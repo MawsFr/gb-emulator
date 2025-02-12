@@ -1,0 +1,17 @@
+{
+  "name": "gb-emulator",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "coverage": "vitest run --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitest/coverage-v8": "3.0.5",
+    "vitest": "3.0.5"
+  }
+}

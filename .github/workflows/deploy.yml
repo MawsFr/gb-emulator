@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install and Build gb-emulator package
+        working-directory: packages/gb-emulator
+        run: |
+          pnpm install --ignore-scripts=false
+          pnpm run build
+
+      - name: Install and Build app
+        working-directory: app
+        run: |
+          pnpm install --ignore-scripts=false
+          pnpm run build
+
+      - name: Run test coverage
+        run: |
+          pnpm run coverage
+          mv coverage app/dist/coverage
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: app/dist

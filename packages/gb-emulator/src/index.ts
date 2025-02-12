@@ -1,0 +1,1 @@
+export const dumb = 0;
