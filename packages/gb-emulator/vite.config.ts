@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import dts from 'vite-plugin-dts'
+import tsconfigPaths from "vite-tsconfig-paths/dist";
 
 export default defineConfig({
     build: {
@@ -11,12 +12,8 @@ export default defineConfig({
             fileName: (format) => `gb-emulator.${ format }.js`
         },
     },
-    resolve: {
-        alias: {
-            '@': resolve('src/')
-        }
-    },
     plugins: [
+        tsconfigPaths(),
         dts({
             outDir: 'dist/types',
             rollupTypes: true,
