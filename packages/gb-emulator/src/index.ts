@@ -1,1 +1,1 @@
-export const dumb = 0;
+export * from './memory'
