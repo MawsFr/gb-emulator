@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { Memory } from "@/memory"
+import { Memory } from "@/memory.ts"
 
 describe(Memory, () => {
     let memory: Memory;

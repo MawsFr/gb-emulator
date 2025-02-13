@@ -1,7 +1,7 @@
 // based on : https://gbdev.io/pandocs/CPU_Registers_and_Flags.html#the-flags-register-lower-8-bits-of-af-register
 
 import { beforeEach, describe, expect, it } from "vitest";
-import { Registers } from "@/registers";
+import { Registers } from "@/registers.ts";
 
 describe(Registers, () => {
   let registers: Registers;
@@ -12,57 +12,57 @@ describe(Registers, () => {
 
   describe("8 bit registers", () => {
     it("should have an A register", () => {
-      registers.setA(0x01);
-      expect(registers.aSlot)
+      registers.A = 0x01;
+      expect(registers.A)
           .to.be.a("number")
           .and.to.equal(0x01);
     });
 
     it("should have a B register", () => {
-      registers.setB(0x01);
-      expect(registers.bSlot)
+      registers.B = 0x01;
+      expect(registers.B)
           .to.be.a("number")
           .and.to.equal(0x01);
     });
 
     it("should have a C register", () => {
-      registers.setC(0x01);
-      expect(registers.cSlot)
+      registers.C = 0x01;
+      expect(registers.C)
           .to.be.a("number")
           .and.to.equal(0x01);
     });
 
     it("should have a D register", () => {
-      registers.setD(0x01);
-      expect(registers.dSlot)
+      registers.D = 0x01;
+      expect(registers.D)
           .to.be.a("number")
           .and.to.equal(0x01);
     });
 
     it("should have an E register", () => {
-      registers.setE(0x01);
-      expect(registers.eSlot)
+      registers.E = 0x01;
+      expect(registers.E)
           .to.be.a("number")
           .and.to.equal(0x01);
     });
 
     it("should have an H register", () => {
-      registers.setH(0x01);
-      expect(registers.hSlot)
+      registers.H = 0x01;
+      expect(registers.H)
           .to.be.a("number")
           .and.to.equal(0x01);
     });
 
     it("should have an L register", () => {
-      registers.setL(0x01);
-      expect(registers.lSlot)
+      registers.L = 0x01;
+      expect(registers.L)
           .to.be.a("number")
           .and.to.equal(0x01);
     });
 
     it("should have an F register", () => {
-      registers.setF(0x01);
-      expect(registers.fSlot)
+      registers.F = 0x01;
+      expect(registers.F)
           .to.be.a("number")
           .and.to.equal(0x01);
     });
@@ -70,49 +70,78 @@ describe(Registers, () => {
 
   describe("16 bits registers", () => {
     it("should have an AF register with A as high and F as low", () => {
-      registers.setA(0x01);
-      registers.setF(0x02);
-      expect(registers.afSlot)
+      registers.A = 0x01;
+      registers.F = 0x02;
+      expect(registers.AF)
           .to.be.a("number")
           .and.to.equal(0x0102);
     });
 
     it("should have a BC register with B as high and C as low", () => {
-      registers.setB(0x01);
-      registers.setC(0x02);
-      expect(registers.bcSlot)
+      registers.B = 0x01;
+      registers.C = 0x02;
+      expect(registers.BC)
           .to.be.a("number")
           .and.to.equal(0x0102);
     });
 
     it("should have a DE register with D as high and E as low", () => {
-      registers.setD(0x01);
-      registers.setE(0x02);
-      expect(registers.deSlot)
+      registers.D = 0x01;
+      registers.E = 0x02;
+      expect(registers.DE)
           .to.be.a("number")
           .and.to.equal(0x0102);
     });
 
     it("should have a HL register with H as high and L as low", () => {
-      registers.setH(0x01);
-      registers.setL(0x02);
-      expect(registers.hlSlot)
+      registers.H = 0x01;
+      registers.L = 0x02;
+      expect(registers.HL)
           .to.be.a("number")
           .and.to.equal(0x0102);
     });
 
     it("should have a SP register", () => {
-      registers.setSP(0x0102);
-      expect(registers.spSlot)
+      registers.SP = 0x0102;
+      expect(registers.SP)
           .to.be.a("number")
           .and.to.equal(0x0102);
     });
 
     it("should have a PC register", () => {
-      registers.setPC(0x0102);
-      expect(registers.pcSlot)
+      registers.PC = 0x0102;
+      expect(registers.PC)
           .to.be.a("number")
           .and.to.equal(0x0102);
+    });
+    
+    // setters
+    it('should set A as High and F as Low when setting AF', () => {
+      registers.AF = 0x0102
+
+      expect(registers.A).to.equal(0x01)
+      expect(registers.F).to.equal(0x02)
+    });
+
+    it('should set B as High and C as Low when setting BC', () => {
+      registers.BC = 0x0102
+
+      expect(registers.B).to.equal(0x01)
+      expect(registers.C).to.equal(0x02)
+    });
+
+    it('should set D as High and E as Low when setting DE', () => {
+      registers.DE = 0x0102
+
+      expect(registers.D).to.equal(0x01)
+      expect(registers.E).to.equal(0x02)
+    });
+
+    it('should set H as High and L as Low when setting HL', () => {
+      registers.HL = 0x0102
+
+      expect(registers.H).to.equal(0x01)
+      expect(registers.L).to.equal(0x02)
     });
   });
 });
