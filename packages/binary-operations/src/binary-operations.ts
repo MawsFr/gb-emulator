@@ -10,6 +10,7 @@ export const masks = {
     SECOND_DIGIT: 0x0F00,
     THIRD_DIGIT: 0x00F0,
     FOURTH_DIGIT: 0x000F,
+    TWO_FIRST_DIGITS: 0xFF00,
     TWO_LAST_DIGITS: 0x00FF,
     THREE_LAST_DIGITS: 0x0FFF,
 }
@@ -31,6 +32,7 @@ export const isolate2ndDigit = (num: number): number => shiftRightBy8(bitwiseAnd
 export const isolate3rdDigit = (num: number): number => shiftRightBy4(bitwiseAnd(num, masks.THIRD_DIGIT))
 export const isolate4thDigit = (num: number): number => bitwiseAnd(num, masks.FOURTH_DIGIT)
 
+export const isolate2FirstDigits = (num: number): number => shiftRightBy8(num)
 export const isolate2LastDigits = (num: number): number => bitwiseAnd(num, masks.TWO_LAST_DIGITS)
 export const isolate3LastDigits = (num: number): number => bitwiseAnd(num, masks.THREE_LAST_DIGITS)
 

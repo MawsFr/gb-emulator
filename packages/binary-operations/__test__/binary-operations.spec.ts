@@ -4,7 +4,7 @@ import {
     bitwiseOr,
     bitwiseXor,
     concatBytes,
-    isBitSet,
+    isBitSet, isolate2FirstDigits,
     isolate2LastDigits,
     isolate2ndDigit,
     isolate3LastDigits,
@@ -174,6 +174,16 @@ describe('BinaryOperations', () => {
             const result = isolate4thDigit(num)
 
             expect(result).to.equal(0x4)
+        });
+    });
+
+    describe(isolate2FirstDigits, () => {
+        it('should isolate the two first digits', () => {
+            const num = 0x1234
+
+            const result = isolate2FirstDigits(num)
+
+            expect(result).to.equal(0x12)
         });
     });
 
