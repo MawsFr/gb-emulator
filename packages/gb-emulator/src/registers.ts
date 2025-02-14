@@ -1,5 +1,7 @@
 import { concatBytes } from "@mawsfr/binary-operations";
 import { isolate2FirstDigits, isolate2LastDigits } from "@mawsfr/binary-operations";
+import { get1stBit } from "@mawsfr/binary-operations";
+import { set1stBit, set2ndBit, set3rdBit, set4thBit, get2ndBit, get3rdBit, get4thBit } from "@mawsfr/binary-operations";
 
 export class Registers {
   private _A: number = 0;
@@ -9,10 +11,11 @@ export class Registers {
   private _E: number = 0;
   private _H: number = 0;
   private _L: number = 0;
-  private _F: number = 0;
 
   private _SP: number = 0;
   private _PC: number = 0;
+
+  private _F: number = 0;
 
   get A() {
     return this._A & 0xFF;
@@ -44,6 +47,38 @@ export class Registers {
 
   get F() {
     return this._F & 0xFF;
+  }
+
+  get zeroFlag() {
+    return get1stBit(this.F);
+  }
+
+  get subtractionFlag() {
+    return get2ndBit(this.F);
+  }
+
+  get halfCarryFlag() {
+    return get3rdBit(this.F);
+  }
+
+  get carryFlag() {
+    return get4thBit(this.F);
+  }
+
+  set zeroFlag(value: number) {
+    this.F = set1stBit(this.F, value)
+  }
+
+  set subtractionFlag(value: number) {
+    this.F = set2ndBit(this.F, value)
+  }
+
+  set halfCarryFlag(value: number) {
+    this.F = set3rdBit(this.F, value)
+  }
+
+  set carryFlag(value: number) {
+    this.F = set4thBit(this.F, value)
   }
 
   get AF() {

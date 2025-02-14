@@ -144,4 +144,35 @@ describe(Registers, () => {
       expect(registers.L).to.equal(0x02)
     });
   });
+
+  describe("Flag registers", () => {
+    it("should have a Zero Flag", () => {
+      registers.zeroFlag = 1;
+      expect(registers.zeroFlag)
+          .to.be.a("number")
+          .and.to.equal(1);
+    });
+
+    it("should have a Subtraction Flag", () => {
+      registers.subtractionFlag = 1;
+      expect(registers.subtractionFlag)
+          .to.be.a("number")
+          .and.to.equal(1);
+    });
+
+    it("should have a Half Carry Flag", () => {
+      registers.halfCarryFlag = 1;
+      expect(registers.halfCarryFlag)
+          .to.be.a("number")
+          .and.to.equal(1);
+    });
+
+    it("should have a Carry Flag", () => {
+      registers.carryFlag = 1;
+      expect(registers.carryFlag)
+          .to.be.a("number")
+          .and.to.equal(1);
+    });
+  })
+
 });
