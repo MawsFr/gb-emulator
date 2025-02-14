@@ -6,7 +6,8 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@mawsfr/binary-operations": ["../packages/binary-operations/src"]
     },
 
     /* Bundler mode */

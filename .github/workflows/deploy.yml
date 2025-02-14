@@ -19,6 +19,12 @@ jobs:
         with:
           version: 10
 
+      - name: Install and Build binary-operations package
+        working-directory: packages/binary-operations
+        run: |
+          pnpm install --ignore-scripts=false
+          pnpm run build
+
       - name: Install and Build gb-emulator package
         working-directory: packages/gb-emulator
         run: |
