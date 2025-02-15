@@ -146,28 +146,28 @@ describe(Registers, () => {
   });
 
   describe("Flag registers", () => {
-    it("should have a Zero Flag", () => {
+    it("should have a Zero Flag (Z)", () => {
       registers.zeroFlag = 1;
       expect(registers.zeroFlag)
           .to.be.a("number")
           .and.to.equal(1);
     });
 
-    it("should have a Subtraction Flag", () => {
+    it("should have a Subtraction Flag (N)", () => {
       registers.subtractionFlag = 1;
       expect(registers.subtractionFlag)
           .to.be.a("number")
           .and.to.equal(1);
     });
 
-    it("should have a Half Carry Flag", () => {
+    it("should have a Half Carry Flag (H)", () => {
       registers.halfCarryFlag = 1;
       expect(registers.halfCarryFlag)
           .to.be.a("number")
           .and.to.equal(1);
     });
 
-    it("should have a Carry Flag", () => {
+    it("should have a Carry Flag (CY)", () => {
       registers.carryFlag = 1;
       expect(registers.carryFlag)
           .to.be.a("number")
