@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { LD_R16MEM_A, LD_R16MEM_A_OPCODES } from "@/instructions/ld/LD_R16MEM_A.ts";
 import { R16Code, Registers } from "@/registers.ts";
 import { Memory } from "@/memory.ts";
 import { Cpu } from "@/cpu.ts";
+import { LD_A_R16MEM, LD_A_R16MEM_OPCODES } from "@/instructions/ld/LD_A_R16MEM.ts";
 
-describe(LD_R16MEM_A, () => {
+describe(LD_A_R16MEM, () => {
     let registers: Registers
     let memory: Memory
     let cpu: Cpu
@@ -18,43 +18,40 @@ describe(LD_R16MEM_A, () => {
         })
     })
 
-    it.each<{ opcode: LD_R16MEM_A_OPCODES, expectedRegister: R16Code }>([
+    it.each<{ opcode: LD_A_R16MEM_OPCODES, expectedRegister: R16Code }>([
         {
-            opcode: 0b00_00_0010,
+            opcode: 0b00_00_1010,
             expectedRegister: 0b00,
         },
         {
-            opcode: 0b00_01_0010,
+            opcode: 0b00_01_1010,
             expectedRegister: 0b01
         },
         {
-            opcode: 0b00_10_0010,
+            opcode: 0b00_10_1010,
             expectedRegister: 0b10
         },
         {
-            opcode: 0b00_11_0010,
+            opcode: 0b00_11_1010,
             expectedRegister: 0b11
         }
-    ])('should load the value of A into the address pointed by a 16 bits register', (
+    ])('should load the value of the address pointed by a 16 bits register into A', (
         {
             opcode, expectedRegister
         }) => {
         // Given
         memory.addresses[0x0] = 0x01
-        memory.addresses[0x1] = 0x12
-        memory.addresses[0x2] = 0x34
+        memory.addresses[0x1] = 0x34
 
         registers.PC.value = 0x0
-        registers.A.value = 0x56
-
-        const pointedAddress = 0x2
-        registers.r16[expectedRegister].value = pointedAddress
+        registers.r16[expectedRegister].value = 0x1
+        registers.A.value = 0x12
 
         // When
-        new LD_R16MEM_A(cpu).execute(opcode)
+        new LD_A_R16MEM(cpu).execute(opcode)
 
         // Then
-        expect(memory.addresses[pointedAddress]).to.equal(0x56)
+        expect(registers.A.value).to.equal(0x34)
         expect(registers.PC.value).to.equal(0x1)
     })
 })
