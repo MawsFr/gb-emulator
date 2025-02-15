@@ -20,19 +20,19 @@ describe(DEC_R16, () => {
 
     it.each<{ opcode: DEC_R16_OPCODES, expectedRegister: R16Code }>([
         {
-            opcode: 0b00_00_0101,
+            opcode: 0b00_00_1011,
             expectedRegister: 0b00
         },
         {
-            opcode: 0b00_01_0101,
+            opcode: 0b00_01_1011,
             expectedRegister: 0b01
         },
         {
-            opcode: 0b00_10_0101,
+            opcode: 0b00_10_1011,
             expectedRegister: 0b10
         },
         {
-            opcode: 0b00_11_0101,
+            opcode: 0b00_11_1011,
             expectedRegister: 0b11
         }
     ])('should decrement the value in register $expectedRegister', (

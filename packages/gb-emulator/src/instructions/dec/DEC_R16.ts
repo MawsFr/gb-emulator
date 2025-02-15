@@ -2,10 +2,10 @@ import { Cpu } from "@/cpu.ts";
 import { Instruction } from "@/instructions/instruction.ts";
 
 export type DEC_R16_OPCODES =
-    | 0b00_00_0101
-    | 0b00_01_0101
-    | 0b00_10_0101
-    | 0b00_11_0101
+    | 0b00_00_1011
+    | 0b00_01_1011
+    | 0b00_10_1011
+    | 0b00_11_1011
 
 export class DEC_R16 extends Instruction {
     constructor(cpu: Cpu) {

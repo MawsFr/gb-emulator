@@ -35,15 +35,31 @@ describe(Cpu, () => {
     });
 
     describe(Cpu.prototype.interpret, () => {
-        it.each([
-            "00000001",
-            "00010001",
-            "00100001",
-            "00110001",
-        ])('Opcode "%s" should call "ld r16, imm16" instruction',
-            (opcodeString) => {
+        it.each<Opcode>([
+            0b00000001,
+            0b00010001,
+            0b00100001,
+            0b00110001,
+            0b00000010,
+            0b00010010,
+            0b00100010,
+            0b00110010,
+            0b00001010,
+            0b00011010,
+            0b00101010,
+            0b00111010,
+            0b00001000,
+            0b00000011,
+            0b00010011,
+            0b00100011,
+            0b00110011,
+            0b00001011,
+            0b00011011,
+            0b00101011,
+            0b00111011,
+        ])('should call the right instruction',
+            (opcode) => {
                 // Given
-                const opcode = parseInt(opcodeString, 2) as Opcode
                 const instruction = cpu.instructions[opcode];
 
                 // When
