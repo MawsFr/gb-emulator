@@ -4,6 +4,7 @@ import { concatBytes } from "@mawsfr/binary-operations";
 import { InstructionLoader } from "@/instructions/instruction-loader.ts";
 import { Instruction } from "@/instructions/instruction.ts";
 import { LD_R16_IMM16_OPCODES } from "@/instructions/ld/LD_R16_IMM16.ts";
+import { LD_R16MEM_A_OPCODES } from "@/instructions/ld/LD_R16MEM_A.ts";
 
 export interface CpuConfig {
     registers: Registers,
@@ -12,6 +13,7 @@ export interface CpuConfig {
 
 export type Opcode =
     | LD_R16_IMM16_OPCODES
+    | LD_R16MEM_A_OPCODES
 
 export class Cpu {
     public readonly registers: Registers

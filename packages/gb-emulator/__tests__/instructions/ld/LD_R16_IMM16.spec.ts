@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { LD_R16_IMM16 } from "@/instructions/ld/LD_R16_IMM16.ts";
-import { Cpu, Opcode } from "@/cpu.ts";
+import { LD_R16_IMM16, LD_R16_IMM16_OPCODES } from "@/instructions/ld/LD_R16_IMM16.ts";
+import { Cpu } from "@/cpu.ts";
 import { R16Code, Registers } from "@/registers.ts";
 import { Memory } from "@/memory.ts";
 
@@ -18,7 +18,7 @@ describe(LD_R16_IMM16, () => {
         })
     })
 
-    it.each<{ opcode: Opcode, expectedRegister: R16Code }>([
+    it.each<{ opcode: LD_R16_IMM16_OPCODES, expectedRegister: R16Code }>([
         {
             opcode: 0b00_00_0001,
             expectedRegister: 0b00
