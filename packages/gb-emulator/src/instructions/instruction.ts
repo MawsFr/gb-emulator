@@ -1,7 +1,7 @@
 import { Registers } from "@/registers.ts";
-import { Cpu } from "@/cpu.ts";
+import { Cpu, Opcode } from "@/cpu.ts";
 
-export abstract class Instruction<T> {
+export abstract class Instruction {
     protected readonly cpu: Cpu
     protected readonly registers: Registers
 
@@ -10,5 +10,5 @@ export abstract class Instruction<T> {
         this.registers = cpu.registers
     }
 
-    abstract execute(params: T): void
+    abstract execute(opcode: Opcode): void
 }

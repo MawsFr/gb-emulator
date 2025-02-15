@@ -1,19 +1,29 @@
 import { Registers } from "@/registers.ts";
 import { Memory } from "@/memory.ts";
 import { concatBytes } from "@mawsfr/binary-operations";
+import { InstructionLoader } from "@/instructions/instruction-loader.ts";
+import { Instruction } from "@/instructions/instruction.ts";
+import { LD_R16_IMM16_OPCODES } from "@/instructions/ld/LD_R16_IMM16.ts";
 
 export interface CpuConfig {
     registers: Registers,
     memory: Memory
 }
 
+export type Opcode =
+    | LD_R16_IMM16_OPCODES
+
 export class Cpu {
     public readonly registers: Registers
     public readonly memory: Memory
 
+    public readonly instructions: Record<Opcode, Instruction>
+
     constructor(config: CpuConfig) {
         this.registers = config.registers
         this.memory = config.memory
+
+        this.instructions = InstructionLoader.loadInstructions(this)
     }
 
     getImmediateBytes({ count }: { count: 1 | 2 }) {
@@ -22,14 +32,12 @@ export class Cpu {
             return this.memory.addresses[this.registers.PC.value]
         }
 
-        if (count === 1) {
-            return nextByte()
-        }
-
-        return concatBytes(nextByte(), nextByte())
+        return count === 1
+            ? nextByte()
+            : concatBytes(nextByte(), nextByte())
     }
 
-    interpret() {
-
+    interpret(opcode: Opcode) {
+        this.instructions[opcode].execute(opcode)
     }
 }

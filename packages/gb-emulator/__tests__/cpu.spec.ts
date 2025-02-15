@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { Cpu } from "@/cpu.ts";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { Cpu, Opcode } from "@/cpu.ts";
 import { Registers } from "@/registers.ts";
 import { Memory } from "@/memory.ts";
 
@@ -15,6 +15,10 @@ describe(Cpu, () => {
             registers,
             memory
         })
+
+        Object.values(cpu.instructions).forEach(instruction => {
+            vi.spyOn(instruction, 'execute').mockReturnValue(void 0);
+        })
     })
 
     describe(Cpu.prototype.getImmediateBytes, () => {
@@ -29,4 +33,24 @@ describe(Cpu, () => {
             expect(registers.PC.value).to.equal(0x2)
         })
     });
+
+    describe(Cpu.prototype.interpret, () => {
+        it.each([
+            "00000001",
+            "00010001",
+            "00100001",
+            "00110001",
+        ])('Opcode "%s" should call "ld r16, imm16" instruction',
+            (opcodeString) => {
+                // Given
+                const opcode = parseInt(opcodeString, 2) as Opcode
+                const instruction = cpu.instructions[opcode];
+
+                // When
+                cpu.interpret(opcode)
+
+                // Then
+                expect(instruction.execute).toHaveBeenCalledWith(opcode)
+            })
+    })
 });
