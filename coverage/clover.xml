@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1739649052337" clover="3.2.0">
-  <project timestamp="1739649052337" name="All files">
+<coverage generated="1739649345377" clover="3.2.0">
+  <project timestamp="1739649345377" name="All files">
     <metrics statements="246" coveredstatements="243" conditionals="67" coveredconditionals="65" methods="62" coveredmethods="61" elements="375" coveredelements="369" complexity="0" loc="246" ncloc="246" packages="4" files="10" classes="10"/>
     <package name="binary-operations.src">
       <metrics statements="55" coveredstatements="55" conditionals="29" coveredconditionals="29" methods="25" coveredmethods="25"/>
@@ -257,7 +257,7 @@
     </package>
     <package name="gb-emulator.src.instructions.ld">
       <metrics statements="26" coveredstatements="26" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
-      <file name="LD_$$R16MEM_A.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LD_$$R16MEM_A.ts">
+      <file name="LD_R16MEM_A.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LD_R16MEM_A.ts">
         <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
