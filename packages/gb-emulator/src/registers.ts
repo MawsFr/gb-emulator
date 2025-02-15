@@ -1,89 +1,83 @@
 import {
-  concatBytes,
-  get1stBit,
-  get2ndBit,
-  get3rdBit,
-  get4thBit,
-  isolate2FirstDigits,
-  isolate2LastDigits,
-  set1stBit,
-  set2ndBit,
-  set3rdBit,
-  set4thBit
+    concatBytes,
+    get1stBit,
+    get2ndBit,
+    get3rdBit,
+    get4thBit,
+    isolate2FirstDigits,
+    isolate2LastDigits,
+    set1stBit,
+    set2ndBit,
+    set3rdBit,
+    set4thBit
 } from "@mawsfr/binary-operations";
 
-export class Registers {
-    private _A: number = 0;
-    private _B: number = 0;
-    private _C: number = 0;
-    private _D: number = 0;
-    private _E: number = 0;
-    private _H: number = 0;
-    private _L: number = 0;
+export interface Register {
+    get value(): number;
 
-    private _SP: number = 0;
-    private _PC: number = 0;
+    set value(newValue: number);
+}
 
-    private _F: number = 0;
+export abstract class AbstractRegister implements Register {
+    private _value: number = 0
+    private readonly mask: number
 
-    get A() {
-        return this._A & 0xFF;
+    protected constructor(mask: number) {
+        this.mask = mask
     }
 
-    get B() {
-        return this._B & 0xFF;
+    get value() {
+        return this._value & this.mask
     }
 
-    get C() {
-        return this._C & 0xFF;
+    set value(newValue) {
+        this._value = newValue & this.mask
     }
+}
 
-    get D() {
-        return this._D & 0xFF;
+export class Register8 extends AbstractRegister {
+    constructor() {
+        super(0xFF);
     }
+}
 
-    get E() {
-        return this._E & 0xFF;
+export class Register16 extends AbstractRegister {
+    constructor() {
+        super(0xFFFF);
     }
+}
 
-    get H() {
-        return this._H & 0xFF;
-    }
-
-    get L() {
-        return this._L & 0xFF;
-    }
-
-    get F() {
-        return this._F & 0xFF;
+export class Flags extends Register8 {
+    constructor() {
+        super();
     }
 
     /**
      * Gets zero flag Z
      */
     get zeroFlag() {
-        return get1stBit(this.F);
+        return get1stBit(this.value);
     }
 
     /**
      * Gets subtraction flag N
      */
     get subtractionFlag() {
-        return get2ndBit(this.F);
+        return get2ndBit(this.value);
     }
 
     /**
      * Gets half carry flag H
      */
     get halfCarryFlag() {
-        return get3rdBit(this.F);
+        return get3rdBit(this.value);
     }
 
     /**
      * Gets carry flag CY
      */
     get carryFlag() {
-        return get4thBit(this.F);
+        return get4thBit(this.value);
     }
 
     /**
@@ -91,7 +85,7 @@ export class Registers {
      * @param value
      */
     set zeroFlag(value: number) {
-        this.F = set1stBit(this.F, value)
+        this.value = set1stBit(this.value, value)
     }
 
     /**
@@ -99,7 +93,7 @@ export class Registers {
      * @param value
      */
     set subtractionFlag(value: number) {
-        this.F = set2ndBit(this.F, value)
+        this.value = set2ndBit(this.value, value)
     }
 
     /**
@@ -107,7 +101,7 @@ export class Registers {
      * @param value
      */
     set halfCarryFlag(value: number) {
-        this.F = set3rdBit(this.F, value)
+        this.value = set3rdBit(this.value, value)
     }
 
     /**
@@ -115,90 +109,65 @@ export class Registers {
      * @param value
      */
     set carryFlag(value: number) {
-        this.F = set4thBit(this.F, value)
+        this.value = set4thBit(this.value, value)
+    }
+}
+
+export class ComposedRegister extends Register16 {
+    public readonly high: Register8
+    public readonly low: Register8
+
+    constructor(high: Register8, low: Register8) {
+        super()
+        this.high = high
+        this.low = low
     }
 
-    get AF() {
-        return concatBytes(this.A, this.F);
+    get value() {
+        return concatBytes(this.high.value, this.low.value)
     }
 
-    get BC() {
-        return concatBytes(this.B, this.C);
+    set value(newValue: number) {
+        this.high.value = isolate2FirstDigits(newValue)
+        this.low.value = isolate2LastDigits(newValue)
+    }
+}
+
+export type R8Code = 0b000 | 0b001 | 0b010 | 0b011 | 0b100 | 0b101 | 0b110
+export type R16Code = 0b00 | 0b01 | 0b10 | 0b11
+
+export class Registers {
+    public readonly A: Register8 = new Register8();
+    public readonly B: Register8 = new Register8();
+    public readonly C: Register8 = new Register8();
+    public readonly D: Register8 = new Register8();
+    public readonly E: Register8 = new Register8();
+    public readonly H: Register8 = new Register8();
+    public readonly L: Register8 = new Register8();
+    public readonly F: Flags = new Flags();
+
+    public readonly HL = new ComposedRegister(this.H, this.L)
+    public readonly AF = new ComposedRegister(this.A, this.F)
+    public readonly BC = new ComposedRegister(this.B, this.C)
+    public readonly DE = new ComposedRegister(this.D, this.E)
+
+    public readonly SP: Register16 = new Register16();
+    public readonly PC: Register16 = new Register16();
+
+    public readonly r8: Record<R8Code, Register8> = {
+        0b000: this.B,
+        0b001: this.C,
+        0b010: this.D,
+        0b011: this.E,
+        0b100: this.H,
+        0b101: this.L,
+        0b110: this.F
     }
 
-    get DE() {
-        return concatBytes(this.D, this.E);
-    }
-
-    get HL() {
-        return concatBytes(this.H, this.L);
-    }
-
-    get SP() {
-        return this._SP & 0xFFff;
-    }
-
-    get PC() {
-        return this._PC & 0xFFff;
-    }
-
-    set A(value: number) {
-        this._A = value & 0xFF;
-    }
-
-    set F(value: number) {
-        this._F = value & 0xFF;
-    }
-
-    set B(value: number) {
-        this._B = value & 0xFF;
-    }
-
-    set C(value: number) {
-        this._C = value & 0xFF;
-    }
-
-    set D(value: number) {
-        this._D = value & 0xFF;
-    }
-
-    set E(value: number) {
-        this._E = value & 0xFF;
-    }
-
-    set H(value: number) {
-        this._H = value & 0xFF;
-    }
-
-    set L(value: number) {
-        this._L = value & 0xFF;
-    }
-
-    set SP(value: number) {
-        this._SP = value & 0xFFFF;
-    }
-
-    set PC(value: number) {
-        this._PC = value & 0xFFFF;
-    }
-
-    set AF(value: number) {
-        this.A = isolate2FirstDigits(value)
-        this.F = isolate2LastDigits(value)
-    }
-
-    set BC(value: number) {
-        this.B = isolate2FirstDigits(value)
-        this.C = isolate2LastDigits(value)
-    }
-
-    set DE(value: number) {
-        this.D = isolate2FirstDigits(value)
-        this.E = isolate2LastDigits(value)
-    }
-
-    set HL(value: number) {
-        this.H = isolate2FirstDigits(value)
-        this.L = isolate2LastDigits(value)
+    public readonly r16: Record<R16Code, Register16> = {
+        0b00: this.BC,
+        0b01: this.DE,
+        0b10: this.HL,
+        0b11: this.SP
     }
 }
