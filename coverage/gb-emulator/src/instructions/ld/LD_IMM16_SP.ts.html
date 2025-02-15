@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for gb-emulator/src/instructions/ld/LD_A_R16MEM.ts</title>
+    <title>Code coverage report for gb-emulator/src/instructions/ld/LD_IMM16_SP.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">gb-emulator/src/instructions/ld</a> LD_A_R16MEM.ts</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">gb-emulator/src/instructions/ld</a> LD_IMM16_SP.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -86,10 +86,9 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -99,45 +98,40 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { Instruction } from "@/instructions/instruction.ts";
-import { Cpu } from "@/cpu.ts";
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { Cpu } from "@/cpu.ts";
+import { Instruction } from "@/instructions/instruction.ts";
+import { isolate2FirstDigits, isolate2LastDigits } from "@mawsfr/binary-operations";
 &nbsp;
-export type LD_A_R16MEM_OPCODES =
-    | 0b00_00_1010
-    | 0b00_01_1010
-    | 0b00_10_1010
-    | 0b00_11_1010
+export type LD_IMM16_SP_OPCODES =
+    | 0b00_00_0001
+    | 0b00_01_0001
+    | 0b00_10_0001
+    | 0b00_11_0001
 &nbsp;
-export class LD_A_R16MEM extends Instruction {
+export class LD_IMM16_SP extends Instruction {
     constructor(cpu: Cpu) {
         super(cpu)
     }
 &nbsp;
-    execute(opcode: LD_A_R16MEM_OPCODES) {
-        const destination = this.extractDestinationR16(opcode);
+    execute() {
+        const address = this.cpu.getImmediateBytes({ count: 2 })
 &nbsp;
-        const register = this.registers.r16[destination]
-        const address = register.value
-&nbsp;
-        this.registers.A.value = this.memory.addresses[address]
+        this.memory.addresses[address] = isolate2LastDigits(this.registers.SP.value)
+        this.memory.addresses[address + 1] = isolate2FirstDigits(this.registers.SP.value)
 &nbsp;
         this.registers.PC.value++
     }
-&nbsp;
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
