@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>54/54</span>
+                <span class='fraction'>48/48</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>54/54</span>
+                <span class='fraction'>48/48</span>
             </div>
         
             
@@ -124,16 +124,7 @@
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,33 +166,24 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">export const concatBytes = (highByte: number, lowByte: number): number =&gt; {
     return bitwiseOr(shiftLeftBy8(highByte), lowByte)
@@ -245,7 +227,7 @@ export const isolateLeastSignificantBit = (num: number): number =&gt; bitwiseAnd
 export const isolateMostSignificantBit = (num: number): number =&gt; shiftRightBy7(num)
 &nbsp;
 export const getNthBit = (num: number, bitIndex: number): number =&gt; {
-    return bitwiseAnd(shiftRightBy(7 - bitIndex)(num), 0x01)
+    return shiftRightBy(bitIndex)(num) &amp; 0x01
 }
 export const get1stBit = (num: number): number =&gt; getNthBit(num, 0)
 export const get2ndBit = (num: number): number =&gt; getNthBit(num, 1)
@@ -253,14 +235,8 @@ export const get3rdBit = (num: number): number =&gt; getNthBit(num, 2)
 export const get4thBit = (num: number): number =&gt; getNthBit(num, 3)
 &nbsp;
 export const setNthBit = ({ number, bitIndex, value }: { number: number, bitIndex: number, value: number }): number =&gt; {
-    const shiftRightByBitIndex = shiftRightBy(bitIndex)
-    const bitMask = shiftRightByBitIndex(0x80)
-&nbsp;
-    if (value === 1) {
-        return bitwiseOr(number, bitMask)
-    }
-&nbsp;
-    return bitwiseAnd(number, bitwiseXor(0xFF, bitMask))
+    const mask = shiftLeftBy(bitIndex)(0x01)
+    return value === 1 ? bitwiseOr(number, mask) : bitwiseAnd(number, bitwiseXor(mask, 0xFF))
 }
 &nbsp;
 export const set1stBit = (num: number, value: number): number =&gt; setNthBit({ number: num, bitIndex: 0, value })
@@ -269,10 +245,7 @@ export const set3rdBit = (num: number, value: number): number =&gt; setNthBit({ 
 export const set4thBit = (num: number, value: number): number =&gt; setNthBit({ number: num, bitIndex: 3, value })
 &nbsp;
 export const isBitSet = (num: number, bitIndex: number): boolean =&gt; {
-    const shiftRightByBitIndex = shiftRightBy(bitIndex)
-    const bitMask = shiftRightByBitIndex(0x80)
-&nbsp;
-    return bitwiseAnd(num, bitMask) !== 0;
+    return getNthBit(num, bitIndex) === 1
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -280,7 +253,7 @@ export const isBitSet = (num: number, bitIndex: number): boolean =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-15T22:41:08.282Z
+                at 2025-02-16T01:25:09.295Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
