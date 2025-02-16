@@ -10,6 +10,7 @@ import { ADD_HL_R16 } from "@/instructions/add/ADD_HL_R16.ts";
 import { INC_R8 } from "@/instructions/inc/INC_R8.ts";
 import { DEC_R8 } from "@/instructions/dec/DEC_R8.ts";
 import { LD_R8_IMM8 } from "@/instructions/ld/LD_R8_IMM8.ts";
+import { RLCA } from "@/instructions/rotate/RLCA.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -23,6 +24,7 @@ export abstract class InstructionLoader {
         const inc_r8 = new INC_R8(cpu)
         const dec_r8 = new DEC_R8(cpu)
         const ld_r8_imm8 = new LD_R8_IMM8(cpu)
+        const rlca = new RLCA(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -82,7 +84,9 @@ export abstract class InstructionLoader {
             0b00_100_110: ld_r8_imm8,
             0b00_101_110: ld_r8_imm8,
             0b00_110_110: ld_r8_imm8,
-            0b00_111_110: ld_r8_imm8
+            0b00_111_110: ld_r8_imm8,
+
+            0b00000111: rlca
         }
     }
 }

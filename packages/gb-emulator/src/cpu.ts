@@ -6,13 +6,14 @@ import { Instruction } from "@/instructions/instruction.ts";
 import { LD_R16_IMM16_OPCODES } from "@/instructions/ld/LD_R16_IMM16.ts";
 import { LD_R16MEM_A_OPCODES } from "@/instructions/ld/LD_R16MEM_A.ts";
 import { LD_A_R16MEM_OPCODES } from "@/instructions/ld/LD_A_R16MEM.ts";
-import { LD_IMM16_SP_OPCODES } from "@/instructions/ld/LD_IMM16_SP.ts";
+import { LD_IMM16_SP_OPCODE } from "@/instructions/ld/LD_IMM16_SP.ts";
 import { INC_R16_OPCODES } from "@/instructions/inc/INC_R16.ts";
 import { DEC_R16_OPCODES } from "@/instructions/dec/DEC_R16.ts";
 import { ADD_HL_R16_OPCODES } from "@/instructions/add/ADD_HL_R16.ts";
 import { INC_R8_OPCODES } from "@/instructions/inc/INC_R8.ts";
 import { DEC_R8_OPCODES } from "@/instructions/dec/DEC_R8.ts";
 import { LD_R8_IMM8_OPCODES } from "@/instructions/ld/LD_R8_IMM8.ts";
+import { RLCA_OPCODE } from "@/instructions/rotate/RLCA.ts";
 
 export interface CpuConfig {
     registers: Registers,
@@ -23,13 +24,14 @@ export type Opcode =
     | LD_R16_IMM16_OPCODES
     | LD_R16MEM_A_OPCODES
     | LD_A_R16MEM_OPCODES
-    | LD_IMM16_SP_OPCODES
+    | LD_IMM16_SP_OPCODE
     | INC_R16_OPCODES
     | DEC_R16_OPCODES
     | ADD_HL_R16_OPCODES
     | INC_R8_OPCODES
     | DEC_R8_OPCODES
     | LD_R8_IMM8_OPCODES
+    | RLCA_OPCODE
 
 export class Cpu {
     public readonly registers: Registers
