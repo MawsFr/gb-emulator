@@ -45,6 +45,52 @@ export class Register16 extends AbstractRegister {
     constructor() {
         super(0xFFFF);
     }
+
+    incrementOrDecrementIfNeeded() {
+        // Do nothing by default
+    }
+}
+
+export class HLI extends Register16 {
+    protected readonly HL: ComposedRegister
+
+    constructor(HL: ComposedRegister) {
+        super();
+        this.HL = HL
+    }
+
+    get value() {
+        return this.HL.value
+    }
+
+    set value(newValue: number) {
+        this.HL.value = newValue
+    }
+
+    incrementOrDecrementIfNeeded() {
+        this.HL.value++
+    }
+}
+
+export class HLD extends Register16 {
+    protected readonly HL: ComposedRegister
+
+    constructor(HL: ComposedRegister) {
+        super();
+        this.HL = HL
+    }
+
+    get value() {
+        return this.HL.value
+    }
+
+    set value(newValue: number) {
+        this.HL.value = newValue
+    }
+
+    incrementOrDecrementIfNeeded() {
+        this.HL.value--
+    }
 }
 
 export class Flags extends Register8 {
@@ -154,6 +200,9 @@ export class Registers {
     public readonly SP: Register16 = new Register16();
     public readonly PC: Register16 = new Register16();
 
+    public readonly HLI: HLI = new HLI(this.HL);
+    public readonly HLD: HLD = new HLD(this.HL);
+
     public readonly r8: Record<R8Code, Register8> = {
         0b000: this.B,
         0b001: this.C,
@@ -169,5 +218,12 @@ export class Registers {
         0b01: this.DE,
         0b10: this.HL,
         0b11: this.SP
+    }
+
+    public readonly r16mem: Record<R16Code, Register16> = {
+        0b00: this.BC,
+        0b01: this.DE,
+        0b10: this.HLI,
+        0b11: this.HLD,
     }
 }

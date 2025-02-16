@@ -15,10 +15,11 @@ export class LD_A_R16MEM extends Instruction {
     execute(opcode: LD_A_R16MEM_OPCODES) {
         const destination = this.extractDestinationR16(opcode);
 
-        const register = this.registers.r16[destination]
+        const register = this.registers.r16mem[destination]
         const address = register.value
 
         this.registers.A.value = this.memory.addresses[address]
+        register.incrementOrDecrementIfNeeded()
 
         this.registers.PC.value++
     }
