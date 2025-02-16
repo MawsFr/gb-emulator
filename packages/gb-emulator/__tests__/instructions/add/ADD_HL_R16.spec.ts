@@ -10,8 +10,8 @@ describe(ADD_HL_R16, () => {
     let cpu: Cpu
 
     beforeEach(() => {
-        registers = new Registers()
         memory = new Memory()
+        registers = new Registers(memory)
         cpu = new Cpu({
             registers,
             memory

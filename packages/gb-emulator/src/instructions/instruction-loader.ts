@@ -8,6 +8,7 @@ import { INC_R16 } from "@/instructions/inc/INC_R16.ts";
 import { DEC_R16 } from "@/instructions/dec/DEC_R16.ts";
 import { ADD_HL_R16 } from "@/instructions/add/ADD_HL_R16.ts";
 import { INC_R8 } from "@/instructions/inc/INC_R8.ts";
+import { DEC_R8 } from "@/instructions/dec/DEC_R8.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -19,6 +20,7 @@ export abstract class InstructionLoader {
         const dec_r16 = new DEC_R16(cpu)
         const add_hl_r16 = new ADD_HL_R16(cpu)
         const inc_r8 = new INC_R8(cpu)
+        const dec_r8 = new DEC_R8(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -61,6 +63,15 @@ export abstract class InstructionLoader {
             0b00101100: inc_r8,
             0b00110100: inc_r8,
             0b00111100: inc_r8,
+
+            0b00000101: dec_r8,
+            0b00001101: dec_r8,
+            0b00010101: dec_r8,
+            0b00011101: dec_r8,
+            0b00100101: dec_r8,
+            0b00101101: dec_r8,
+            0b00110101: dec_r8,
+            0b00111101: dec_r8,
         }
     }
 }

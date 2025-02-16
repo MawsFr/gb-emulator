@@ -10,8 +10,8 @@ describe(LD_R16MEM_A, () => {
     let cpu: Cpu
 
     beforeEach(() => {
-        registers = new Registers()
         memory = new Memory()
+        registers = new Registers(memory)
         cpu = new Cpu({
             registers,
             memory
