@@ -1,11 +1,10 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { LD_R16_IMM16 } from "@/instructions/ld/LD_R16_IMM16.ts";
 import { Registers } from "@/registers.ts";
 import { Memory } from "@/memory.ts";
 import { Cpu } from "@/cpu.ts";
 import { RLCA } from "@/instructions/rotate/RLCA.ts";
 
-describe(LD_R16_IMM16, () => {
+describe(RLCA, () => {
     let registers: Registers
     let memory: Memory
     let cpu: Cpu
