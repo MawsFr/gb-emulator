@@ -40,7 +40,7 @@ export const isolateLeastSignificantBit = (num: number): number => bitwiseAnd(nu
 export const isolateMostSignificantBit = (num: number): number => shiftRightBy7(num)
 
 export const getNthBit = (num: number, bitIndex: number): number => {
-    return bitwiseAnd(shiftRightBy(7 - bitIndex)(num), 0x01)
+    return shiftRightBy(bitIndex)(num) & 0x01
 }
 export const get1stBit = (num: number): number => getNthBit(num, 0)
 export const get2ndBit = (num: number): number => getNthBit(num, 1)
@@ -48,14 +48,8 @@ export const get3rdBit = (num: number): number => getNthBit(num, 2)
 export const get4thBit = (num: number): number => getNthBit(num, 3)
 
 export const setNthBit = ({ number, bitIndex, value }: { number: number, bitIndex: number, value: number }): number => {
-    const shiftRightByBitIndex = shiftRightBy(bitIndex)
-    const bitMask = shiftRightByBitIndex(0x80)
-
-    if (value === 1) {
-        return bitwiseOr(number, bitMask)
-    }
-
-    return bitwiseAnd(number, bitwiseXor(0xFF, bitMask))
+    const mask = shiftLeftBy(bitIndex)(0x01)
+    return value === 1 ? bitwiseOr(number, mask) : bitwiseAnd(number, bitwiseXor(mask, 0xFF))
 }
 
 export const set1stBit = (num: number, value: number): number => setNthBit({ number: num, bitIndex: 0, value })
@@ -64,8 +58,5 @@ export const set3rdBit = (num: number, value: number): number => setNthBit({ num
 export const set4thBit = (num: number, value: number): number => setNthBit({ number: num, bitIndex: 3, value })
 
 export const isBitSet = (num: number, bitIndex: number): boolean => {
-    const shiftRightByBitIndex = shiftRightBy(bitIndex)
-    const bitMask = shiftRightByBitIndex(0x80)
-
-    return bitwiseAnd(num, bitMask) !== 0;
+    return getNthBit(num, bitIndex) === 1
 }

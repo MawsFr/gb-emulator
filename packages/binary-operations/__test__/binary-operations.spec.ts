@@ -3,15 +3,26 @@ import {
     bitwiseAnd,
     bitwiseOr,
     bitwiseXor,
-    concatBytes, get1stBit, get2ndBit, get3rdBit, get4thBit, getNthBit,
-    isBitSet, isolate2FirstDigits,
+    concatBytes,
+    get1stBit,
+    get2ndBit,
+    get3rdBit,
+    get4thBit,
+    getNthBit,
+    isBitSet,
+    isolate2FirstDigits,
     isolate2LastDigits,
     isolate2ndDigit,
     isolate3LastDigits,
     isolate3rdDigit,
     isolate4thDigit,
     isolateLeastSignificantBit,
-    isolateMostSignificantBit, set1stBit, set2ndBit, set3rdBit, set4thBit, setNthBit,
+    isolateMostSignificantBit,
+    set1stBit,
+    set2ndBit,
+    set3rdBit,
+    set4thBit,
+    setNthBit,
     shiftLeftBy,
     shiftLeftBy1,
     shiftLeftBy8,
@@ -229,8 +240,8 @@ describe('BinaryOperations', () => {
 
     describe(getNthBit, () => {
         it.each([
-            { num: 0b10000000, bitIndex: 0, expected: 1 },
-            { num: 0b11111110, bitIndex: 7, expected: 0 }
+            { num: 0b11111110, bitIndex: 0, expected: 0 },
+            { num: 0b10000000, bitIndex: 7, expected: 1 }
         ])('should get the nth bit', ({ num, bitIndex, expected }) => {
             const result = getNthBit(num, bitIndex)
             expect(result).toBe(expected)
@@ -239,7 +250,7 @@ describe('BinaryOperations', () => {
 
     describe(get1stBit, () => {
         it('should get the 1st bit', () => {
-            const num = 0b10000000
+            const num = 0b00000001
 
             const result = get1stBit(num)
 
@@ -249,7 +260,7 @@ describe('BinaryOperations', () => {
 
     describe(get2ndBit, () => {
         it('should get the 2nd bit', () => {
-            const num = 0b01000000
+            const num = 0b00000010
 
             const result = get2ndBit(num)
 
@@ -259,7 +270,7 @@ describe('BinaryOperations', () => {
 
     describe(get3rdBit, () => {
         it('should get the 3rd bit', () => {
-            const num = 0b00100000
+            const num = 0b0000100
 
             const result = get3rdBit(num)
 
@@ -269,7 +280,7 @@ describe('BinaryOperations', () => {
 
     describe(get4thBit, () => {
         it('should get the 4th bit', () => {
-            const num = 0b00010000
+            const num = 0b00001000
 
             const result = get4thBit(num)
 
@@ -279,14 +290,14 @@ describe('BinaryOperations', () => {
 
     describe(setNthBit, () => {
         it.each([
-            { num: 0b00000000, bitIndex: 0, value: 1, expected: 0b10000000 },
-            { num: 0b00000000, bitIndex: 1, value: 1, expected: 0b01000000 },
-            { num: 0b00000000, bitIndex: 2, value: 1, expected: 0b00100000 },
-            { num: 0b00000000, bitIndex: 3, value: 1, expected: 0b00010000 },
-            { num: 0b11111111, bitIndex: 0, value: 0, expected: 0b01111111 },
-            { num: 0b11111111, bitIndex: 1, value: 0, expected: 0b10111111 },
-            { num: 0b11111111, bitIndex: 2, value: 0, expected: 0b11011111 },
-            { num: 0b11111111, bitIndex: 3, value: 0, expected: 0b11101111 },
+            { num: 0b00000000, bitIndex: 0, value: 1, expected: 0b00000001 },
+            { num: 0b00000000, bitIndex: 1, value: 1, expected: 0b00000010 },
+            { num: 0b00000000, bitIndex: 2, value: 1, expected: 0b00000100 },
+            { num: 0b00000000, bitIndex: 3, value: 1, expected: 0b00001000 },
+            { num: 0b11111111, bitIndex: 0, value: 0, expected: 0b11111110 },
+            { num: 0b11111111, bitIndex: 1, value: 0, expected: 0b11111101 },
+            { num: 0b11111111, bitIndex: 2, value: 0, expected: 0b11111011 },
+            { num: 0b11111111, bitIndex: 3, value: 0, expected: 0b11110111 },
         ])('should set the nth bit', ({ num, bitIndex, value, expected }) => {
             const result = setNthBit({ number: num, bitIndex, value })
             expect(result).toBe(expected)
@@ -299,7 +310,7 @@ describe('BinaryOperations', () => {
 
             const result = set1stBit(num, 1)
 
-            expect(result).toBe(0b10010000)
+            expect(result).toBe(0b00010001)
         })
     });
 
@@ -309,17 +320,17 @@ describe('BinaryOperations', () => {
 
             const result = set2ndBit(num, 1)
 
-            expect(result).toBe(0b01001000)
+            expect(result).toBe(0b00001010)
         })
     })
 
     describe(set3rdBit, () => {
         it('should set the 3rd bit', () => {
-            const num = 0b00000100
+            const num = 0b00001000
 
             const result = set3rdBit(num, 1)
 
-            expect(result).toBe(0b00100100)
+            expect(result).toBe(0b00001100)
         })
     });
 
@@ -329,13 +340,13 @@ describe('BinaryOperations', () => {
 
             const result = set4thBit(num, 1)
 
-            expect(result).toBe(0b00010010)
+            expect(result).toBe(0b00001010)
         })
     })
 
     describe(isBitSet, () => {
-        it('should check if a bit is set', () => {
-            const num = 0b10000000
+        it('should check if a bit is set on an 8 bit number', () => {
+            const num = 0b00000001
 
             const result = isBitSet(num, 0)
 
@@ -345,7 +356,7 @@ describe('BinaryOperations', () => {
 
     describe(isBitSet, () => {
         it('should check if a bit is not set', () => {
-            const num = 0b11111110
+            const num = 0b01111111
 
             const result = isBitSet(num, 7)
 
