@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1739672991053" clover="3.2.0">
-  <project timestamp="1739672991053" name="All files">
-    <metrics statements="381" coveredstatements="378" conditionals="92" coveredconditionals="90" methods="83" coveredmethods="82" elements="556" coveredelements="550" complexity="0" loc="381" ncloc="381" packages="7" files="15" classes="15"/>
+<coverage generated="1739673243873" clover="3.2.0">
+  <project timestamp="1739673243873" name="All files">
+    <metrics statements="382" coveredstatements="379" conditionals="92" coveredconditionals="90" methods="83" coveredmethods="82" elements="557" coveredelements="551" complexity="0" loc="382" ncloc="382" packages="7" files="15" classes="15"/>
     <package name="binary-operations.src">
       <metrics statements="49" coveredstatements="49" conditionals="29" coveredconditionals="29" methods="25" coveredmethods="25"/>
       <file name="binary-operations.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/binary-operations/src/binary-operations.ts">
@@ -113,11 +113,11 @@
         <line num="26" count="1168" type="stmt"/>
         <line num="27" count="1168" type="stmt"/>
         <line num="29" count="1168" type="cond" truecount="1" falsecount="0"/>
-        <line num="30" count="278" type="stmt"/>
-        <line num="31" count="278" type="stmt"/>
+        <line num="30" count="291" type="stmt"/>
+        <line num="31" count="291" type="stmt"/>
         <line num="33" count="1168" type="cond" truecount="1" falsecount="0"/>
-        <line num="34" count="223" type="stmt"/>
-        <line num="35" count="223" type="stmt"/>
+        <line num="34" count="228" type="stmt"/>
+        <line num="35" count="228" type="stmt"/>
         <line num="36" count="1168" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
         <line num="39" count="1" type="cond" truecount="1" falsecount="0"/>
@@ -129,7 +129,7 @@
         <line num="46" count="584" type="stmt"/>
         <line num="47" count="584" type="stmt"/>
         <line num="49" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="51" count="2" type="stmt"/>
+        <line num="51" count="4" type="stmt"/>
         <line num="52" count="1" type="stmt"/>
         <line num="54" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="55" count="73" type="stmt"/>
@@ -138,14 +138,14 @@
         <line num="59" count="73" type="stmt"/>
         <line num="60" count="73" type="stmt"/>
         <line num="62" count="73" type="cond" truecount="1" falsecount="0"/>
-        <line num="63" count="2" type="stmt"/>
-        <line num="64" count="2" type="stmt"/>
+        <line num="63" count="4" type="stmt"/>
+        <line num="64" count="4" type="stmt"/>
         <line num="66" count="73" type="cond" truecount="1" falsecount="0"/>
-        <line num="67" count="1" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
+        <line num="67" count="2" type="stmt"/>
+        <line num="68" count="2" type="stmt"/>
         <line num="70" count="73" type="cond" truecount="1" falsecount="0"/>
-        <line num="71" count="1" type="stmt"/>
-        <line num="72" count="1" type="stmt"/>
+        <line num="71" count="2" type="stmt"/>
+        <line num="72" count="2" type="stmt"/>
         <line num="73" count="73" type="stmt"/>
         <line num="75" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="76" count="73" type="stmt"/>
@@ -154,14 +154,14 @@
         <line num="80" count="73" type="stmt"/>
         <line num="81" count="73" type="stmt"/>
         <line num="83" count="73" type="cond" truecount="1" falsecount="0"/>
-        <line num="84" count="2" type="stmt"/>
-        <line num="85" count="2" type="stmt"/>
+        <line num="84" count="4" type="stmt"/>
+        <line num="85" count="4" type="stmt"/>
         <line num="87" count="73" type="cond" truecount="1" falsecount="0"/>
-        <line num="88" count="1" type="stmt"/>
-        <line num="89" count="1" type="stmt"/>
+        <line num="88" count="2" type="stmt"/>
+        <line num="89" count="2" type="stmt"/>
         <line num="91" count="73" type="cond" truecount="1" falsecount="0"/>
-        <line num="92" count="1" type="stmt"/>
-        <line num="93" count="1" type="stmt"/>
+        <line num="92" count="2" type="stmt"/>
+        <line num="93" count="2" type="stmt"/>
         <line num="94" count="73" type="stmt"/>
         <line num="96" count="1" type="stmt"/>
         <line num="97" count="1" type="cond" truecount="1" falsecount="0"/>
@@ -201,12 +201,12 @@
         <line num="169" count="292" type="stmt"/>
         <line num="170" count="292" type="stmt"/>
         <line num="172" count="292" type="cond" truecount="1" falsecount="0"/>
-        <line num="173" count="57" type="stmt"/>
-        <line num="174" count="57" type="stmt"/>
+        <line num="173" count="64" type="stmt"/>
+        <line num="174" count="64" type="stmt"/>
         <line num="176" count="292" type="cond" truecount="1" falsecount="0"/>
-        <line num="177" count="44" type="stmt"/>
-        <line num="178" count="44" type="stmt"/>
-        <line num="179" count="44" type="stmt"/>
+        <line num="177" count="47" type="stmt"/>
+        <line num="178" count="47" type="stmt"/>
+        <line num="179" count="47" type="stmt"/>
         <line num="180" count="292" type="stmt"/>
         <line num="185" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="186" count="73" type="stmt"/>
@@ -382,7 +382,7 @@
       </file>
     </package>
     <package name="gb-emulator.src.instructions.ld">
-      <metrics statements="53" coveredstatements="53" conditionals="8" coveredconditionals="8" methods="8" coveredmethods="8"/>
+      <metrics statements="54" coveredstatements="54" conditionals="8" coveredconditionals="8" methods="8" coveredmethods="8"/>
       <file name="LD_A_R16MEM.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LD_A_R16MEM.ts">
         <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
@@ -417,7 +417,7 @@
         <line num="20" count="1" type="stmt"/>
       </file>
       <file name="LD_R16MEM_A.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LD_R16MEM_A.ts">
-        <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="cond" truecount="1" falsecount="0"/>
@@ -428,9 +428,10 @@
         <line num="18" count="4" type="stmt"/>
         <line num="19" count="4" type="stmt"/>
         <line num="21" count="4" type="stmt"/>
-        <line num="23" count="4" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
         <line num="24" count="4" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
+        <line num="25" count="4" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
       </file>
       <file name="LD_R16_IMM16.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LD_R16_IMM16.ts">
         <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
