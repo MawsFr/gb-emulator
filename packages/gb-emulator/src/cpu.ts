@@ -10,6 +10,7 @@ import { LD_IMM16_SP_OPCODES } from "@/instructions/ld/LD_IMM16_SP.ts";
 import { INC_R16_OPCODES } from "@/instructions/inc/INC_R16.ts";
 import { DEC_R16_OPCODES } from "@/instructions/dec/DEC_R16.ts";
 import { ADD_HL_R16_OPCODES } from "@/instructions/add/ADD_HL_R16.ts";
+import { INC_R8_OPCODES } from "@/instructions/inc/INC_R8.ts";
 
 export interface CpuConfig {
     registers: Registers,
@@ -24,6 +25,7 @@ export type Opcode =
     | INC_R16_OPCODES
     | DEC_R16_OPCODES
     | ADD_HL_R16_OPCODES
+    | INC_R8_OPCODES
 
 export class Cpu {
     public readonly registers: Registers

@@ -2,12 +2,15 @@
 
 import { beforeEach, describe, expect, it } from "vitest";
 import { Registers } from "@/registers.ts";
+import { Memory } from "@/memory.ts";
 
 describe(Registers, () => {
+    let memory: Memory;
     let registers: Registers;
 
     beforeEach(() => {
-        registers = new Registers();
+        memory = new Memory();
+        registers = new Registers(memory);
     });
 
     describe("8 bit registers", () => {
@@ -174,4 +177,20 @@ describe(Registers, () => {
                 .and.to.equal(1);
         });
     })
+
+    describe('[HL Pointer]', () => {
+        it("should have a value", () => {
+            registers.HL.value = 0x0102;
+            registers["[HL]"].value = 0x03;
+            expect(registers["[HL]"].value).to.equal(0x03);
+            expect(memory.addresses[0x0102]).to.equal(0x03);
+        });
+
+        it("should set a value", () => {
+            registers.HL.value = 0x0102;
+            registers["[HL]"].value = 0x03;
+            expect(registers["[HL]"].value).to.equal(0x03);
+            expect(memory.addresses[0x0102]).to.equal(0x03);
+        });
+    });
 });

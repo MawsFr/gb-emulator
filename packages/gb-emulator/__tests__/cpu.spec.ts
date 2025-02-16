@@ -9,8 +9,8 @@ describe(Cpu, () => {
     let registers: Registers
 
     beforeEach(() => {
-        registers = new Registers()
         memory = new Memory()
+        registers = new Registers(memory)
         cpu = new Cpu({
             registers,
             memory
@@ -61,14 +61,14 @@ describe(Cpu, () => {
             0b00011001,
             0b00101001,
             0b00111001,
-            // 0b00000100,
-            // 0b00001100,
-            // 0b00010100,
-            // 0b00011100,
-            // 0b00100100,
-            // 0b00101100,
-            // 0b00110100,
-            // 0b00111100,
+            0b00000100,
+            0b00001100,
+            0b00010100,
+            0b00011100,
+            0b00100100,
+            0b00101100,
+            0b00110100,
+            0b00111100,
         ])('should call the right instruction',
             (opcode) => {
                 // Given

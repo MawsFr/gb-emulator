@@ -11,6 +11,7 @@ import {
     set3rdBit,
     set4thBit
 } from "@mawsfr/binary-operations";
+import { Memory } from "@/memory.ts";
 
 export interface Register {
     get value(): number;
@@ -20,18 +21,22 @@ export interface Register {
 
 export abstract class AbstractRegister implements Register {
     protected _value: number = 0
-    protected readonly mask: number
+    protected readonly _mask: number
 
     protected constructor(mask: number) {
-        this.mask = mask
+        this._mask = mask
+    }
+
+    get mask() {
+        return this._mask
     }
 
     get value() {
-        return this._value & this.mask
+        return this._value & this._mask
     }
 
     set value(newValue) {
-        this._value = newValue & this.mask
+        this._value = newValue & this._mask
     }
 }
 
@@ -170,7 +175,7 @@ export class ComposedRegister extends Register16 {
     }
 
     get value() {
-        return concatBytes(this.high.value, this.low.value) & this.mask
+        return concatBytes(this.high.value, this.low.value) & this._mask
     }
 
     set value(newValue: number) {
@@ -179,7 +184,26 @@ export class ComposedRegister extends Register16 {
     }
 }
 
-export type R8Code = 0b000 | 0b001 | 0b010 | 0b011 | 0b100 | 0b101 | 0b110
+export class Pointer extends AbstractRegister {
+    protected readonly register: ComposedRegister
+    protected readonly memory: Memory;
+
+    constructor(register: ComposedRegister, memory: Memory) {
+        super(register.mask)
+        this.register = register
+        this.memory = memory
+    }
+
+    get value() {
+        return this.memory.addresses[this.register.value]
+    }
+
+    set value(newValue: number) {
+        this.memory.addresses[this.register.value] = newValue
+    }
+}
+
+export type R8Code = 0b000 | 0b001 | 0b010 | 0b011 | 0b100 | 0b101 | 0b110 | 0b111
 export type R16Code = 0b00 | 0b01 | 0b10 | 0b11
 
 export class Registers {
@@ -203,15 +227,9 @@ export class Registers {
     public readonly HLI: HLI = new HLI(this.HL);
     public readonly HLD: HLD = new HLD(this.HL);
 
-    public readonly r8: Record<R8Code, Register8> = {
-        0b000: this.B,
-        0b001: this.C,
-        0b010: this.D,
-        0b011: this.E,
-        0b100: this.H,
-        0b101: this.L,
-        0b110: this.F
-    }
+    public readonly "[HL]": Pointer
+
+    public readonly r8: Record<R8Code, Register8>
 
     public readonly r16: Record<R16Code, Register16> = {
         0b00: this.BC,
@@ -225,5 +243,19 @@ export class Registers {
         0b01: this.DE,
         0b10: this.HLI,
         0b11: this.HLD,
+    }
+
+    constructor(memory: Memory) {
+        this["[HL]"] = new Pointer(this.HL, memory)
+        this.r8 = {
+            0b000: this.B,
+            0b001: this.C,
+            0b010: this.D,
+            0b011: this.E,
+            0b100: this.H,
+            0b101: this.L,
+            0b110: this["[HL]"],
+            0b111: this.A
+        }
     }
 }

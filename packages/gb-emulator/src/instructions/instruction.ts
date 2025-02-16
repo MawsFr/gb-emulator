@@ -1,9 +1,10 @@
-import { R16Code, Registers } from "@/registers.ts";
+import { R16Code, R8Code, Registers } from "@/registers.ts";
 import { Cpu, Opcode } from "@/cpu.ts";
-import { bitwiseAnd, shiftRightBy4 } from "@mawsfr/binary-operations";
+import { bitwiseAnd, shiftRightBy, shiftRightBy4 } from "@mawsfr/binary-operations";
 import { Memory } from "@/memory.ts";
 
 export const REGISTER_16_MASK = 0b00_11_0000
+export const REGISTER_8_MASK = 0b00_111_000
 
 export abstract class Instruction {
     protected readonly cpu: Cpu
@@ -20,5 +21,9 @@ export abstract class Instruction {
 
     protected extractDestinationR16(opcode: Opcode) {
         return shiftRightBy4(bitwiseAnd(opcode, REGISTER_16_MASK)) as R16Code;
+    }
+
+    protected extractDestinationR8(opcode: Opcode) {
+        return shiftRightBy(3)(bitwiseAnd(opcode, REGISTER_8_MASK)) as R8Code;
     }
 }
