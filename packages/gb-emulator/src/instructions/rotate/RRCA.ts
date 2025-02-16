@@ -1,5 +1,6 @@
 import { Cpu } from "@/cpu.ts";
 import { Instruction } from "@/instructions/instruction.ts";
+import { bitwiseOr, getNthBit, shiftLeftBy, shiftRightBy1 } from "@mawsfr/binary-operations";
 
 export type RRCA_OPCODE = 0b00001111
 
@@ -9,8 +10,8 @@ export class RRCA extends Instruction {
     }
 
     execute() {
-        const carry = this.registers.A.value & 0b1
-        this.registers.A.value = (this.registers.A.value >> 1) | (carry << 7)
+        const carry = getNthBit(this.registers.A.value, 0)
+        this.registers.A.value = bitwiseOr(shiftRightBy1(this.registers.A.value), shiftLeftBy(7)(carry))
         this.registers.F.carryFlag = carry
 
         this.registers.PC.value++
