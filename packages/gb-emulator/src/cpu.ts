@@ -16,6 +16,7 @@ import { LD_R8_IMM8_OPCODES } from "@/instructions/ld/LD_R8_IMM8.ts";
 import { RLCA_OPCODE } from "@/instructions/rotate/RLCA.ts";
 import { RRCA_OPCODE } from "@/instructions/rotate/RRCA.ts";
 import { RLA_OPCODE } from "@/instructions/rotate/RLA.ts";
+import { RRA_OPCODE } from "@/instructions/rotate/RRA.ts";
 
 export interface CpuConfig {
     registers: Registers,
@@ -36,6 +37,7 @@ export type Opcode =
     | RLCA_OPCODE
     | RRCA_OPCODE
     | RLA_OPCODE
+    | RRA_OPCODE
 
 export class Cpu {
     public readonly registers: Registers

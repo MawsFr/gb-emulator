@@ -13,6 +13,7 @@ import { LD_R8_IMM8 } from "@/instructions/ld/LD_R8_IMM8.ts";
 import { RLCA } from "@/instructions/rotate/RLCA.ts";
 import { RRCA } from "@/instructions/rotate/RRCA.ts";
 import { RLA } from "@/instructions/rotate/RLA.ts";
+import { RRA } from "@/instructions/rotate/RRA.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -29,6 +30,7 @@ export abstract class InstructionLoader {
         const rlca = new RLCA(cpu)
         const rrca = new RRCA(cpu)
         const rla = new RLA(cpu)
+        const rra = new RRA(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -93,6 +95,7 @@ export abstract class InstructionLoader {
             0b00000111: rlca,
             0b00001111: rrca,
             0b00010111: rla,
+            0b00011111: rra,
         }
     }
 }
