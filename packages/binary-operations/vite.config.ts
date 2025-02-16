@@ -10,6 +10,7 @@ export default defineConfig({
             name: 'binary-operations',
             fileName: (format) => `binary-operations.${ format }.js`
         },
+        sourcemap: true,
     },
     resolve: {
         alias: {
