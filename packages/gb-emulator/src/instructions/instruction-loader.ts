@@ -6,6 +6,7 @@ import { LD_A_R16MEM } from "@/instructions/ld/LD_A_R16MEM.ts";
 import { LD_IMM16_SP } from "@/instructions/ld/LD_IMM16_SP.ts";
 import { INC_R16 } from "@/instructions/inc/INC_R16.ts";
 import { DEC_R16 } from "@/instructions/dec/DEC_R16.ts";
+import { ADD_HL_R16 } from "@/instructions/add/ADD_HL_R16.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -15,6 +16,7 @@ export abstract class InstructionLoader {
         const ld_imm16_sp = new LD_IMM16_SP(cpu)
         const inc_r16 = new INC_R16(cpu)
         const dec_r16 = new DEC_R16(cpu)
+        const add_hl_r16 = new ADD_HL_R16(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -43,6 +45,11 @@ export abstract class InstructionLoader {
             0b00011011: dec_r16,
             0b00101011: dec_r16,
             0b00111011: dec_r16,
+
+            0b00001001: add_hl_r16,
+            0b00011001: add_hl_r16,
+            0b00101001: add_hl_r16,
+            0b00111001: add_hl_r16,
         }
     }
 }

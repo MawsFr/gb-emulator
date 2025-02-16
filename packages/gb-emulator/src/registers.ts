@@ -19,8 +19,8 @@ export interface Register {
 }
 
 export abstract class AbstractRegister implements Register {
-    private _value: number = 0
-    private readonly mask: number
+    protected _value: number = 0
+    protected readonly mask: number
 
     protected constructor(mask: number) {
         this.mask = mask
@@ -60,17 +60,17 @@ export class Flags extends Register8 {
     }
 
     /**
-     * Gets subtraction flag N
-     */
-    get subtractionFlag() {
-        return get2ndBit(this.value);
-    }
-
-    /**
      * Gets half carry flag H
      */
     get halfCarryFlag() {
         return get3rdBit(this.value);
+    }
+
+    /**
+     * Gets subtraction flag N
+     */
+    get subtractionFlag() {
+        return get2ndBit(this.value);
     }
 
     /**
@@ -89,19 +89,19 @@ export class Flags extends Register8 {
     }
 
     /**
-     * Sets subtraction flag N
-     * @param value
-     */
-    set subtractionFlag(value: number) {
-        this.value = set2ndBit(this.value, value)
-    }
-
-    /**
      * Sets half carry flag H
      * @param value
      */
     set halfCarryFlag(value: number) {
         this.value = set3rdBit(this.value, value)
+    }
+
+    /**
+     * Sets subtraction flag N
+     * @param value
+     */
+    set subtractionFlag(value: number) {
+        this.value = set2ndBit(this.value, value)
     }
 
     /**
@@ -124,7 +124,7 @@ export class ComposedRegister extends Register16 {
     }
 
     get value() {
-        return concatBytes(this.high.value, this.low.value)
+        return concatBytes(this.high.value, this.low.value) & this.mask
     }
 
     set value(newValue: number) {
