@@ -15,6 +15,7 @@ import { RRCA } from "@/instructions/rotate/RRCA.ts";
 import { RLA } from "@/instructions/rotate/RLA.ts";
 import { RRA } from "@/instructions/rotate/RRA.ts";
 import { DAA } from "@/instructions/misc/DAA.ts";
+import { CPL } from "@/instructions/misc/CPL.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -33,6 +34,7 @@ export abstract class InstructionLoader {
         const rla = new RLA(cpu)
         const rra = new RRA(cpu)
         const daa = new DAA(cpu)
+        const cpl = new CPL(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -98,7 +100,8 @@ export abstract class InstructionLoader {
             0b00001111: rrca,
             0b00010111: rla,
             0b00011111: rra,
-            0b00100111: daa
+            0b00100111: daa,
+            0b00101111: cpl
         }
     }
 }
