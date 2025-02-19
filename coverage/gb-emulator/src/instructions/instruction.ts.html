@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>19/19</span>
+                <span class='fraction'>23/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>19/19</span>
+                <span class='fraction'>23/23</span>
             </div>
         
             
@@ -91,41 +91,52 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2884x</span>
-<span class="cline-any cline-yes">2884x</span>
-<span class="cline-any cline-yes">2884x</span>
+<span class="cline-any cline-yes">4449x</span>
+<span class="cline-any cline-yes">4449x</span>
+<span class="cline-any cline-yes">4449x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2884x</span>
-<span class="cline-any cline-yes">2884x</span>
-<span class="cline-any cline-yes">2884x</span>
-<span class="cline-any cline-yes">2884x</span>
-<span class="cline-any cline-yes">2884x</span>
+<span class="cline-any cline-yes">4449x</span>
+<span class="cline-any cline-yes">4449x</span>
+<span class="cline-any cline-yes">4449x</span>
+<span class="cline-any cline-yes">4449x</span>
+<span class="cline-any cline-yes">4449x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2884x</span>
+<span class="cline-any cline-yes">4449x</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2884x</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-yes">2884x</span></td><td class="text"><pre class="prettyprint lang-js">import { R16Code, R8Code, Registers } from "@/registers.ts";
+<span class="cline-any cline-yes">4449x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4449x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4449x</span></td><td class="text"><pre class="prettyprint lang-js">import { R16Code, R8Code, Registers } from "@/registers.ts";
 import { Cpu, Opcode } from "@/cpu.ts";
 import { bitwiseAnd, shiftRightBy, shiftRightBy4 } from "@mawsfr/binary-operations";
 import { Memory } from "@/memory.ts";
 &nbsp;
 export const REGISTER_16_MASK = 0b00_11_0000
-export const REGISTER_8_MASK = 0b00_111_000
+export const REGISTER_8_SOURCE_MASK = 0b00_000_111
+export const REGISTER_8_DESTINATION_MASK = 0b00_111_000
 &nbsp;
 export abstract class Instruction {
     protected readonly cpu: Cpu
@@ -145,7 +156,11 @@ export abstract class Instruction {
     }
 &nbsp;
     protected extractDestinationR8(opcode: Opcode) {
-        return shiftRightBy(3)(bitwiseAnd(opcode, REGISTER_8_MASK)) as R8Code;
+        return shiftRightBy(3)(bitwiseAnd(opcode, REGISTER_8_DESTINATION_MASK)) as R8Code;
+    }
+&nbsp;
+    protected extractSourceR8(opcode: Opcode) {
+        return bitwiseAnd(opcode, REGISTER_8_SOURCE_MASK) as R8Code;
     }
 }</pre></td></tr></table></pre>
 
@@ -154,7 +169,7 @@ export abstract class Instruction {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-19T05:02:13.574Z
+                at 2025-02-19T06:43:23.576Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
