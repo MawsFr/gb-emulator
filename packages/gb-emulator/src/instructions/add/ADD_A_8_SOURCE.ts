@@ -1,11 +1,6 @@
 import { Instruction } from "@/instructions/instruction.ts";
 import { Cpu } from "@/cpu.ts";
 import { R8Code } from "@/registers.ts";
-import {
-    ImmediateSourceStrategy,
-    RegisterSourceStrategy,
-    SourceStrategy
-} from "@/instructions/add/source-strategies.ts";
 
 export type ADD_A_R8_OPCODES =
     0b10000000
@@ -19,17 +14,14 @@ export type ADD_A_R8_OPCODES =
 
 export type ADD_A_IMM8_OPCODE = 0b11000110;
 
-export abstract class ADD_A_SOURCE extends Instruction {
-    private readonly sourceStrategy: SourceStrategy;
-
-    protected constructor(cpu: Cpu, sourceStrategy: SourceStrategy) {
+export abstract class ADD_A_8_SOURCE extends Instruction {
+    protected constructor(cpu: Cpu) {
         super(cpu);
-        this.sourceStrategy = sourceStrategy;
     }
 
     execute(): void {
         const augend = this.registers.A.value;
-        const addend = this.sourceStrategy.getSource();
+        const addend = this.getSource();
         const result = augend + addend;
 
         this.registers.A.value = result;
@@ -37,16 +29,29 @@ export abstract class ADD_A_SOURCE extends Instruction {
 
         this.registers.PC.value++;
     }
+
+    abstract getSource(): number;
 }
 
-export class ADD_A_R8 extends ADD_A_SOURCE {
+export class ADD_A_R8 extends ADD_A_8_SOURCE {
+    private readonly register: R8Code
+
     constructor(cpu: Cpu, register: R8Code) {
-        super(cpu, new RegisterSourceStrategy(register, cpu.registers));
+        super(cpu);
+        this.register = register;
+    }
+
+    getSource(): number {
+        return this.registers.r8[this.register].value;
     }
 }
 
-export class ADD_A_IMM8 extends ADD_A_SOURCE {
+export class ADD_A_IMM8 extends ADD_A_8_SOURCE {
     constructor(cpu: Cpu) {
-        super(cpu, new ImmediateSourceStrategy(cpu));
+        super(cpu);
+    }
+
+    getSource(): number {
+        return this.cpu.getImmediate8();
     }
 }

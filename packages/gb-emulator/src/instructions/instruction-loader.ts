@@ -23,7 +23,7 @@ import { JR_COND_IMM8 } from "@/instructions/jump/JR_COND_IMM8.ts";
 import { STOP } from "@/instructions/misc/STOP.ts";
 import { LD_R8_R8 } from "@/instructions/ld/LD_R8_R8.ts";
 import { HALT } from "@/instructions/misc/HALT.ts";
-import { ADD_A_IMM8, ADD_A_R8 } from "@/instructions/add/ADD_A_SOURCE.ts";
+import { ADD_A_IMM8, ADD_A_R8 } from "@/instructions/add/ADD_A_8_SOURCE.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
