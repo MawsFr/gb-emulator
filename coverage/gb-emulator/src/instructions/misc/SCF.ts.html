@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for gb-emulator/src/instructions/rotate/RRCA.ts</title>
+    <title>Code coverage report for gb-emulator/src/instructions/misc/SCF.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">gb-emulator/src/instructions/rotate</a> RRCA.ts</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">gb-emulator/src/instructions/misc</a> SCF.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -80,10 +80,8 @@
 <a name='L15'></a><a href='#L15'>15</a>
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L18'></a><a href='#L18'>18</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -99,21 +97,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { Cpu } from "@/cpu.ts";
-import { Instruction } from "@/instructions/instruction.ts";
-import { bitwiseOr, getNthBit, shiftLeftBy, shiftRightBy1 } from "@mawsfr/binary-operations";
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { Instruction } from "@/instructions/instruction.ts";
+import { Cpu } from "@/cpu.ts";
 &nbsp;
-export type RRCA_OPCODE = 0b00001111
+export type SCF_OPCODE = 0b00110111
 &nbsp;
-export class RRCA extends Instruction {
+export class SCF extends Instruction {
     constructor(cpu: Cpu) {
         super(cpu)
     }
 &nbsp;
     execute() {
-        const carry = getNthBit(this.registers.A.value, 0)
-        this.registers.A.value = bitwiseOr(shiftRightBy1(this.registers.A.value), shiftLeftBy(7)(carry))
-        this.registers.F.carryFlag = carry
+        this.registers.F.carryFlag = 1
+        this.registers.F.subtractionFlag = 0
+        this.registers.F.halfCarryFlag = 0
 &nbsp;
         this.registers.PC.value++
     }
