@@ -118,6 +118,8 @@ describe(Cpu, () => {
             0b00101000,
             0b00110000,
             0b00111000,
+            // STOP
+            0b00010000,
         ])('should call the right instruction',
             (opcode) => {
                 // Given

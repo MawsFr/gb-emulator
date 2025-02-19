@@ -20,6 +20,7 @@ import { SCF } from "@/instructions/misc/SCF.ts";
 import { CCF } from "@/instructions/misc/CCF.ts";
 import { JR_IMM8 } from "@/instructions/jump/JR_IMM8.ts";
 import { JR_COND_IMM8 } from "@/instructions/jump/JR_COND_IMM8.ts";
+import { STOP } from "@/instructions/misc/STOP.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -43,6 +44,7 @@ export abstract class InstructionLoader {
         const ccf = new CCF(cpu)
         const jr_imm8 = new JR_IMM8(cpu)
         const jr_cond_imm8 = new JR_COND_IMM8(cpu)
+        const stop = new STOP(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -118,6 +120,8 @@ export abstract class InstructionLoader {
             0b00101000: jr_cond_imm8,
             0b00110000: jr_cond_imm8,
             0b00111000: jr_cond_imm8,
+
+            0b00010000: stop
         }
     }
 }
