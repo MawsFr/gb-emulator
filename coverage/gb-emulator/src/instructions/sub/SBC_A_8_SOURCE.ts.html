@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for gb-emulator/src/instructions/instruction.ts</title>
+    <title>Code coverage report for gb-emulator/src/instructions/sub/SBC_A_8_SOURCE.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../../prettify.css" />
-    <link rel="stylesheet" href="../../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../../sort-arrow-sprite.png);
+            background-image: url(../../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">gb-emulator/src/instructions</a> instruction.ts</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">gb-emulator/src/instructions/sub</a> SBC_A_8_SOURCE.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>47/47</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.47% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>17/19</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>47/47</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
@@ -120,137 +120,119 @@
 <a name='L55'></a><a href='#L55'>55</a>
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2180x</span>
+<span class="cline-any cline-yes">2180x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">13397x</span>
-<span class="cline-any cline-yes">13397x</span>
-<span class="cline-any cline-yes">13397x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13397x</span>
-<span class="cline-any cline-yes">13397x</span>
-<span class="cline-any cline-yes">13397x</span>
-<span class="cline-any cline-yes">13397x</span>
-<span class="cline-any cline-yes">13397x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13397x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13397x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13397x</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13397x</span>
-<span class="cline-any cline-yes">25x</span>
-<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13397x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1937x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1937x</span>
+<span class="cline-any cline-yes">1937x</span>
+<span class="cline-any cline-yes">1937x</span>
+<span class="cline-any cline-yes">1937x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1937x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">13397x</span></td><td class="text"><pre class="prettyprint lang-js">import { R16Code, R8Code, Registers } from "@/registers.ts";
-import { Cpu, Opcode } from "@/cpu.ts";
-import { bitwiseAnd, isBitSet, shiftRightBy, shiftRightBy4 } from "@mawsfr/binary-operations";
-import { Memory } from "@/memory.ts";
+<span class="cline-any cline-yes">1937x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">243x</span>
+<span class="cline-any cline-yes">243x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { Instruction } from "@/instructions/instruction.ts";
+import { Cpu } from "@/cpu.ts";
+import { R8Code } from "@/registers.ts";
 &nbsp;
-export const REGISTER_16_MASK = 0b00_11_0000
-export const REGISTER_8_SOURCE_MASK = 0b00_000_111
-export const REGISTER_8_DESTINATION_MASK = 0b00_111_000
+export type SBC_A_R8_OPCODES =
+    | 0b10011000
+    | 0b10011001
+    | 0b10011010
+    | 0b10011011
+    | 0b10011100
+    | 0b10011101
+    | 0b10011110
+    | 0b10011111;
 &nbsp;
-export abstract class Instruction {
-    protected readonly cpu: Cpu
-    protected readonly registers: Registers
-    protected readonly memory: Memory
+export type SBC_A_IMM8_OPCODE = 0b11011110;
 &nbsp;
+export abstract class SBC_A_8_SOURCE extends Instruction {
     protected constructor(cpu: Cpu) {
-        this.cpu = cpu
-        this.registers = cpu.registers
-        this.memory = cpu.memory
+        super(cpu);
     }
 &nbsp;
-    abstract execute(opcode: Opcode): void
+    execute(): void {
+        const minuend = this.registers.A.value;
+        const subtrahend = this.getSource();
+        const carry = this.registers.F.carryFlag
+        const result = minuend - subtrahend - carry;
 &nbsp;
-    protected updateFlagsAfterAddition(augend: number, addend: number, result: number) {
-        this.registers.F.carryFlag =
-            isBitSet(augend, 15) &amp;&amp; isBitSet(addend, 15)
-                ? 1
-                : 0
+        this.registers.A.value = result;
+        this.updateFlagsAfterSubtraction(minuend, subtrahend - carry, result);
 &nbsp;
-        this.registers.F.halfCarryFlag =
-            isBitSet(augend, 11) &amp;&amp; isBitSet(addend, 11)
-                ? 1
-                : 0
-&nbsp;
-        this.registers.F.subtractionFlag = 0
-        this.registers.F.zeroFlag = result === <span class="branch-0 cbranch-no" title="branch not covered" >0 ? 1 : 0</span>
+        this.registers.PC.value++;
     }
 &nbsp;
-    protected updateFlagsAfterSubtraction(minuend: number, subtrahend: number, result: number) {
-        this.registers.F.carryFlag =
-            minuend &lt; subtrahend
-                ? 1
-                : 0
+    abstract getSource(): number;
+}
 &nbsp;
-        this.registers.F.halfCarryFlag =
-            (minuend &amp; 0xF) &lt; (subtrahend &amp; 0xF)
-                ? 1
-                : 0
+export class SBC_A_R8 extends SBC_A_8_SOURCE {
+    private readonly register: R8Code
 &nbsp;
-        this.registers.F.subtractionFlag = 1
-        this.registers.F.zeroFlag = result === <span class="branch-0 cbranch-no" title="branch not covered" >0 ? 1 : 0</span>
+    constructor(cpu: Cpu, register: R8Code) {
+        super(cpu);
+        this.register = register;
     }
 &nbsp;
-    protected extractDestinationR16(opcode: Opcode) {
-        return shiftRightBy4(bitwiseAnd(opcode, REGISTER_16_MASK)) as R16Code;
+    getSource(): number {
+        return this.registers.r8[this.register].value;
+    }
+}
+&nbsp;
+export class SBC_A_IMM8 extends SBC_A_8_SOURCE {
+    constructor(cpu: Cpu) {
+        super(cpu);
     }
 &nbsp;
-    protected extractDestinationR8(opcode: Opcode) {
-        return shiftRightBy(3)(bitwiseAnd(opcode, REGISTER_8_DESTINATION_MASK)) as R8Code;
-    }
-&nbsp;
-    protected extractSourceR8(opcode: Opcode) {
-        return bitwiseAnd(opcode, REGISTER_8_SOURCE_MASK) as R8Code;
+    getSource(): number {
+        return this.cpu.getImmediate8();
     }
 }</pre></td></tr></table></pre>
 
@@ -261,14 +243,14 @@ export abstract class Instruction {
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2025-02-19T09:19:26.837Z
             </div>
-        <script src="../../../prettify.js"></script>
+        <script src="../../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../../sorter.js"></script>
-        <script src="../../../block-navigation.js"></script>
+        <script src="../../../../sorter.js"></script>
+        <script src="../../../../block-navigation.js"></script>
     </body>
 </html>
     
