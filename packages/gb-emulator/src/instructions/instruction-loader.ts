@@ -22,6 +22,7 @@ import { JR_IMM8 } from "@/instructions/jump/JR_IMM8.ts";
 import { JR_COND_IMM8 } from "@/instructions/jump/JR_COND_IMM8.ts";
 import { STOP } from "@/instructions/misc/STOP.ts";
 import { LD_R8_R8 } from "@/instructions/ld/LD_R8_R8.ts";
+import { HALT } from "@/instructions/misc/HALT.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -46,6 +47,7 @@ export abstract class InstructionLoader {
         const jr_imm8 = new JR_IMM8(cpu)
         const jr_cond_imm8 = new JR_COND_IMM8(cpu)
         const stop = new STOP(cpu)
+        const halt = new HALT(cpu)
         const ld_r8_r8 = new LD_R8_R8(cpu)
 
         return {
@@ -124,6 +126,7 @@ export abstract class InstructionLoader {
             0b00111000: jr_cond_imm8,
 
             0b00010000: stop,
+            0b01110110: halt,
 
             0b01_000_000: ld_r8_r8, 0b01_001_000: ld_r8_r8, 0b01_010_000: ld_r8_r8, 0b01_011_000: ld_r8_r8,
             0b01_100_000: ld_r8_r8, 0b01_101_000: ld_r8_r8, 0b01_110_000: ld_r8_r8, 0b01_111_000: ld_r8_r8,
