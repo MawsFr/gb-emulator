@@ -19,6 +19,7 @@ import { RLA_OPCODE } from "@/instructions/rotate/RLA.ts";
 import { RRA_OPCODE } from "@/instructions/rotate/RRA.ts";
 import { DAA_OPCODE } from "@/instructions/misc/DAA.ts";
 import { CPL_OPCODE } from "@/instructions/misc/CPL.ts";
+import { SCF_OPCODE } from "@/instructions/misc/SCF.ts";
 
 export interface CpuConfig {
     registers: Registers,
@@ -42,6 +43,7 @@ export type Opcode =
     | RRA_OPCODE
     | DAA_OPCODE
     | CPL_OPCODE
+    | SCF_OPCODE
 
 export class Cpu {
     public readonly registers: Registers
