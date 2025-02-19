@@ -25,6 +25,7 @@ import { LD_R8_R8 } from "@/instructions/ld/LD_R8_R8.ts";
 import { HALT } from "@/instructions/misc/HALT.ts";
 import { ADD_A_IMM8, ADD_A_R8 } from "@/instructions/add/ADD_A_8_SOURCE.ts";
 import { ADC_A_IMM8, ADC_A_R8 } from "@/instructions/add/ADC_A_8_SOURCE.ts";
+import { SUB_A_IMM8, SUB_A_R8 } from "@/instructions/sub/SUB_A_8_SOURCE.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -69,6 +70,15 @@ export abstract class InstructionLoader {
         const adc_a_hl = new ADC_A_R8(cpu, 0b110)
         const adc_a_a = new ADC_A_R8(cpu, 0b111)
         const adc_a_imm8 = new ADC_A_IMM8(cpu)
+        const sub_a_b = new SUB_A_R8(cpu, 0b000)
+        const sub_a_c = new SUB_A_R8(cpu, 0b001)
+        const sub_a_d = new SUB_A_R8(cpu, 0b010)
+        const sub_a_e = new SUB_A_R8(cpu, 0b011)
+        const sub_a_h = new SUB_A_R8(cpu, 0b100)
+        const sub_a_l = new SUB_A_R8(cpu, 0b101)
+        const sub_a_hl = new SUB_A_R8(cpu, 0b110)
+        const sub_a_a = new SUB_A_R8(cpu, 0b111)
+        const sub_a_imm8 = new SUB_A_IMM8(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -186,6 +196,17 @@ export abstract class InstructionLoader {
             0b10001111: adc_a_a,
 
             0b11001110: adc_a_imm8,
+
+            0b10010000: sub_a_b,
+            0b10010001: sub_a_c,
+            0b10010010: sub_a_d,
+            0b10010011: sub_a_e,
+            0b10010100: sub_a_h,
+            0b10010101: sub_a_l,
+            0b10010110: sub_a_hl,
+            0b10010111: sub_a_a,
+
+            0b11010110: sub_a_imm8,
         }
     }
 }

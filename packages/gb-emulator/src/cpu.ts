@@ -28,6 +28,7 @@ import { LD_R8_R8_OPCODES } from "@/instructions/ld/LD_R8_R8.ts";
 import { HALT_OPCODE } from "@/instructions/misc/HALT.ts";
 import { ADD_A_IMM8_OPCODE, ADD_A_R8_OPCODES } from "@/instructions/add/ADD_A_8_SOURCE.ts";
 import { ADC_A_IMM8_OPCODE, ADC_A_R8_OPCODES } from "@/instructions/add/ADC_A_8_SOURCE.ts";
+import { SUB_A_IMM8_OPCODE, SUB_A_R8_OPCODES } from "@/instructions/sub/SUB_A_8_SOURCE.ts";
 
 export interface CpuConfig {
     registers: Registers,
@@ -62,6 +63,8 @@ export type Opcode =
     | ADD_A_IMM8_OPCODE
     | ADC_A_R8_OPCODES
     | ADC_A_IMM8_OPCODE
+    | SUB_A_R8_OPCODES
+    | SUB_A_IMM8_OPCODE
 
 export class Cpu {
     public readonly registers: Registers

@@ -35,6 +35,21 @@ export abstract class Instruction {
         this.registers.F.zeroFlag = result === 0 ? 1 : 0
     }
 
+    protected updateFlagsAfterSubtraction(minuend: number, subtrahend: number, result: number) {
+        this.registers.F.carryFlag =
+            minuend < subtrahend
+                ? 1
+                : 0
+
+        this.registers.F.halfCarryFlag =
+            (minuend & 0xF) < (subtrahend & 0xF)
+                ? 1
+                : 0
+
+        this.registers.F.subtractionFlag = 1
+        this.registers.F.zeroFlag = result === 0 ? 1 : 0
+    }
+
     protected extractDestinationR16(opcode: Opcode) {
         return shiftRightBy4(bitwiseAnd(opcode, REGISTER_16_MASK)) as R16Code;
     }
