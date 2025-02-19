@@ -24,6 +24,7 @@ import { CCF_OPCODE } from "@/instructions/misc/CCF.ts";
 import { JR_IMM8_OPCODE } from "@/instructions/jump/JR_IMM8.ts";
 import { JR_COND_IMM8_OPCODE } from "@/instructions/jump/JR_COND_IMM8.ts";
 import { STOP_OPCODE } from "@/instructions/misc/STOP.ts";
+import { LD_R8_R8_OPCODES } from "@/instructions/ld/LD_R8_R8.ts";
 
 export interface CpuConfig {
     registers: Registers,
@@ -52,6 +53,7 @@ export type Opcode =
     | JR_IMM8_OPCODE
     | JR_COND_IMM8_OPCODE
     | STOP_OPCODE
+    | LD_R8_R8_OPCODES
 
 export class Cpu {
     public readonly registers: Registers

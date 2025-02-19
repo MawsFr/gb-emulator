@@ -4,7 +4,8 @@ import { bitwiseAnd, shiftRightBy, shiftRightBy4 } from "@mawsfr/binary-operatio
 import { Memory } from "@/memory.ts";
 
 export const REGISTER_16_MASK = 0b00_11_0000
-export const REGISTER_8_MASK = 0b00_111_000
+export const REGISTER_8_SOURCE_MASK = 0b00_000_111
+export const REGISTER_8_DESTINATION_MASK = 0b00_111_000
 
 export abstract class Instruction {
     protected readonly cpu: Cpu
@@ -24,6 +25,10 @@ export abstract class Instruction {
     }
 
     protected extractDestinationR8(opcode: Opcode) {
-        return shiftRightBy(3)(bitwiseAnd(opcode, REGISTER_8_MASK)) as R8Code;
+        return shiftRightBy(3)(bitwiseAnd(opcode, REGISTER_8_DESTINATION_MASK)) as R8Code;
+    }
+
+    protected extractSourceR8(opcode: Opcode) {
+        return bitwiseAnd(opcode, REGISTER_8_SOURCE_MASK) as R8Code;
     }
 }

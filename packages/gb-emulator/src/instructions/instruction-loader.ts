@@ -21,6 +21,7 @@ import { CCF } from "@/instructions/misc/CCF.ts";
 import { JR_IMM8 } from "@/instructions/jump/JR_IMM8.ts";
 import { JR_COND_IMM8 } from "@/instructions/jump/JR_COND_IMM8.ts";
 import { STOP } from "@/instructions/misc/STOP.ts";
+import { LD_R8_R8 } from "@/instructions/ld/LD_R8_R8.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -45,6 +46,7 @@ export abstract class InstructionLoader {
         const jr_imm8 = new JR_IMM8(cpu)
         const jr_cond_imm8 = new JR_COND_IMM8(cpu)
         const stop = new STOP(cpu)
+        const ld_r8_r8 = new LD_R8_R8(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -121,7 +123,24 @@ export abstract class InstructionLoader {
             0b00110000: jr_cond_imm8,
             0b00111000: jr_cond_imm8,
 
-            0b00010000: stop
+            0b00010000: stop,
+
+            0b01_000_000: ld_r8_r8, 0b01_001_000: ld_r8_r8, 0b01_010_000: ld_r8_r8, 0b01_011_000: ld_r8_r8,
+            0b01_100_000: ld_r8_r8, 0b01_101_000: ld_r8_r8, 0b01_110_000: ld_r8_r8, 0b01_111_000: ld_r8_r8,
+            0b01_000_001: ld_r8_r8, 0b01_001_001: ld_r8_r8, 0b01_010_001: ld_r8_r8, 0b01_011_001: ld_r8_r8,
+            0b01_100_001: ld_r8_r8, 0b01_101_001: ld_r8_r8, 0b01_110_001: ld_r8_r8, 0b01_111_001: ld_r8_r8,
+            0b01_000_010: ld_r8_r8, 0b01_001_010: ld_r8_r8, 0b01_010_010: ld_r8_r8, 0b01_011_010: ld_r8_r8,
+            0b01_100_010: ld_r8_r8, 0b01_101_010: ld_r8_r8, 0b01_110_010: ld_r8_r8, 0b01_111_010: ld_r8_r8,
+            0b01_000_011: ld_r8_r8, 0b01_001_011: ld_r8_r8, 0b01_010_011: ld_r8_r8, 0b01_011_011: ld_r8_r8,
+            0b01_100_011: ld_r8_r8, 0b01_101_011: ld_r8_r8, 0b01_110_011: ld_r8_r8, 0b01_111_011: ld_r8_r8,
+            0b01_000_100: ld_r8_r8, 0b01_001_100: ld_r8_r8, 0b01_010_100: ld_r8_r8, 0b01_011_100: ld_r8_r8,
+            0b01_100_100: ld_r8_r8, 0b01_101_100: ld_r8_r8, 0b01_110_100: ld_r8_r8, 0b01_111_100: ld_r8_r8,
+            0b01_000_101: ld_r8_r8, 0b01_001_101: ld_r8_r8, 0b01_010_101: ld_r8_r8, 0b01_011_101: ld_r8_r8,
+            0b01_100_101: ld_r8_r8, 0b01_101_101: ld_r8_r8, 0b01_110_101: ld_r8_r8, 0b01_111_101: ld_r8_r8,
+            0b01_000_110: ld_r8_r8, 0b01_001_110: ld_r8_r8, 0b01_010_110: ld_r8_r8, 0b01_011_110: ld_r8_r8,
+            0b01_100_110: ld_r8_r8, 0b01_101_110: ld_r8_r8, 0b01_111_110: ld_r8_r8,
+            0b01_000_111: ld_r8_r8, 0b01_001_111: ld_r8_r8, 0b01_010_111: ld_r8_r8, 0b01_011_111: ld_r8_r8,
+            0b01_100_111: ld_r8_r8, 0b01_101_111: ld_r8_r8, 0b01_110_111: ld_r8_r8, 0b01_111_111: ld_r8_r8,
         }
     }
 }
