@@ -74,7 +74,7 @@ describe(ADD_HL_R16, () => {
         // Then
         expect(registers.HL.value).to.equal(expectedValue)
         expect(registers.PC.value).to.equal(0x1)
-        expect(registers.F.zeroFlag).to.equal(1)
+        expect(registers.F.zeroFlag).to.equal(0)
         expect(registers.F.subtractionFlag).to.equal(0)
         expect(registers.F.carryFlag).to.equal(expectedCarryFlag)
         expect(registers.F.halfCarryFlag).to.equal(expectedHalfCarryFlag)

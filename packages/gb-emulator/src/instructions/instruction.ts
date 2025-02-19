@@ -1,6 +1,6 @@
 import { R16Code, R8Code, Registers } from "@/registers.ts";
 import { Cpu, Opcode } from "@/cpu.ts";
-import { bitwiseAnd, shiftRightBy, shiftRightBy4 } from "@mawsfr/binary-operations";
+import { bitwiseAnd, isBitSet, shiftRightBy, shiftRightBy4 } from "@mawsfr/binary-operations";
 import { Memory } from "@/memory.ts";
 
 export const REGISTER_16_MASK = 0b00_11_0000
@@ -19,6 +19,21 @@ export abstract class Instruction {
     }
 
     abstract execute(opcode: Opcode): void
+
+    protected updateFlagsAfterAddition(augend: number, addend: number, result: number) {
+        this.registers.F.carryFlag =
+            isBitSet(augend, 15) && isBitSet(addend, 15)
+                ? 1
+                : 0
+
+        this.registers.F.halfCarryFlag =
+            isBitSet(augend, 11) && isBitSet(addend, 11)
+                ? 1
+                : 0
+
+        this.registers.F.subtractionFlag = 0
+        this.registers.F.zeroFlag = result === 0 ? 1 : 0
+    }
 
     protected extractDestinationR16(opcode: Opcode) {
         return shiftRightBy4(bitwiseAnd(opcode, REGISTER_16_MASK)) as R16Code;
