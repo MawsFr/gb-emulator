@@ -21,6 +21,7 @@ import { DAA_OPCODE } from "@/instructions/misc/DAA.ts";
 import { CPL_OPCODE } from "@/instructions/misc/CPL.ts";
 import { SCF_OPCODE } from "@/instructions/misc/SCF.ts";
 import { CCF_OPCODE } from "@/instructions/misc/CCF.ts";
+import { JP_IMM8_OPCODE } from "@/instructions/jump/JP_IMM8.ts";
 
 export interface CpuConfig {
     registers: Registers,
@@ -46,6 +47,7 @@ export type Opcode =
     | CPL_OPCODE
     | SCF_OPCODE
     | CCF_OPCODE
+    | JP_IMM8_OPCODE
 
 export class Cpu {
     public readonly registers: Registers
@@ -69,6 +71,14 @@ export class Cpu {
         return count === 1
             ? nextByte()
             : concatBytes(nextByte(), nextByte())
+    }
+
+    getImmediate8() {
+        return this.getImmediateBytes({ count: 1 })
+    }
+
+    getImmediate16() {
+        return this.getImmediateBytes({ count: 2 })
     }
 
     interpret(opcode: Opcode) {

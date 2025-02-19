@@ -18,6 +18,7 @@ import { DAA } from "@/instructions/misc/DAA.ts";
 import { CPL } from "@/instructions/misc/CPL.ts";
 import { SCF } from "@/instructions/misc/SCF.ts";
 import { CCF } from "@/instructions/misc/CCF.ts";
+import { JP_IMM8 } from "@/instructions/jump/JP_IMM8.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -39,6 +40,7 @@ export abstract class InstructionLoader {
         const cpl = new CPL(cpu)
         const scf = new SCF(cpu)
         const ccf = new CCF(cpu)
+        const jr_imm8 = new JP_IMM8(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -107,7 +109,9 @@ export abstract class InstructionLoader {
             0b00100111: daa,
             0b00101111: cpl,
             0b00110111: scf,
-            0b00111111: ccf
+            0b00111111: ccf,
+
+            0b00011000: jr_imm8
         }
     }
 }
