@@ -152,6 +152,11 @@ describe(Cpu, () => {
             0b10010100, 0b10010101, 0b10010110, 0b10010111,
             // SUB A, IMM8
             0b11010110,
+            // SBC A, R8
+            0b10011000, 0b10011001, 0b10011010, 0b10011011,
+            0b10011100, 0b10011101, 0b10011110, 0b10011111,
+            // SBC A, IMM8
+            0b11011110,
         ])('should call the right instruction',
             (opcode) => {
                 // Given

@@ -26,6 +26,7 @@ import { HALT } from "@/instructions/misc/HALT.ts";
 import { ADD_A_IMM8, ADD_A_R8 } from "@/instructions/add/ADD_A_8_SOURCE.ts";
 import { ADC_A_IMM8, ADC_A_R8 } from "@/instructions/add/ADC_A_8_SOURCE.ts";
 import { SUB_A_IMM8, SUB_A_R8 } from "@/instructions/sub/SUB_A_8_SOURCE.ts";
+import { SBC_A_IMM8, SBC_A_R8 } from "@/instructions/sub/SBC_A_8_SOURCE.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -79,6 +80,15 @@ export abstract class InstructionLoader {
         const sub_a_hl = new SUB_A_R8(cpu, 0b110)
         const sub_a_a = new SUB_A_R8(cpu, 0b111)
         const sub_a_imm8 = new SUB_A_IMM8(cpu)
+        const sbc_a_b = new SBC_A_R8(cpu, 0b000)
+        const sbc_a_c = new SBC_A_R8(cpu, 0b001)
+        const sbc_a_d = new SBC_A_R8(cpu, 0b010)
+        const sbc_a_e = new SBC_A_R8(cpu, 0b011)
+        const sbc_a_h = new SBC_A_R8(cpu, 0b100)
+        const sbc_a_l = new SBC_A_R8(cpu, 0b101)
+        const sbc_a_hl = new SBC_A_R8(cpu, 0b110)
+        const sbc_a_a = new SBC_A_R8(cpu, 0b111)
+        const sbc_a_imm8 = new SBC_A_IMM8(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -207,6 +217,17 @@ export abstract class InstructionLoader {
             0b10010111: sub_a_a,
 
             0b11010110: sub_a_imm8,
+
+            0b10011000: sbc_a_b,
+            0b10011001: sbc_a_c,
+            0b10011010: sbc_a_d,
+            0b10011011: sbc_a_e,
+            0b10011100: sbc_a_h,
+            0b10011101: sbc_a_l,
+            0b10011110: sbc_a_hl,
+            0b10011111: sbc_a_a,
+
+            0b11011110: sbc_a_imm8,
         }
     }
 }
