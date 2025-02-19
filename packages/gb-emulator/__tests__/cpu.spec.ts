@@ -113,6 +113,11 @@ describe(Cpu, () => {
             0b00111111,
             // JR IMM8
             0b00011000,
+            // JR CC, IMM8
+            0b00100000,
+            0b00101000,
+            0b00110000,
+            0b00111000,
         ])('should call the right instruction',
             (opcode) => {
                 // Given

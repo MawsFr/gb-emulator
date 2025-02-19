@@ -2,9 +2,9 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { Cpu } from "@/cpu.ts";
 import { Registers } from "@/registers.ts";
 import { Memory } from "@/memory.ts";
-import { JP_IMM8 } from "@/instructions/jump/JP_IMM8.ts"
+import { JR_IMM8 } from "@/instructions/jump/JR_IMM8.ts"
 
-describe(JP_IMM8, () => {
+describe(JR_IMM8, () => {
     let registers: Registers
     let memory: Memory
     let cpu: Cpu
@@ -25,9 +25,9 @@ describe(JP_IMM8, () => {
         registers.PC.value = 0x0
 
         // When
-        new JP_IMM8(cpu).execute()
+        new JR_IMM8(cpu).execute()
 
         // Then
-        expect(registers.PC.value).to.equal(0x52)
+        expect(registers.PC.value).to.equal(0x51)
     })
 })
