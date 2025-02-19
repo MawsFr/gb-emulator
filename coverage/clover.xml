@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1739952177351" clover="3.2.0">
-  <project timestamp="1739952177351" name="All files">
-    <metrics statements="794" coveredstatements="785" conditionals="164" coveredconditionals="159" methods="139" coveredmethods="135" elements="1097" coveredelements="1079" complexity="0" loc="794" ncloc="794" packages="10" files="33" classes="33"/>
+<coverage generated="1739952467051" clover="3.2.0">
+  <project timestamp="1739952467051" name="All files">
+    <metrics statements="779" coveredstatements="770" conditionals="160" coveredconditionals="155" methods="135" coveredmethods="131" elements="1074" coveredelements="1056" complexity="0" loc="779" ncloc="779" packages="10" files="32" classes="32"/>
     <package name="binary-operations.src">
       <metrics statements="49" coveredstatements="49" conditionals="29" coveredconditionals="29" methods="25" coveredmethods="25"/>
       <file name="binary-operations.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/binary-operations/src/binary-operations.ts">
@@ -475,36 +475,41 @@
       </file>
     </package>
     <package name="gb-emulator.src.instructions.add">
-      <metrics statements="62" coveredstatements="62" conditionals="13" coveredconditionals="13" methods="13" coveredmethods="13"/>
-      <file name="ADD_A_SOURCE.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/add/ADD_A_SOURCE.ts">
-        <metrics statements="27" coveredstatements="27" conditionals="5" coveredconditionals="5" methods="5" coveredmethods="5"/>
+      <metrics statements="47" coveredstatements="47" conditionals="9" coveredconditionals="9" methods="9" coveredmethods="9"/>
+      <file name="ADD_A_8_SOURCE.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/add/ADD_A_8_SOURCE.ts">
+        <metrics statements="32" coveredstatements="32" conditionals="7" coveredconditionals="7" methods="7" coveredmethods="7"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="19" count="1883" type="stmt"/>
+        <line num="20" count="1883" type="stmt"/>
         <line num="22" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="23" count="1883" type="stmt"/>
-        <line num="25" count="1883" type="cond" truecount="1" falsecount="0"/>
-        <line num="26" count="1883" type="stmt"/>
-        <line num="27" count="1883" type="stmt"/>
-        <line num="28" count="1883" type="stmt"/>
-        <line num="30" count="1883" type="cond" truecount="1" falsecount="0"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
         <line num="31" count="2" type="stmt"/>
-        <line num="32" count="2" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
-        <line num="38" count="2" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
-        <line num="40" count="1883" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
-        <line num="43" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="44" count="1673" type="stmt"/>
-        <line num="45" count="1673" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="36" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="37" count="1673" type="stmt"/>
+        <line num="39" count="1673" type="cond" truecount="1" falsecount="0"/>
+        <line num="40" count="1673" type="stmt"/>
+        <line num="41" count="1673" type="stmt"/>
+        <line num="42" count="1673" type="stmt"/>
+        <line num="44" count="1673" type="cond" truecount="1" falsecount="0"/>
+        <line num="45" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="49" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="50" count="210" type="stmt"/>
+        <line num="47" count="1673" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="50" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="51" count="210" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
+        <line num="52" count="210" type="stmt"/>
+        <line num="54" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
       </file>
       <file name="ADD_HL_R16.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/add/ADD_HL_R16.ts">
         <metrics statements="15" coveredstatements="15" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
@@ -523,29 +528,6 @@
         <line num="24" count="4" type="stmt"/>
         <line num="25" count="4" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
-      </file>
-      <file name="source-strategies.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/add/source-strategies.ts">
-        <metrics statements="20" coveredstatements="20" conditionals="6" coveredconditionals="6" methods="6" coveredmethods="6"/>
-        <line num="8" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="9" count="1674" type="stmt"/>
-        <line num="10" count="1674" type="stmt"/>
-        <line num="12" count="1674" type="cond" truecount="1" falsecount="0"/>
-        <line num="13" count="1674" type="stmt"/>
-        <line num="14" count="1674" type="stmt"/>
-        <line num="15" count="1674" type="stmt"/>
-        <line num="17" count="1674" type="cond" truecount="1" falsecount="0"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="20" count="1674" type="stmt"/>
-        <line num="22" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="23" count="211" type="stmt"/>
-        <line num="25" count="211" type="cond" truecount="1" falsecount="0"/>
-        <line num="26" count="211" type="stmt"/>
-        <line num="27" count="211" type="stmt"/>
-        <line num="29" count="211" type="cond" truecount="1" falsecount="0"/>
-        <line num="30" count="2" type="stmt"/>
-        <line num="31" count="2" type="stmt"/>
-        <line num="32" count="211" type="stmt"/>
       </file>
     </package>
     <package name="gb-emulator.src.instructions.dec">
