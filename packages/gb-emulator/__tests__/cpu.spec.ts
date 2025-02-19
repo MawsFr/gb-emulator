@@ -109,6 +109,8 @@ describe(Cpu, () => {
             0b00101111,
             // SCF
             0b00110111,
+            // CCF
+            0b00111111,
         ])('should call the right instruction',
             (opcode) => {
                 // Given
