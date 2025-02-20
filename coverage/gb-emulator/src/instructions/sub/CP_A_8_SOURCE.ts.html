@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for gb-emulator/src/instructions/sub/SUB_A_8_SOURCE.ts</title>
+    <title>Code coverage report for gb-emulator/src/instructions/sub/CP_A_8_SOURCE.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">gb-emulator/src/instructions/sub</a> SUB_A_8_SOURCE.ts</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">gb-emulator/src/instructions/sub</a> CP_A_8_SOURCE.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>27/27</span>
+                <span class='fraction'>25/25</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>27/27</span>
+                <span class='fraction'>25/25</span>
             </div>
         
             
@@ -109,8 +109,7 @@
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -137,10 +136,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2495x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -162,19 +160,19 @@ import { Cpu } from "@/cpu.ts";
 import { R8Code } from "@/registers.ts";
 import { ImmediateSourceStrategy, RegisterSourceStrategy, SourceStrategy } from "@/instructions/source-strategies.ts";
 &nbsp;
-export type SUB_A_R8_OPCODES =
-    | 0b10010000
-    | 0b10010001
-    | 0b10010010
-    | 0b10010011
-    | 0b10010100
-    | 0b10010101
-    | 0b10010110
-    | 0b10010111;
+export type CP_A_R8_OPCODES =
+    | 0b10111000
+    | 0b10111001
+    | 0b10111010
+    | 0b10111011
+    | 0b10111100
+    | 0b10111101
+    | 0b10111110
+    | 0b10111111;
 &nbsp;
-export type SUB_A_IMM8_OPCODE = 0b11010110;
+export type CP_A_IMM8_OPCODE = 0b11111110
 &nbsp;
-export abstract class SUB_A_8_SOURCE extends Instruction {
+export abstract class CP_A_8_SOURCE extends Instruction {
     private readonly sourceStrategy: SourceStrategy;
 &nbsp;
     protected constructor(cpu: Cpu, sourceStrategy: SourceStrategy) {
@@ -183,24 +181,23 @@ export abstract class SUB_A_8_SOURCE extends Instruction {
     }
 &nbsp;
     execute(): void {
-        const minuend = this.registers.A.value;
-        const subtrahend = this.sourceStrategy.getSource();
-        const result = minuend - subtrahend;
+        const value = this.sourceStrategy.getSource();
 &nbsp;
-        this.registers.A.value = result;
-        this.updateFlagsAfterSubtraction(minuend, subtrahend, result);
+        const result = this.registers.A.value - value;
+&nbsp;
+        this.updateFlagsAfterSubtraction(this.registers.A.value, value, result);
 &nbsp;
         this.registers.PC.value++;
     }
 }
 &nbsp;
-export class SUB_A_R8 extends SUB_A_8_SOURCE {
+export class CP_A_R8 extends CP_A_8_SOURCE {
     constructor(cpu: Cpu, register: R8Code) {
         super(cpu, new RegisterSourceStrategy(register, cpu.registers));
     }
 }
 &nbsp;
-export class SUB_A_IMM8 extends SUB_A_8_SOURCE {
+export class CP_A_IMM8 extends CP_A_8_SOURCE {
     constructor(cpu: Cpu) {
         super(cpu, new ImmediateSourceStrategy(cpu));
     }
