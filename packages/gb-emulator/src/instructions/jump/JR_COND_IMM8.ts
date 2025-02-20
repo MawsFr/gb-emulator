@@ -15,12 +15,7 @@ export class JR_COND_IMM8 extends Instruction {
     execute(opcode: JR_COND_IMM8_OPCODE) {
         const immediate8 = this.cpu.getImmediate8()
 
-        if (
-            (opcode === 0b00100000 && !this.registers.F.zeroFlag) ||
-            (opcode === 0b00101000 && this.registers.F.zeroFlag) ||
-            (opcode === 0b00110000 && !this.registers.F.carryFlag) ||
-            (opcode === 0b00111000 && this.registers.F.carryFlag)
-        ) {
+        if (this.conditionIsMet(opcode)) {
             this.registers.PC.value += immediate8
         } else {
             this.registers.PC.value++
