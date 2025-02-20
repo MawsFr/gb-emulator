@@ -23,8 +23,9 @@ export abstract class AbstractRegister implements Register {
     protected _value: number = 0
     protected readonly _mask: number
 
-    protected constructor(mask: number) {
+    protected constructor(mask: number, value?: number) {
         this._mask = mask
+        this._value = value ?? this._value
     }
 
     get mask() {
@@ -47,8 +48,8 @@ export class Register8 extends AbstractRegister {
 }
 
 export class Register16 extends AbstractRegister {
-    constructor() {
-        super(0xFFFF);
+    constructor(value?: number) {
+        super(0xFFFF, value);
     }
 
     incrementOrDecrementIfNeeded() {
@@ -222,7 +223,7 @@ export class Registers {
     public readonly BC = new ComposedRegister(this.B, this.C)
     public readonly DE = new ComposedRegister(this.D, this.E)
 
-    public readonly SP: Register16 = new Register16();
+    public readonly SP: Register16 = new Register16(0xFFFE);
     public readonly PC: Register16 = new Register16();
 
     public readonly HLI: HLI = new HLI(this.HL);

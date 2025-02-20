@@ -111,6 +111,10 @@ describe(Registers, () => {
                 .and.to.equal(0x0102);
         });
 
+        it('should have a SP register with default value = 0xFFFE', () => {
+            expect(registers.SP.value).to.equal(0xFFFE)
+        })
+
         it("should have a PC register", () => {
             registers.PC.value = 0x0102;
             expect(registers.PC.value)
