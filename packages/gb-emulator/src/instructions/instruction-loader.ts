@@ -27,6 +27,7 @@ import { ADD_A_IMM8, ADD_A_R8 } from "@/instructions/add/ADD_A_8_SOURCE.ts";
 import { ADC_A_IMM8, ADC_A_R8 } from "@/instructions/add/ADC_A_8_SOURCE.ts";
 import { SUB_A_IMM8, SUB_A_R8 } from "@/instructions/sub/SUB_A_8_SOURCE.ts";
 import { SBC_A_IMM8, SBC_A_R8 } from "@/instructions/sub/SBC_A_8_SOURCE.ts";
+import { AND_A_IMM8, AND_A_R8 } from "@/instructions/bitwise/AND_A_8_SOURCE.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -89,6 +90,15 @@ export abstract class InstructionLoader {
         const sbc_a_hl = new SBC_A_R8(cpu, 0b110)
         const sbc_a_a = new SBC_A_R8(cpu, 0b111)
         const sbc_a_imm8 = new SBC_A_IMM8(cpu)
+        const and_a_b = new AND_A_R8(cpu, 0b000)
+        const and_a_c = new AND_A_R8(cpu, 0b001)
+        const and_a_d = new AND_A_R8(cpu, 0b010)
+        const and_a_e = new AND_A_R8(cpu, 0b011)
+        const and_a_h = new AND_A_R8(cpu, 0b100)
+        const and_a_l = new AND_A_R8(cpu, 0b101)
+        const and_a_hl = new AND_A_R8(cpu, 0b110)
+        const and_a_a = new AND_A_R8(cpu, 0b111)
+        const and_a_imm8 = new AND_A_IMM8(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -228,6 +238,17 @@ export abstract class InstructionLoader {
             0b10011111: sbc_a_a,
 
             0b11011110: sbc_a_imm8,
+
+            0b10100000: and_a_b,
+            0b10100001: and_a_c,
+            0b10100010: and_a_d,
+            0b10100011: and_a_e,
+            0b10100100: and_a_h,
+            0b10100101: and_a_l,
+            0b10100110: and_a_hl,
+            0b10100111: and_a_a,
+
+            0b11100110: and_a_imm8
         }
     }
 }

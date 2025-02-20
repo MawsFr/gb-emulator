@@ -30,7 +30,7 @@ export class DAA extends Instruction {
             ? offset
             : -offset
 
-        this.registers.F.zeroFlag = this.registers.A.value === 0 ? 1 : 0
+        this.setZeroFlag(this.registers.A.value)
         this.registers.F.halfCarryFlag = 0
 
         this.registers.PC.value++

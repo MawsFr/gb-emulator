@@ -32,7 +32,7 @@ export abstract class Instruction {
                 : 0
 
         this.registers.F.subtractionFlag = 0
-        this.registers.F.zeroFlag = result === 0 ? 1 : 0
+        this.setZeroFlag(result)
     }
 
     protected updateFlagsAfterSubtraction(minuend: number, subtrahend: number, result: number) {
@@ -47,7 +47,11 @@ export abstract class Instruction {
                 : 0
 
         this.registers.F.subtractionFlag = 1
-        this.registers.F.zeroFlag = result === 0 ? 1 : 0
+        this.setZeroFlag(result)
+    }
+
+    protected setZeroFlag(value: number) {
+        this.registers.F.zeroFlag = value === 0 ? 1 : 0
     }
 
     protected extractDestinationR16(opcode: Opcode) {
