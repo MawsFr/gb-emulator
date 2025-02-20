@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for gb-emulator/src/instructions/add/ADD_HL_R16.ts</title>
+    <title>Code coverage report for gb-emulator/src/instructions/jump/JP_COND_IMM16.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">gb-emulator/src/instructions/add</a> ADD_HL_R16.ts</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">gb-emulator/src/instructions/jump</a> JP_COND_IMM16.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/15</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/15</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -84,12 +84,8 @@
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -99,44 +95,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">309x</span>
-<span class="cline-any cline-yes">309x</span>
+<span class="cline-any cline-yes">313x</span>
+<span class="cline-any cline-yes">313x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { Cpu } from "@/cpu.ts";
-import { Instruction } from "@/instructions/instruction.ts";
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { Instruction } from "@/instructions/instruction.ts";
+import { Cpu } from "@/cpu.ts";
 &nbsp;
-export type ADD_HL_R16_OPCODES =
-    | 0b00_00_1001
-    | 0b00_01_1001
-    | 0b00_10_1001
-    | 0b00_11_1001
+export type JP_COND_IMM16_OPCODE =
+    | 0b11000010
+    | 0b11001010
+    | 0b11010010
+    | 0b11011010
 &nbsp;
-export class ADD_HL_R16 extends Instruction {
+export class JP_COND_IMM16 extends Instruction {
     constructor(cpu: Cpu) {
         super(cpu)
     }
 &nbsp;
-    execute(opcode: ADD_HL_R16_OPCODES) {
-        const destination = this.extractDestinationR16(opcode);
-        const augend = this.registers.HL.value;
-        const addend = this.registers.r16[destination].value;
-        const result = augend + addend;
-&nbsp;
-        this.registers.HL.value = result
-        this.updateFlagsAfterAddition(augend, addend, result);
-&nbsp;
-        this.registers.PC.value++
+    execute(opcode: JP_COND_IMM16_OPCODE) {
+        if (this.conditionIsMet(opcode)) {
+            this.registers.PC.value = this.cpu.getImmediate16()
+        } else {
+            this.registers.PC.value += 3
+        }
     }
 }</pre></td></tr></table></pre>
 
