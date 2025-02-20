@@ -33,6 +33,7 @@ import { SBC_A_IMM8_OPCODE, SBC_A_R8_OPCODES } from "@/instructions/sub/SBC_A_8_
 import { AND_A_IMM8_OPCODE, AND_A_R8_OPCODES } from "@/instructions/bitwise/AND_A_8_SOURCE.ts";
 import { XOR_A_IMM8_OPCODE, XOR_A_R8_OPCODES } from "@/instructions/bitwise/XOR_A_8_SOURCE.ts";
 import { OR_A_IMM8_OPCODE, OR_A_R8_OPCODES } from "@/instructions/bitwise/OR_A_8_SOURCE.ts";
+import { CP_A_IMM8_OPCODE, CP_A_R8_OPCODES } from "@/instructions/sub/CP_A_8_SOURCE.ts";
 
 export interface CpuConfig {
     registers: Registers,
@@ -77,6 +78,8 @@ export type Opcode =
     | XOR_A_IMM8_OPCODE
     | OR_A_R8_OPCODES
     | OR_A_IMM8_OPCODE
+    | CP_A_R8_OPCODES
+    | CP_A_IMM8_OPCODE
 
 export class Cpu {
     public readonly registers: Registers
