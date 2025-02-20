@@ -36,6 +36,7 @@ import { OR_A_IMM8_OPCODE, OR_A_R8_OPCODES } from "@/instructions/bitwise/OR_A_8
 import { CP_A_IMM8_OPCODE, CP_A_R8_OPCODES } from "@/instructions/sub/CP_A_8_SOURCE.ts";
 import { RET_OPCODE } from "@/instructions/ret/RET.ts";
 import { RET_COND_OPCODES } from "@/instructions/ret/RET_COND.ts";
+import { JP_IMM16_OPCODE } from "@/instructions/jump/JP_IMM16.ts";
 
 export interface CpuConfig {
     registers: Registers,
@@ -84,6 +85,7 @@ export type Opcode =
     | CP_A_IMM8_OPCODE
     | RET_COND_OPCODES
     | RET_OPCODE
+    | JP_IMM16_OPCODE
 
 export class Cpu {
     public readonly registers: Registers

@@ -176,6 +176,8 @@ describe(Cpu, () => {
             0b11000000, 0b11001000, 0b11010000, 0b11011000,
             // RET
             0b11001001,
+            // JP IMM16
+            0b11000011,
         ])('should call the right instruction',
             (opcode) => {
                 // Given
