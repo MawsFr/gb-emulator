@@ -4,7 +4,14 @@ import { R8Code } from "@/registers.ts";
 import { ImmediateSourceStrategy, RegisterSourceStrategy, SourceStrategy } from "@/instructions/source-strategies.ts";
 
 export type XOR_A_R8_OPCODES =
-    0b10101000 | 0b10101001 | 0b10101010 | 0b10101011 | 0b10101100 | 0b10101101 | 0b10101111;
+    | 0b10101000
+    | 0b10101001
+    | 0b10101010
+    | 0b10101011
+    | 0b10101100
+    | 0b10101101
+    | 0b10101110
+    | 0b10101111;
 
 export type XOR_A_IMM8_OPCODE = 0b11101110;
 
