@@ -180,6 +180,8 @@ describe(Cpu, () => {
             0b11000011,
             // JP COND IMM16
             0b11000010, 0b11001010, 0b11010010, 0b11011010,
+            // JP HL
+            0b11101001,
         ])('should call the right instruction',
             (opcode) => {
                 // Given

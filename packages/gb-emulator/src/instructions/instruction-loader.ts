@@ -35,6 +35,7 @@ import { RET } from "@/instructions/ret/RET.ts";
 import { RET_COND } from "@/instructions/ret/RET_COND.ts";
 import { JP_IMM16 } from "@/instructions/jump/JP_IMM16.ts";
 import { JP_COND_IMM16 } from "@/instructions/jump/JP_COND_IMM16.ts";
+import { JP_HL } from "@/instructions/jump/JP_HL.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -137,6 +138,7 @@ export abstract class InstructionLoader {
         const ret = new RET(cpu)
         const jp_imm16 = new JP_IMM16(cpu)
         const jp_cond_imm16 = new JP_COND_IMM16(cpu)
+        const jp_hl = new JP_HL(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -331,7 +333,8 @@ export abstract class InstructionLoader {
             0b11000010: jp_cond_imm16,
             0b11001010: jp_cond_imm16,
             0b11010010: jp_cond_imm16,
-            0b11011010: jp_cond_imm16
+            0b11011010: jp_cond_imm16,
+            0b11101001: jp_hl,
         }
     }
 }
