@@ -8,9 +8,9 @@ describe(Memory, () => {
         memory = new Memory();
     });
 
-    it('should have a 64KB of 8 bits addresses from 0x0 to 0x7FFF', () => {
+    it('should have a 64KB of 8 bits addresses from 0x0 to 0xFFFF', () => {
         expect(memory.addresses)
             .to.be.an.instanceof(Uint8Array)
-            .and.have.length(0x8000);
+            .and.have.length(0xFFFF);
     });
 });
