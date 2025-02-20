@@ -31,6 +31,9 @@ describe(XOR_A_R8, () => {
         // Then
         expect(registers.A.value).to.equal(expectedValue)
         expect(registers.B.value).to.equal(0b10101010)
+        expect(registers.F.zeroFlag).to.equal(0)
+        expect(registers.F.subtractionFlag).to.equal(0)
+        expect(registers.F.halfCarryFlag).to.equal(0)
         expect(registers.PC.value).to.equal(0x1)
     })
 })
@@ -62,6 +65,9 @@ describe(XOR_A_IMM8, () => {
         // Then
         expect(registers.A.value).to.equal(expectedValue)
         expect(memory.addresses[0x1]).to.equal(0b10101010)
+        expect(registers.F.zeroFlag).to.equal(0)
+        expect(registers.F.subtractionFlag).to.equal(0)
+        expect(registers.F.halfCarryFlag).to.equal(0)
         expect(registers.PC.value).to.equal(0x2)
     })
 })

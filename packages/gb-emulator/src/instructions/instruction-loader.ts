@@ -29,6 +29,7 @@ import { SUB_A_IMM8, SUB_A_R8 } from "@/instructions/sub/SUB_A_8_SOURCE.ts";
 import { SBC_A_IMM8, SBC_A_R8 } from "@/instructions/sub/SBC_A_8_SOURCE.ts";
 import { AND_A_IMM8, AND_A_R8 } from "@/instructions/bitwise/AND_A_8_SOURCE.ts";
 import { XOR_A_IMM8, XOR_A_R8 } from "@/instructions/bitwise/XOR_A_8_SOURCE.ts";
+import { OR_A_IMM8, OR_A_R8 } from "@/instructions/bitwise/OR_A_8_SOURCE.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -109,6 +110,15 @@ export abstract class InstructionLoader {
         const xor_a_hl = new XOR_A_R8(cpu, 0b110)
         const xor_a_a = new XOR_A_R8(cpu, 0b111)
         const xor_a_imm8 = new XOR_A_IMM8(cpu)
+        const or_a_b = new OR_A_R8(cpu, 0b000)
+        const or_a_c = new OR_A_R8(cpu, 0b001)
+        const or_a_d = new OR_A_R8(cpu, 0b010)
+        const or_a_e = new OR_A_R8(cpu, 0b011)
+        const or_a_h = new OR_A_R8(cpu, 0b100)
+        const or_a_l = new OR_A_R8(cpu, 0b101)
+        const or_a_hl = new OR_A_R8(cpu, 0b110)
+        const or_a_a = new OR_A_R8(cpu, 0b111)
+        const or_a_imm8 = new OR_A_IMM8(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -270,6 +280,17 @@ export abstract class InstructionLoader {
             0b10101111: xor_a_a,
 
             0b11101110: xor_a_imm8,
+
+            0b10110000: or_a_b,
+            0b10110001: or_a_c,
+            0b10110010: or_a_d,
+            0b10110011: or_a_e,
+            0b10110100: or_a_h,
+            0b10110101: or_a_l,
+            0b10110110: or_a_hl,
+            0b10110111: or_a_a,
+
+            0b11110110: or_a_imm8,
         }
     }
 }
