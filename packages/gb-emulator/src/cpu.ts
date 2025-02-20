@@ -35,6 +35,7 @@ import { XOR_A_IMM8_OPCODE, XOR_A_R8_OPCODES } from "@/instructions/bitwise/XOR_
 import { OR_A_IMM8_OPCODE, OR_A_R8_OPCODES } from "@/instructions/bitwise/OR_A_8_SOURCE.ts";
 import { CP_A_IMM8_OPCODE, CP_A_R8_OPCODES } from "@/instructions/sub/CP_A_8_SOURCE.ts";
 import { RET_OPCODE } from "@/instructions/ret/RET.ts";
+import { RET_COND_OPCODES } from "@/instructions/ret/RET_COND.ts";
 
 export interface CpuConfig {
     registers: Registers,
@@ -81,6 +82,7 @@ export type Opcode =
     | OR_A_IMM8_OPCODE
     | CP_A_R8_OPCODES
     | CP_A_IMM8_OPCODE
+    | RET_COND_OPCODES
     | RET_OPCODE
 
 export class Cpu {

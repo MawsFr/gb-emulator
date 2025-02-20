@@ -32,6 +32,7 @@ import { XOR_A_IMM8, XOR_A_R8 } from "@/instructions/bitwise/XOR_A_8_SOURCE.ts";
 import { OR_A_IMM8, OR_A_R8 } from "@/instructions/bitwise/OR_A_8_SOURCE.ts";
 import { CP_A_IMM8, CP_A_R8 } from "@/instructions/sub/CP_A_8_SOURCE.ts";
 import { RET } from "@/instructions/ret/RET.ts";
+import { RET_COND } from "@/instructions/ret/RET_COND.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -130,6 +131,7 @@ export abstract class InstructionLoader {
         const cp_a_hl = new CP_A_R8(cpu, 0b110)
         const cp_a_a = new CP_A_R8(cpu, 0b111)
         const cp_a_imm8 = new CP_A_IMM8(cpu)
+        const ret_cond = new RET_COND(cpu)
         const ret = new RET(cpu)
 
         return {
@@ -315,7 +317,11 @@ export abstract class InstructionLoader {
 
             0b11111110: cp_a_imm8,
 
-            0b11001001: ret
+            0b11000000: ret_cond,
+            0b11001000: ret_cond,
+            0b11010000: ret_cond,
+            0b11011000: ret_cond,
+            0b11001001: ret,
         }
     }
 }

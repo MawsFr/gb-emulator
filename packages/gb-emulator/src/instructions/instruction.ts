@@ -3,6 +3,7 @@ import { Cpu, Opcode } from "@/cpu.ts";
 import { bitwiseAnd, isBitSet, shiftRightBy, shiftRightBy4 } from "@mawsfr/binary-operations";
 import { Memory } from "@/memory.ts";
 import { JR_COND_IMM8_OPCODE } from "@/instructions/jump/JR_COND_IMM8.ts";
+import { RET_COND_OPCODES } from "@/instructions/ret/RET_COND.ts";
 
 export const REGISTER_16_MASK = 0b00_11_0000
 export const REGISTER_8_SOURCE_MASK = 0b00_000_111
@@ -66,8 +67,8 @@ export abstract class Instruction {
     protected extractSourceR8(opcode: Opcode) {
         return bitwiseAnd(opcode, REGISTER_8_SOURCE_MASK) as R8Code;
     }
-    
-    protected conditionIsMet(opcode: JR_COND_IMM8_OPCODE) {
+
+    protected conditionIsMet(opcode: JR_COND_IMM8_OPCODE | RET_COND_OPCODES) {
         const conditionCode = this.getCondition(opcode)
 
         switch (conditionCode) {

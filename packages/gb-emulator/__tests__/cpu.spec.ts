@@ -172,6 +172,8 @@ describe(Cpu, () => {
             0b10111100, 0b10111101, 0b10111110, 0b10111111,
             // CP A, IMM8
             0b11111110,
+            // RET COND
+            0b11000000, 0b11001000, 0b11010000, 0b11011000,
             // RET
             0b11001001,
         ])('should call the right instruction',
