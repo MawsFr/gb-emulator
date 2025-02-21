@@ -5,6 +5,7 @@ import { Memory } from "@/memory.ts";
 import { JR_COND_IMM8_OPCODE } from "@/instructions/jump/JR_COND_IMM8.ts";
 import { RET_COND_OPCODES } from "@/instructions/ret/RET_COND.ts";
 import { JP_COND_IMM16_OPCODE } from "@/instructions/jump/JP_COND_IMM16.ts";
+import { CALL_COND_IMM16_OPCODES } from "@/instructions/call/CALL_COND_IMM16.ts";
 
 export const REGISTER_16_MASK = 0b00_11_0000
 export const REGISTER_8_SOURCE_MASK = 0b00_000_111
@@ -69,7 +70,7 @@ export abstract class Instruction {
         return bitwiseAnd(opcode, REGISTER_8_SOURCE_MASK) as R8Code;
     }
 
-    protected conditionIsMet(opcode: JR_COND_IMM8_OPCODE | RET_COND_OPCODES | JP_COND_IMM16_OPCODE) {
+    protected conditionIsMet(opcode: JR_COND_IMM8_OPCODE | RET_COND_OPCODES | JP_COND_IMM16_OPCODE | CALL_COND_IMM16_OPCODES) {
         const conditionCode = this.getCondition(opcode)
 
         switch (conditionCode) {
@@ -84,7 +85,7 @@ export abstract class Instruction {
         }
     }
 
-    protected getCondition(opcode: JR_COND_IMM8_OPCODE | RET_COND_OPCODES | JP_COND_IMM16_OPCODE) {
+    protected getCondition(opcode: JR_COND_IMM8_OPCODE | RET_COND_OPCODES | JP_COND_IMM16_OPCODE | CALL_COND_IMM16_OPCODES) {
         return shiftRightBy(3)(bitwiseAnd(opcode, 0b00_011_000)) as ConditionCode;
     }
 }
