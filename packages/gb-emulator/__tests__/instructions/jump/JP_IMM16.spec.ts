@@ -20,8 +20,8 @@ describe(JP_IMM16, () => {
 
     it('should jump to the address specified by the immediate 16 bits', () => {
         // Given
-        memory.addresses[0x1] = 0x50
-        memory.addresses[0x2] = 0x51
+        memory.addresses[0x1] = 0x51
+        memory.addresses[0x2] = 0x50
 
         registers.PC.value = 0x0
 

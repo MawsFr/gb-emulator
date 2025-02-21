@@ -44,8 +44,8 @@ describe(JP_COND_IMM16, () => {
             // Given
             registers.F.zeroFlag = zeroFlag ?? 0
             registers.F.carryFlag = carryFlag ?? 0
-            memory.addresses[0x1] = 0x50
-            memory.addresses[0x2] = 0x51
+            memory.addresses[0x1] = 0x51
+            memory.addresses[0x2] = 0x50
 
             registers.PC.value = 0x0
 

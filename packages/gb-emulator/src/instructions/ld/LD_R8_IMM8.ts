@@ -19,9 +19,7 @@ export class LD_R8_IMM8 extends Instruction {
     execute(opcode: LD_R8_IMM8_OPCODES) {
         const destination = this.extractDestinationR8(opcode);
 
-        this.registers.r8[destination].value = this.cpu.getImmediateBytes({
-            count: 1,
-        })
+        this.registers.r8[destination].value = this.cpu.getImmediate8()
 
         this.registers.PC.value++
     }

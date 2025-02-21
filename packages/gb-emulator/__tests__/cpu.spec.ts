@@ -24,8 +24,8 @@ describe(Cpu, () => {
     describe(Cpu.prototype.getImmediateBytes, () => {
         it('should return the concatenation of the next 2 bytes and skip them', () => {
             memory.addresses[0x0] = 0x01
-            memory.addresses[0x1] = 0x12
-            memory.addresses[0x2] = 0x34
+            memory.addresses[0x1] = 0x34
+            memory.addresses[0x2] = 0x12
 
             const value = cpu.getImmediateBytes({ count: 2 })
 
@@ -182,6 +182,8 @@ describe(Cpu, () => {
             0b11000010, 0b11001010, 0b11010010, 0b11011010,
             // JP HL
             0b11101001,
+            // CALL IMM16
+            0b11001101,
         ])('should call the right instruction',
             (opcode) => {
                 // Given

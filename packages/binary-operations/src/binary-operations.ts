@@ -1,5 +1,13 @@
-export const concatBytes = (highByte: number, lowByte: number): number => {
-    return bitwiseOr(shiftLeftBy8(highByte), lowByte)
+export const concatBytes = (
+    highByte: number,
+    lowByte: number, {
+        endianness
+    }: { endianness: 'big' | 'little' } = { endianness: 'little' }): number => {
+    if (endianness === 'big') {
+        return bitwiseOr(shiftLeftBy8(highByte), lowByte)
+    }
+
+    return bitwiseOr(highByte, shiftLeftBy8(lowByte))
 }
 
 export const bitwiseOr = (num1: number, num2: number): number => num1 | num2

@@ -10,7 +10,7 @@ export class LD_IMM16_SP extends Instruction {
     }
 
     execute() {
-        const address = this.cpu.getImmediateBytes({ count: 2 })
+        const address = this.cpu.getImmediate16()
 
         this.memory.addresses[address] = isolate2LastDigits(this.registers.SP.value)
         this.memory.addresses[address + 1] = isolate2FirstDigits(this.registers.SP.value)

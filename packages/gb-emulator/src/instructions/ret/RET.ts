@@ -10,10 +10,10 @@ export class RET extends Instruction {
     }
 
     execute() {
-        const low = this.memory.addresses[this.registers.SP.value]
+        const high = this.memory.addresses[this.registers.SP.value]
         this.registers.SP.value++
 
-        const high = this.memory.addresses[this.registers.SP.value]
+        const low = this.memory.addresses[this.registers.SP.value]
         this.registers.SP.value++
 
         this.registers.PC.value = concatBytes(high, low)

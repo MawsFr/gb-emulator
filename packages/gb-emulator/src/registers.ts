@@ -176,7 +176,9 @@ export class ComposedRegister extends Register16 {
     }
 
     get value() {
-        return concatBytes(this.high.value, this.low.value) & this._mask
+        return concatBytes(this.high.value, this.low.value, {
+            endianness: 'big'
+        }) & this._mask
     }
 
     set value(newValue: number) {

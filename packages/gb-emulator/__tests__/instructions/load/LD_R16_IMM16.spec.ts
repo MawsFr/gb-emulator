@@ -42,8 +42,8 @@ describe(LD_R16_IMM16, () => {
         // Given
         registers.PC.value = 0x0
         memory.addresses[0x0] = 0x01
-        memory.addresses[0x1] = 0x12
-        memory.addresses[0x2] = 0x34
+        memory.addresses[0x1] = 0x34
+        memory.addresses[0x2] = 0x12
 
         // When
         new LD_R16_IMM16(cpu).execute(opcode)

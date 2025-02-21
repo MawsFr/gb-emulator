@@ -15,9 +15,7 @@ export class LD_R16_IMM16 extends Instruction {
     execute(opcode: LD_R16_IMM16_OPCODES) {
         const destination = this.extractDestinationR16(opcode);
 
-        this.registers.r16[destination].value = this.cpu.getImmediateBytes({
-            count: 2,
-        })
+        this.registers.r16[destination].value = this.cpu.getImmediate16()
 
         this.registers.PC.value++
     }
