@@ -191,7 +191,11 @@
 <a name='L126'></a><a href='#L126'>126</a>
 <a name='L127'></a><a href='#L127'>127</a>
 <a name='L128'></a><a href='#L128'>128</a>
-<a name='L129'></a><a href='#L129'>129</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -284,42 +288,46 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">307x</span>
-<span class="cline-any cline-yes">307x</span>
+<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">321x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">307x</span>
+<span class="cline-any cline-yes">321x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">307x</span>
-<span class="cline-any cline-yes">307x</span>
-<span class="cline-any cline-yes">307x</span>
+<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">321x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">307x</span>
-<span class="cline-any cline-yes">307x</span>
+<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">321x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">307x</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">47x</span>
-<span class="cline-any cline-yes">47x</span>
-<span class="cline-any cline-yes">47x</span>
+<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">41x</span>
+<span class="cline-any cline-yes">57x</span>
+<span class="cline-any cline-yes">57x</span>
+<span class="cline-any cline-yes">57x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">41x</span>
 <span class="cline-any cline-yes">25x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">41x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">307x</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">307x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">307x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">307x</span></td><td class="text"><pre class="prettyprint lang-js">import { Registers } from "@/registers.ts";
+<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">205x</span>
+<span class="cline-any cline-yes">205x</span>
+<span class="cline-any cline-yes">321x</span></td><td class="text"><pre class="prettyprint lang-js">import { Registers } from "@/registers.ts";
 import { Memory } from "@/memory.ts";
 import { concatBytes } from "@mawsfr/binary-operations";
 import { InstructionLoader } from "@/instructions/instruction-loader.ts";
@@ -360,6 +368,8 @@ import { RET_COND_OPCODES } from "@/instructions/ret/RET_COND.ts";
 import { JP_IMM16_OPCODE } from "@/instructions/jump/JP_IMM16.ts";
 import { JP_COND_IMM16_OPCODE } from "@/instructions/jump/JP_COND_IMM16.ts";
 import { JP_HL_OPCODE } from "@/instructions/jump/JP_HL.ts";
+import { CALL_IMM16_OPCODE } from "@/instructions/call/CALL_IMM16.ts";
+import { CALL_COND_IMM16_OPCODES } from "@/instructions/call/CALL_COND_IMM16.ts";
 &nbsp;
 export interface CpuConfig {
     registers: Registers,
@@ -411,6 +421,8 @@ export type Opcode =
     | JP_IMM16_OPCODE
     | JP_COND_IMM16_OPCODE
     | JP_HL_OPCODE
+    | CALL_IMM16_OPCODE
+    | CALL_COND_IMM16_OPCODES
 &nbsp;
 export class Cpu {
     public readonly registers: Registers
@@ -454,7 +466,7 @@ export class Cpu {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-20T21:11:49.694Z
+                at 2025-02-21T15:54:10.881Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
