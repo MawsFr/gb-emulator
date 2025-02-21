@@ -35,13 +35,18 @@ import {
 
 describe('BinaryOperations', () => {
     describe(concatBytes, () => {
-        it('should concat two bytes', () => {
+        it.each<{ endianness: 'big' | 'little', expected: number }>([
+            { endianness: 'big', expected: 0x1020 },
+            { endianness: 'little', expected: 0x2010 },
+        ])('should concat two bytes with $endianness endian', ({ endianness, expected }) => {
             const byte1 = 0x10
             const byte2 = 0x20
 
-            const result = concatBytes(byte1, byte2)
+            const result = concatBytes(byte1, byte2, {
+                endianness
+            })
 
-            expect(result).to.equal(0x1020)
+            expect(result).to.equal(expected)
         });
     });
 
