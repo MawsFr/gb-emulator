@@ -211,6 +211,8 @@ export type R16Code = 0b00 | 0b01 | 0b10 | 0b11
 export type ConditionCode = 0b00 | 0b01 | 0b10 | 0b11
 
 export class Registers {
+    private readonly memory: Memory
+
     public readonly A: Register8 = new Register8();
     public readonly B: Register8 = new Register8();
     public readonly C: Register8 = new Register8();
@@ -250,6 +252,7 @@ export class Registers {
     }
 
     constructor(memory: Memory) {
+        this.memory = memory
         this["[HL]"] = new Pointer(this.HL, memory)
         this.r8 = {
             0b000: this.B,
@@ -261,5 +264,12 @@ export class Registers {
             0b110: this["[HL]"],
             0b111: this.A
         }
+    }
+
+    pushPCToStack() {
+        this.SP.value--
+        this.memory.addresses[this.SP.value] = isolate2LastDigits(this.PC.value)
+        this.SP.value--
+        this.memory.addresses[this.SP.value] = isolate2FirstDigits(this.PC.value)
     }
 }

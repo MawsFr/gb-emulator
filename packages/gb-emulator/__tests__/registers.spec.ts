@@ -197,4 +197,16 @@ describe(Registers, () => {
             expect(memory.addresses[0x0102]).to.equal(0x03);
         });
     });
+
+    describe(Registers.prototype.pushPCToStack, () => {
+        it('should push the PC value to the stack', () => {
+            registers.SP.value = 0xFFFE
+            registers.PC.value = 0x0102
+
+            registers.pushPCToStack()
+
+            expect(memory.addresses[0xFFFD]).to.equal(0x02)
+            expect(memory.addresses[0xFFFC]).to.equal(0x01)
+        })
+    })
 });

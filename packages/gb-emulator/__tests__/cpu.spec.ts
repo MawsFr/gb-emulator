@@ -186,6 +186,9 @@ describe(Cpu, () => {
             0b11001101,
             // CALL COND IMM16
             0b11000100, 0b11001100, 0b11010100, 0b11011100,
+            // RST TGT3
+            0b11000111, 0b11001111, 0b11010111, 0b11011111,
+            0b11100111, 0b11101111, 0b11110111, 0b11111111,
         ])('should call the right instruction',
             (opcode) => {
                 // Given
