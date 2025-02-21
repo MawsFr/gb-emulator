@@ -274,10 +274,14 @@ export class Registers {
     }
 
     pushPCToStack() {
+        this.pushToStack(this.PC.value)
+    }
+
+    pushToStack(value: number) {
         this.SP.value--
-        this.memory.addresses[this.SP.value] = isolate2LastDigits(this.PC.value)
+        this.memory.addresses[this.SP.value] = isolate2LastDigits(value)
         this.SP.value--
-        this.memory.addresses[this.SP.value] = isolate2FirstDigits(this.PC.value)
+        this.memory.addresses[this.SP.value] = isolate2FirstDigits(value)
     }
 
     popFromStack() {
