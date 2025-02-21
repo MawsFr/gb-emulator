@@ -251,6 +251,13 @@ export class Registers {
         0b11: this.HLD,
     }
 
+    public readonly r16Stk: Record<R16Code, Register16> = {
+        0b00: this.BC,
+        0b01: this.DE,
+        0b10: this.HL,
+        0b11: this.AF
+    }
+
     constructor(memory: Memory) {
         this.memory = memory
         this["[HL]"] = new Pointer(this.HL, memory)
@@ -271,5 +278,13 @@ export class Registers {
         this.memory.addresses[this.SP.value] = isolate2LastDigits(this.PC.value)
         this.SP.value--
         this.memory.addresses[this.SP.value] = isolate2FirstDigits(this.PC.value)
+    }
+
+    popFromStack() {
+        const low = this.memory.addresses[this.SP.value]
+        this.SP.value++
+        const high = this.memory.addresses[this.SP.value]
+        this.SP.value++
+        return concatBytes(high, low)
     }
 }

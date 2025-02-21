@@ -42,6 +42,7 @@ import { JP_HL_OPCODE } from "@/instructions/jump/JP_HL.ts";
 import { CALL_IMM16_OPCODE } from "@/instructions/call/CALL_IMM16.ts";
 import { CALL_COND_IMM16_OPCODES } from "@/instructions/call/CALL_COND_IMM16.ts";
 import { RST_TGT3_OPCODES } from "@/instructions/misc/RST_TGT3.ts";
+import { POP_R16STK_OPCODES } from "@/instructions/stack/POP_R16STK.ts";
 
 export interface CpuConfig {
     registers: Registers,
@@ -96,6 +97,7 @@ export type Opcode =
     | CALL_IMM16_OPCODE
     | CALL_COND_IMM16_OPCODES
     | RST_TGT3_OPCODES
+    | POP_R16STK_OPCODES
 
 export class Cpu {
     public readonly registers: Registers

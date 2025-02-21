@@ -39,6 +39,7 @@ import { JP_HL } from "@/instructions/jump/JP_HL.ts";
 import { CALL_IMM16 } from "@/instructions/call/CALL_IMM16.ts";
 import { CALL_COND_IMM16 } from "@/instructions/call/CALL_COND_IMM16.ts";
 import { RST_TGT3 } from "@/instructions/misc/RST_TGT3.ts";
+import { POP_R16STK } from "@/instructions/stack/POP_R16STK.ts";
 
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
@@ -145,6 +146,7 @@ export abstract class InstructionLoader {
         const call_imm16 = new CALL_IMM16(cpu)
         const call_cond_imm16 = new CALL_COND_IMM16(cpu)
         const rst_tgt3 = new RST_TGT3(cpu)
+        const pop_r16stk = new POP_R16STK(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -356,6 +358,11 @@ export abstract class InstructionLoader {
             0b11_101_111: rst_tgt3,
             0b11_110_111: rst_tgt3,
             0b11_111_111: rst_tgt3,
+
+            0b11_00_0001: pop_r16stk,
+            0b11_01_0001: pop_r16stk,
+            0b11_10_0001: pop_r16stk,
+            0b11_11_0001: pop_r16stk,
         }
     }
 }

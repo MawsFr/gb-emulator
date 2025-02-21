@@ -189,6 +189,8 @@ describe(Cpu, () => {
             // RST TGT3
             0b11000111, 0b11001111, 0b11010111, 0b11011111,
             0b11100111, 0b11101111, 0b11110111, 0b11111111,
+            // POP R16STK
+            0b11000001, 0b11010001, 0b11100001, 0b11110001,
         ])('should call the right instruction',
             (opcode) => {
                 // Given
