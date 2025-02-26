@@ -1,23 +1,19 @@
-import { describe, it } from "vitest";
-import { HALT } from "@/instructions/misc/HALT.ts";
+import { describe, it } from 'vitest'
+import { HALT } from '@/instructions/misc/HALT.ts'
 
 describe(HALT, () => {
-    // let registers: Registers
-    // let memory: Memory
-    // let cpu: Cpu
+    // Let registers: Registers
+    // Let memory: Memory
+    // Let cpu: Cpu
     //
-    // beforeEach(() => {
-    //     memory = new Memory()
-    //     registers = new Registers(memory)
-    //     cpu = new Cpu({
-    //         registers,
-    //         memory
+    // BeforeEach(() => {
+    //     Memory = new Memory()
+    //     Registers = new Registers(memory)
+    //     Cpu = new Cpu({
+    //         Registers,
+    //         Memory
     //     })
     // })
 
-    it.todo('should halt the CPU', () => {
-
-
-    })
-
+    it.todo('should halt the CPU', () => {})
 })
