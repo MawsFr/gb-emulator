@@ -3,6 +3,7 @@
 .vscode-test/
 out/
 dist/
+coverage/
 fixtures/
 node_modules/
 

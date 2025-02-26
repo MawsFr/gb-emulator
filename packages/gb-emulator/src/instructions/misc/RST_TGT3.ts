@@ -1,5 +1,4 @@
-import { Instruction } from "@/instructions/instruction.ts";
-import { Cpu } from "@/cpu.ts";
+import { Instruction } from '@/instructions/instruction.ts'
 
 export type RST_TGT3_OPCODES =
     | 0b11000111
@@ -12,10 +11,6 @@ export type RST_TGT3_OPCODES =
     | 0b11111111
 
 export class RST_TGT3 extends Instruction {
-    constructor(cpu: Cpu) {
-        super(cpu);
-    }
-
     execute(opcode: RST_TGT3_OPCODES) {
         this.registers.PC.value++
 
@@ -26,22 +21,33 @@ export class RST_TGT3 extends Instruction {
 
     protected getRSTAddress(opcode: RST_TGT3_OPCODES): number {
         switch (opcode) {
-            case 0b11000111:
+            case 0b11000111: {
                 return 0x0018
-            case 0b11001111:
+            }
+            case 0b11001111: {
                 return 0x0020
-            case 0b11010111:
+            }
+            case 0b11010111: {
                 return 0x0028
-            case 0b11011111:
+            }
+            case 0b11011111: {
                 return 0x0030
-            case 0b11100111:
+            }
+            case 0b11100111: {
                 return 0x0038
-            case 0b11101111:
+            }
+            case 0b11101111: {
                 return 0x0040
-            case 0b11110111:
+            }
+            case 0b11110111: {
                 return 0x0048
-            case 0b11111111:
+            }
+            case 0b11111111: {
                 return 0x0050
+            }
+            default: {
+                throw new Error(`Unknown opcode: ${opcode}`)
+            }
         }
     }
 }

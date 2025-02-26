@@ -1,5 +1,5 @@
-import { R8Code, Registers } from "@/registers.ts";
-import { Cpu } from "@/cpu.ts";
+import { R8Code, Registers } from '@/registers.ts';
+import { Cpu } from '@/cpu.ts';
 
 export interface SourceStrategy {
     getSource(): number;

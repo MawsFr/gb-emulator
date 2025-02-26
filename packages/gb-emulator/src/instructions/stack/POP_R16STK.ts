@@ -1,5 +1,4 @@
-import { Instruction } from "@/instructions/instruction.ts";
-import { Cpu } from "@/cpu.ts";
+import { Instruction } from '@/instructions/instruction.ts'
 
 export type POP_R16STK_OPCODES =
     | 0b11000001
@@ -8,10 +7,6 @@ export type POP_R16STK_OPCODES =
     | 0b11110001
 
 export class POP_R16STK extends Instruction {
-    constructor(cpu: Cpu) {
-        super(cpu);
-    }
-
     execute(opcode: POP_R16STK_OPCODES) {
         const registerPair = this.extractDestinationR16(opcode)
         const registerPairValue = this.registers.r16Stk[registerPair]

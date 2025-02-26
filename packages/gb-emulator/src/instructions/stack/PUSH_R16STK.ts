@@ -1,5 +1,4 @@
-import { Instruction } from "@/instructions/instruction.ts";
-import { Cpu } from "@/cpu.ts";
+import { Instruction } from '@/instructions/instruction.ts'
 
 export type PUSH_R16STK_OPCODES =
     | 0b11_00_0101
@@ -8,10 +7,6 @@ export type PUSH_R16STK_OPCODES =
     | 0b11_11_0101
 
 export class PUSH_R16STK extends Instruction {
-    constructor(cpu: Cpu) {
-        super(cpu);
-    }
-
     execute(opcode: PUSH_R16STK_OPCODES) {
         const registerPair = this.extractDestinationR16(opcode)
         const registerPairValue = this.registers.r16Stk[registerPair]

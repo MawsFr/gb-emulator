@@ -1,6 +1,7 @@
-import { Instruction } from "@/instructions/instruction.ts";
-import { Cpu } from "@/cpu.ts";
+import { Instruction } from '@/instructions/instruction.ts';
 
+ 
+// Prettier-ignore
 export type LD_R8_R8_OPCODES =
     | 0b01_000_000 | 0b01_001_000 | 0b01_010_000 | 0b01_011_000
     | 0b01_100_000 | 0b01_101_000 | 0b01_110_000 | 0b01_111_000
@@ -19,17 +20,15 @@ export type LD_R8_R8_OPCODES =
     | 0b01_000_111 | 0b01_001_111 | 0b01_010_111 | 0b01_011_111
     | 0b01_100_111 | 0b01_101_111 | 0b01_110_111 | 0b01_111_111
 
+ 
+
 export class LD_R8_R8 extends Instruction {
-    constructor(cpu: Cpu) {
-        super(cpu)
-    }
-
     execute(opcode: LD_R8_R8_OPCODES) {
-        const source = this.extractSourceR8(opcode)
-        const destination = this.extractDestinationR8(opcode)
+        const source = this.extractSourceR8(opcode);
+        const destination = this.extractDestinationR8(opcode);
 
-        this.registers.r8[destination].value = this.registers.r8[source].value
+        this.registers.r8[destination].value = this.registers.r8[source].value;
 
-        this.registers.PC.value++
+        this.registers.PC.value++;
     }
 }
