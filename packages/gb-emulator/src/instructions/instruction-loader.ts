@@ -478,6 +478,7 @@ export abstract class InstructionLoader {
     ): Record<PrefixedOpcode, Instruction> {
         const rlc_r8 = new RLC_R8(cpu)
         const rrc_r8 = new RRC_R8(cpu)
+        const rl_r8 = new RLA(cpu)
 
         return {
             0b00000_000: rlc_r8,
@@ -497,6 +498,15 @@ export abstract class InstructionLoader {
             0b00001_101: rrc_r8,
             0b00001_110: rrc_r8,
             0b00001_111: rrc_r8,
+
+            0b00010_000: rl_r8,
+            0b00010_001: rl_r8,
+            0b00010_010: rl_r8,
+            0b00010_011: rl_r8,
+            0b00010_100: rl_r8,
+            0b00010_101: rl_r8,
+            0b00010_110: rl_r8,
+            0b00010_111: rl_r8,
         }
     }
 }
