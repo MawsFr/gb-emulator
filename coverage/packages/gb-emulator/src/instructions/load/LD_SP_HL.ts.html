@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for packages/gb-emulator/src/instructions/load/LDH_IMM8_A.ts</title>
+    <title>Code coverage report for packages/gb-emulator/src/instructions/load/LD_SP_HL.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../../index.html">All files</a> / <a href="index.html">packages/gb-emulator/src/instructions/load</a> LDH_IMM8_A.ts</h1>
+        <h1><a href="../../../../../index.html">All files</a> / <a href="index.html">packages/gb-emulator/src/instructions/load</a> LD_SP_HL.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -73,24 +73,27 @@
 <a name='L8'></a><a href='#L8'>8</a>
 <a name='L9'></a><a href='#L9'>9</a>
 <a name='L10'></a><a href='#L10'>10</a>
-<a name='L11'></a><a href='#L11'>11</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Instruction } from '../instruction'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Instruction } from '@/instructions/instruction.ts'
 &nbsp;
-export type LDH_IMM8_A_OPCODE = 0b11100000
+export type LD_SP_HL_OPCODE = 0b11111001
 &nbsp;
-export class LDH_IMM8_A extends Instruction {
+export class LD_SP_HL extends Instruction {
     execute(): void {
-        this.memory.addresses[0xFF00 + this.cpu.getImmediate8()] =
-            this.registers.A.value
+        this.registers.SP.value = this.registers.HL.value
+&nbsp;
+        this.registers.PC.value++
     }
 }
 &nbsp;</pre></td></tr></table></pre>
