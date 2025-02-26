@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
     LD_R16_IMM16,
     LD_R16_IMM16_OPCODES,
-} from '@/instructions/ld/LD_R16_IMM16.ts'
+} from '@/instructions/load/LD_R16_IMM16.ts'
 import { R16Code } from '@/registers.ts'
 import { GbEmulatorTestContext } from '$/test.setup.ts'
 

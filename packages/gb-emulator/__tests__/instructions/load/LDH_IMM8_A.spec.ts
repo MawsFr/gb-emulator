@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { LDH_IMM8_A } from '@/instructions/ld/LDH_IMM8_A.ts'
+import { LDH_IMM8_A } from '@/instructions/load/LDH_IMM8_A.ts'
 import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(LDH_IMM8_A, () => {

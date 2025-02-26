@@ -3,7 +3,7 @@ import { R16Code } from '@/registers.ts'
 import {
     LD_A_R16MEM,
     LD_A_R16MEM_OPCODES,
-} from '@/instructions/ld/LD_A_R16MEM.ts'
+} from '@/instructions/load/LD_A_R16MEM.ts'
 import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(LD_A_R16MEM, () => {
