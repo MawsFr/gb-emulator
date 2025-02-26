@@ -3,19 +3,15 @@ import {
     POP_R16STK,
     POP_R16STK_OPCODES,
 } from '@/instructions/stack/POP_R16STK.ts'
-import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(POP_R16STK, () => {
-    it.for<
-        {
-            opcode: POP_R16STK_OPCODES
-            expectedBC?: number
-            expectedDE?: number
-            expectedHL?: number
-            expectedAF?: number
-        },
-        GbEmulatorTestContext
-    >([
+    it.for<{
+        opcode: POP_R16STK_OPCODES
+        expectedBC?: number
+        expectedDE?: number
+        expectedHL?: number
+        expectedAF?: number
+    }>([
         {
             opcode: 0b11_00_0001,
             expectedBC: 0x1234,

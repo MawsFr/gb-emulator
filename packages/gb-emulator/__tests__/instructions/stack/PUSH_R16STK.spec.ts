@@ -3,15 +3,11 @@ import {
     PUSH_R16STK,
     PUSH_R16STK_OPCODES,
 } from '@/instructions/stack/PUSH_R16STK.ts'
-import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(PUSH_R16STK, () => {
-    it.for<
-        {
-            opcode: PUSH_R16STK_OPCODES
-        },
-        GbEmulatorTestContext
-    >([
+    it.for<{
+        opcode: PUSH_R16STK_OPCODES
+    }>([
         { opcode: 0b11_00_0101 },
         { opcode: 0b11_01_0101 },
         { opcode: 0b11_10_0101 },

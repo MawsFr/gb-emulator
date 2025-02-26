@@ -1,16 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { LD_R8_IMM8, LD_R8_IMM8_OPCODES } from '@/instructions/load/LD_R8_IMM8'
 import { R8Code } from '@/registers.ts'
-import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(LD_R8_IMM8, () => {
-    it.for<
-        {
-            opcode: LD_R8_IMM8_OPCODES
-            expectedRegister: R8Code
-        },
-        GbEmulatorTestContext
-    >([
+    it.for<{
+        opcode: LD_R8_IMM8_OPCODES
+        expectedRegister: R8Code
+    }>([
         {
             opcode: 0b00_000_110,
             expectedRegister: 0b00,

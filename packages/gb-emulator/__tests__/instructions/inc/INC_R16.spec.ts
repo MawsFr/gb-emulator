@@ -1,16 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { R16Code } from '@/registers.ts'
 import { INC_R16, INC_R16_OPCODES } from '@/instructions/inc/INC_R16.ts'
-import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(INC_R16, () => {
-    it.for<
-        {
-            opcode: INC_R16_OPCODES
-            expectedRegister: R16Code
-        },
-        GbEmulatorTestContext
-    >([
+    it.for<{
+        opcode: INC_R16_OPCODES
+        expectedRegister: R16Code
+    }>([
         {
             opcode: 0b00_00_0011,
             expectedRegister: 0b00,

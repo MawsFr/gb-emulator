@@ -3,17 +3,13 @@ import {
     JR_COND_IMM8,
     JR_COND_IMM8_OPCODE,
 } from '@/instructions/jump/JR_COND_IMM8.ts'
-import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(JR_COND_IMM8, () => {
-    it.for<
-        {
-            opcode: JR_COND_IMM8_OPCODE
-            zeroFlag?: number
-            carryFlag?: number
-        },
-        GbEmulatorTestContext
-    >([
+    it.for<{
+        opcode: JR_COND_IMM8_OPCODE
+        zeroFlag?: number
+        carryFlag?: number
+    }>([
         {
             opcode: 0b00100000,
             zeroFlag: 0,
@@ -47,14 +43,11 @@ describe(JR_COND_IMM8, () => {
         }
     )
 
-    it.for<
-        {
-            opcode: JR_COND_IMM8_OPCODE
-            zeroFlag?: number
-            carryFlag?: number
-        },
-        GbEmulatorTestContext
-    >([
+    it.for<{
+        opcode: JR_COND_IMM8_OPCODE
+        zeroFlag?: number
+        carryFlag?: number
+    }>([
         {
             opcode: 0b00100000,
             zeroFlag: 1,

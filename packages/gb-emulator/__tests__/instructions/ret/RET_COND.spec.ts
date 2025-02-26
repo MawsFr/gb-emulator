@@ -1,16 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { RET_COND, RET_COND_OPCODES } from '@/instructions/ret/RET_COND.ts'
-import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(RET_COND, () => {
-    it.for<
-        {
-            opcode: RET_COND_OPCODES
-            zeroFlag?: number
-            carryFlag?: number
-        },
-        GbEmulatorTestContext
-    >([
+    it.for<{
+        opcode: RET_COND_OPCODES
+        zeroFlag?: number
+        carryFlag?: number
+    }>([
         {
             opcode: 0b11000000,
             zeroFlag: 0,
@@ -47,14 +43,11 @@ describe(RET_COND, () => {
         }
     )
 
-    it.for<
-        {
-            opcode: RET_COND_OPCODES
-            zeroFlag?: number
-            carryFlag?: number
-        },
-        GbEmulatorTestContext
-    >([
+    it.for<{
+        opcode: RET_COND_OPCODES
+        zeroFlag?: number
+        carryFlag?: number
+    }>([
         {
             opcode: 0b11000000,
             zeroFlag: 1,

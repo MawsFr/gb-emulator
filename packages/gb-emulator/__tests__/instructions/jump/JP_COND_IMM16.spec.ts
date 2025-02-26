@@ -3,17 +3,13 @@ import {
     JP_COND_IMM16,
     JP_COND_IMM16_OPCODE,
 } from '@/instructions/jump/JP_COND_IMM16.ts'
-import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(JP_COND_IMM16, () => {
-    it.for<
-        {
-            opcode: JP_COND_IMM16_OPCODE
-            zeroFlag?: number
-            carryFlag?: number
-        },
-        GbEmulatorTestContext
-    >([
+    it.for<{
+        opcode: JP_COND_IMM16_OPCODE
+        zeroFlag?: number
+        carryFlag?: number
+    }>([
         {
             opcode: 0b11000010,
             zeroFlag: 0,
@@ -49,14 +45,11 @@ describe(JP_COND_IMM16, () => {
         }
     )
 
-    it.for<
-        {
-            opcode: JP_COND_IMM16_OPCODE
-            zeroFlag?: number
-            carryFlag?: number
-        },
-        GbEmulatorTestContext
-    >([
+    it.for<{
+        opcode: JP_COND_IMM16_OPCODE
+        zeroFlag?: number
+        carryFlag?: number
+    }>([
         {
             opcode: 0b11000010,
             zeroFlag: 1,

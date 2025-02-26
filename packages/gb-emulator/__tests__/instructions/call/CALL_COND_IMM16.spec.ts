@@ -3,17 +3,13 @@ import {
     CALL_COND_IMM16,
     CALL_COND_IMM16_OPCODES,
 } from '@/instructions/call/CALL_COND_IMM16.ts'
-import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(CALL_COND_IMM16, () => {
-    it.for<
-        {
-            opcode: CALL_COND_IMM16_OPCODES
-            zeroFlag?: number
-            carryFlag?: number
-        },
-        GbEmulatorTestContext
-    >([
+    it.for<{
+        opcode: CALL_COND_IMM16_OPCODES
+        zeroFlag?: number
+        carryFlag?: number
+    }>([
         {
             opcode: 0b110_00_100,
             zeroFlag: 0,
@@ -53,14 +49,11 @@ describe(CALL_COND_IMM16, () => {
         }
     )
 
-    it.for<
-        {
-            opcode: CALL_COND_IMM16_OPCODES
-            zeroFlag?: number
-            carryFlag?: number
-        },
-        GbEmulatorTestContext
-    >([
+    it.for<{
+        opcode: CALL_COND_IMM16_OPCODES
+        zeroFlag?: number
+        carryFlag?: number
+    }>([
         {
             opcode: 0b110_00_100,
             zeroFlag: 1,

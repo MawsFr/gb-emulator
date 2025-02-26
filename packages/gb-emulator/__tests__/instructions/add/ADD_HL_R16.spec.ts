@@ -3,19 +3,15 @@ import {
     ADD_HL_R16,
     ADD_HL_R16_OPCODES,
 } from '@/instructions/add/ADD_HL_R16.ts'
-import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(ADD_HL_R16, () => {
-    it.for<
-        {
-            opcode: ADD_HL_R16_OPCODES
-            expectedRegister: string
-            expectedValue: number
-            expectedCarryFlag: number
-            expectedHalfCarryFlag: number
-        },
-        GbEmulatorTestContext
-    >([
+    it.for<{
+        opcode: ADD_HL_R16_OPCODES
+        expectedRegister: string
+        expectedValue: number
+        expectedCarryFlag: number
+        expectedHalfCarryFlag: number
+    }>([
         {
             opcode: 0b00_00_1001,
             expectedRegister: 'BC',
