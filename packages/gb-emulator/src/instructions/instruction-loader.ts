@@ -45,6 +45,7 @@ import { LDH_C_A } from '@/instructions/ld/LDH_C_A.ts'
 import { LDH_IMM8_A } from '@/instructions/ld/LDH_IMM8_A.ts'
 import { LD_IMM16_A } from '@/instructions/ld/LD_IMM16_A.ts'
 import { LDH_A_C } from '@/instructions/ld/LDH_A_C.ts'
+import { LDH_A_IMM8 } from '@/instructions/ld/LDH_A_IMM8.ts'
 
 // eslint-disable-next-line unicorn/no-static-only-class
 export abstract class InstructionLoader {
@@ -158,6 +159,7 @@ export abstract class InstructionLoader {
         const ldh_imm8_a = new LDH_IMM8_A(cpu)
         const ld_imm16_a = new LD_IMM16_A(cpu)
         const ldh_a_c = new LDH_A_C(cpu)
+        const ldh_a_imm8 = new LDH_A_IMM8(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -430,6 +432,7 @@ export abstract class InstructionLoader {
             0b11100000: ldh_imm8_a,
             0b11101010: ld_imm16_a,
             0b11110010: ldh_a_c,
+            0b11110000: ldh_a_imm8,
         }
     }
 }
