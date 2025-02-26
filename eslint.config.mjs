@@ -66,6 +66,7 @@ export default [
             'init-declarations': 'off',
             'max-lines-per-function': 'off',
             'unicorn/numeric-separators-style': 'off',
+            'unicorn/no-object-as-default-parameter': 'off',
         },
     },
 ]
