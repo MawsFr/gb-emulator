@@ -14,7 +14,10 @@ export class ADD_HL_R16 extends Instruction {
         const result = augend + addend
 
         this.registers.HL.value = result
-        this.updateFlagsAfterAddition(augend, addend, result)
+        this.updateFlagsAfterAddition(augend, addend, result, {
+            halfCarryFlagBit: 11,
+            carryFlagBit: 15,
+        })
 
         this.registers.PC.value++
     }

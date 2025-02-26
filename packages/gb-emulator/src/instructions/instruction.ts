@@ -32,16 +32,39 @@ export abstract class Instruction {
     protected updateFlagsAfterAddition(
         augend: number,
         addend: number,
-        result: number
+        result: number,
+        options?: {
+            zeroFlag?: number
+            carryFlagBit?: number
+            halfCarryFlagBit?: number
+        }
     ) {
-        this.registers.F.carryFlag =
-            isBitSet(augend, 15) && isBitSet(addend, 15) ? 1 : 0
+        const carryFlagBit = options?.carryFlagBit ?? 7
+        const halfCarryFlagBit = options?.halfCarryFlagBit ?? 3
 
-        this.registers.F.halfCarryFlag =
-            isBitSet(augend, 11) && isBitSet(addend, 11) ? 1 : 0
+        this.registers.F.carryFlag = this.getCarryFlag(
+            augend,
+            addend,
+            carryFlagBit
+        )
+
+        this.registers.F.halfCarryFlag = this.getCarryFlag(
+            augend,
+            addend,
+            halfCarryFlagBit
+        )
 
         this.registers.F.subtractionFlag = 0
-        this.setZeroFlag(result)
+
+        if (options?.zeroFlag) {
+            this.registers.F.zeroFlag = options.zeroFlag
+        } else {
+            this.setZeroFlag(result)
+        }
+    }
+
+    private getCarryFlag(augend: number, addend: number, bit: number) {
+        return isBitSet(augend, bit) && isBitSet(addend, bit) ? 1 : 0
     }
 
     protected updateFlagsAfterSubtraction(

@@ -74,6 +74,7 @@ import { LD_IMM16_A_OPCODE } from '@/instructions/ld/LD_IMM16_A.ts'
 import { LDH_A_C_OPCODE } from '@/instructions/ld/LDH_A_C.ts'
 import { LDH_A_IMM8_OPCODE } from '@/instructions/ld/LDH_A_IMM8.ts'
 import { LD_A_IMM16_OPCODE } from '@/instructions/ld/LD_A_IMM16.ts'
+import { ADD_SP_IMM8_OPCODE } from '@/instructions/add/ADD_SP_IMM8.ts'
 
 export interface CpuConfig {
     registers: Registers
@@ -136,6 +137,7 @@ export type Opcode =
     | LDH_A_C_OPCODE
     | LDH_A_IMM8_OPCODE
     | LD_A_IMM16_OPCODE
+    | ADD_SP_IMM8_OPCODE
 
 export class Cpu {
     public readonly registers: Registers

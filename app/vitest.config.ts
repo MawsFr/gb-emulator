@@ -9,6 +9,6 @@ export default defineConfig({
             exclude: ['dist/**', '*.config.*', '*.d.ts'],
         },
         isolate: false,
-        setupFiles: ['../test.setup.js'],
+        setupFiles: ['../test.setup.ts'],
     },
 })
