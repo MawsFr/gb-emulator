@@ -49,6 +49,8 @@ import { LDH_A_IMM8 } from '@/instructions/load/LDH_A_IMM8.ts'
 import { LD_A_IMM16 } from '@/instructions/load/LD_A_IMM16.ts'
 import { ADD_SP_IMM8 } from '@/instructions/add/ADD_SP_IMM8.ts'
 import { LD_HL_SP_PLUS_IMM8 } from '@/instructions/load/LD_HL_SP_PLUS_IMM8.ts'
+import { LD_SP_HL } from '@/instructions/load/LD_SP_HL.ts'
+import { RETI } from '@/instructions/ret/RETI.ts'
 
 // eslint-disable-next-line unicorn/no-static-only-class
 export abstract class InstructionLoader {
@@ -150,6 +152,7 @@ export abstract class InstructionLoader {
         const cp_a_imm8 = new CP_A_IMM8(cpu)
         const ret_cond = new RET_COND(cpu)
         const ret = new RET(cpu)
+        const reti = new RETI(cpu)
         const jp_imm16 = new JP_IMM16(cpu)
         const jp_cond_imm16 = new JP_COND_IMM16(cpu)
         const jp_hl = new JP_HL(cpu)
@@ -166,6 +169,7 @@ export abstract class InstructionLoader {
         const ld_a_imm16 = new LD_A_IMM16(cpu)
         const add_sp_imm8 = new ADD_SP_IMM8(cpu)
         const ld_hl_sp_plus_imm8 = new LD_HL_SP_PLUS_IMM8(cpu)
+        const ld_sp_hl = new LD_SP_HL(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -402,6 +406,7 @@ export abstract class InstructionLoader {
             0b11010000: ret_cond,
             0b11011000: ret_cond,
             0b11001001: ret,
+            0b11011001: reti,
 
             0b11000011: jp_imm16,
             0b11000010: jp_cond_imm16,
@@ -442,6 +447,7 @@ export abstract class InstructionLoader {
             0b11111010: ld_a_imm16,
             0b11101000: add_sp_imm8,
             0b11111000: ld_hl_sp_plus_imm8,
+            0b11111001: ld_sp_hl,
         }
     }
 }

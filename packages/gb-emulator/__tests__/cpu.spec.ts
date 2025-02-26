@@ -129,6 +129,8 @@ describe(Cpu, () => {
             0b11000000, 0b11001000, 0b11010000, 0b11011000,
             // RET
             0b11001001,
+            // RETI
+            0b11011001,
             // JP IMM16
             0b11000011,
             // JP COND IMM16
@@ -162,6 +164,8 @@ describe(Cpu, () => {
             0b11101000,
             // LD HL, SP + IMM8
             0b11111000,
+            // LD SP, HL
+            0b11111001,
         ])('should call the right instruction', (opcode, { cpu }) => {
             // Given
             const instruction = cpu.instructions[opcode]
