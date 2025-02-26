@@ -71,6 +71,7 @@ import { PUSH_R16STK_OPCODES } from '@/instructions/stack/PUSH_R16STK.ts'
 import { LDH_C_A_OPCODE } from '@/instructions/ld/LDH_C_A.ts'
 import { LDH_IMM8_A_OPCODE } from '@/instructions/ld/LDH_IMM8_A.ts'
 import { LD_IMM16_A_OPCODE } from '@/instructions/ld/LD_IMM16_A.ts'
+import { LDH_A_C_OPCODE } from '@/instructions/ld/LDH_A_C.ts'
 
 export interface CpuConfig {
     registers: Registers
@@ -130,6 +131,7 @@ export type Opcode =
     | LDH_C_A_OPCODE
     | LDH_IMM8_A_OPCODE
     | LD_IMM16_A_OPCODE
+    | LDH_A_C_OPCODE
 
 export class Cpu {
     public readonly registers: Registers
