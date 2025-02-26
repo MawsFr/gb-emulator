@@ -1,47 +1,48 @@
-import { Cpu, Opcode } from "@/cpu.ts";
-import { LD_R16_IMM16 } from "@/instructions/ld/LD_R16_IMM16.ts";
-import { Instruction } from "@/instructions/instruction.ts";
-import { LD_R16MEM_A } from "@/instructions/ld/LD_R16MEM_A.ts";
-import { LD_A_R16MEM } from "@/instructions/ld/LD_A_R16MEM.ts";
-import { LD_IMM16_SP } from "@/instructions/ld/LD_IMM16_SP.ts";
-import { INC_R16 } from "@/instructions/inc/INC_R16.ts";
-import { DEC_R16 } from "@/instructions/dec/DEC_R16.ts";
-import { ADD_HL_R16 } from "@/instructions/add/ADD_HL_R16.ts";
-import { INC_R8 } from "@/instructions/inc/INC_R8.ts";
-import { DEC_R8 } from "@/instructions/dec/DEC_R8.ts";
-import { LD_R8_IMM8 } from "@/instructions/ld/LD_R8_IMM8.ts";
-import { RLCA } from "@/instructions/rotate/RLCA.ts";
-import { RRCA } from "@/instructions/rotate/RRCA.ts";
-import { RLA } from "@/instructions/rotate/RLA.ts";
-import { RRA } from "@/instructions/rotate/RRA.ts";
-import { DAA } from "@/instructions/misc/DAA.ts";
-import { CPL } from "@/instructions/misc/CPL.ts";
-import { SCF } from "@/instructions/misc/SCF.ts";
-import { CCF } from "@/instructions/misc/CCF.ts";
-import { JR_IMM8 } from "@/instructions/jump/JR_IMM8.ts";
-import { JR_COND_IMM8 } from "@/instructions/jump/JR_COND_IMM8.ts";
-import { STOP } from "@/instructions/misc/STOP.ts";
-import { LD_R8_R8 } from "@/instructions/ld/LD_R8_R8.ts";
-import { HALT } from "@/instructions/misc/HALT.ts";
-import { ADD_A_IMM8, ADD_A_R8 } from "@/instructions/add/ADD_A_8_SOURCE.ts";
-import { ADC_A_IMM8, ADC_A_R8 } from "@/instructions/add/ADC_A_8_SOURCE.ts";
-import { SUB_A_IMM8, SUB_A_R8 } from "@/instructions/sub/SUB_A_8_SOURCE.ts";
-import { SBC_A_IMM8, SBC_A_R8 } from "@/instructions/sub/SBC_A_8_SOURCE.ts";
-import { AND_A_IMM8, AND_A_R8 } from "@/instructions/bitwise/AND_A_8_SOURCE.ts";
-import { XOR_A_IMM8, XOR_A_R8 } from "@/instructions/bitwise/XOR_A_8_SOURCE.ts";
-import { OR_A_IMM8, OR_A_R8 } from "@/instructions/bitwise/OR_A_8_SOURCE.ts";
-import { CP_A_IMM8, CP_A_R8 } from "@/instructions/sub/CP_A_8_SOURCE.ts";
-import { RET } from "@/instructions/ret/RET.ts";
-import { RET_COND } from "@/instructions/ret/RET_COND.ts";
-import { JP_IMM16 } from "@/instructions/jump/JP_IMM16.ts";
-import { JP_COND_IMM16 } from "@/instructions/jump/JP_COND_IMM16.ts";
-import { JP_HL } from "@/instructions/jump/JP_HL.ts";
-import { CALL_IMM16 } from "@/instructions/call/CALL_IMM16.ts";
-import { CALL_COND_IMM16 } from "@/instructions/call/CALL_COND_IMM16.ts";
-import { RST_TGT3 } from "@/instructions/misc/RST_TGT3.ts";
-import { POP_R16STK } from "@/instructions/stack/POP_R16STK.ts";
-import { PUSH_R16STK } from "@/instructions/stack/PUSH_R16STK.ts";
+import { Cpu, Opcode } from '@/cpu.ts'
+import { LD_R16_IMM16 } from '@/instructions/ld/LD_R16_IMM16.ts'
+import { Instruction } from '@/instructions/instruction.ts'
+import { LD_R16MEM_A } from '@/instructions/ld/LD_R16MEM_A.ts'
+import { LD_A_R16MEM } from '@/instructions/ld/LD_A_R16MEM.ts'
+import { LD_IMM16_SP } from '@/instructions/ld/LD_IMM16_SP.ts'
+import { INC_R16 } from '@/instructions/inc/INC_R16.ts'
+import { DEC_R16 } from '@/instructions/dec/DEC_R16.ts'
+import { ADD_HL_R16 } from '@/instructions/add/ADD_HL_R16.ts'
+import { INC_R8 } from '@/instructions/inc/INC_R8.ts'
+import { DEC_R8 } from '@/instructions/dec/DEC_R8.ts'
+import { LD_R8_IMM8 } from '@/instructions/ld/LD_R8_IMM8.ts'
+import { RLCA } from '@/instructions/rotate/RLCA.ts'
+import { RRCA } from '@/instructions/rotate/RRCA.ts'
+import { RLA } from '@/instructions/rotate/RLA.ts'
+import { RRA } from '@/instructions/rotate/RRA.ts'
+import { DAA } from '@/instructions/misc/DAA.ts'
+import { CPL } from '@/instructions/misc/CPL.ts'
+import { SCF } from '@/instructions/misc/SCF.ts'
+import { CCF } from '@/instructions/misc/CCF.ts'
+import { JR_IMM8 } from '@/instructions/jump/JR_IMM8.ts'
+import { JR_COND_IMM8 } from '@/instructions/jump/JR_COND_IMM8.ts'
+import { STOP } from '@/instructions/misc/STOP.ts'
+import { LD_R8_R8 } from '@/instructions/ld/LD_R8_R8.ts'
+import { HALT } from '@/instructions/misc/HALT.ts'
+import { ADD_A_IMM8, ADD_A_R8 } from '@/instructions/add/ADD_A_8_SOURCE.ts'
+import { ADC_A_IMM8, ADC_A_R8 } from '@/instructions/add/ADC_A_8_SOURCE.ts'
+import { SUB_A_IMM8, SUB_A_R8 } from '@/instructions/sub/SUB_A_8_SOURCE.ts'
+import { SBC_A_IMM8, SBC_A_R8 } from '@/instructions/sub/SBC_A_8_SOURCE.ts'
+import { AND_A_IMM8, AND_A_R8 } from '@/instructions/bitwise/AND_A_8_SOURCE.ts'
+import { XOR_A_IMM8, XOR_A_R8 } from '@/instructions/bitwise/XOR_A_8_SOURCE.ts'
+import { OR_A_IMM8, OR_A_R8 } from '@/instructions/bitwise/OR_A_8_SOURCE.ts'
+import { CP_A_IMM8, CP_A_R8 } from '@/instructions/sub/CP_A_8_SOURCE.ts'
+import { RET } from '@/instructions/ret/RET.ts'
+import { RET_COND } from '@/instructions/ret/RET_COND.ts'
+import { JP_IMM16 } from '@/instructions/jump/JP_IMM16.ts'
+import { JP_COND_IMM16 } from '@/instructions/jump/JP_COND_IMM16.ts'
+import { JP_HL } from '@/instructions/jump/JP_HL.ts'
+import { CALL_IMM16 } from '@/instructions/call/CALL_IMM16.ts'
+import { CALL_COND_IMM16 } from '@/instructions/call/CALL_COND_IMM16.ts'
+import { RST_TGT3 } from '@/instructions/misc/RST_TGT3.ts'
+import { POP_R16STK } from '@/instructions/stack/POP_R16STK.ts'
+import { PUSH_R16STK } from '@/instructions/stack/PUSH_R16STK.ts'
 
+// eslint-disable-next-line unicorn/no-static-only-class
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
         const ld_r16_imm16 = new LD_R16_IMM16(cpu)
@@ -228,22 +229,71 @@ export abstract class InstructionLoader {
             0b00010000: stop,
             0b01110110: halt,
 
-            0b01_000_000: ld_r8_r8, 0b01_001_000: ld_r8_r8, 0b01_010_000: ld_r8_r8, 0b01_011_000: ld_r8_r8,
-            0b01_100_000: ld_r8_r8, 0b01_101_000: ld_r8_r8, 0b01_110_000: ld_r8_r8, 0b01_111_000: ld_r8_r8,
-            0b01_000_001: ld_r8_r8, 0b01_001_001: ld_r8_r8, 0b01_010_001: ld_r8_r8, 0b01_011_001: ld_r8_r8,
-            0b01_100_001: ld_r8_r8, 0b01_101_001: ld_r8_r8, 0b01_110_001: ld_r8_r8, 0b01_111_001: ld_r8_r8,
-            0b01_000_010: ld_r8_r8, 0b01_001_010: ld_r8_r8, 0b01_010_010: ld_r8_r8, 0b01_011_010: ld_r8_r8,
-            0b01_100_010: ld_r8_r8, 0b01_101_010: ld_r8_r8, 0b01_110_010: ld_r8_r8, 0b01_111_010: ld_r8_r8,
-            0b01_000_011: ld_r8_r8, 0b01_001_011: ld_r8_r8, 0b01_010_011: ld_r8_r8, 0b01_011_011: ld_r8_r8,
-            0b01_100_011: ld_r8_r8, 0b01_101_011: ld_r8_r8, 0b01_110_011: ld_r8_r8, 0b01_111_011: ld_r8_r8,
-            0b01_000_100: ld_r8_r8, 0b01_001_100: ld_r8_r8, 0b01_010_100: ld_r8_r8, 0b01_011_100: ld_r8_r8,
-            0b01_100_100: ld_r8_r8, 0b01_101_100: ld_r8_r8, 0b01_110_100: ld_r8_r8, 0b01_111_100: ld_r8_r8,
-            0b01_000_101: ld_r8_r8, 0b01_001_101: ld_r8_r8, 0b01_010_101: ld_r8_r8, 0b01_011_101: ld_r8_r8,
-            0b01_100_101: ld_r8_r8, 0b01_101_101: ld_r8_r8, 0b01_110_101: ld_r8_r8, 0b01_111_101: ld_r8_r8,
-            0b01_000_110: ld_r8_r8, 0b01_001_110: ld_r8_r8, 0b01_010_110: ld_r8_r8, 0b01_011_110: ld_r8_r8,
-            0b01_100_110: ld_r8_r8, 0b01_101_110: ld_r8_r8, 0b01_111_110: ld_r8_r8,
-            0b01_000_111: ld_r8_r8, 0b01_001_111: ld_r8_r8, 0b01_010_111: ld_r8_r8, 0b01_011_111: ld_r8_r8,
-            0b01_100_111: ld_r8_r8, 0b01_101_111: ld_r8_r8, 0b01_110_111: ld_r8_r8, 0b01_111_111: ld_r8_r8,
+             
+            0b01_000_000: ld_r8_r8,
+            0b01_001_000: ld_r8_r8,
+            0b01_010_000: ld_r8_r8,
+            0b01_011_000: ld_r8_r8,
+            0b01_100_000: ld_r8_r8,
+            0b01_101_000: ld_r8_r8,
+            0b01_110_000: ld_r8_r8,
+            0b01_111_000: ld_r8_r8,
+            0b01_000_001: ld_r8_r8,
+            0b01_001_001: ld_r8_r8,
+            0b01_010_001: ld_r8_r8,
+            0b01_011_001: ld_r8_r8,
+            0b01_100_001: ld_r8_r8,
+            0b01_101_001: ld_r8_r8,
+            0b01_110_001: ld_r8_r8,
+            0b01_111_001: ld_r8_r8,
+            0b01_000_010: ld_r8_r8,
+            0b01_001_010: ld_r8_r8,
+            0b01_010_010: ld_r8_r8,
+            0b01_011_010: ld_r8_r8,
+            0b01_100_010: ld_r8_r8,
+            0b01_101_010: ld_r8_r8,
+            0b01_110_010: ld_r8_r8,
+            0b01_111_010: ld_r8_r8,
+            0b01_000_011: ld_r8_r8,
+            0b01_001_011: ld_r8_r8,
+            0b01_010_011: ld_r8_r8,
+            0b01_011_011: ld_r8_r8,
+            0b01_100_011: ld_r8_r8,
+            0b01_101_011: ld_r8_r8,
+            0b01_110_011: ld_r8_r8,
+            0b01_111_011: ld_r8_r8,
+            0b01_000_100: ld_r8_r8,
+            0b01_001_100: ld_r8_r8,
+            0b01_010_100: ld_r8_r8,
+            0b01_011_100: ld_r8_r8,
+            0b01_100_100: ld_r8_r8,
+            0b01_101_100: ld_r8_r8,
+            0b01_110_100: ld_r8_r8,
+            0b01_111_100: ld_r8_r8,
+            0b01_000_101: ld_r8_r8,
+            0b01_001_101: ld_r8_r8,
+            0b01_010_101: ld_r8_r8,
+            0b01_011_101: ld_r8_r8,
+            0b01_100_101: ld_r8_r8,
+            0b01_101_101: ld_r8_r8,
+            0b01_110_101: ld_r8_r8,
+            0b01_111_101: ld_r8_r8,
+            0b01_000_110: ld_r8_r8,
+            0b01_001_110: ld_r8_r8,
+            0b01_010_110: ld_r8_r8,
+            0b01_011_110: ld_r8_r8,
+            0b01_100_110: ld_r8_r8,
+            0b01_101_110: ld_r8_r8,
+            0b01_111_110: ld_r8_r8,
+            0b01_000_111: ld_r8_r8,
+            0b01_001_111: ld_r8_r8,
+            0b01_010_111: ld_r8_r8,
+            0b01_011_111: ld_r8_r8,
+            0b01_100_111: ld_r8_r8,
+            0b01_101_111: ld_r8_r8,
+            0b01_110_111: ld_r8_r8,
+            0b01_111_111: ld_r8_r8,
+             
 
             0b10000000: add_a_b,
             0b10000001: add_a_c,

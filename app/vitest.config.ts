@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitest/config'
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
     test: {
@@ -6,9 +6,9 @@ export default defineConfig({
             enabled: false,
             reporter: 'html',
             provider: 'v8',
-            exclude: [ 'dist/**', '*.config.*', '*.d.ts' ],
+            exclude: ['dist/**', '*.config.*', '*.d.ts'],
         },
         isolate: false,
-        setupFiles: [ '../test.setup.js' ],
+        setupFiles: ['../test.setup.js'],
     },
-})
+});

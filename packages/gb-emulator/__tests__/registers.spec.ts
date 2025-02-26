@@ -1,4 +1,4 @@
-// based on : https://gbdev.io/pandocs/CPU_Registers_and_Flags.html#the-flags-register-lower-8-bits-of-af-register
+// Based on : https://gbdev.io/pandocs/CPU_Registers_and_Flags.html#the-flags-register-lower-8-bits-of-af-register
 
 import { beforeEach, describe, expect, it } from "vitest";
 import { Registers } from "@/registers.ts";
@@ -122,7 +122,7 @@ describe(Registers, () => {
                 .and.to.equal(0x0102);
         });
 
-        // setters
+        // Setters
         it('should set A as High and F as Low when setting AF', () => {
             registers.AF.value = 0x0102
 

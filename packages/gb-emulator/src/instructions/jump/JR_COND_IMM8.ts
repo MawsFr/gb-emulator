@@ -1,5 +1,4 @@
-import { Instruction } from "@/instructions/instruction.ts";
-import { Cpu } from "@/cpu.ts";
+import { Instruction } from '@/instructions/instruction.ts'
 
 export type JR_COND_IMM8_OPCODE =
     | 0b00100000 // JR NZ, imm8
@@ -8,10 +7,6 @@ export type JR_COND_IMM8_OPCODE =
     | 0b00111000 // JR C, imm8
 
 export class JR_COND_IMM8 extends Instruction {
-    constructor(cpu: Cpu) {
-        super(cpu)
-    }
-
     execute(opcode: JR_COND_IMM8_OPCODE) {
         const immediate8 = this.cpu.getImmediate8()
 

@@ -1,7 +1,5 @@
-import { describe, it } from "vitest";
+import { describe, it } from 'vitest'
 
-describe("RETI", () => {
-    it.todo('should be implemented', () => {
-
-    });
-});
+describe('RETI', () => {
+    it.todo('should be implemented', () => {})
+})

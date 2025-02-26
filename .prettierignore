@@ -1,0 +1,20 @@
+*
+
+.vscode-test/
+out/
+dist/
+coverage/
+fixtures/
+node_modules/
+
+!*.ts
+!*.js
+!*.cjs
+!*.mjs
+!*.json
+!*.vue
+!*.html
+!*.css
+
+# Check subdirectories too
+!*/

@@ -1,4 +1,4 @@
-import {afterAll, beforeEach, vi} from "vitest";
+import { afterAll, beforeEach, vi } from 'vitest';
 
 beforeEach(() => {
     vi.restoreAllMocks();
@@ -6,8 +6,8 @@ beforeEach(() => {
     vi.resetAllMocks();
     vi.clearAllMocks();
     vi.useFakeTimers();
-})
+});
 
 afterAll(() => {
     vi.useRealTimers();
-})
+});
