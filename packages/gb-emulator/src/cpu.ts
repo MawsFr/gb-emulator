@@ -81,6 +81,7 @@ import { RETI_OPCODE } from '@/instructions/ret/RETI.ts'
 import { EI_OPCODE } from '@/instructions/interrupts/EI.ts'
 import { DI_OPCODE } from '@/instructions/interrupts/DI.ts'
 import { HARD_LOCK_OPCODES } from '@/instructions/hard-lock/HARD_LOCK.ts'
+import { RLC_R8_OPCODES } from '@/instructions/prefixed-instructions/RLC_R8.ts'
 
 export interface CpuConfig {
     registers: Registers
@@ -151,11 +152,14 @@ export type Opcode =
     | DI_OPCODE
     | HARD_LOCK_OPCODES
 
+export type PrefixedOpcode = RLC_R8_OPCODES
+
 export class Cpu {
     public readonly registers: Registers
     public readonly memory: Memory
 
     public readonly instructions: Record<Opcode, Instruction>
+    public readonly prefixedInstructions: Record<PrefixedOpcode, Instruction>
 
     private hardLocked: boolean = false
 
@@ -164,6 +168,8 @@ export class Cpu {
         this.memory = config.memory
 
         this.instructions = InstructionLoader.loadInstructions(this)
+        this.prefixedInstructions =
+            InstructionLoader.loadPrefixedInstructions(this)
     }
 
     getImmediateBytes({ count }: { count: 1 | 2 }) {
@@ -190,6 +196,10 @@ export class Cpu {
 
     interpret(opcode: Opcode) {
         this.instructions[opcode].execute(opcode)
+    }
+
+    interpretPrefixed(opcode: PrefixedOpcode) {
+        this.prefixedInstructions[opcode].execute(opcode)
     }
 
     hardLock() {

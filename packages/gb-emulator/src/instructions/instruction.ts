@@ -1,5 +1,5 @@
 import { ConditionCode, R16Code, R8Code, Registers } from '@/registers.ts'
-import { Cpu, Opcode } from '@/cpu.ts'
+import { Cpu, Opcode, PrefixedOpcode } from '@/cpu.ts'
 import {
     bitwiseAnd,
     isBitSet,
@@ -27,7 +27,7 @@ export abstract class Instruction {
         this.memory = cpu.memory
     }
 
-    abstract execute(opcode: Opcode): void
+    abstract execute(opcode: Opcode | PrefixedOpcode): void
 
     protected updateFlagsAfterAddition(
         augend: number,
@@ -85,6 +85,13 @@ export abstract class Instruction {
         this.registers.F.zeroFlag = value === 0 ? 1 : 0
     }
 
+    protected updateFlagsAfterRotate(value: number, carry: number) {
+        this.registers.F.subtractionFlag = 0
+        this.registers.F.halfCarryFlag = 0
+        this.registers.F.carryFlag = carry
+        this.setZeroFlag(value)
+    }
+
     protected extractDestinationR16(opcode: Opcode) {
         return shiftRightBy4(bitwiseAnd(opcode, REGISTER_16_MASK)) as R16Code
     }
@@ -95,7 +102,7 @@ export abstract class Instruction {
         ) as R8Code
     }
 
-    protected extractSourceR8(opcode: Opcode) {
+    protected extractSourceR8(opcode: Opcode | PrefixedOpcode) {
         return bitwiseAnd(opcode, REGISTER_8_SOURCE_MASK) as R8Code
     }
 

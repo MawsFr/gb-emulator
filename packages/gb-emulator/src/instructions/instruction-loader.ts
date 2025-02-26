@@ -1,4 +1,4 @@
-import { Cpu, Opcode } from '@/cpu.ts'
+import { Cpu, Opcode, PrefixedOpcode } from '@/cpu.ts'
 import { LD_R16_IMM16 } from '@/instructions/load/LD_R16_IMM16.ts'
 import { Instruction } from '@/instructions/instruction.ts'
 import { LD_R16MEM_A } from '@/instructions/load/LD_R16MEM_A.ts'
@@ -54,6 +54,7 @@ import { RETI } from '@/instructions/ret/RETI.ts'
 import { EI } from '@/instructions/interrupts/EI.ts'
 import { DI } from '@/instructions/interrupts/DI.ts'
 import { HARD_LOCK } from '@/instructions/hard-lock/HARD_LOCK.ts'
+import { RLC_R8 } from '@/instructions/prefixed-instructions/RLC_R8.ts'
 
 // eslint-disable-next-line unicorn/no-static-only-class
 export abstract class InstructionLoader {
@@ -468,6 +469,23 @@ export abstract class InstructionLoader {
             0xF4: hard_lock,
             0xFC: hard_lock,
             0xFD: hard_lock,
+        }
+    }
+
+    static loadPrefixedInstructions(
+        cpu: Cpu
+    ): Record<PrefixedOpcode, Instruction> {
+        const rlc_r8 = new RLC_R8(cpu)
+
+        return {
+            0b00_000_000: rlc_r8,
+            0b00_000_001: rlc_r8,
+            0b00_000_010: rlc_r8,
+            0b00_000_011: rlc_r8,
+            0b00_000_100: rlc_r8,
+            0b00_000_101: rlc_r8,
+            0b00_000_110: rlc_r8,
+            0b00_000_111: rlc_r8,
         }
     }
 }

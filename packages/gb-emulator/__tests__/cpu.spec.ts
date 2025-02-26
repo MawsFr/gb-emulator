@@ -1,10 +1,16 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { Cpu, Opcode } from '@/cpu.ts'
+import { Cpu, Opcode, PrefixedOpcode } from '@/cpu.ts'
 import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(Cpu, () => {
     beforeEach<GbEmulatorTestContext>((context) => {
         for (const instruction of Object.values(context.cpu.instructions)) {
+            vi.spyOn(instruction, 'execute').mockReturnValue()
+        }
+
+        for (const instruction of Object.values(
+            context.cpu.prefixedInstructions
+        )) {
             vi.spyOn(instruction, 'execute').mockReturnValue()
         }
     })
@@ -178,6 +184,23 @@ describe(Cpu, () => {
 
             // When
             cpu.interpret(opcode)
+
+            // Then
+            expect(instruction.execute).toHaveBeenCalledWith(opcode)
+        })
+    })
+
+    describe(Cpu.prototype.interpretPrefixed, () => {
+        it.for<PrefixedOpcode>([
+            // RLC_R8
+            0b00000_000, 0b00000_001, 0b00000_010, 0b00000_011, 0b00000_100,
+            0b00000_101, 0b00000_110, 0b00000_111,
+        ])('should call the right instruction', (opcode, { cpu }) => {
+            // Given
+            const instruction = cpu.prefixedInstructions[opcode]
+
+            // When
+            cpu.interpretPrefixed(opcode)
 
             // Then
             expect(instruction.execute).toHaveBeenCalledWith(opcode)
