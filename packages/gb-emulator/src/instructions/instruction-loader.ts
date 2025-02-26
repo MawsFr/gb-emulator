@@ -53,6 +53,7 @@ import { LD_SP_HL } from '@/instructions/load/LD_SP_HL.ts'
 import { RETI } from '@/instructions/ret/RETI.ts'
 import { EI } from '@/instructions/interrupts/EI.ts'
 import { DI } from '@/instructions/interrupts/DI.ts'
+import { HARD_LOCK } from '@/instructions/hard-lock/HARD_LOCK.ts'
 
 // eslint-disable-next-line unicorn/no-static-only-class
 export abstract class InstructionLoader {
@@ -174,6 +175,7 @@ export abstract class InstructionLoader {
         const ld_sp_hl = new LD_SP_HL(cpu)
         const ei = new EI(cpu)
         const di = new DI(cpu)
+        const hard_lock = new HARD_LOCK(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -455,6 +457,17 @@ export abstract class InstructionLoader {
 
             0b11111011: ei,
             0b11110011: di,
+            0xD3: hard_lock,
+            0xDB: hard_lock,
+            0xDD: hard_lock,
+            0xE3: hard_lock,
+            0xE4: hard_lock,
+            0xEB: hard_lock,
+            0xEC: hard_lock,
+            0xED: hard_lock,
+            0xF4: hard_lock,
+            0xFC: hard_lock,
+            0xFD: hard_lock,
         }
     }
 }

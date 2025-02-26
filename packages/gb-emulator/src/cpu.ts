@@ -80,6 +80,7 @@ import { LD_SP_HL_OPCODE } from '@/instructions/load/LD_SP_HL.ts'
 import { RETI_OPCODE } from '@/instructions/ret/RETI.ts'
 import { EI_OPCODE } from '@/instructions/interrupts/EI.ts'
 import { DI_OPCODE } from '@/instructions/interrupts/DI.ts'
+import { HARD_LOCK_OPCODES } from '@/instructions/hard-lock/HARD_LOCK.ts'
 
 export interface CpuConfig {
     registers: Registers
@@ -148,12 +149,15 @@ export type Opcode =
     | LD_SP_HL_OPCODE
     | EI_OPCODE
     | DI_OPCODE
+    | HARD_LOCK_OPCODES
 
 export class Cpu {
     public readonly registers: Registers
     public readonly memory: Memory
 
     public readonly instructions: Record<Opcode, Instruction>
+
+    private hardLocked: boolean = false
 
     constructor(config: CpuConfig) {
         this.registers = config.registers
@@ -186,5 +190,13 @@ export class Cpu {
 
     interpret(opcode: Opcode) {
         this.instructions[opcode].execute(opcode)
+    }
+
+    hardLock() {
+        this.hardLocked = true
+    }
+
+    isHardLocked() {
+        return this.hardLocked
     }
 }
