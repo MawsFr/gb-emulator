@@ -7,7 +7,8 @@
     "scripts": {
         "lint": "pnpm eslint . --ext .vue,.js,.ts --fix",
         "format": "pnpm prettier --write .",
-        "coverage": "vitest run --coverage"
+        "coverage": "vitest run --coverage",
+        "prepare": "husky install"
     },
     "keywords": [],
     "author": "",
@@ -24,10 +25,22 @@
         "eslint-plugin-unicorn": "^57.0.0",
         "eslint-plugin-vue": "^9.32.0",
         "globals": "^16.0.0",
+        "husky": "^8.0.0",
         "prettier": "3.5.2",
         "prettier-eslint": "16.3.0",
         "prettier-eslint-cli": "^8.0.1",
         "typescript-eslint": "^8.25.0",
         "vitest": "3.0.5"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,vue,tsx,json,css,scss,md}": [
+            "prettier --write",
+            "eslint --fix"
+        ]
     }
 }
