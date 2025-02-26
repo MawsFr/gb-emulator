@@ -42,6 +42,7 @@ import { RST_TGT3 } from '@/instructions/misc/RST_TGT3.ts'
 import { POP_R16STK } from '@/instructions/stack/POP_R16STK.ts'
 import { PUSH_R16STK } from '@/instructions/stack/PUSH_R16STK.ts'
 import { LDH_C_A } from '@/instructions/ld/LDH_C_A.ts'
+import { LDH_IMM8_A } from '@/instructions/ld/LDH_IMM8_A.ts'
 
 // eslint-disable-next-line unicorn/no-static-only-class
 export abstract class InstructionLoader {
@@ -152,6 +153,7 @@ export abstract class InstructionLoader {
         const pop_r16stk = new POP_R16STK(cpu)
         const push_r16stk = new PUSH_R16STK(cpu)
         const ldh_c_a = new LDH_C_A(cpu)
+        const ldh_imm8_a = new LDH_IMM8_A(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -421,6 +423,7 @@ export abstract class InstructionLoader {
             0b11_11_0101: push_r16stk,
 
             0b11100010: ldh_c_a,
+            0b11100000: ldh_imm8_a,
         }
     }
 }

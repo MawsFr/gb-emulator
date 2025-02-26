@@ -69,6 +69,7 @@ import { RST_TGT3_OPCODES } from '@/instructions/misc/RST_TGT3.ts'
 import { POP_R16STK_OPCODES } from '@/instructions/stack/POP_R16STK.ts'
 import { PUSH_R16STK_OPCODES } from '@/instructions/stack/PUSH_R16STK.ts'
 import { LDH_C_A_OPCODE } from '@/instructions/ld/LDH_C_A.ts'
+import { LDH_IMM8_A_OPCODE } from '@/instructions/ld/LDH_IMM8_A.ts'
 
 export interface CpuConfig {
     registers: Registers
@@ -126,6 +127,7 @@ export type Opcode =
     | POP_R16STK_OPCODES
     | PUSH_R16STK_OPCODES
     | LDH_C_A_OPCODE
+    | LDH_IMM8_A_OPCODE
 
 export class Cpu {
     public readonly registers: Registers
@@ -151,6 +153,9 @@ export class Cpu {
         return this.memory.addresses[this.registers.PC.value]
     }
 
+    /**
+     * Increments PC and returns the immediate 8 bit value
+     */
     getImmediate8() {
         return this.getImmediateBytes({ count: 1 })
     }
