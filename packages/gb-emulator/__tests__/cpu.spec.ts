@@ -166,6 +166,10 @@ describe(Cpu, () => {
             0b11111000,
             // LD SP, HL
             0b11111001,
+            // EI
+            0b11111011,
+            // DI
+            0b11110011,
         ])('should call the right instruction', (opcode, { cpu }) => {
             // Given
             const instruction = cpu.instructions[opcode]

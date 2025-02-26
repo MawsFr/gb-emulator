@@ -78,6 +78,8 @@ import { ADD_SP_IMM8_OPCODE } from '@/instructions/add/ADD_SP_IMM8.ts'
 import { LD_HL_SP_PLUS_IMM8_OPCODE } from '@/instructions/load/LD_HL_SP_PLUS_IMM8.ts'
 import { LD_SP_HL_OPCODE } from '@/instructions/load/LD_SP_HL.ts'
 import { RETI_OPCODE } from '@/instructions/ret/RETI.ts'
+import { EI_OPCODE } from '@/instructions/interrupts/EI.ts'
+import { DI_OPCODE } from '@/instructions/interrupts/DI.ts'
 
 export interface CpuConfig {
     registers: Registers
@@ -144,6 +146,8 @@ export type Opcode =
     | ADD_SP_IMM8_OPCODE
     | LD_HL_SP_PLUS_IMM8_OPCODE
     | LD_SP_HL_OPCODE
+    | EI_OPCODE
+    | DI_OPCODE
 
 export class Cpu {
     public readonly registers: Registers
