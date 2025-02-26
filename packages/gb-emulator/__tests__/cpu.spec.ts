@@ -210,6 +210,9 @@ describe(Cpu, () => {
             // SRA_R8
             0b00101_000, 0b00101_001, 0b00101_010, 0b00101_011, 0b00101_100,
             0b00101_101, 0b00101_110, 0b00101_111,
+            // SWAP_R8
+            0b00110_000, 0b00110_001, 0b00110_010, 0b00110_011, 0b00110_100,
+            0b00110_101, 0b00110_110, 0b00110_111,
         ])('should call the right instruction', (opcode, { cpu }) => {
             // Given
             const instruction = cpu.prefixedInstructions[opcode]
