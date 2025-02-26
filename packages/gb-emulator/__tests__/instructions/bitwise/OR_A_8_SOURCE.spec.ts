@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { OR_A_IMM8, OR_A_R8 } from '@/instructions/bitwise/OR_A_8_SOURCE.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(OR_A_R8, () => {
     it<GbEmulatorTestContext>('should bitwise OR the value of a register to A', ({

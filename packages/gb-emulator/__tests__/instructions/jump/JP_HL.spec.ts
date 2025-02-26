@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { JP_HL } from '@/instructions/jump/JP_HL.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(JP_HL, () => {
     it<GbEmulatorTestContext>('should jump to the address specified by the HL register', ({

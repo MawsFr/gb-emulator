@@ -3,7 +3,7 @@ import {
     ADD_HL_R16,
     ADD_HL_R16_OPCODES,
 } from '@/instructions/add/ADD_HL_R16.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(ADD_HL_R16, () => {
     it.for<

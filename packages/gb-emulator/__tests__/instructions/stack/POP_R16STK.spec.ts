@@ -3,7 +3,7 @@ import {
     POP_R16STK,
     POP_R16STK_OPCODES,
 } from '@/instructions/stack/POP_R16STK.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(POP_R16STK, () => {
     it.for<

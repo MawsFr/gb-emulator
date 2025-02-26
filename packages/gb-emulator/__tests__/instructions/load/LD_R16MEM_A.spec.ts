@@ -4,7 +4,7 @@ import {
     LD_R16MEM_A_OPCODES,
 } from '@/instructions/ld/LD_R16MEM_A.ts'
 import { R16Code } from '@/registers.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(LD_R16MEM_A, () => {
     it.for<

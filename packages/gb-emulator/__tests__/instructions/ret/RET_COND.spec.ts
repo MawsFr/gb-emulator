@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { RET_COND, RET_COND_OPCODES } from '@/instructions/ret/RET_COND.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(RET_COND, () => {
     it.for<

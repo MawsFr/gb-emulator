@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { LD_IMM16_SP } from '@/instructions/ld/LD_IMM16_SP.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(LD_IMM16_SP, () => {
     it<GbEmulatorTestContext>('should put SP into the address pointed by the immediate 16 bits', ({

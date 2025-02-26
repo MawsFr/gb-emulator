@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { RET } from '@/instructions/ret/RET.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(RET, () => {
     it<GbEmulatorTestContext>('should return unconditionally from a function', ({

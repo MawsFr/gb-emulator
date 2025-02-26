@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { SBC_A_IMM8, SBC_A_R8 } from '@/instructions/sub/SBC_A_8_SOURCE.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(SBC_A_R8, () => {
     it<GbEmulatorTestContext>('should subtract the value of a register and the carry flag to A', ({

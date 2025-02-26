@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { ADD_SP_IMM8 } from '@/instructions/add/ADD_SP_IMM8.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(ADD_SP_IMM8, () => {
     it<GbEmulatorTestContext>('should add immediate 8 bits value to SP register', ({

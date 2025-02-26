@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { LD_R8_R8 } from '@/instructions/ld/LD_R8_R8'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(LD_R8_R8, () => {
     it<GbEmulatorTestContext>('should load the value of a register into another register', ({

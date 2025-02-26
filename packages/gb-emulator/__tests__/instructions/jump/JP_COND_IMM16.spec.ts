@@ -3,7 +3,7 @@ import {
     JP_COND_IMM16,
     JP_COND_IMM16_OPCODE,
 } from '@/instructions/jump/JP_COND_IMM16.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(JP_COND_IMM16, () => {
     it.for<

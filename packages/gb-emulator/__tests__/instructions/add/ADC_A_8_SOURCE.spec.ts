@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { ADC_A_IMM8, ADC_A_R8 } from '@/instructions/add/ADC_A_8_SOURCE.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(ADC_A_R8, () => {
     it<GbEmulatorTestContext>('should add the value of a register and the carry flag to A', ({

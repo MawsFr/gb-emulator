@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { CP_A_IMM8, CP_A_R8 } from '@/instructions/sub/CP_A_8_SOURCE.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(CP_A_R8, () => {
     it<GbEmulatorTestContext>('should compare the value of a register to A', ({

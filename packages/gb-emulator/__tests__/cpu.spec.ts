@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { Cpu, Opcode } from '@/cpu.ts'
-import { GbEmulatorTestContext } from '../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(Cpu, () => {
     beforeEach<GbEmulatorTestContext>((context) => {

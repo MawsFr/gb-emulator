@@ -2,7 +2,7 @@
 
 import { describe, expect, it } from 'vitest'
 import { Registers } from '@/registers.ts'
-import { GbEmulatorTestContext } from '../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(Registers, () => {
     describe('8 bit registers', () => {

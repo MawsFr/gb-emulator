@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { LD_R8_IMM8, LD_R8_IMM8_OPCODES } from '@/instructions/ld/LD_R8_IMM8'
 import { R8Code } from '@/registers.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(LD_R8_IMM8, () => {
     it.for<

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { DAA } from '@/instructions/misc/DAA.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(DAA, () => {
     describe('should adjust the A register to a BCD value', () => {

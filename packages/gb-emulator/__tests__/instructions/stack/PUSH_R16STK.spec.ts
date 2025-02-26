@@ -3,7 +3,7 @@ import {
     PUSH_R16STK,
     PUSH_R16STK_OPCODES,
 } from '@/instructions/stack/PUSH_R16STK.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(PUSH_R16STK, () => {
     it.for<

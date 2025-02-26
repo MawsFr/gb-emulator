@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { CALL_IMM16 } from '@/instructions/call/CALL_IMM16.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(CALL_IMM16, () => {
     it<GbEmulatorTestContext>('should call the address specified by the immediate 16 bits', ({

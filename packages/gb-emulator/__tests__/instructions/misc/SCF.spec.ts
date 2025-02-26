@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { SCF } from '@/instructions/misc/SCF.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(SCF, () => {
     it<GbEmulatorTestContext>('should flip all bits in the A register', ({

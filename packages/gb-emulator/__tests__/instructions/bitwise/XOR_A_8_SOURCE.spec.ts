@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { XOR_A_IMM8, XOR_A_R8 } from '@/instructions/bitwise/XOR_A_8_SOURCE.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(XOR_A_R8, () => {
     it<GbEmulatorTestContext>('should bitwise XOR the value of a register to A', ({

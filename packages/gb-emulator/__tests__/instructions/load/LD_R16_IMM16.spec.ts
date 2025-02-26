@@ -4,7 +4,7 @@ import {
     LD_R16_IMM16_OPCODES,
 } from '@/instructions/ld/LD_R16_IMM16.ts'
 import { R16Code } from '@/registers.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(LD_R16_IMM16, () => {
     it.for<

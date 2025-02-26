@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { ADD_A_IMM8, ADD_A_R8 } from '@/instructions/add/ADD_A_8_SOURCE.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(ADD_A_R8, () => {
     it<GbEmulatorTestContext>('should add the value of a register to A', ({

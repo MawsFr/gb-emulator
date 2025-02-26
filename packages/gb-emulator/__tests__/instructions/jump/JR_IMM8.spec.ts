@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { JR_IMM8 } from '@/instructions/jump/JR_IMM8.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(JR_IMM8, () => {
     it<GbEmulatorTestContext>('should jump to the address specified by the immediate 8 bits', ({

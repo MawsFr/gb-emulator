@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest'
 import { STOP } from '@/instructions/misc/STOP.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(STOP, () => {
     // Let registers: Registers

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { RRA } from '@/instructions/rotate/RRA.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(RRA, () => {
     it<GbEmulatorTestContext>('should rotate the value in register A to the right and load the carry flag', ({

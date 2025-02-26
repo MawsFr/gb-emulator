@@ -10,6 +10,6 @@ export default defineConfig({
             provider: 'v8',
         },
         isolate: false,
-        setupFiles: ['../test.setup.ts'],
+        setupFiles: ['./test.setup.ts', '../test.setup.ts'],
     },
 })

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { CPL } from '@/instructions/misc/CPL.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(CPL, () => {
     it<GbEmulatorTestContext>('should flip all bits in the A register', ({

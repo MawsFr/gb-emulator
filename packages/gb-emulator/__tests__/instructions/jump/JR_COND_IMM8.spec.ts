@@ -3,7 +3,7 @@ import {
     JR_COND_IMM8,
     JR_COND_IMM8_OPCODE,
 } from '@/instructions/jump/JR_COND_IMM8.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(JR_COND_IMM8, () => {
     it.for<

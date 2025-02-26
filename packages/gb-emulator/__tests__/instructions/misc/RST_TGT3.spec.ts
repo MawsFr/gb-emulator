@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { RST_TGT3, RST_TGT3_OPCODES } from '@/instructions/misc/RST_TGT3.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(RST_TGT3, () => {
     it.for<

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { LDH_C_A } from '@/instructions/ld/LDH_C_A.ts'
-import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
+import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(LDH_C_A, () => {
     it<GbEmulatorTestContext>('should write the value in register A at address FF00 + value in register C', ({
