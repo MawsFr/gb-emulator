@@ -58,6 +58,7 @@ import { RLC_R8 } from '@/instructions/prefixed-instructions/RLC_R8.ts'
 import { RRC_R8 } from '@/instructions/prefixed-instructions/RRC_R8.ts'
 import { RR_R8 } from '@/instructions/prefixed-instructions/RR_R8.ts'
 import { RL_R8 } from '@/instructions/prefixed-instructions/RL_R8.ts'
+import { SLA_R8 } from '@/instructions/prefixed-instructions/SLA_R8.ts'
 
 // eslint-disable-next-line unicorn/no-static-only-class
 export abstract class InstructionLoader {
@@ -482,6 +483,7 @@ export abstract class InstructionLoader {
         const rrc_r8 = new RRC_R8(cpu)
         const rl_r8 = new RL_R8(cpu)
         const rr_r8 = new RR_R8(cpu)
+        const sla_r8 = new SLA_R8(cpu)
 
         return {
             0b00000_000: rlc_r8,
@@ -519,6 +521,15 @@ export abstract class InstructionLoader {
             0b00011_101: rr_r8,
             0b00011_110: rr_r8,
             0b00011_111: rr_r8,
+
+            0b00100_000: sla_r8,
+            0b00100_001: sla_r8,
+            0b00100_010: sla_r8,
+            0b00100_011: sla_r8,
+            0b00100_100: sla_r8,
+            0b00100_101: sla_r8,
+            0b00100_110: sla_r8,
+            0b00100_111: sla_r8,
         }
     }
 }
