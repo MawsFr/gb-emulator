@@ -19,7 +19,8 @@ export class SLA_R8 extends Instruction {
         this.registers.r8[register].value = shiftLeftBy1(
             this.registers.r8[register].value
         )
-        this.registers.F.carryFlag = bit7
+
+        this.updateFlagsAfterRotate(this.registers.r8[register].value, bit7)
 
         this.registers.PC.value++
     }
