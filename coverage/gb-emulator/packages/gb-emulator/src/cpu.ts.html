@@ -237,7 +237,9 @@
 <a name='L172'></a><a href='#L172'>172</a>
 <a name='L173'></a><a href='#L173'>173</a>
 <a name='L174'></a><a href='#L174'>174</a>
-<a name='L175'></a><a href='#L175'>175</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -372,45 +374,47 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">361x</span>
-<span class="cline-any cline-yes">361x</span>
+<span class="cline-any cline-yes">363x</span>
+<span class="cline-any cline-yes">363x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">361x</span>
+<span class="cline-any cline-yes">363x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">361x</span>
-<span class="cline-any cline-yes">361x</span>
-<span class="cline-any cline-yes">361x</span>
+<span class="cline-any cline-yes">363x</span>
+<span class="cline-any cline-yes">363x</span>
+<span class="cline-any cline-yes">363x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">361x</span>
-<span class="cline-any cline-yes">361x</span>
+<span class="cline-any cline-yes">363x</span>
+<span class="cline-any cline-yes">363x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">361x</span>
-<span class="cline-any cline-yes">43x</span>
-<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">363x</span>
+<span class="cline-any cline-yes">44x</span>
+<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">44x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">361x</span>
-<span class="cline-any cline-yes">60x</span>
-<span class="cline-any cline-yes">60x</span>
-<span class="cline-any cline-yes">60x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">363x</span>
+<span class="cline-any cline-yes">61x</span>
+<span class="cline-any cline-yes">61x</span>
+<span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">361x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">361x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">363x</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">363x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">361x</span>
-<span class="cline-any cline-yes">225x</span>
-<span class="cline-any cline-yes">225x</span>
-<span class="cline-any cline-yes">361x</span>
+<span class="cline-any cline-yes">363x</span>
+<span class="cline-any cline-yes">226x</span>
+<span class="cline-any cline-yes">226x</span>
+<span class="cline-any cline-yes">363x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Registers } from '@/registers.ts'
 import { Memory } from '@/memory.ts'
 import { concatBytes } from '@mawsfr/binary-operations'
@@ -485,6 +489,7 @@ import { LDH_C_A_OPCODE } from '@/instructions/ld/LDH_C_A.ts'
 import { LDH_IMM8_A_OPCODE } from '@/instructions/ld/LDH_IMM8_A.ts'
 import { LD_IMM16_A_OPCODE } from '@/instructions/ld/LD_IMM16_A.ts'
 import { LDH_A_C_OPCODE } from '@/instructions/ld/LDH_A_C.ts'
+import { LDH_A_IMM8_OPCODE } from '@/instructions/ld/LDH_A_IMM8.ts'
 &nbsp;
 export interface CpuConfig {
     registers: Registers
@@ -545,6 +550,7 @@ export type Opcode =
     | LDH_IMM8_A_OPCODE
     | LD_IMM16_A_OPCODE
     | LDH_A_C_OPCODE
+    | LDH_A_IMM8_OPCODE
 &nbsp;
 export class Cpu {
     public readonly registers: Registers
@@ -592,7 +598,7 @@ export class Cpu {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-26T15:13:40.130Z
+                at 2025-02-26T15:17:32.436Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

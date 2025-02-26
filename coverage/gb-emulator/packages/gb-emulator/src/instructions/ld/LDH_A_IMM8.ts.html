@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for gb-emulator/packages/gb-emulator/src/instructions/jump/JR_IMM8.ts</title>
+    <title>Code coverage report for gb-emulator/packages/gb-emulator/src/instructions/ld/LDH_A_IMM8.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../../../index.html">All files</a> / <a href="index.html">gb-emulator/packages/gb-emulator/src/instructions/jump</a> JR_IMM8.ts</h1>
+        <h1><a href="../../../../../../index.html">All files</a> / <a href="index.html">gb-emulator/packages/gb-emulator/src/instructions/ld</a> LDH_A_IMM8.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -83,14 +83,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Instruction } from '@/instructions/instruction.ts'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Instruction } from '../instruction'
 &nbsp;
-export type JR_IMM8_OPCODE = 0b00011000
+export type LDH_A_IMM8_OPCODE = 0b11110000
 &nbsp;
-export class JR_IMM8 extends Instruction {
-    execute() {
-        const immediate8 = this.cpu.getImmediate8()
-        this.registers.PC.value += immediate8
+export class LDH_A_IMM8 extends Instruction {
+    execute(): void {
+        this.registers.A.value =
+            this.memory.addresses[0xFF00 + this.cpu.getImmediate8()]
     }
 }
 &nbsp;</pre></td></tr></table></pre>
