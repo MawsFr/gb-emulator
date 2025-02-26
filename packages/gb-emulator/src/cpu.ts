@@ -68,6 +68,7 @@ import { CALL_COND_IMM16_OPCODES } from '@/instructions/call/CALL_COND_IMM16.ts'
 import { RST_TGT3_OPCODES } from '@/instructions/misc/RST_TGT3.ts'
 import { POP_R16STK_OPCODES } from '@/instructions/stack/POP_R16STK.ts'
 import { PUSH_R16STK_OPCODES } from '@/instructions/stack/PUSH_R16STK.ts'
+import { LDH_C_A_OPCODE } from '@/instructions/ld/LDH_C_A.ts'
 
 export interface CpuConfig {
     registers: Registers
@@ -124,6 +125,7 @@ export type Opcode =
     | RST_TGT3_OPCODES
     | POP_R16STK_OPCODES
     | PUSH_R16STK_OPCODES
+    | LDH_C_A_OPCODE
 
 export class Cpu {
     public readonly registers: Registers
