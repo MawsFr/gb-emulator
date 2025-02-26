@@ -82,6 +82,7 @@ import { EI_OPCODE } from '@/instructions/interrupts/EI.ts'
 import { DI_OPCODE } from '@/instructions/interrupts/DI.ts'
 import { HARD_LOCK_OPCODES } from '@/instructions/hard-lock/HARD_LOCK.ts'
 import { RLC_R8_OPCODES } from '@/instructions/prefixed-instructions/RLC_R8.ts'
+import { RRC_R8_OPCODES } from '@/instructions/prefixed-instructions/RRC_R8.ts'
 
 export interface CpuConfig {
     registers: Registers
@@ -152,7 +153,7 @@ export type Opcode =
     | DI_OPCODE
     | HARD_LOCK_OPCODES
 
-export type PrefixedOpcode = RLC_R8_OPCODES
+export type PrefixedOpcode = RLC_R8_OPCODES | RRC_R8_OPCODES
 
 export class Cpu {
     public readonly registers: Registers

@@ -195,6 +195,9 @@ describe(Cpu, () => {
             // RLC_R8
             0b00000_000, 0b00000_001, 0b00000_010, 0b00000_011, 0b00000_100,
             0b00000_101, 0b00000_110, 0b00000_111,
+            // RRC_R8
+            0b00001_000, 0b00001_001, 0b00001_010, 0b00001_011, 0b00001_100,
+            0b00001_101, 0b00001_110, 0b00001_111,
         ])('should call the right instruction', (opcode, { cpu }) => {
             // Given
             const instruction = cpu.prefixedInstructions[opcode]
