@@ -229,7 +229,6 @@ export abstract class InstructionLoader {
             0b00010000: stop,
             0b01110110: halt,
 
-             
             0b01_000_000: ld_r8_r8,
             0b01_001_000: ld_r8_r8,
             0b01_010_000: ld_r8_r8,
@@ -293,7 +292,6 @@ export abstract class InstructionLoader {
             0b01_101_111: ld_r8_r8,
             0b01_110_111: ld_r8_r8,
             0b01_111_111: ld_r8_r8,
-             
 
             0b10000000: add_a_b,
             0b10000001: add_a_c,

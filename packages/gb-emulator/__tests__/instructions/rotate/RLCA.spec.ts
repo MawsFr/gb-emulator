@@ -1,8 +1,8 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { Registers } from "@/registers.ts";
-import { Memory } from "@/memory.ts";
-import { Cpu } from "@/cpu.ts";
-import { RLCA } from "@/instructions/rotate/RLCA.ts";
+import { beforeEach, describe, expect, it } from 'vitest'
+import { Registers } from '@/registers.ts'
+import { Memory } from '@/memory.ts'
+import { Cpu } from '@/cpu.ts'
+import { RLCA } from '@/instructions/rotate/RLCA.ts'
 
 describe(RLCA, () => {
     let registers: Registers
@@ -14,7 +14,7 @@ describe(RLCA, () => {
         registers = new Registers(memory)
         cpu = new Cpu({
             registers,
-            memory
+            memory,
         })
     })
 

@@ -1,13 +1,16 @@
-import { describe, expect, it } from "vitest";
-import { Cpu } from "@/cpu.ts";
-import { Registers } from "@/registers.ts";
-import { ImmediateSourceStrategy, RegisterSourceStrategy } from "@/instructions/source-strategies.ts";
+import { describe, expect, it } from 'vitest'
+import { Cpu } from '@/cpu.ts'
+import { Registers } from '@/registers.ts'
+import {
+    ImmediateSourceStrategy,
+    RegisterSourceStrategy,
+} from '@/instructions/source-strategies.ts'
 
 describe(ImmediateSourceStrategy, () => {
     it('should return the immediate value', () => {
         // Given
         const cpu: Cpu = {
-            getImmediate8: () => 0x1
+            getImmediate8: () => 0x1,
         } as Cpu
 
         // When
@@ -23,8 +26,8 @@ describe(RegisterSourceStrategy, () => {
         // Given
         const registers = {
             r8: {
-                0b000: { value: 0x1 }
-            }
+                0b000: { value: 0x1 },
+            },
         } as Registers
 
         // When

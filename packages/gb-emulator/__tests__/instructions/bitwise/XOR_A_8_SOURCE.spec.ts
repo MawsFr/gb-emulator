@@ -1,8 +1,8 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { Cpu } from "@/cpu.ts";
-import { Registers } from "@/registers.ts";
-import { Memory } from "@/memory.ts";
-import { XOR_A_IMM8, XOR_A_R8 } from "@/instructions/bitwise/XOR_A_8_SOURCE.ts";
+import { beforeEach, describe, expect, it } from 'vitest'
+import { Cpu } from '@/cpu.ts'
+import { Registers } from '@/registers.ts'
+import { Memory } from '@/memory.ts'
+import { XOR_A_IMM8, XOR_A_R8 } from '@/instructions/bitwise/XOR_A_8_SOURCE.ts'
 
 describe(XOR_A_R8, () => {
     let registers: Registers
@@ -14,7 +14,7 @@ describe(XOR_A_R8, () => {
         registers = new Registers(memory)
         cpu = new Cpu({
             registers,
-            memory
+            memory,
         })
     })
 
@@ -48,7 +48,7 @@ describe(XOR_A_IMM8, () => {
         registers = new Registers(memory)
         cpu = new Cpu({
             registers,
-            memory
+            memory,
         })
     })
 

@@ -15,5 +15,6 @@ describe(HALT, () => {
     //     })
     // })
 
+    // eslint-disable-next-line no-empty-function
     it.todo('should halt the CPU', () => {})
 })

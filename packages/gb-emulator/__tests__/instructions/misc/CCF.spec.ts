@@ -1,8 +1,8 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { Registers } from "@/registers.ts";
-import { Memory } from "@/memory.ts";
-import { Cpu } from "@/cpu.ts";
-import { CCF } from "@/instructions/misc/CCF.ts";
+import { beforeEach, describe, expect, it } from 'vitest'
+import { Registers } from '@/registers.ts'
+import { Memory } from '@/memory.ts'
+import { Cpu } from '@/cpu.ts'
+import { CCF } from '@/instructions/misc/CCF.ts'
 
 describe(CCF, () => {
     let registers: Registers
@@ -14,7 +14,7 @@ describe(CCF, () => {
         registers = new Registers(memory)
         cpu = new Cpu({
             registers,
-            memory
+            memory,
         })
     })
 
@@ -29,5 +29,5 @@ describe(CCF, () => {
         expect(registers.F.carryFlag).toBe(1)
         expect(registers.F.subtractionFlag).toBe(0)
         expect(registers.F.halfCarryFlag).toBe(0)
-    });
+    })
 })

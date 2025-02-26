@@ -1,8 +1,8 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { Registers } from "@/registers.ts";
-import { Memory } from "@/memory.ts";
-import { Cpu } from "@/cpu.ts";
-import { RRCA } from "@/instructions/rotate/RRCA.ts";
+import { beforeEach, describe, expect, it } from 'vitest'
+import { Registers } from '@/registers.ts'
+import { Memory } from '@/memory.ts'
+import { Cpu } from '@/cpu.ts'
+import { RRCA } from '@/instructions/rotate/RRCA.ts'
 
 describe(RRCA, () => {
     let registers: Registers
@@ -14,7 +14,7 @@ describe(RRCA, () => {
         registers = new Registers(memory)
         cpu = new Cpu({
             registers,
-            memory
+            memory,
         })
     })
 
@@ -27,6 +27,5 @@ describe(RRCA, () => {
 
         // Then
         expect(registers.A.value).to.equal(0b10000000)
-
     })
 })

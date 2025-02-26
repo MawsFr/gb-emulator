@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
-import { resolve } from 'node:path';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
+import { resolve } from 'node:path'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
     build: {
@@ -20,4 +20,4 @@ export default defineConfig({
             tsconfigPath: './tsconfig.json',
         }),
     ],
-});
+})

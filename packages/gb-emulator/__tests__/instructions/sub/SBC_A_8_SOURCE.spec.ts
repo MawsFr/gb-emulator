@@ -1,8 +1,8 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { Cpu } from "@/cpu.ts";
-import { Registers } from "@/registers.ts";
-import { Memory } from "@/memory.ts";
-import { SBC_A_IMM8, SBC_A_R8 } from "@/instructions/sub/SBC_A_8_SOURCE.ts";
+import { beforeEach, describe, expect, it } from 'vitest'
+import { Cpu } from '@/cpu.ts'
+import { Registers } from '@/registers.ts'
+import { Memory } from '@/memory.ts'
+import { SBC_A_IMM8, SBC_A_R8 } from '@/instructions/sub/SBC_A_8_SOURCE.ts'
 
 describe(SBC_A_R8, () => {
     let registers: Registers
@@ -14,7 +14,7 @@ describe(SBC_A_R8, () => {
         registers = new Registers(memory)
         cpu = new Cpu({
             registers,
-            memory
+            memory,
         })
     })
 
@@ -49,7 +49,7 @@ describe(SBC_A_IMM8, () => {
         registers = new Registers(memory)
         cpu = new Cpu({
             registers,
-            memory
+            memory,
         })
     })
 

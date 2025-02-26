@@ -1,24 +1,18 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "types": [
-      "vitest/globals"
-    ],
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "paths": {
-      "@mawsfr/gb-emulator": [
-        "../packages/gb-emulator/src"
-      ]
-    }
-  },
-  "include": [
-    "./src"
-  ]
+    "extends": "@vue/tsconfig/tsconfig.dom.json",
+    "compilerOptions": {
+        "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+        "types": ["vitest/globals"],
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedSideEffectImports": true,
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true,
+        "paths": {
+            "@mawsfr/gb-emulator": ["../packages/gb-emulator/src"]
+        }
+    },
+    "include": ["./src"]
 }

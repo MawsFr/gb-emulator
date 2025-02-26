@@ -1,1 +1,1 @@
-export * from './binary-operations';
+export * from './binary-operations'

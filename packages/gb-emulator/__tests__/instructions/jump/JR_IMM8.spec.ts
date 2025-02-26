@@ -1,8 +1,8 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { Cpu } from "@/cpu.ts";
-import { Registers } from "@/registers.ts";
-import { Memory } from "@/memory.ts";
-import { JR_IMM8 } from "@/instructions/jump/JR_IMM8.ts"
+import { beforeEach, describe, expect, it } from 'vitest'
+import { Cpu } from '@/cpu.ts'
+import { Registers } from '@/registers.ts'
+import { Memory } from '@/memory.ts'
+import { JR_IMM8 } from '@/instructions/jump/JR_IMM8.ts'
 
 describe(JR_IMM8, () => {
     let registers: Registers
@@ -14,7 +14,7 @@ describe(JR_IMM8, () => {
         registers = new Registers(memory)
         cpu = new Cpu({
             registers,
-            memory
+            memory,
         })
     })
 
