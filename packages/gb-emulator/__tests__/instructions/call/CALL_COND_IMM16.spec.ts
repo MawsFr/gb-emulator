@@ -1,31 +1,19 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
-import { Cpu } from '@/cpu.ts'
+import { describe, expect, it } from 'vitest'
 import {
     CALL_COND_IMM16,
     CALL_COND_IMM16_OPCODES,
 } from '@/instructions/call/CALL_COND_IMM16.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(CALL_COND_IMM16, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it.each<{
-        opcode: CALL_COND_IMM16_OPCODES
-        zeroFlag?: number
-        carryFlag?: number
-    }>([
+    it.for<
+        {
+            opcode: CALL_COND_IMM16_OPCODES
+            zeroFlag?: number
+            carryFlag?: number
+        },
+        GbEmulatorTestContext
+    >([
         {
             opcode: 0b110_00_100,
             zeroFlag: 0,
@@ -44,7 +32,7 @@ describe(CALL_COND_IMM16, () => {
         },
     ])(
         'should call the address specified by the immediate 16 bits if the condition is met',
-        ({ opcode, zeroFlag, carryFlag }) => {
+        ({ opcode, zeroFlag, carryFlag }, { cpu, memory, registers }) => {
             // Given
             registers.F.zeroFlag = zeroFlag ?? 0
             registers.F.carryFlag = carryFlag ?? 0
@@ -65,11 +53,14 @@ describe(CALL_COND_IMM16, () => {
         }
     )
 
-    it.each<{
-        opcode: CALL_COND_IMM16_OPCODES
-        zeroFlag?: number
-        carryFlag?: number
-    }>([
+    it.for<
+        {
+            opcode: CALL_COND_IMM16_OPCODES
+            zeroFlag?: number
+            carryFlag?: number
+        },
+        GbEmulatorTestContext
+    >([
         {
             opcode: 0b110_00_100,
             zeroFlag: 1,
@@ -88,7 +79,7 @@ describe(CALL_COND_IMM16, () => {
         },
     ])(
         'should not call the address specified by the immediate 16 bits if the condition is not met',
-        ({ opcode, zeroFlag, carryFlag }) => {
+        ({ opcode, zeroFlag, carryFlag }, { cpu, memory, registers }) => {
             // Given
             registers.F.zeroFlag = zeroFlag ?? 0
             registers.F.carryFlag = carryFlag ?? 0

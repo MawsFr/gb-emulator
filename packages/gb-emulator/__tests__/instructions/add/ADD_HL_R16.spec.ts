@@ -1,33 +1,21 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Cpu } from '@/cpu.ts'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
+import { describe, expect, it } from 'vitest'
 import {
     ADD_HL_R16,
     ADD_HL_R16_OPCODES,
 } from '@/instructions/add/ADD_HL_R16.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(ADD_HL_R16, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it.each<{
-        opcode: ADD_HL_R16_OPCODES
-        expectedRegister: string
-        expectedValue: number
-        expectedCarryFlag: number
-        expectedHalfCarryFlag: number
-    }>([
+    it.for<
+        {
+            opcode: ADD_HL_R16_OPCODES
+            expectedRegister: string
+            expectedValue: number
+            expectedCarryFlag: number
+            expectedHalfCarryFlag: number
+        },
+        GbEmulatorTestContext
+    >([
         {
             opcode: 0b00_00_1001,
             expectedRegister: 'BC',
@@ -58,12 +46,10 @@ describe(ADD_HL_R16, () => {
         },
     ])(
         'should add $expectedValue from register $expectedRegister value to HL',
-        ({
-            opcode,
-            expectedValue,
-            expectedCarryFlag,
-            expectedHalfCarryFlag,
-        }) => {
+        (
+            { opcode, expectedValue, expectedCarryFlag, expectedHalfCarryFlag },
+            { cpu, registers }
+        ) => {
             // Given
             registers.PC.value = 0x0
             registers.BC.value = 0b0111011111111111

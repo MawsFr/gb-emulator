@@ -1,31 +1,19 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Cpu } from '@/cpu.ts'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
+import { describe, expect, it } from 'vitest'
 import {
     JP_COND_IMM16,
     JP_COND_IMM16_OPCODE,
 } from '@/instructions/jump/JP_COND_IMM16.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(JP_COND_IMM16, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it.each<{
-        opcode: JP_COND_IMM16_OPCODE
-        zeroFlag?: number
-        carryFlag?: number
-    }>([
+    it.for<
+        {
+            opcode: JP_COND_IMM16_OPCODE
+            zeroFlag?: number
+            carryFlag?: number
+        },
+        GbEmulatorTestContext
+    >([
         {
             opcode: 0b11000010,
             zeroFlag: 0,
@@ -44,7 +32,7 @@ describe(JP_COND_IMM16, () => {
         },
     ])(
         'should jump to the address specified by the immediate 16 bits if the condition is met',
-        ({ opcode, zeroFlag, carryFlag }) => {
+        ({ opcode, zeroFlag, carryFlag }, { cpu, memory, registers }) => {
             // Given
             registers.F.zeroFlag = zeroFlag ?? 0
             registers.F.carryFlag = carryFlag ?? 0
@@ -61,11 +49,14 @@ describe(JP_COND_IMM16, () => {
         }
     )
 
-    it.each<{
-        opcode: JP_COND_IMM16_OPCODE
-        zeroFlag?: number
-        carryFlag?: number
-    }>([
+    it.for<
+        {
+            opcode: JP_COND_IMM16_OPCODE
+            zeroFlag?: number
+            carryFlag?: number
+        },
+        GbEmulatorTestContext
+    >([
         {
             opcode: 0b11000010,
             zeroFlag: 1,
@@ -84,7 +75,7 @@ describe(JP_COND_IMM16, () => {
         },
     ])(
         'should not jump to the address specified by the immediate 16 bits if the condition is not met',
-        ({ opcode, zeroFlag, carryFlag }) => {
+        ({ opcode, zeroFlag, carryFlag }, { cpu, memory, registers }) => {
             // Given
             registers.F.zeroFlag = zeroFlag ?? 0
             registers.F.carryFlag = carryFlag ?? 0

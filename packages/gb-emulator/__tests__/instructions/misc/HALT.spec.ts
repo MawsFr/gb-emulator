@@ -1,5 +1,6 @@
 import { describe, it } from 'vitest'
 import { HALT } from '@/instructions/misc/HALT.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(HALT, () => {
     // Let registers: Registers
@@ -16,5 +17,5 @@ describe(HALT, () => {
     // })
 
     // eslint-disable-next-line no-empty-function
-    it.todo('should halt the CPU', () => {})
+    it.todo<GbEmulatorTestContext>('should halt the CPU', () => {})
 })

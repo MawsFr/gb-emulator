@@ -1,24 +1,15 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
-import { Cpu } from '@/cpu.ts'
+import { describe, expect, it } from 'vitest'
 import { RST_TGT3, RST_TGT3_OPCODES } from '@/instructions/misc/RST_TGT3.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(RST_TGT3, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it.each<{ opcode: RST_TGT3_OPCODES; expectedPC: number }>([
+    it.for<
+        {
+            opcode: RST_TGT3_OPCODES
+            expectedPC: number
+        },
+        GbEmulatorTestContext
+    >([
         {
             opcode: 0b11_000_111,
             expectedPC: 0x0018,
@@ -53,7 +44,7 @@ describe(RST_TGT3, () => {
         },
     ])(
         'should call the address specified by the immediate 16 bits if the condition is met',
-        ({ opcode, expectedPC }) => {
+        ({ opcode, expectedPC }, { cpu, memory, registers }) => {
             // Given
             registers.PC.value = 0x5051
             registers.SP.value = 0xFFFE

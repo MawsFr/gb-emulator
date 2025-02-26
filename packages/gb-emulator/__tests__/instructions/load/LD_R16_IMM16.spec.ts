@@ -1,27 +1,19 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
     LD_R16_IMM16,
     LD_R16_IMM16_OPCODES,
 } from '@/instructions/ld/LD_R16_IMM16.ts'
-import { Cpu } from '@/cpu.ts'
-import { R16Code, Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
+import { R16Code } from '@/registers.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(LD_R16_IMM16, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it.each<{ opcode: LD_R16_IMM16_OPCODES; expectedRegister: R16Code }>([
+    it.for<
+        {
+            opcode: LD_R16_IMM16_OPCODES
+            expectedRegister: R16Code
+        },
+        GbEmulatorTestContext
+    >([
         {
             opcode: 0b00_00_0001,
             expectedRegister: 0b00,
@@ -40,7 +32,7 @@ describe(LD_R16_IMM16, () => {
         },
     ])(
         'should load the 2 next bytes into a 16 bits register',
-        ({ opcode, expectedRegister }) => {
+        ({ opcode, expectedRegister }, { cpu, memory, registers }) => {
             // Given
             registers.PC.value = 0x0
             memory.addresses[0x0] = 0x01

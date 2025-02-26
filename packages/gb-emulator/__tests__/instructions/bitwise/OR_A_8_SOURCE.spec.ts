@@ -1,24 +1,12 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Cpu } from '@/cpu.ts'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
+import { describe, expect, it } from 'vitest'
 import { OR_A_IMM8, OR_A_R8 } from '@/instructions/bitwise/OR_A_8_SOURCE.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(OR_A_R8, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it('should bitwise OR the value of a register to A', () => {
+    it<GbEmulatorTestContext>('should bitwise OR the value of a register to A', ({
+        cpu,
+        registers,
+    }) => {
         // Given
         registers.PC.value = 0x0
         registers.A.value = 0b11001100
@@ -39,20 +27,11 @@ describe(OR_A_R8, () => {
 })
 
 describe(OR_A_IMM8, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it('should bitwise OR the immediate value to A', () => {
+    it<GbEmulatorTestContext>('should bitwise OR the immediate value to A', ({
+        cpu,
+        memory,
+        registers,
+    }) => {
         // Given
         registers.PC.value = 0x0
         registers.A.value = 0b11001100

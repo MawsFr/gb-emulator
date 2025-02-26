@@ -1,33 +1,21 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
-import { Cpu } from '@/cpu.ts'
+import { describe, expect, it } from 'vitest'
 import {
     POP_R16STK,
     POP_R16STK_OPCODES,
 } from '@/instructions/stack/POP_R16STK.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(POP_R16STK, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it.each<{
-        opcode: POP_R16STK_OPCODES
-        expectedBC?: number
-        expectedDE?: number
-        expectedHL?: number
-        expectedAF?: number
-    }>([
+    it.for<
+        {
+            opcode: POP_R16STK_OPCODES
+            expectedBC?: number
+            expectedDE?: number
+            expectedHL?: number
+            expectedAF?: number
+        },
+        GbEmulatorTestContext
+    >([
         {
             opcode: 0b11_00_0001,
             expectedBC: 0x1234,
@@ -46,7 +34,10 @@ describe(POP_R16STK, () => {
         },
     ])(
         'should pop the value from the stack into the register pair',
-        ({ opcode, expectedBC, expectedDE, expectedHL, expectedAF }) => {
+        (
+            { opcode, expectedBC, expectedDE, expectedHL, expectedAF },
+            { cpu, memory, registers }
+        ) => {
             // Given
             registers.PC.value = 0x0000
             registers.SP.value = 0xFFFC

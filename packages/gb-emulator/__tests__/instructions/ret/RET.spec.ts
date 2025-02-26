@@ -1,24 +1,13 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
-import { Cpu } from '@/cpu.ts'
+import { describe, expect, it } from 'vitest'
 import { RET } from '@/instructions/ret/RET.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(RET, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it('should return unconditionally from a function', () => {
+    it<GbEmulatorTestContext>('should return unconditionally from a function', ({
+        cpu,
+        memory,
+        registers,
+    }) => {
         registers.PC.value = 0x0050
         registers.SP.value = 0xFFFC
         memory.addresses[0xFFFC] = 0x34

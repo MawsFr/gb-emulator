@@ -1,28 +1,16 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
-import { Cpu } from '@/cpu.ts'
+import { describe, expect, it } from 'vitest'
 import { RET_COND, RET_COND_OPCODES } from '@/instructions/ret/RET_COND.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(RET_COND, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it.each<{
-        opcode: RET_COND_OPCODES
-        zeroFlag?: number
-        carryFlag?: number
-    }>([
+    it.for<
+        {
+            opcode: RET_COND_OPCODES
+            zeroFlag?: number
+            carryFlag?: number
+        },
+        GbEmulatorTestContext
+    >([
         {
             opcode: 0b11000000,
             zeroFlag: 0,
@@ -41,7 +29,7 @@ describe(RET_COND, () => {
         },
     ])(
         'should return if the condition is met',
-        ({ opcode, zeroFlag, carryFlag }) => {
+        ({ opcode, zeroFlag, carryFlag }, { cpu, memory, registers }) => {
             // Given
             registers.F.zeroFlag = zeroFlag ?? 0
             registers.F.carryFlag = carryFlag ?? 0
@@ -59,11 +47,14 @@ describe(RET_COND, () => {
         }
     )
 
-    it.each<{
-        opcode: RET_COND_OPCODES
-        zeroFlag?: number
-        carryFlag?: number
-    }>([
+    it.for<
+        {
+            opcode: RET_COND_OPCODES
+            zeroFlag?: number
+            carryFlag?: number
+        },
+        GbEmulatorTestContext
+    >([
         {
             opcode: 0b11000000,
             zeroFlag: 1,
@@ -82,7 +73,7 @@ describe(RET_COND, () => {
         },
     ])(
         'should not return if the condition is not met',
-        ({ opcode, zeroFlag, carryFlag }) => {
+        ({ opcode, zeroFlag, carryFlag }, { cpu, memory, registers }) => {
             // Given
             registers.F.zeroFlag = zeroFlag ?? 0
             registers.F.carryFlag = carryFlag ?? 0

@@ -1,36 +1,24 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
-import { Cpu } from '@/cpu.ts'
+import { describe, expect, it } from 'vitest'
 import {
     PUSH_R16STK,
     PUSH_R16STK_OPCODES,
 } from '@/instructions/stack/PUSH_R16STK.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(PUSH_R16STK, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it.each<{
-        opcode: PUSH_R16STK_OPCODES
-    }>([
+    it.for<
+        {
+            opcode: PUSH_R16STK_OPCODES
+        },
+        GbEmulatorTestContext
+    >([
         { opcode: 0b11_00_0101 },
         { opcode: 0b11_01_0101 },
         { opcode: 0b11_10_0101 },
         { opcode: 0b11_11_0101 },
     ])(
         'should push the value from the register pair onto the stack',
-        ({ opcode }) => {
+        ({ opcode }, { cpu, memory, registers }) => {
             // Given
             registers.PC.value = 0x0000
             registers.SP.value = 0xFFFE

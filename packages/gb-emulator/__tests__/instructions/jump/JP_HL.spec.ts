@@ -1,24 +1,12 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Cpu } from '@/cpu.ts'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
+import { describe, expect, it } from 'vitest'
 import { JP_HL } from '@/instructions/jump/JP_HL.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(JP_HL, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it('should jump to the address specified by the HL register', () => {
+    it<GbEmulatorTestContext>('should jump to the address specified by the HL register', ({
+        cpu,
+        registers,
+    }) => {
         // Given
         registers.HL.value = 0x5051
 

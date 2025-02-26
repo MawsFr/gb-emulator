@@ -1,24 +1,13 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
-import { Cpu } from '@/cpu.ts'
+import { describe, expect, it } from 'vitest'
 import { LD_IMM16_SP } from '@/instructions/ld/LD_IMM16_SP.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(LD_IMM16_SP, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it('should put SP into the address pointed by the immediate 16 bits', () => {
+    it<GbEmulatorTestContext>('should put SP into the address pointed by the immediate 16 bits', ({
+        cpu,
+        memory,
+        registers,
+    }) => {
         // Given
         memory.addresses[0x0] = 0x01
         memory.addresses[0x1] = 0x51

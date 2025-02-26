@@ -1,24 +1,16 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Cpu } from '@/cpu.ts'
-import { R8Code, Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
+import { describe, expect, it } from 'vitest'
+import { R8Code } from '@/registers.ts'
 import { INC_R8, INC_R8_OPCODES } from '@/instructions/inc/INC_R8.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(INC_R8, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it.each<{ opcode: INC_R8_OPCODES; expectedRegister: R8Code }>([
+    it.for<
+        {
+            opcode: INC_R8_OPCODES
+            expectedRegister: R8Code
+        },
+        GbEmulatorTestContext
+    >([
         {
             opcode: 0b00_000_100,
             expectedRegister: 0b000,
@@ -53,7 +45,7 @@ describe(INC_R8, () => {
         },
     ])(
         'should increment the value in register $expectedRegister',
-        ({ opcode, expectedRegister }) => {
+        ({ opcode, expectedRegister }, { cpu, registers }) => {
             // Given
             registers.PC.value = 0x0
             registers.r8[expectedRegister].value = 0x50

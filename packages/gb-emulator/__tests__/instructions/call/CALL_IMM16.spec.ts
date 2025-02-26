@@ -1,24 +1,13 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
-import { Cpu } from '@/cpu.ts'
+import { describe, expect, it } from 'vitest'
 import { CALL_IMM16 } from '@/instructions/call/CALL_IMM16.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(CALL_IMM16, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it('should call the address specified by the immediate 16 bits', () => {
+    it<GbEmulatorTestContext>('should call the address specified by the immediate 16 bits', ({
+        cpu,
+        memory,
+        registers,
+    }) => {
         // Given
         registers.PC.value = 0x8000
 

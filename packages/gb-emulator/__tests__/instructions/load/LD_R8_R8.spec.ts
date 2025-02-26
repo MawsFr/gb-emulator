@@ -1,24 +1,12 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { LD_R8_R8 } from '@/instructions/ld/LD_R8_R8'
-import { Cpu } from '@/cpu.ts'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(LD_R8_R8, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it('should load the value of a register into another register', () => {
+    it<GbEmulatorTestContext>('should load the value of a register into another register', ({
+        cpu,
+        registers,
+    }) => {
         // Given
         registers.PC.value = 0x0
         registers.A.value = 0x1

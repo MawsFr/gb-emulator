@@ -1,28 +1,20 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { Cpu, Opcode } from '@/cpu.ts'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
+import { GbEmulatorTestContext } from '../../../test.setup.ts'
 
 describe(Cpu, () => {
-    let cpu: Cpu
-    let memory: Memory
-    let registers: Registers
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-
-        for (const instruction of Object.values(cpu.instructions)) {
+    beforeEach<GbEmulatorTestContext>((context) => {
+        for (const instruction of Object.values(context.cpu.instructions)) {
             vi.spyOn(instruction, 'execute').mockReturnValue()
         }
     })
 
     describe(Cpu.prototype.getImmediateBytes, () => {
-        it('should return the concatenation of the next 2 bytes and skip them', () => {
+        it<GbEmulatorTestContext>('should return the concatenation of the next 2 bytes and skip them', ({
+            registers,
+            memory,
+            cpu,
+        }) => {
             memory.addresses[0x0] = 0x01
             memory.addresses[0x1] = 0x34
             memory.addresses[0x2] = 0x12
@@ -35,7 +27,7 @@ describe(Cpu, () => {
     })
 
     describe(Cpu.prototype.interpret, () => {
-        it.each<Opcode>([
+        it.for<Opcode, GbEmulatorTestContext>([
             // LD R16, IMM16
             0b00000001, 0b00010001, 0b00100001, 0b00110001,
             // LD R16MEM, A
@@ -168,7 +160,7 @@ describe(Cpu, () => {
             0b11111010,
             // ADD SP, IMM8
             0b11101000,
-        ])('should call the right instruction', (opcode) => {
+        ])('should call the right instruction', (opcode, { cpu }) => {
             // Given
             const instruction = cpu.instructions[opcode]
 

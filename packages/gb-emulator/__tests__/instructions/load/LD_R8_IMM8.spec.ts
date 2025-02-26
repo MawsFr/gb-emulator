@@ -1,24 +1,16 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { LD_R8_IMM8, LD_R8_IMM8_OPCODES } from '@/instructions/ld/LD_R8_IMM8'
-import { Cpu } from '@/cpu.ts'
-import { R8Code, Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
+import { R8Code } from '@/registers.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(LD_R8_IMM8, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it.each<{ opcode: LD_R8_IMM8_OPCODES; expectedRegister: R8Code }>([
+    it.for<
+        {
+            opcode: LD_R8_IMM8_OPCODES
+            expectedRegister: R8Code
+        },
+        GbEmulatorTestContext
+    >([
         {
             opcode: 0b00_000_110,
             expectedRegister: 0b00,
@@ -53,7 +45,7 @@ describe(LD_R8_IMM8, () => {
         },
     ])(
         'should load the next bytes into a 8 bits register',
-        ({ opcode, expectedRegister }) => {
+        ({ opcode, expectedRegister }, { cpu, memory, registers }) => {
             // Given
             registers.PC.value = 0x0
             memory.addresses[0x0] = 0x01

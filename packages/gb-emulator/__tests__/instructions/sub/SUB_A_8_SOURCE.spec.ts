@@ -1,24 +1,12 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { Cpu } from '@/cpu.ts'
-import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
+import { describe, expect, it } from 'vitest'
 import { SUB_A_IMM8, SUB_A_R8 } from '@/instructions/sub/SUB_A_8_SOURCE.ts'
+import { GbEmulatorTestContext } from '../../../../../test.setup.ts'
 
 describe(SUB_A_R8, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it('should subtract the value of a register to A', () => {
+    it<GbEmulatorTestContext>('should subtract the value of a register to A', ({
+        registers,
+        cpu,
+    }) => {
         // Given
         registers.PC.value = 0x0
         registers.A.value = 0x1
@@ -39,20 +27,11 @@ describe(SUB_A_R8, () => {
 })
 
 describe(SUB_A_IMM8, () => {
-    let registers: Registers
-    let memory: Memory
-    let cpu: Cpu
-
-    beforeEach(() => {
-        memory = new Memory()
-        registers = new Registers(memory)
-        cpu = new Cpu({
-            registers,
-            memory,
-        })
-    })
-
-    it('should subtract the immediate value to A', () => {
+    it<GbEmulatorTestContext>('should subtract the immediate value to A', ({
+        registers,
+        memory,
+        cpu,
+    }) => {
         // Given
         registers.PC.value = 0x0
         registers.A.value = 0x1
