@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1740592843526" clover="3.2.0">
-  <project timestamp="1740592843526" name="All files">
+<coverage generated="1740592974075" clover="3.2.0">
+  <project timestamp="1740592974075" name="All files">
     <metrics statements="1781" coveredstatements="1497" conditionals="243" coveredconditionals="231" methods="197" coveredmethods="190" elements="2221" coveredelements="1918" complexity="0" loc="1781" ncloc="1781" packages="19" files="63" classes="63"/>
     <package name="app.dist.assets">
       <metrics statements="17" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -1527,9 +1527,9 @@
         <line num="10" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="packages.gb-emulator.src.instructions.ld">
+    <package name="packages.gb-emulator.src.instructions.load">
       <metrics statements="107" coveredstatements="107" conditionals="12" coveredconditionals="12" methods="12" coveredmethods="12"/>
-      <file name="LDH_A_C.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LDH_A_C.ts">
+      <file name="LDH_A_C.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/load/LDH_A_C.ts">
         <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -1540,7 +1540,7 @@
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
       </file>
-      <file name="LDH_A_IMM8.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LDH_A_IMM8.ts">
+      <file name="LDH_A_IMM8.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/load/LDH_A_IMM8.ts">
         <metrics statements="7" coveredstatements="7" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -1550,7 +1550,7 @@
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
       </file>
-      <file name="LDH_C_A.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LDH_C_A.ts">
+      <file name="LDH_C_A.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/load/LDH_C_A.ts">
         <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -1561,7 +1561,7 @@
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
       </file>
-      <file name="LDH_IMM8_A.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LDH_IMM8_A.ts">
+      <file name="LDH_IMM8_A.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/load/LDH_IMM8_A.ts">
         <metrics statements="7" coveredstatements="7" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -1571,7 +1571,7 @@
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
       </file>
-      <file name="LD_A_IMM16.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LD_A_IMM16.ts">
+      <file name="LD_A_IMM16.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/load/LD_A_IMM16.ts">
         <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -1582,7 +1582,7 @@
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
       </file>
-      <file name="LD_A_R16MEM.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LD_A_R16MEM.ts">
+      <file name="LD_A_R16MEM.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/load/LD_A_R16MEM.ts">
         <metrics statements="11" coveredstatements="11" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
@@ -1596,7 +1596,7 @@
         <line num="20" count="4" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
       </file>
-      <file name="LD_IMM16_A.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LD_IMM16_A.ts">
+      <file name="LD_IMM16_A.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/load/LD_IMM16_A.ts">
         <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -1607,7 +1607,7 @@
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
       </file>
-      <file name="LD_IMM16_SP.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LD_IMM16_SP.ts">
+      <file name="LD_IMM16_SP.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/load/LD_IMM16_SP.ts">
         <metrics statements="14" coveredstatements="14" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1624,7 +1624,7 @@
         <line num="21" count="1" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
       </file>
-      <file name="LD_R16MEM_A.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LD_R16MEM_A.ts">
+      <file name="LD_R16MEM_A.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/load/LD_R16MEM_A.ts">
         <metrics statements="11" coveredstatements="11" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
@@ -1638,7 +1638,7 @@
         <line num="20" count="4" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
       </file>
-      <file name="LD_R16_IMM16.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LD_R16_IMM16.ts">
+      <file name="LD_R16_IMM16.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/load/LD_R16_IMM16.ts">
         <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
@@ -1649,7 +1649,7 @@
         <line num="16" count="4" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
       </file>
-      <file name="LD_R8_IMM8.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LD_R8_IMM8.ts">
+      <file name="LD_R8_IMM8.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/load/LD_R8_IMM8.ts">
         <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
@@ -1660,7 +1660,7 @@
         <line num="20" count="8" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
       </file>
-      <file name="LD_R8_R8.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/ld/LD_R8_R8.ts">
+      <file name="LD_R8_R8.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/instructions/load/LD_R8_R8.ts">
         <metrics statements="9" coveredstatements="9" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="68" count="1" type="stmt"/>
