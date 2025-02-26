@@ -56,6 +56,8 @@ import { DI } from '@/instructions/interrupts/DI.ts'
 import { HARD_LOCK } from '@/instructions/hard-lock/HARD_LOCK.ts'
 import { RLC_R8 } from '@/instructions/prefixed-instructions/RLC_R8.ts'
 import { RRC_R8 } from '@/instructions/prefixed-instructions/RRC_R8.ts'
+import { RR_R8 } from '@/instructions/prefixed-instructions/RR_R8.ts'
+import { RL_R8 } from '@/instructions/prefixed-instructions/RL_R8.ts'
 
 // eslint-disable-next-line unicorn/no-static-only-class
 export abstract class InstructionLoader {
@@ -478,7 +480,8 @@ export abstract class InstructionLoader {
     ): Record<PrefixedOpcode, Instruction> {
         const rlc_r8 = new RLC_R8(cpu)
         const rrc_r8 = new RRC_R8(cpu)
-        const rl_r8 = new RLA(cpu)
+        const rl_r8 = new RL_R8(cpu)
+        const rr_r8 = new RR_R8(cpu)
 
         return {
             0b00000_000: rlc_r8,
@@ -507,6 +510,15 @@ export abstract class InstructionLoader {
             0b00010_101: rl_r8,
             0b00010_110: rl_r8,
             0b00010_111: rl_r8,
+
+            0b00011_000: rr_r8,
+            0b00011_001: rr_r8,
+            0b00011_010: rr_r8,
+            0b00011_011: rr_r8,
+            0b00011_100: rr_r8,
+            0b00011_101: rr_r8,
+            0b00011_110: rr_r8,
+            0b00011_111: rr_r8,
         }
     }
 }
