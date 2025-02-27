@@ -43,16 +43,16 @@ describe(SRA_R8, () => {
         'should shift the value in a register to the right and load the carry flag',
         ({ opcode, expectedRegister }, { registers, cpu }) => {
             // Given
-            registers.r8[expectedRegister].value = 0b00000001
+            registers.r8[expectedRegister].value = 0b10000001
             registers.F.carryFlag = 0
 
             // When
             new SRA_R8(cpu).execute(opcode)
 
             // Then
-            expect(registers.r8[expectedRegister].value).to.equal(0b00000000)
+            expect(registers.r8[expectedRegister].value).to.equal(0b11000000)
             expect(registers.F.carryFlag).to.equal(1)
-            expect(registers.F.zeroFlag).to.equal(1)
+            expect(registers.F.zeroFlag).to.equal(0)
             expect(registers.F.halfCarryFlag).to.equal(0)
             expect(registers.F.subtractionFlag).to.equal(0)
             expect(registers.PC.value).to.equal(1)

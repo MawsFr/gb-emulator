@@ -1,5 +1,10 @@
 import { Instruction } from '@/instructions/instruction.ts'
-import { getNthBit, shiftRightBy1 } from '@mawsfr/binary-operations'
+import {
+    bitwiseOr,
+    getNthBit,
+    shiftLeftBy,
+    shiftRightBy1,
+} from '@mawsfr/binary-operations'
 
 export type SRA_R8_OPCODES =
     | 0b00101_000
@@ -15,9 +20,15 @@ export class SRA_R8 extends Instruction {
     execute(opcode: SRA_R8_OPCODES) {
         const register = this.extractSourceR8(opcode)
         const bit0 = getNthBit(this.registers.r8[register].value, 0)
+        const bit7 = getNthBit(this.registers.r8[register].value, 7)
 
         this.registers.r8[register].value = shiftRightBy1(
             this.registers.r8[register].value
+        )
+
+        this.registers.r8[register].value = bitwiseOr(
+            this.registers.r8[register].value,
+            shiftLeftBy(7)(bit7)
         )
 
         this.updateFlagsAfterRotate(this.registers.r8[register].value, bit0)
