@@ -230,4 +230,8 @@ export class Cpu {
     isHardLocked() {
         return this.hardLocked
     }
+
+    fetchNextOpcode(): Opcode {
+        return this.memory.addresses[this.registers.PC.value] as Opcode
+    }
 }

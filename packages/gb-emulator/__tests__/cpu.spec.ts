@@ -279,4 +279,20 @@ describe(Cpu, () => {
             expect(instruction.execute).toHaveBeenCalledWith(opcode)
         })
     })
+
+    describe(Cpu.prototype.fetchNextOpcode, () => {
+        it<GbEmulatorTestContext>('should return a normal opcode', ({
+            memory,
+            cpu,
+        }) => {
+            // Given
+            memory.addresses[0x0100] = 0b10100000
+
+            // When
+            const opcode = cpu.fetchNextOpcode()
+
+            // Then
+            expect(opcode).to.equal(0b10100000)
+        })
+    })
 })
