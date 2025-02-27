@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for packages/gb-emulator/src/instructions/load/LD_R8_R8.ts</title>
+    <title>Code coverage report for packages/gb-emulator/src/instructions/prefixed-instructions/BIT_B3_R8.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../../index.html">All files</a> / <a href="index.html">packages/gb-emulator/src/instructions/load</a> LD_R8_R8.ts</h1>
+        <h1><a href="../../../../../index.html">All files</a> / <a href="index.html">packages/gb-emulator/src/instructions/prefixed-instructions</a> BIT_B3_R8.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
@@ -140,7 +140,20 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -209,17 +222,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">128x</span>
+<span class="cline-any cline-yes">128x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">128x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">128x</span>
+<span class="cline-any cline-yes">128x</span>
+<span class="cline-any cline-yes">128x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">64x</span>
+<span class="cline-any cline-yes">64x</span>
+<span class="cline-any cline-yes">128x</span>
+<span class="cline-any cline-yes">128x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">128x</span>
+<span class="cline-any cline-yes">128x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Instruction } from '@/instructions/instruction.ts'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Instruction } from '../instruction'
+import { isBitSet } from '@mawsfr/binary-operations'
 &nbsp;
-export type LD_R8_R8_OPCODES =
+export type BIT_B3_R8_OPCODES =
     | 0b01_000_000
     | 0b01_001_000
     | 0b01_010_000
@@ -274,6 +297,7 @@ export type LD_R8_R8_OPCODES =
     | 0b01_011_110
     | 0b01_100_110
     | 0b01_101_110
+    | 0b01_110_110
     | 0b01_111_110
     | 0b01_000_111
     | 0b01_001_111
@@ -284,14 +308,23 @@ export type LD_R8_R8_OPCODES =
     | 0b01_110_111
     | 0b01_111_111
 &nbsp;
-export class LD_R8_R8 extends Instruction {
-    execute(opcode: LD_R8_R8_OPCODES) {
-        const source = this.extractSourceR8(opcode)
-        const destination = this.extractDestinationR8(opcode)
+export class BIT_B3_R8 extends Instruction {
+    execute(opcode: BIT_B3_R8_OPCODES): void {
+        const register = this.extractSourceR8(opcode)
+        const bit = this.extractDestinationR8(opcode)
 &nbsp;
-        this.registers.r8[destination].value = this.registers.r8[source].value
+        this.registers.F.zeroFlag =
+            (
+                isBitSet(this.registers.r8[register].value, bit, {
+                    endianness: 'big',
+                })
+            ) ?
+                1
+            :   0
+        this.registers.F.halfCarryFlag = 1
+        this.registers.F.subtractionFlag = 0
 &nbsp;
-        this.registers.PC.value++
+        this.registers.PC.value += 1
     }
 }
 &nbsp;</pre></td></tr></table></pre>
