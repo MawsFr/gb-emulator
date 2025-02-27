@@ -233,8 +233,19 @@ export class Cpu {
         return this.hardLocked
     }
 
+    startDispatchLoop() {
+        setInterval(() => {
+            this.dispatch()
+        }, 1000 / 60)
+    }
+
     dispatch() {
         const opcode = this.decode(this.fetchNextByte())
+
+        // eslint-disable-next-line no-console
+        console.log(
+            `Executing opcode : ${opcode.toString(16)} | ${opcode.toString(2)}`
+        )
 
         this.instructions[opcode].execute(opcode)
     }
@@ -246,11 +257,15 @@ export class Cpu {
     decode(byte: number): Opcode {
         const opcode = byte
 
-        if (!Object.keys(this.instructions).includes(String(opcode))) {
+        if (!this.isValidOpcode(opcode)) {
             throw new Error('Unknown instruction')
         }
 
         return opcode as Opcode
+    }
+
+    isValidOpcode(opcode: number) {
+        return Object.keys(this.instructions).includes(String(opcode))
     }
 
     decodePrefixed(byte: number): PrefixedOpcode {

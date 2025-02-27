@@ -358,4 +358,20 @@ describe(Cpu, () => {
             expect(cpu.instructions[0b10100000].execute).toHaveBeenCalledOnce()
         })
     })
+
+    describe(Cpu.prototype.startDispatchLoop, () => {
+        it<GbEmulatorTestContext>('should periodically dispatch opcodes', ({
+            cpu,
+        }) => {
+            // Given
+            vi.spyOn(cpu, 'dispatch').mockImplementation(vi.fn())
+
+            // When
+            cpu.startDispatchLoop()
+            vi.advanceTimersByTime(1000 / 60)
+
+            // Then
+            expect(cpu.dispatch).toHaveBeenCalledOnce()
+        })
+    })
 })
