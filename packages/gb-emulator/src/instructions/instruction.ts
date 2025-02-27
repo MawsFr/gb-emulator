@@ -96,7 +96,7 @@ export abstract class Instruction {
         return shiftRightBy4(bitwiseAnd(opcode, REGISTER_16_MASK)) as R16Code
     }
 
-    protected extractDestinationR8(opcode: Opcode) {
+    protected extractDestinationR8(opcode: Opcode | PrefixedOpcode) {
         return shiftRightBy(3)(
             bitwiseAnd(opcode, REGISTER_8_DESTINATION_MASK)
         ) as R8Code

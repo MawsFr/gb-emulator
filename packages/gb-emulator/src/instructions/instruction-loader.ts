@@ -64,6 +64,7 @@ import { SWAP_R8 } from '@/instructions/prefixed-instructions/SWAP_R8.ts'
 import { SRL_R8 } from '@/instructions/prefixed-instructions/SRL_R8.ts'
 import { BIT_B3_R8 } from './prefixed-instructions/BIT_B3_R8'
 import { RES_B3_R8 } from './prefixed-instructions/RES_B3_R8'
+import { SET_B3_R8 } from './prefixed-instructions/SET_B3_R8'
 
 // eslint-disable-next-line unicorn/no-static-only-class
 export abstract class InstructionLoader {
@@ -494,6 +495,7 @@ export abstract class InstructionLoader {
         const srl_r8 = new SRL_R8(cpu)
         const bit_b3_r8 = new BIT_B3_R8(cpu)
         const res_b3_r8 = new RES_B3_R8(cpu)
+        const set_b3_r8 = new SET_B3_R8(cpu)
 
         return {
             0b00000_000: rlc_r8,
@@ -697,6 +699,71 @@ export abstract class InstructionLoader {
             0b10_101_111: res_b3_r8,
             0b10_110_111: res_b3_r8,
             0b10_111_111: res_b3_r8,
+
+            0b11_000_000: set_b3_r8,
+            0b11_001_000: set_b3_r8,
+            0b11_010_000: set_b3_r8,
+            0b11_011_000: set_b3_r8,
+            0b11_100_000: set_b3_r8,
+            0b11_101_000: set_b3_r8,
+            0b11_110_000: set_b3_r8,
+            0b11_111_000: set_b3_r8,
+            0b11_000_001: set_b3_r8,
+            0b11_001_001: set_b3_r8,
+            0b11_010_001: set_b3_r8,
+            0b11_011_001: set_b3_r8,
+            0b11_100_001: set_b3_r8,
+            0b11_101_001: set_b3_r8,
+            0b11_110_001: set_b3_r8,
+            0b11_111_001: set_b3_r8,
+            0b11_000_010: set_b3_r8,
+            0b11_001_010: set_b3_r8,
+            0b11_010_010: set_b3_r8,
+            0b11_011_010: set_b3_r8,
+            0b11_100_010: set_b3_r8,
+            0b11_101_010: set_b3_r8,
+            0b11_110_010: set_b3_r8,
+            0b11_111_010: set_b3_r8,
+            0b11_000_011: set_b3_r8,
+            0b11_001_011: set_b3_r8,
+            0b11_010_011: set_b3_r8,
+            0b11_011_011: set_b3_r8,
+            0b11_100_011: set_b3_r8,
+            0b11_101_011: set_b3_r8,
+            0b11_110_011: set_b3_r8,
+            0b11_111_011: set_b3_r8,
+            0b11_000_100: set_b3_r8,
+            0b11_001_100: set_b3_r8,
+            0b11_010_100: set_b3_r8,
+            0b11_011_100: set_b3_r8,
+            0b11_100_100: set_b3_r8,
+            0b11_101_100: set_b3_r8,
+            0b11_110_100: set_b3_r8,
+            0b11_111_100: set_b3_r8,
+            0b11_000_101: set_b3_r8,
+            0b11_001_101: set_b3_r8,
+            0b11_010_101: set_b3_r8,
+            0b11_011_101: set_b3_r8,
+            0b11_100_101: set_b3_r8,
+            0b11_101_101: set_b3_r8,
+            0b11_110_101: set_b3_r8,
+            0b11_111_101: set_b3_r8,
+            0b11_000_110: set_b3_r8,
+            0b11_001_110: set_b3_r8,
+            0b11_010_110: set_b3_r8,
+            0b11_011_110: set_b3_r8,
+            0b11_100_110: set_b3_r8,
+            0b11_101_110: set_b3_r8,
+            0b11_110_110: set_b3_r8,
+            0b11_111_110: set_b3_r8,
+            0b11_000_111: set_b3_r8,
+            0b11_001_111: set_b3_r8,
+            0b11_010_111: set_b3_r8,
+            0b11_011_111: set_b3_r8,
+            0b11_100_111: set_b3_r8,
+            0b11_101_111: set_b3_r8,
+            0b11_110_111: set_b3_r8,
+            0b11_111_111: set_b3_r8,
         }
     }
 }
