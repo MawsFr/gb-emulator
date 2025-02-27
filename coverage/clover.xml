@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1740674800744" clover="3.2.0">
-  <project timestamp="1740674800744" name="All files">
+<coverage generated="1740674984792" clover="3.2.0">
+  <project timestamp="1740674984792" name="All files">
     <metrics statements="2327" coveredstatements="2037" conditionals="267" coveredconditionals="256" methods="219" coveredmethods="209" elements="2813" coveredelements="2502" complexity="0" loc="2327" ncloc="2327" packages="22" files="80" classes="80"/>
     <package name="app.dist.assets">
       <metrics statements="17" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -64,7 +64,7 @@
         <line num="18" count="70" type="cond" truecount="1" falsecount="0"/>
         <line num="20" count="747" type="stmt"/>
         <line num="21" count="70" type="cond" truecount="1" falsecount="0"/>
-        <line num="23" count="12529" type="stmt"/>
+        <line num="23" count="12555" type="stmt"/>
         <line num="25" count="70" type="stmt"/>
         <line num="26" count="70" type="stmt"/>
         <line num="27" count="70" type="stmt"/>
@@ -505,8 +505,8 @@
         <line num="37" count="5606" type="stmt"/>
         <line num="38" count="5606" type="stmt"/>
         <line num="40" count="13073" type="cond" truecount="1" falsecount="0"/>
-        <line num="41" count="3525" type="stmt"/>
-        <line num="42" count="3525" type="stmt"/>
+        <line num="41" count="3551" type="stmt"/>
+        <line num="42" count="3551" type="stmt"/>
         <line num="43" count="13073" type="stmt"/>
         <line num="45" count="1" type="stmt"/>
         <line num="46" count="1" type="cond" truecount="1" falsecount="0"/>
