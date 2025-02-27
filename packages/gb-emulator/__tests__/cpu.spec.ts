@@ -339,4 +339,23 @@ describe(Cpu, () => {
             )
         })
     })
+
+    describe(Cpu.prototype.dispatch, () => {
+        it<GbEmulatorTestContext>('should fetch, decode and execute next opcode', ({
+            cpu,
+        }) => {
+            // Given
+            vi.spyOn(cpu, 'fetchNextByte').mockReturnValue(0b10100000)
+            vi.spyOn(cpu, 'decode').mockReturnValue(0b10100000)
+            vi.spyOn(cpu.instructions[0b10100000], 'execute')
+
+            // When
+            cpu.dispatch()
+
+            // Then
+            expect(cpu.fetchNextByte).toHaveBeenCalledOnce()
+            expect(cpu.decode).toHaveBeenCalledExactlyOnceWith(0b10100000)
+            expect(cpu.instructions[0b10100000].execute).toHaveBeenCalledOnce()
+        })
+    })
 })

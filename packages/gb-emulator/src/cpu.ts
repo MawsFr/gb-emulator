@@ -233,6 +233,12 @@ export class Cpu {
         return this.hardLocked
     }
 
+    dispatch() {
+        const opcode = this.decode(this.fetchNextByte())
+
+        this.instructions[opcode].execute(opcode)
+    }
+
     fetchNextByte(): number {
         return this.memory.addresses[this.registers.PC.value]
     }
