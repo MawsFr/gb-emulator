@@ -109,11 +109,10 @@ describe(Registers, () => {
             expect(registers.SP.value).to.equal(0xFFFE)
         })
 
-        it<GbEmulatorTestContext>('should have a PC register', ({
+        it<GbEmulatorTestContext>('should have a PC register with default value 0x0100', ({
             registers,
         }) => {
-            registers.PC.value = 0x0102
-            expect(registers.PC.value).to.be.a('number').and.to.equal(0x0102)
+            expect(registers.PC.value).to.be.a('number').and.to.equal(0x0100)
         })
 
         // Setters

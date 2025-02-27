@@ -8,6 +8,7 @@ describe(LD_SP_HL, () => {
         cpu,
     }) => {
         // Given
+        registers.PC.value = 0x0
         registers.SP.value = 0x50
         registers.HL.value = 0x1000
 

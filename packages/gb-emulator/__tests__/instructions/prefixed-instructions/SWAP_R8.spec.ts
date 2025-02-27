@@ -54,7 +54,7 @@ describe(SWAP_R8, () => {
             expect(registers.F.zeroFlag).to.equal(0)
             expect(registers.F.halfCarryFlag).to.equal(0)
             expect(registers.F.subtractionFlag).to.equal(0)
-            expect(registers.PC.value).to.equal(1)
+            expect(registers.PC.value).to.equal(0x101)
         }
     )
 })

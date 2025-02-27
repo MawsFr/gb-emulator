@@ -45,6 +45,7 @@ describe(SRA_R8, () => {
             // Given
             registers.r8[expectedRegister].value = 0b10000001
             registers.F.carryFlag = 0
+            registers.PC.value = 0x0
 
             // When
             new SRA_R8(cpu).execute(opcode)
@@ -55,7 +56,7 @@ describe(SRA_R8, () => {
             expect(registers.F.zeroFlag).to.equal(0)
             expect(registers.F.halfCarryFlag).to.equal(0)
             expect(registers.F.subtractionFlag).to.equal(0)
-            expect(registers.PC.value).to.equal(1)
+            expect(registers.PC.value).to.equal(0x1)
         }
     )
 })

@@ -21,6 +21,7 @@ describe(Cpu, () => {
             memory,
             cpu,
         }) => {
+            registers.PC.value = 0x0
             memory.addresses[0x0] = 0x01
             memory.addresses[0x1] = 0x34
             memory.addresses[0x2] = 0x12
@@ -28,7 +29,7 @@ describe(Cpu, () => {
             const value = cpu.getImmediateBytes({ count: 2 })
 
             expect(value).to.equal(0x1234)
-            expect(registers.PC.value).to.equal(0x2)
+            expect(registers.PC.value).to.equal(0x02)
         })
     })
 

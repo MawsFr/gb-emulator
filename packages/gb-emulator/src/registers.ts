@@ -236,7 +236,7 @@ export class Registers {
     public readonly DE = new ComposedRegister(this.D, this.E)
 
     public readonly SP: Register16 = new Register16(0xFFFE)
-    public readonly PC: Register16 = new Register16()
+    public readonly PC: Register16 = new Register16(0x0100)
 
     public readonly HLI: HLI = new HLI(this.HL)
     public readonly HLD: HLD = new HLD(this.HL)
