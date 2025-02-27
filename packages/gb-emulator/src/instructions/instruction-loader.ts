@@ -65,6 +65,7 @@ import { SRL_R8 } from '@/instructions/prefixed-instructions/SRL_R8.ts'
 import { BIT_B3_R8 } from './prefixed-instructions/BIT_B3_R8'
 import { RES_B3_R8 } from './prefixed-instructions/RES_B3_R8'
 import { SET_B3_R8 } from './prefixed-instructions/SET_B3_R8'
+import { CB } from '@/instructions/prefixed-instructions/CB.ts'
 
 // eslint-disable-next-line unicorn/no-static-only-class
 export abstract class InstructionLoader {
@@ -187,6 +188,7 @@ export abstract class InstructionLoader {
         const ei = new EI(cpu)
         const di = new DI(cpu)
         const hard_lock = new HARD_LOCK(cpu)
+        const cb = new CB(cpu)
 
         return {
             0b00000001: ld_r16_imm16,
@@ -479,6 +481,8 @@ export abstract class InstructionLoader {
             0xF4: hard_lock,
             0xFC: hard_lock,
             0xFD: hard_lock,
+
+            0b11001011: cb,
         }
     }
 

@@ -92,6 +92,7 @@ import { SRL_R8_OPCODES } from '@/instructions/prefixed-instructions/SRL_R8.ts'
 import { BIT_B3_R8_OPCODES } from './instructions/prefixed-instructions/BIT_B3_R8'
 import { RES_B3_R8_OPCODES } from './instructions/prefixed-instructions/RES_B3_R8'
 import { SET_B3_R8_OPCODES } from './instructions/prefixed-instructions/SET_B3_R8'
+import { CB_OPCODE } from '@/instructions/prefixed-instructions/CB.ts'
 
 export interface CpuConfig {
     registers: Registers
@@ -161,6 +162,7 @@ export type Opcode =
     | EI_OPCODE
     | DI_OPCODE
     | HARD_LOCK_OPCODES
+    | CB_OPCODE
 
 export type PrefixedOpcode =
     | RLC_R8_OPCODES

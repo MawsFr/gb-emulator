@@ -179,6 +179,8 @@ describe(Cpu, () => {
             0b11110011,
             // Hard lock
             0xD3, 0xDB, 0xDD, 0xE3, 0xE4, 0xEB, 0xEC, 0xED, 0xF4, 0xFC, 0xFD,
+            // CB (prefixed)
+            0b11001011,
         ])('should call the right instruction', (opcode, { cpu }) => {
             // Given
             const instruction = cpu.instructions[opcode]
