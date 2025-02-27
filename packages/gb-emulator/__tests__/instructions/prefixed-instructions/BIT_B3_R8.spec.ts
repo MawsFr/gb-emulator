@@ -87,7 +87,7 @@ describe(BIT_B3_R8, () => {
                 expect(registers.F.halfCarryFlag).to.equal(1)
                 expect(registers.F.subtractionFlag).to.equal(0)
                 expect(registers.F.carryFlag).to.equal(1)
-                expect(registers.PC.value).to.equal(0x0001)
+                expect(registers.PC.value).to.equal(0x01)
             }
         }
     )
@@ -173,7 +173,7 @@ describe(BIT_B3_R8, () => {
                 expect(registers.F.halfCarryFlag).to.equal(1)
                 expect(registers.F.subtractionFlag).to.equal(0)
                 expect(registers.F.carryFlag).to.equal(1)
-                expect(registers.PC.value).to.equal(0x0001)
+                expect(registers.PC.value).to.equal(0x01)
             }
         }
     )
