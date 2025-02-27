@@ -103,6 +103,17 @@ export const set3rdBit = (number_: number, value: number): number =>
 export const set4thBit = (number_: number, value: number): number =>
     setNthBit({ number: number_, bitIndex: 3, value })
 
-export const isBitSet = (number_: number, bitIndex: number): boolean => {
-    return getNthBit(number_, bitIndex) === 1
+export const isBitSet = (
+    number_: number,
+    bitIndex: number,
+    { endianness }: { endianness: 'big' | 'little' } = {
+        endianness: 'little',
+    }
+): boolean => {
+    return (
+        getNthBit(
+            number_,
+            endianness === 'little' ? bitIndex : 7 - bitIndex
+        ) === 1
+    )
 }

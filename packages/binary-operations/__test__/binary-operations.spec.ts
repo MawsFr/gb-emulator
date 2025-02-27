@@ -353,20 +353,36 @@ describe('BinaryOperations', () => {
     })
 
     describe(isBitSet, () => {
-        it('should check if a bit is set on an 8 bit number', () => {
+        it('should check if a bit is set on an 8 bit number with little endian', () => {
             const num = 0b0000_0001
 
             const result = isBitSet(num, 0)
 
             expect(result).toBeTruthy()
         })
+
+        it('should check if a bit is set on an 8 bit number with big endian', () => {
+            const num = 0b1000_0000
+
+            const result = isBitSet(num, 0, { endianness: 'big' })
+
+            expect(result).toBeTruthy()
+        })
     })
 
     describe(isBitSet, () => {
-        it('should check if a bit is not set', () => {
+        it('should check if a bit is not set with little endian', () => {
             const num = 0b0111_1111
 
             const result = isBitSet(num, 7)
+
+            expect(result).toBeFalsy()
+        })
+
+        it('should check if a bit is not set with big endian', () => {
+            const num = 0b0111_1111
+
+            const result = isBitSet(num, 0, { endianness: 'big' })
 
             expect(result).toBeFalsy()
         })

@@ -62,6 +62,7 @@ import { SLA_R8 } from '@/instructions/prefixed-instructions/SLA_R8.ts'
 import { SRA_R8 } from '@/instructions/prefixed-instructions/SRA_R8.ts'
 import { SWAP_R8 } from '@/instructions/prefixed-instructions/SWAP_R8.ts'
 import { SRL_R8 } from '@/instructions/prefixed-instructions/SRL_R8.ts'
+import { BIT_B3_R8 } from './prefixed-instructions/BIT_B3_R8'
 
 // eslint-disable-next-line unicorn/no-static-only-class
 export abstract class InstructionLoader {
@@ -490,6 +491,7 @@ export abstract class InstructionLoader {
         const sra_r8 = new SRA_R8(cpu)
         const swap_r8 = new SWAP_R8(cpu)
         const srl_r8 = new SRL_R8(cpu)
+        const bit_b3_r8 = new BIT_B3_R8(cpu)
 
         return {
             0b00000_000: rlc_r8,
@@ -563,6 +565,71 @@ export abstract class InstructionLoader {
             0b00111_101: srl_r8,
             0b00111_110: srl_r8,
             0b00111_111: srl_r8,
+
+            0b01_000_000: bit_b3_r8,
+            0b01_001_000: bit_b3_r8,
+            0b01_010_000: bit_b3_r8,
+            0b01_011_000: bit_b3_r8,
+            0b01_100_000: bit_b3_r8,
+            0b01_101_000: bit_b3_r8,
+            0b01_110_000: bit_b3_r8,
+            0b01_111_000: bit_b3_r8,
+            0b01_000_001: bit_b3_r8,
+            0b01_001_001: bit_b3_r8,
+            0b01_010_001: bit_b3_r8,
+            0b01_011_001: bit_b3_r8,
+            0b01_100_001: bit_b3_r8,
+            0b01_101_001: bit_b3_r8,
+            0b01_110_001: bit_b3_r8,
+            0b01_111_001: bit_b3_r8,
+            0b01_000_010: bit_b3_r8,
+            0b01_001_010: bit_b3_r8,
+            0b01_010_010: bit_b3_r8,
+            0b01_011_010: bit_b3_r8,
+            0b01_100_010: bit_b3_r8,
+            0b01_101_010: bit_b3_r8,
+            0b01_110_010: bit_b3_r8,
+            0b01_111_010: bit_b3_r8,
+            0b01_000_011: bit_b3_r8,
+            0b01_001_011: bit_b3_r8,
+            0b01_010_011: bit_b3_r8,
+            0b01_011_011: bit_b3_r8,
+            0b01_100_011: bit_b3_r8,
+            0b01_101_011: bit_b3_r8,
+            0b01_110_011: bit_b3_r8,
+            0b01_111_011: bit_b3_r8,
+            0b01_000_100: bit_b3_r8,
+            0b01_001_100: bit_b3_r8,
+            0b01_010_100: bit_b3_r8,
+            0b01_011_100: bit_b3_r8,
+            0b01_100_100: bit_b3_r8,
+            0b01_101_100: bit_b3_r8,
+            0b01_110_100: bit_b3_r8,
+            0b01_111_100: bit_b3_r8,
+            0b01_000_101: bit_b3_r8,
+            0b01_001_101: bit_b3_r8,
+            0b01_010_101: bit_b3_r8,
+            0b01_011_101: bit_b3_r8,
+            0b01_100_101: bit_b3_r8,
+            0b01_101_101: bit_b3_r8,
+            0b01_110_101: bit_b3_r8,
+            0b01_111_101: bit_b3_r8,
+            0b01_000_110: bit_b3_r8,
+            0b01_001_110: bit_b3_r8,
+            0b01_010_110: bit_b3_r8,
+            0b01_011_110: bit_b3_r8,
+            0b01_100_110: bit_b3_r8,
+            0b01_101_110: bit_b3_r8,
+            0b01_110_110: bit_b3_r8,
+            0b01_111_110: bit_b3_r8,
+            0b01_000_111: bit_b3_r8,
+            0b01_001_111: bit_b3_r8,
+            0b01_010_111: bit_b3_r8,
+            0b01_011_111: bit_b3_r8,
+            0b01_100_111: bit_b3_r8,
+            0b01_101_111: bit_b3_r8,
+            0b01_110_111: bit_b3_r8,
+            0b01_111_111: bit_b3_r8,
         }
     }
 }

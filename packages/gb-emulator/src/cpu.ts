@@ -89,6 +89,7 @@ import { SLA_R8_OPCODES } from '@/instructions/prefixed-instructions/SLA_R8.ts'
 import { SRA_R8_OPCODES } from '@/instructions/prefixed-instructions/SRA_R8.ts'
 import { SWAP_R8_OPCODES } from '@/instructions/prefixed-instructions/SWAP_R8.ts'
 import { SRL_R8_OPCODES } from '@/instructions/prefixed-instructions/SRL_R8.ts'
+import { BIT_B3_R8_OPCODES } from './instructions/prefixed-instructions/BIT_B3_R8'
 
 export interface CpuConfig {
     registers: Registers
@@ -168,6 +169,7 @@ export type PrefixedOpcode =
     | SRA_R8_OPCODES
     | SWAP_R8_OPCODES
     | SRL_R8_OPCODES
+    | BIT_B3_R8_OPCODES
 
 export class Cpu {
     public readonly registers: Registers
