@@ -215,11 +215,11 @@ export class Cpu {
         return this.getImmediateBytes({ count: 2 })
     }
 
-    interpret(opcode: Opcode) {
+    execute(opcode: Opcode) {
         this.instructions[opcode].execute(opcode)
     }
 
-    interpretPrefixed(opcode: PrefixedOpcode) {
+    executePrefixed(opcode: PrefixedOpcode) {
         this.prefixedInstructions[opcode].execute(opcode)
     }
 

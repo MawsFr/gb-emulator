@@ -33,7 +33,7 @@ describe(Cpu, () => {
         })
     })
 
-    describe(Cpu.prototype.interpret, () => {
+    describe(Cpu.prototype.execute, () => {
         it.for<Opcode>([
             // LD R16, IMM16
             0b00000001, 0b00010001, 0b00100001, 0b00110001,
@@ -184,14 +184,14 @@ describe(Cpu, () => {
             const instruction = cpu.instructions[opcode]
 
             // When
-            cpu.interpret(opcode)
+            cpu.execute(opcode)
 
             // Then
             expect(instruction.execute).toHaveBeenCalledWith(opcode)
         })
     })
 
-    describe(Cpu.prototype.interpretPrefixed, () => {
+    describe(Cpu.prototype.executePrefixed, () => {
         it.for<PrefixedOpcode>([
             // RLC_R8
             0b00000_000, 0b00000_001, 0b00000_010, 0b00000_011, 0b00000_100,
@@ -268,12 +268,12 @@ describe(Cpu, () => {
             0b11_100_110, 0b11_101_110, 0b11_110_110, 0b11_111_110,
             0b11_000_111, 0b11_001_111, 0b11_010_111, 0b11_011_111,
             0b11_100_111, 0b11_101_111, 0b11_110_111, 0b11_111_111,
-        ])('should call the right instruction', (opcode, { cpu }) => {
+        ])('should call the right prefixed instruction', (opcode, { cpu }) => {
             // Given
             const instruction = cpu.prefixedInstructions[opcode]
 
             // When
-            cpu.interpretPrefixed(opcode)
+            cpu.executePrefixed(opcode)
 
             // Then
             expect(instruction.execute).toHaveBeenCalledWith(opcode)
