@@ -233,7 +233,27 @@ export class Cpu {
         return this.hardLocked
     }
 
-    fetchNextOpcode(): Opcode {
-        return this.memory.addresses[this.registers.PC.value] as Opcode
+    fetchNextByte(): number {
+        return this.memory.addresses[this.registers.PC.value]
+    }
+
+    decode(byte: number): Opcode {
+        const opcode = byte
+
+        if (!Object.keys(this.instructions).includes(String(opcode))) {
+            throw new Error('Unknown instruction')
+        }
+
+        return opcode as Opcode
+    }
+
+    decodePrefixed(byte: number): PrefixedOpcode {
+        const opcode = byte
+
+        if (!Object.keys(this.prefixedInstructions).includes(String(opcode))) {
+            throw new Error('Unknown prefixed instruction')
+        }
+
+        return opcode as PrefixedOpcode
     }
 }

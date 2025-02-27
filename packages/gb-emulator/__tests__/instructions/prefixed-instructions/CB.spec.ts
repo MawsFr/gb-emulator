@@ -8,6 +8,7 @@ describe(CB, () => {
         cpu,
         memory,
     }) => {
+        vi.spyOn(cpu, 'decodePrefixed')
         vi.spyOn(cpu, 'executePrefixed')
         registers.PC.value = 0x0
         memory.addresses[0x1] = 0b01_000_000
@@ -16,6 +17,7 @@ describe(CB, () => {
         new CB(cpu).execute()
 
         // Then
+        expect(cpu.decodePrefixed).toHaveBeenCalledWith(0b01_000_000)
         expect(cpu.executePrefixed).toHaveBeenCalledWith(0b01_000_000)
         expect(registers.PC.value).to.equal(0x02)
     })

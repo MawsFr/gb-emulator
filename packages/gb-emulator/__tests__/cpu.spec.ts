@@ -282,7 +282,7 @@ describe(Cpu, () => {
         })
     })
 
-    describe(Cpu.prototype.fetchNextOpcode, () => {
+    describe(Cpu.prototype.fetchNextByte, () => {
         it<GbEmulatorTestContext>('should return a normal opcode', ({
             memory,
             cpu,
@@ -291,10 +291,52 @@ describe(Cpu, () => {
             memory.addresses[0x0100] = 0b10100000
 
             // When
-            const opcode = cpu.fetchNextOpcode()
+            const opcode = cpu.fetchNextByte()
 
             // Then
             expect(opcode).to.equal(0b10100000)
+        })
+    })
+
+    describe(Cpu.prototype.decode, () => {
+        it<GbEmulatorTestContext>('should return the opcode if exists', ({
+            cpu,
+        }) => {
+            const byte: number = 0b10100000
+
+            const opcode = cpu.decode(byte)
+
+            expect(opcode).toBeDefined()
+        })
+
+        it<GbEmulatorTestContext>('should fail if opcode is unknown', ({
+            cpu,
+        }) => {
+            const byte: number = 0b111111111
+
+            expect(() => cpu.decode(byte)).toThrow('Unknown instruction')
+        })
+    })
+
+    describe(Cpu.prototype.decodePrefixed, () => {
+        it<GbEmulatorTestContext>('should return the prefixed opcode if exists', ({
+            cpu,
+        }) => {
+            const byte: number = 0b10100000
+
+            const opcode = cpu.decodePrefixed(byte)
+
+            expect(opcode).toBeDefined()
+        })
+
+        it<GbEmulatorTestContext>('should fail if the prefixed opcode is unknown', ({
+            cpu,
+        }) => {
+            const byte: number = 0b111111111
+
+            expect(() => cpu.decodePrefixed(byte)).toThrow(
+                'Unknown prefixed instruction'
+            )
         })
     })
 })
