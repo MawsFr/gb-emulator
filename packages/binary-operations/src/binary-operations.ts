@@ -117,3 +117,6 @@ export const isBitSet = (
         ) === 1
     )
 }
+
+export const toHex = (number: number): string =>
+    `0x${number.toString(16).toUpperCase()}`

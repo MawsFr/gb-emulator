@@ -31,6 +31,7 @@ import {
     shiftRightBy4,
     shiftRightBy7,
     shiftRightBy8,
+    toHex,
 } from '../src'
 
 describe('BinaryOperations', () => {
@@ -385,6 +386,16 @@ describe('BinaryOperations', () => {
             const result = isBitSet(num, 0, { endianness: 'big' })
 
             expect(result).toBeFalsy()
+        })
+    })
+
+    describe(toHex, () => {
+        it('should convert a number to uppercase hexadecimal', () => {
+            const num = 0xFF
+
+            const result = toHex(num)
+
+            expect(result).to.equal('0xFF')
         })
     })
 })
