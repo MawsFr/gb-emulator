@@ -30,10 +30,10 @@ describe(JR_COND_IMM8, () => {
         'should jump to the address pointed by PC + 1 if the condition is met',
         ({ opcode, zeroFlag, carryFlag }, { cpu, memory, registers }) => {
             // Given
+            registers.PC.value = 0x1
             registers.F.zeroFlag = zeroFlag ?? 0
             registers.F.carryFlag = carryFlag ?? 0
-            registers.PC.value = 0x0
-            memory.addresses[0x1] = 0x50
+            memory.write(0x2, 0x50)
 
             // When
             new JR_COND_IMM8(cpu).execute(opcode)
@@ -71,7 +71,7 @@ describe(JR_COND_IMM8, () => {
             registers.F.zeroFlag = zeroFlag ?? 0
             registers.F.carryFlag = carryFlag ?? 0
             registers.PC.value = 0x0
-            memory.addresses[0x1] = 0x50
+            memory.write(0x1, 0x50)
 
             // When
             new JR_COND_IMM8(cpu).execute(opcode)

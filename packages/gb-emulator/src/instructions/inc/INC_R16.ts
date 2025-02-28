@@ -8,10 +8,12 @@ export type INC_R16_OPCODES =
 
 export class INC_R16 extends Instruction {
     execute(opcode: INC_R16_OPCODES) {
-        const destination = this.extractDestinationR16(opcode)
+        this.r16(opcode).value++
 
-        this.registers.r16[destination].value++
+        this.cpu.goToNextInstruction()
+    }
 
-        this.registers.PC.value++
+    toString(opcode: INC_R16_OPCODES): string {
+        return `INC ${this.r16(opcode)}`
     }
 }

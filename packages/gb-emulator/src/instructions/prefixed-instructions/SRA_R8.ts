@@ -18,21 +18,19 @@ export type SRA_R8_OPCODES =
 
 export class SRA_R8 extends Instruction {
     execute(opcode: SRA_R8_OPCODES) {
-        const register = this.extractSourceR8(opcode)
-        const bit0 = getNthBit(this.registers.r8[register].value, 0)
-        const bit7 = getNthBit(this.registers.r8[register].value, 7)
+        const register = this.r8Source(opcode)
+        const bit0 = getNthBit(register.value, 0)
+        const bit7 = getNthBit(register.value, 7)
 
-        this.registers.r8[register].value = shiftRightBy1(
-            this.registers.r8[register].value
-        )
+        register.value = shiftRightBy1(register.value)
+        register.value = bitwiseOr(register.value, shiftLeftBy(7)(bit7))
 
-        this.registers.r8[register].value = bitwiseOr(
-            this.registers.r8[register].value,
-            shiftLeftBy(7)(bit7)
-        )
+        this.updateFlagsAfterRotate(register.value, bit0)
 
-        this.updateFlagsAfterRotate(this.registers.r8[register].value, bit0)
+        this.cpu.goToNextInstruction()
+    }
 
-        this.registers.PC.value++
+    toString(opcode: SRA_R8_OPCODES) {
+        return `(prefixed) SRA ${this.r8Source(opcode).name}`
     }
 }

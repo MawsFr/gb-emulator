@@ -1,13 +1,16 @@
 import { Instruction } from '@/instructions/instruction.ts'
+import { SKIP_IMMEDIATE_16 } from '$/src'
 
 export type LD_IMM16_A_OPCODE = 0b11101010
 
 export class LD_IMM16_A extends Instruction {
     execute() {
-        const address = this.cpu.getImmediate16()
+        this.registers.A.copyValueInto(this.cpu['[imm16]'])
 
-        this.memory.addresses[address] = this.registers.A.value
+        this.cpu.goToNextInstruction(SKIP_IMMEDIATE_16)
+    }
 
-        this.registers.PC.value++
+    toString(): string {
+        return `LD ${this.cpu['[imm16]']}, ${this.registers.A}`
     }
 }

@@ -1,4 +1,4 @@
-import { Registers } from '@/registers.ts'
+import { Pointer, Pointer16, Registers } from '@/registers.ts'
 import { Immediate16, Immediate8, Memory } from '@/memory.ts'
 import { InstructionLoader } from '@/instructions/instruction-loader.ts'
 import { Instruction } from '@/instructions/instruction.ts'
@@ -187,26 +187,64 @@ export class Cpu {
 
     private hardLocked: boolean = false
 
-    public readonly immediate8: Immediate8
-    public readonly immediate16: Immediate16
+    public readonly imm8: Immediate8
+    public readonly imm16: Immediate16
+    public readonly '[imm8]': Pointer
+    public readonly '[imm16]': Pointer16
+    public readonly '[FF00+C]': Pointer
+    public readonly '[FF00+imm8]': Pointer
 
     constructor(config: CpuConfig) {
         this.registers = config.registers
         this.memory = config.memory
-        this.immediate8 = new Immediate8(this.memory, this.registers.PC)
-        this.immediate16 = new Immediate16(this.memory, this.registers.PC)
+
+        this.imm8 = new Immediate8(this.memory, this.registers.PC)
+        this.imm16 = new Immediate16(this.memory, this.registers.PC)
+
+        this['[imm8]'] = new Pointer(this.imm8, this.memory)
+        this['[imm16]'] = new Pointer16(this.imm16, this.memory)
+        this['[FF00+C]'] = new Pointer(this.registers.C, this.memory, 0xFF00)
+        this['[FF00+imm8]'] = new Pointer(this.imm8, this.memory, 0xFF00)
 
         this.instructions = InstructionLoader.loadInstructions(this)
-        this.prefixedInstructions =
-            InstructionLoader.loadPrefixedInstructions(this)
+        this.prefixedInstructions
+            = InstructionLoader.loadPrefixedInstructions(this)
     }
 
     getImmediate8() {
-        return this.immediate8.value
+        return this.imm8.value
     }
 
     getImmediate16() {
-        return this.immediate16.value
+        return this.imm16.value
+    }
+
+    getCurrentAddress() {
+        return this.registers.PC.value
+    }
+
+    goToAddress(address: number) {
+        this.registers.PC.value = address
+    }
+
+    goToRelativeAddress(addend: number) {
+        this.registers.PC.value += addend
+    }
+
+    goToNextInstruction(additionalBytes: number = 0) {
+        this.goToRelativeAddress(1 + additionalBytes)
+    }
+
+    getValuePointedByImmediate18() {
+        return this['[imm8]'].value
+    }
+
+    getValuePointedByImmediate16() {
+        return this['[imm16]'].value
+    }
+
+    setValuePointedByImmediate16(value: number) {
+        this['[imm16]'].value = value
     }
 
     execute(opcode: Opcode) {
@@ -227,7 +265,7 @@ export class Cpu {
 
     loadROM(rom: Uint8Array) {
         for (const [address, byte] of [...rom].entries()) {
-            this.memory.addresses[address] = byte
+            this.memory.write(address, byte)
         }
     }
 

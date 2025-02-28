@@ -9,10 +9,10 @@ describe(LD_A_IMM16, () => {
         registers,
     }) => {
         // Given
-        memory.addresses[0x0] = 0x01
-        memory.addresses[0x1] = 0x51
-        memory.addresses[0x2] = 0x50
-        memory.addresses[0x5051] = 0x12
+        memory.write(0x0, 0x01)
+        memory.write(0x1, 0x51)
+        memory.write(0x2, 0x50)
+        memory.write(0x5051, 0x12)
 
         registers.PC.value = 0x0
         registers.A.value = 0x01

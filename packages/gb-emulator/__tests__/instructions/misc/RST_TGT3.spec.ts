@@ -51,8 +51,8 @@ describe(RST_TGT3, () => {
             // Then
             expect(registers.PC.value).toBe(expectedPC)
             expect(registers.SP.value).toBe(0xFFFC)
-            expect(memory.addresses[0xFFFD]).toBe(0x52)
-            expect(memory.addresses[0xFFFC]).toBe(0x50)
+            expect(memory.addresses[0xFFFD]).toBe(0x50)
+            expect(memory.addresses[0xFFFC]).toBe(0x52)
         }
     )
 })

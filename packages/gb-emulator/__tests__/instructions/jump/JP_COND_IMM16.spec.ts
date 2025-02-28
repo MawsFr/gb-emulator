@@ -30,12 +30,11 @@ describe(JP_COND_IMM16, () => {
         'should jump to the address specified by the immediate 16 bits if the condition is met',
         ({ opcode, zeroFlag, carryFlag }, { cpu, memory, registers }) => {
             // Given
+            registers.PC.value = 0x0
             registers.F.zeroFlag = zeroFlag ?? 0
             registers.F.carryFlag = carryFlag ?? 0
-            memory.addresses[0x1] = 0x51
-            memory.addresses[0x2] = 0x50
-
-            registers.PC.value = 0x0
+            memory.write(0x1, 0x51)
+            memory.write(0x2, 0x50)
 
             // When
             new JP_COND_IMM16(cpu).execute(opcode)
@@ -72,8 +71,8 @@ describe(JP_COND_IMM16, () => {
             // Given
             registers.F.zeroFlag = zeroFlag ?? 0
             registers.F.carryFlag = carryFlag ?? 0
-            memory.addresses[0x1] = 0x50
-            memory.addresses[0x2] = 0x51
+            memory.write(0x1, 0x50)
+            memory.write(0x2, 0x51)
 
             registers.PC.value = 0x0
 

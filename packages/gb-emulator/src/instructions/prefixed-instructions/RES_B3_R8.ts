@@ -69,15 +69,19 @@ export type RES_B3_R8_OPCODES =
 
 export class RES_B3_R8 extends Instruction {
     execute(opcode: RES_B3_R8_OPCODES): void {
-        const register = this.extractSourceR8(opcode)
+        const register = this.r8Source(opcode)
         const bit = this.extractDestinationR8(opcode)
 
-        this.registers.r8[register].value = setNthBit({
-            number: this.registers.r8[register].value,
+        register.value = setNthBit({
+            number: register.value,
             bitIndex: bit,
             value: 0,
         })
 
-        this.registers.PC.value += 1
+        this.cpu.goToNextInstruction()
+    }
+
+    toString(opcode: RES_B3_R8_OPCODES) {
+        return `(prefixed) RES ${this.extractDestinationR8(opcode)}, ${this.r8Source(opcode).name}`
     }
 }

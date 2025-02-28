@@ -6,4 +6,8 @@ export class STOP extends Instruction {
     execute() {
         throw new Error('STOP instruction not implemented')
     }
+
+    toString() {
+        return `STOP`
+    }
 }

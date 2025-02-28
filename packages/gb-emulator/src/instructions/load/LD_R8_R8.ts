@@ -67,11 +67,12 @@ export type LD_R8_R8_OPCODES =
 
 export class LD_R8_R8 extends Instruction {
     execute(opcode: LD_R8_R8_OPCODES) {
-        const source = this.extractSourceR8(opcode)
-        const destination = this.extractDestinationR8(opcode)
+        this.r8Source(opcode).copyValueInto(this.r8Dest(opcode))
 
-        this.registers.r8[destination].value = this.registers.r8[source].value
+        this.cpu.goToNextInstruction()
+    }
 
-        this.registers.PC.value++
+    toString(opcode: LD_R8_R8_OPCODES): string {
+        return `LD ${this.r8Dest(opcode)}, ${this.r8Source(opcode)}`
     }
 }

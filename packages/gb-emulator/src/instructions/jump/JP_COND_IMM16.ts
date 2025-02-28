@@ -1,4 +1,5 @@
 import { Instruction } from '@/instructions/instruction.ts'
+import { SKIP_IMMEDIATE_16 } from '$/src'
 
 export type JP_COND_IMM16_OPCODE =
     | 0b11000010
@@ -8,10 +9,19 @@ export type JP_COND_IMM16_OPCODE =
 
 export class JP_COND_IMM16 extends Instruction {
     execute(opcode: JP_COND_IMM16_OPCODE) {
-        if (this.conditionIsMet(opcode)) {
-            this.registers.PC.value = this.cpu.getImmediate16()
-        } else {
-            this.registers.PC.value += 3
+        if (!this.condition(opcode).isMet()) {
+            this.cpu.goToNextInstruction(SKIP_IMMEDIATE_16)
+            return
         }
+
+        this.executeJP_IMM16(opcode)
+    }
+
+    private executeJP_IMM16(opcode: JP_COND_IMM16_OPCODE) {
+        this.cpu.instructions[0b11000011].execute(opcode)
+    }
+
+    toString(opcode: JP_COND_IMM16_OPCODE): string {
+        return `JP ${this.condition(opcode)}, ${this.cpu.imm16}`
     }
 }

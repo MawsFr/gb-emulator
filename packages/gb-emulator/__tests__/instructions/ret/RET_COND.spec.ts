@@ -31,8 +31,8 @@ describe(RET_COND, () => {
             registers.F.carryFlag = carryFlag ?? 0
             registers.PC.value = 0x50
             registers.SP.value = 0xFFFC
-            memory.addresses[0xFFFC] = 0x34
-            memory.addresses[0xFFFD] = 0x12
+            memory.write(0xFFFC, 0x34)
+            memory.write(0xFFFD, 0x12)
 
             // When
             new RET_COND(cpu).execute(opcode)
@@ -72,8 +72,8 @@ describe(RET_COND, () => {
             registers.F.carryFlag = carryFlag ?? 0
             registers.PC.value = 0x50
             registers.SP.value = 0xFFFC
-            memory.addresses[0xFFFC] = 0x34
-            memory.addresses[0xFFFD] = 0x12
+            memory.write(0xFFFC, 0x34)
+            memory.write(0xFFFD, 0x12)
 
             // When
             new RET_COND(cpu).execute(opcode)

@@ -12,12 +12,17 @@ export class RRA extends Instruction {
     execute() {
         const carry = this.registers.F.carryFlag
         const bit0 = getNthBit(this.registers.A.value, 0)
+
         this.registers.A.value = bitwiseOr(
             shiftRightBy1(this.registers.A.value),
             shiftLeftBy(7)(carry)
         )
         this.registers.F.carryFlag = bit0
 
-        this.registers.PC.value++
+        this.cpu.goToNextInstruction()
+    }
+
+    toString() {
+        return 'RRA'
     }
 }

@@ -10,8 +10,8 @@ describe(LDH_A_IMM8, () => {
     }) => {
         registers.PC.value = 0x0
         registers.A.value = 0x12
-        memory.addresses[0x1] = 0x03
-        memory.addresses[0xFF03] = 0x50
+        memory.write(0x1, 0x03)
+        memory.write(0xFF03, 0x50)
 
         new LDH_A_IMM8(cpu).execute()
 

@@ -8,9 +8,8 @@ export type ADD_HL_R16_OPCODES =
 
 export class ADD_HL_R16 extends Instruction {
     execute(opcode: ADD_HL_R16_OPCODES) {
-        const destination = this.extractDestinationR16(opcode)
         const augend = this.registers.HL.value
-        const addend = this.registers.r16[destination].value
+        const addend = this.r16(opcode).value
         const result = augend + addend
 
         this.registers.HL.value = result
@@ -19,6 +18,10 @@ export class ADD_HL_R16 extends Instruction {
             carryFlagBit: 15,
         })
 
-        this.registers.PC.value++
+        this.cpu.goToNextInstruction()
+    }
+
+    toString(opcode: ADD_HL_R16_OPCODES): string {
+        return `ADD ${this.registers.HL}, ${this.r16(opcode)}`
     }
 }

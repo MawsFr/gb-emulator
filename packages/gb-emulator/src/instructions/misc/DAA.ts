@@ -14,15 +14,15 @@ export class DAA extends Instruction {
         const isAddition = subtract === 0
 
         if (
-            (isAddition && DAA.isLeastSignificantNibbleGreaterThan9(aValue)) ||
-            halfCarry === 1
+            (isAddition && DAA.isLeastSignificantNibbleGreaterThan9(aValue))
+            || halfCarry === 1
         ) {
             offset = bitwiseOr(offset, 0x06)
         }
 
         if (
-            (isAddition && DAA.isMostSignificantNibbleGreaterThan9(aValue)) ||
-            carry === 1
+            (isAddition && DAA.isMostSignificantNibbleGreaterThan9(aValue))
+            || carry === 1
         ) {
             offset = bitwiseOr(offset, 0x60)
             this.registers.F.carryFlag = 1
@@ -33,7 +33,7 @@ export class DAA extends Instruction {
         this.setZeroFlag(this.registers.A.value)
         this.registers.F.halfCarryFlag = 0
 
-        this.registers.PC.value++
+        this.cpu.goToNextInstruction()
     }
 
     static isLeastSignificantNibbleGreaterThan9(value: number): boolean {
@@ -42,5 +42,9 @@ export class DAA extends Instruction {
 
     static isMostSignificantNibbleGreaterThan9(value: number): boolean {
         return value >= 0x90
+    }
+
+    toString() {
+        return `DAA`
     }
 }

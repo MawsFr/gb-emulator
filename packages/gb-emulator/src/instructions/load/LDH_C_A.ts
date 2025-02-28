@@ -4,9 +4,12 @@ export type LDH_C_A_OPCODE = 0b11100010
 
 export class LDH_C_A extends Instruction {
     execute(): void {
-        this.memory.addresses[0xFF00 + this.registers.C.value] =
-            this.registers.A.value
+        this.cpu['[FF00+C]'].copyValueFrom(this.registers.A)
 
-        this.registers.PC.value++
+        this.cpu.goToNextInstruction()
+    }
+
+    toString(): string {
+        return `LD ${this.cpu['[FF00+C]']}, ${this.registers.A}`
     }
 }

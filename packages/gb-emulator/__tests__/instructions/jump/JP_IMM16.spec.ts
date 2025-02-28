@@ -9,8 +9,8 @@ describe(JP_IMM16, () => {
         registers,
     }) => {
         // Given
-        memory.addresses[0x1] = 0x51
-        memory.addresses[0x2] = 0x50
+        memory.write(0x1, 0x51)
+        memory.write(0x2, 0x50)
 
         registers.PC.value = 0x0
 

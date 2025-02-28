@@ -217,8 +217,8 @@ describe(Registers, () => {
 
             registers.pushPCToStack()
 
-            expect(memory.addresses[0xFFFD]).to.equal(0x02)
-            expect(memory.addresses[0xFFFC]).to.equal(0x01)
+            expect(memory.addresses[0xFFFD]).to.equal(0x01)
+            expect(memory.addresses[0xFFFC]).to.equal(0x02)
         })
     })
 })

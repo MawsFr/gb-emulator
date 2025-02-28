@@ -8,11 +8,12 @@ export type POP_R16STK_OPCODES =
 
 export class POP_R16STK extends Instruction {
     execute(opcode: POP_R16STK_OPCODES) {
-        const registerPair = this.extractDestinationR16(opcode)
-        const registerPairValue = this.registers.r16Stk[registerPair]
+        this.r16Stk(opcode).value = this.registers.popFromStack()
 
-        registerPairValue.value = this.registers.popFromStack()
+        this.cpu.goToNextInstruction()
+    }
 
-        this.registers.PC.value += 1
+    toString(opcode: POP_R16STK_OPCODES) {
+        return `POP ${this.r16Stk(opcode).name}`
     }
 }

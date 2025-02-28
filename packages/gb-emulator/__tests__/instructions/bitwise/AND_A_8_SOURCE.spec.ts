@@ -35,7 +35,7 @@ describe(AND_A_IMM8, () => {
         // Given
         registers.PC.value = 0x0
         registers.A.value = 0b11001100
-        memory.addresses[0x1] = 0b10101010
+        memory.write(0x1, 0b10101010)
         const expectedValue = 0b10001000
 
         // When

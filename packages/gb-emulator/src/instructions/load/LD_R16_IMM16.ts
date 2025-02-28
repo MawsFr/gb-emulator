@@ -1,4 +1,5 @@
 import { Instruction } from '@/instructions/instruction.ts'
+import { SKIP_IMMEDIATE_16 } from '$/src'
 
 export type LD_R16_IMM16_OPCODES =
     | 0b00_00_0001
@@ -8,10 +9,12 @@ export type LD_R16_IMM16_OPCODES =
 
 export class LD_R16_IMM16 extends Instruction {
     execute(opcode: LD_R16_IMM16_OPCODES) {
-        const destination = this.extractDestinationR16(opcode)
+        this.r16(opcode).value = this.cpu.getImmediate16()
 
-        this.registers.r16[destination].value = this.cpu.getImmediate16()
+        this.cpu.goToNextInstruction(SKIP_IMMEDIATE_16)
+    }
 
-        this.registers.PC.value++
+    toString(opcode: LD_R16_IMM16_OPCODES): string {
+        return `LD ${this.r16(opcode)}, ${this.cpu.imm16}`
     }
 }

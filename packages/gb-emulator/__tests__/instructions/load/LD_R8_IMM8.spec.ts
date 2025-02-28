@@ -44,8 +44,8 @@ describe(LD_R8_IMM8, () => {
         ({ opcode, expectedRegister }, { cpu, memory, registers }) => {
             // Given
             registers.PC.value = 0x0
-            memory.addresses[0x0] = 0x01
-            memory.addresses[0x1] = 0x12
+            memory.write(0x0, 0x01)
+            memory.write(0x1, 0x12)
 
             // When
             new LD_R8_IMM8(cpu).execute(opcode)

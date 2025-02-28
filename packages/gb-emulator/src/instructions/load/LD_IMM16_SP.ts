@@ -1,22 +1,16 @@
 import { Instruction } from '@/instructions/instruction.ts'
-import {
-    isolate2FirstDigits,
-    isolate2LastDigits,
-} from '@mawsfr/binary-operations'
+import { SKIP_IMMEDIATE_16 } from '$/src'
 
 export type LD_IMM16_SP_OPCODE = 0b00001000
 
 export class LD_IMM16_SP extends Instruction {
     execute() {
-        const address = this.cpu.getImmediate16()
+        this.registers.SP.copyValueInto(this.cpu['[imm16]'])
 
-        this.memory.addresses[address] = isolate2LastDigits(
-            this.registers.SP.value
-        )
-        this.memory.addresses[address + 1] = isolate2FirstDigits(
-            this.registers.SP.value
-        )
+        this.cpu.goToNextInstruction(SKIP_IMMEDIATE_16)
+    }
 
-        this.registers.PC.value++
+    toString(): string {
+        return `LD ${this.cpu['[imm16]']}, ${this.registers.SP}`
     }
 }

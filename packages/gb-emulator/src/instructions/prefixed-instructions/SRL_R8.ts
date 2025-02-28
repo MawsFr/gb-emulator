@@ -13,15 +13,17 @@ export type SRL_R8_OPCODES =
 
 export class SRL_R8 extends Instruction {
     execute(opcode: SRL_R8_OPCODES) {
-        const register = this.extractSourceR8(opcode)
-        const bit0 = getNthBit(this.registers.r8[register].value, 0)
+        const register = this.r8Source(opcode)
+        const bit0 = getNthBit(register.value, 0)
 
-        this.registers.r8[register].value = shiftRightBy1(
-            this.registers.r8[register].value
-        )
+        register.value = shiftRightBy1(register.value)
 
-        this.updateFlagsAfterRotate(this.registers.r8[register].value, bit0)
+        this.updateFlagsAfterRotate(register.value, bit0)
 
-        this.registers.PC.value++
+        this.cpu.goToNextInstruction()
+    }
+
+    toString(opcode: SRL_R8_OPCODES) {
+        return `(prefixed) SRL ${this.r8Source(opcode).name}`
     }
 }

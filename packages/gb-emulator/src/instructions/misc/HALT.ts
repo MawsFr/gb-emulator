@@ -6,4 +6,8 @@ export class HALT extends Instruction {
     execute() {
         throw new Error('HALT instruction not implemented')
     }
+
+    toString() {
+        return `HALT`
+    }
 }

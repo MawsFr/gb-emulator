@@ -12,11 +12,11 @@ export type RST_TGT3_OPCODES =
 
 export class RST_TGT3 extends Instruction {
     execute(opcode: RST_TGT3_OPCODES) {
-        this.registers.PC.value++
+        this.cpu.goToNextInstruction()
 
         this.registers.pushPCToStack()
 
-        this.registers.PC.value = this.getRSTAddress(opcode)
+        this.cpu.goToAddress(this.getRSTAddress(opcode))
     }
 
     protected getRSTAddress(opcode: RST_TGT3_OPCODES): number {
@@ -49,5 +49,9 @@ export class RST_TGT3 extends Instruction {
                 throw new Error(`Unknown opcode: ${opcode}`)
             }
         }
+    }
+
+    toString(opcode: RST_TGT3_OPCODES) {
+        return `RST ${this.getRSTAddress(opcode).toString(16)}`
     }
 }

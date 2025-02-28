@@ -45,8 +45,8 @@ describe(PUSH_R16STK, () => {
             new PUSH_R16STK(cpu).execute(opcode)
 
             // Then
-            expect(memory.addresses[0xFFFD]).to.equal(0x34)
-            expect(memory.addresses[0xFFFC]).to.equal(0x12)
+            expect(memory.addresses[0xFFFD]).to.equal(0x12)
+            expect(memory.addresses[0xFFFC]).to.equal(0x34)
             expect(registers.SP.value).to.equal(0xFFFC)
         }
     )

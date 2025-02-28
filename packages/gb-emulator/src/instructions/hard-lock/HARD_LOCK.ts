@@ -17,4 +17,8 @@ export class HARD_LOCK extends Instruction {
     execute() {
         this.cpu.hardLock()
     }
+
+    toString(): string {
+        return `⚠ HARD_LOCK`
+    }
 }

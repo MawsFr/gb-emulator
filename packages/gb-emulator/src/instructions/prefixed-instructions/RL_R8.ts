@@ -13,16 +13,17 @@ export type RL_R8_OPCODES =
 
 export class RL_R8 extends Instruction {
     execute(opcode: RL_R8_OPCODES) {
-        const register = this.extractSourceR8(opcode)
+        const register = this.r8Source(opcode)
         const carry = this.registers.F.carryFlag
-        const bit7 = getNthBit(this.registers.r8[register].value, 7)
+        const bit7 = getNthBit(register.value, 7)
 
-        this.registers.r8[register].value = bitwiseOr(
-            shiftLeftBy1(this.registers.r8[register].value),
-            carry
-        )
+        register.value = bitwiseOr(shiftLeftBy1(register.value), carry)
         this.registers.F.carryFlag = bit7
 
-        this.registers.PC.value++
+        this.cpu.goToNextInstruction()
+    }
+
+    toString(opcode: RL_R8_OPCODES) {
+        return `(prefixed) RL ${this.r8Source(opcode).name}`
     }
 }

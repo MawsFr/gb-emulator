@@ -1,4 +1,10 @@
-import { ConditionCode, R16Code, R8Code, Registers } from '@/registers.ts'
+import {
+    ConditionCode,
+    R16Code,
+    R8Code,
+    Register16,
+    Registers,
+} from '@/registers.ts'
 import { Cpu, Opcode, PrefixedOpcode } from '@/cpu.ts'
 import {
     bitwiseAnd,
@@ -28,6 +34,8 @@ export abstract class Instruction {
     }
 
     abstract execute(opcode: Opcode | PrefixedOpcode): void
+
+    abstract toString(opcode: Opcode | PrefixedOpcode): string
 
     protected updateFlagsAfterAddition(
         augend: number,
@@ -74,8 +82,8 @@ export abstract class Instruction {
     ) {
         this.registers.F.carryFlag = minuend < subtrahend ? 1 : 0
 
-        this.registers.F.halfCarryFlag =
-            bitwiseAnd(minuend, 0xF) < bitwiseAnd(subtrahend, 0xF) ? 1 : 0
+        this.registers.F.halfCarryFlag
+            = bitwiseAnd(minuend, 0xF) < bitwiseAnd(subtrahend, 0xF) ? 1 : 0
 
         this.registers.F.subtractionFlag = 1
         this.setZeroFlag(result)
@@ -92,7 +100,31 @@ export abstract class Instruction {
         this.setZeroFlag(value)
     }
 
-    protected extractDestinationR16(opcode: Opcode) {
+    protected r8Dest(opcode: Opcode | PrefixedOpcode) {
+        return this.registers.r8[this.extractDestinationR8(opcode)]
+    }
+
+    protected r8Source(opcode: Opcode | PrefixedOpcode) {
+        return this.registers.r8[this.extractSourceR8(opcode)]
+    }
+
+    protected r16(opcode: Opcode): Register16 {
+        return this.registers.r16[this.extractR16(opcode)]
+    }
+
+    protected r16mem(opcode: Opcode) {
+        return this.registers.r16mem[this.extractR16(opcode)]
+    }
+
+    protected r16Stk(opcode: Opcode) {
+        return this.registers.r16Stk[this.extractR16(opcode)]
+    }
+
+    protected '[r16mem]'(opcode: Opcode) {
+        return this.registers['[r16mem]'][this.extractR16(opcode)]
+    }
+
+    protected extractR16(opcode: Opcode) {
         return shiftRightBy4(bitwiseAnd(opcode, REGISTER_16_MASK)) as R16Code
     }
 
@@ -106,34 +138,6 @@ export abstract class Instruction {
         return bitwiseAnd(opcode, REGISTER_8_SOURCE_MASK) as R8Code
     }
 
-    protected conditionIsMet(
-        opcode:
-            | JR_COND_IMM8_OPCODE
-            | RET_COND_OPCODES
-            | JP_COND_IMM16_OPCODE
-            | CALL_COND_IMM16_OPCODES
-    ) {
-        const conditionCode = this.getCondition(opcode)
-
-        switch (conditionCode) {
-            case 0b00: {
-                return !this.registers.F.zeroFlag
-            }
-            case 0b01: {
-                return this.registers.F.zeroFlag
-            }
-            case 0b10: {
-                return !this.registers.F.carryFlag
-            }
-            case 0b11: {
-                return this.registers.F.carryFlag
-            }
-            default: {
-                throw new Error(`Invalid condition code: ${conditionCode}`)
-            }
-        }
-    }
-
     protected getCondition(
         opcode:
             | JR_COND_IMM8_OPCODE
@@ -141,8 +145,19 @@ export abstract class Instruction {
             | JP_COND_IMM16_OPCODE
             | CALL_COND_IMM16_OPCODES
     ) {
+        // TODO: verify if code exists
         return shiftRightBy(3)(
             bitwiseAnd(opcode, 0b00_011_000)
         ) as ConditionCode
+    }
+
+    protected condition(
+        opcode:
+            | JR_COND_IMM8_OPCODE
+            | RET_COND_OPCODES
+            | JP_COND_IMM16_OPCODE
+            | CALL_COND_IMM16_OPCODES
+    ) {
+        return this.registers.conditions[this.getCondition(opcode)]
     }
 }

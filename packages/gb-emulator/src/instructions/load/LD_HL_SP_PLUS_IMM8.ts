@@ -1,4 +1,5 @@
 import { Instruction } from '@/instructions/instruction.ts'
+import { SKIP_IMMEDIATE_8 } from '$/src'
 
 export type LD_HL_SP_PLUS_IMM8_OPCODE = 0b11111000
 
@@ -14,6 +15,10 @@ export class LD_HL_SP_PLUS_IMM8 extends Instruction {
             zeroFlag: 0,
         })
 
-        this.registers.PC.value++
+        this.cpu.goToNextInstruction(SKIP_IMMEDIATE_8)
+    }
+
+    toString(): string {
+        return `LD ${this.registers.HL}, ${this.registers.SP} + ${this.cpu.imm8}`
     }
 }

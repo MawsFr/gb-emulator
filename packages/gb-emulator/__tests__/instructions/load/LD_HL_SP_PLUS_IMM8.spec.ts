@@ -12,7 +12,7 @@ describe(LD_HL_SP_PLUS_IMM8, () => {
         registers.PC.value = 0x0
         registers.HL.value = 0x5000
         registers.SP.value = 0xFFFF
-        memory.addresses[0x1] = 0xFF
+        memory.write(0x1, 0xFF)
 
         // When
         new LD_HL_SP_PLUS_IMM8(cpu).execute()
