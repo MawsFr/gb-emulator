@@ -233,6 +233,12 @@ export class Cpu {
         return this.hardLocked
     }
 
+    loadROM(rom: Uint8Array) {
+        for (const [address, byte] of [...rom].entries()) {
+            this.memory.addresses[address] = byte
+        }
+    }
+
     startDispatchLoop() {
         setInterval(() => {
             this.dispatch()

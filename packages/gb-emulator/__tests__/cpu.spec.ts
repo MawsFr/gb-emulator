@@ -374,4 +374,17 @@ describe(Cpu, () => {
             expect(cpu.dispatch).toHaveBeenCalledOnce()
         })
     })
+
+    describe(Cpu.prototype.loadROM, () => {
+        it<GbEmulatorTestContext>('should load the ROM at address 0000', ({
+            cpu,
+            memory,
+        }) => {
+            cpu.loadROM(Uint8Array.from([0x11, 0x22, 0x33]))
+
+            expect(memory.addresses[0x0]).to.equal(0x11)
+            expect(memory.addresses[0x1]).to.equal(0x22)
+            expect(memory.addresses[0x2]).to.equal(0x33)
+        })
+    })
 })
