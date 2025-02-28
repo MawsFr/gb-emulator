@@ -35,7 +35,7 @@ describe(SUB_A_IMM8, () => {
         // Given
         registers.PC.value = 0x0
         registers.A.value = 0x1
-        memory.addresses[0x1] = 0x2
+        memory.write(0x1, 0x2)
 
         // When
         new SUB_A_IMM8(cpu).execute()

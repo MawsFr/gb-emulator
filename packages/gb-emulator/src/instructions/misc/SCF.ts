@@ -8,6 +8,10 @@ export class SCF extends Instruction {
         this.registers.F.subtractionFlag = 0
         this.registers.F.halfCarryFlag = 0
 
-        this.registers.PC.value++
+        this.cpu.goToNextInstruction()
+    }
+
+    toString() {
+        return `SCF`
     }
 }

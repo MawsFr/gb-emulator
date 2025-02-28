@@ -2,7 +2,7 @@ import { Instruction } from '@/instructions/instruction.ts'
 import { Cpu } from '@/cpu.ts'
 import { R8Code } from '@/registers.ts'
 import {
-    ImmediateSourceStrategy,
+    Immediate8SourceStrategy,
     RegisterSourceStrategy,
     SourceStrategy,
 } from '@/instructions/source-strategies.ts'
@@ -20,21 +20,24 @@ export type CP_A_R8_OPCODES =
 export type CP_A_IMM8_OPCODE = 0b11111110
 
 export abstract class CP_A_8_SOURCE extends Instruction {
-    private readonly sourceStrategy: SourceStrategy
+    private readonly source: SourceStrategy
 
-    protected constructor(cpu: Cpu, sourceStrategy: SourceStrategy) {
+    protected constructor(cpu: Cpu, source: SourceStrategy) {
         super(cpu)
-        this.sourceStrategy = sourceStrategy
+        this.source = source
     }
 
     execute(): void {
-        const value = this.sourceStrategy.getSource()
-
+        const value = this.source.getValue()
         const result = this.registers.A.value - value
 
         this.updateFlagsAfterSubtraction(this.registers.A.value, value, result)
 
-        this.registers.PC.value++
+        this.cpu.goToNextInstruction(this.source.getAdditionalBytes())
+    }
+
+    toString(): string {
+        return `CP ${this.registers.A}, ${this.source.get()}`
     }
 }
 
@@ -46,6 +49,6 @@ export class CP_A_R8 extends CP_A_8_SOURCE {
 
 export class CP_A_IMM8 extends CP_A_8_SOURCE {
     constructor(cpu: Cpu) {
-        super(cpu, new ImmediateSourceStrategy(cpu))
+        super(cpu, new Immediate8SourceStrategy(cpu))
     }
 }

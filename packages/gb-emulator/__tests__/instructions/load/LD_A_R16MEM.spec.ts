@@ -38,8 +38,8 @@ describe(LD_A_R16MEM, () => {
             { cpu, memory, registers }
         ) => {
             // Given
-            memory.addresses[0x0] = 0x01
-            memory.addresses[0x1] = 0x34
+            memory.write(0x0, 0x01)
+            memory.write(0x1, 0x34)
 
             registers.PC.value = 0x0
             registers.r16mem[expectedRegister].value = 0x1

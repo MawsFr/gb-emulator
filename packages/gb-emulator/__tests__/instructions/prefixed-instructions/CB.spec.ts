@@ -11,7 +11,7 @@ describe(CB, () => {
         vi.spyOn(cpu, 'decodePrefixed')
         vi.spyOn(cpu, 'executePrefixed')
         registers.PC.value = 0x0
-        memory.addresses[0x1] = 0b01_000_000
+        memory.write(0x1, 0b01_000_000)
 
         // When
         new CB(cpu).execute()

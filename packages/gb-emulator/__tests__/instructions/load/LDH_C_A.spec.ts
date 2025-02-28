@@ -11,7 +11,7 @@ describe(LDH_C_A, () => {
         registers.PC.value = 0x0
         registers.A.value = 0x50
         registers.C.value = 0x03
-        memory.addresses[0xFF03] = 0x12
+        memory.write(0xFF03, 0x12)
 
         new LDH_C_A(cpu).execute()
 

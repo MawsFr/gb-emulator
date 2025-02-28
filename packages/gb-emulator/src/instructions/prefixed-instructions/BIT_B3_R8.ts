@@ -1,5 +1,5 @@
 import { Instruction } from '../instruction'
-import { isBitSet } from '@mawsfr/binary-operations'
+import { getNthBit } from '@mawsfr/binary-operations'
 
 export type BIT_B3_R8_OPCODES =
     | 0b01_000_000
@@ -69,20 +69,16 @@ export type BIT_B3_R8_OPCODES =
 
 export class BIT_B3_R8 extends Instruction {
     execute(opcode: BIT_B3_R8_OPCODES): void {
-        const register = this.extractSourceR8(opcode)
         const bit = this.extractDestinationR8(opcode)
 
-        this.registers.F.zeroFlag =
-            (
-                isBitSet(this.registers.r8[register].value, bit, {
-                    endianness: 'big',
-                })
-            ) ?
-                1
-            :   0
         this.registers.F.halfCarryFlag = 1
         this.registers.F.subtractionFlag = 0
+        this.registers.F.zeroFlag = getNthBit(this.r8Source(opcode).value, bit)
 
-        this.registers.PC.value += 1
+        this.cpu.goToNextInstruction()
+    }
+
+    toString(opcode: BIT_B3_R8_OPCODES): string {
+        return `(prefixed) BIT ${this.extractDestinationR8(opcode)}, ${this.r8Source(opcode)}`
     }
 }

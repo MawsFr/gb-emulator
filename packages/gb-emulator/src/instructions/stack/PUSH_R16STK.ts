@@ -8,11 +8,12 @@ export type PUSH_R16STK_OPCODES =
 
 export class PUSH_R16STK extends Instruction {
     execute(opcode: PUSH_R16STK_OPCODES) {
-        const registerPair = this.extractDestinationR16(opcode)
-        const registerPairValue = this.registers.r16Stk[registerPair]
+        this.registers.pushToStack(this.r16Stk(opcode).value)
 
-        this.registers.pushToStack(registerPairValue.value)
+        this.cpu.goToNextInstruction()
+    }
 
-        this.registers.PC.value += 1
+    toString(opcode: PUSH_R16STK_OPCODES) {
+        return `PUSH ${this.r16Stk(opcode).name}`
     }
 }

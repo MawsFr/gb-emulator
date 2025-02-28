@@ -38,8 +38,8 @@ describe(POP_R16STK, () => {
             registers.PC.value = 0x0000
             registers.SP.value = 0xFFFC
 
-            memory.addresses[0xFFFD] = 0x34
-            memory.addresses[0xFFFC] = 0x12
+            memory.write(0xFFFD, 0x12)
+            memory.write(0xFFFC, 0x34)
 
             // When
             new POP_R16STK(cpu).execute(opcode)

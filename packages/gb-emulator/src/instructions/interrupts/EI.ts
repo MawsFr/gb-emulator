@@ -6,4 +6,8 @@ export class EI extends Instruction {
     execute() {
         throw new Error('Not implemented')
     }
+
+    toString(): string {
+        return `EI`
+    }
 }

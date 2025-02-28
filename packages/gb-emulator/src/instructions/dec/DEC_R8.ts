@@ -12,10 +12,12 @@ export type DEC_R8_OPCODES =
 
 export class DEC_R8 extends Instruction {
     execute(opcode: DEC_R8_OPCODES) {
-        const destination = this.extractDestinationR8(opcode)
+        this.r8Dest(opcode).value--
 
-        this.registers.r8[destination].value--
+        this.cpu.goToNextInstruction()
+    }
 
-        this.registers.PC.value++
+    toString(opcode: DEC_R8_OPCODES): string {
+        return `DEC ${this.r8Dest(opcode)}`
     }
 }

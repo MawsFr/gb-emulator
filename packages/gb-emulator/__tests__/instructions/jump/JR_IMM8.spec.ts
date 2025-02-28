@@ -9,9 +9,9 @@ describe(JR_IMM8, () => {
         registers,
     }) => {
         // Given
-        memory.addresses[0x1] = 0x50
+        memory.write(0x2, 0x50)
 
-        registers.PC.value = 0x0
+        registers.PC.value = 0x1
 
         // When
         new JR_IMM8(cpu).execute()

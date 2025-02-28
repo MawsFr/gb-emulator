@@ -4,7 +4,7 @@ export type NOP_OPCODE = 0x00000000
 
 export class NOP extends Instruction {
     execute() {
-        this.registers.PC.value++
+        this.cpu.goToNextInstruction()
     }
 
     toString() {

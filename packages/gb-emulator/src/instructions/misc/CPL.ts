@@ -11,4 +11,8 @@ export class CPL extends Instruction {
 
         this.registers.PC.value++
     }
+
+    toString() {
+        return `CPL`
+    }
 }

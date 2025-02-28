@@ -6,4 +6,8 @@ export class DI extends Instruction {
     execute() {
         throw new Error('Not implemented')
     }
+
+    toString(): string {
+        return `DI`
+    }
 }

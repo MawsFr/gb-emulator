@@ -9,6 +9,7 @@ import eslintConfigPrettier from 'eslint-config-prettier'
 import ts from 'typescript-eslint'
 import prettierRecommended from 'eslint-plugin-prettier/recommended'
 import { includeIgnoreFile } from '@eslint/compat'
+import stylistic from '@stylistic/eslint-plugin'
 
 const __filename = fileURLToPath(import.meta.url),
     __dirname = path.dirname(__filename),
@@ -16,13 +17,18 @@ const __filename = fileURLToPath(import.meta.url),
 
 const gitignorePath = path.resolve(__dirname, '.gitignore')
 
-export default [
+export default ts.config(
     includeIgnoreFile(gitignorePath),
     js.configs.recommended,
     js.configs.all,
     ...ts.configs.recommended,
     ...vue.configs['flat/recommended'],
     prettierRecommended,
+    {
+        plugins: {
+            '@stylistic': stylistic,
+        },
+    },
     unicorn.configs.recommended,
     ...compat.extends(),
     eslintConfigPrettier,
@@ -35,6 +41,10 @@ export default [
                 ...globals.es2020,
                 ...globals.es2021,
                 ...globals.amd,
+            },
+            sourceType: 'module',
+            parserOptions: {
+                parser: ts.parser,
             },
         },
     },
@@ -68,6 +78,9 @@ export default [
             'unicorn/numeric-separators-style': 'off',
             'unicorn/no-object-as-default-parameter': 'off',
             'max-params': 'off',
+            'no-warning-comments': 'off',
+            '@stylistic/multiline-ternary': ['error', 'always-multiline'],
+            '@stylistic/operator-linebreak': ['error', 'before'],
         },
-    },
-]
+    }
+)

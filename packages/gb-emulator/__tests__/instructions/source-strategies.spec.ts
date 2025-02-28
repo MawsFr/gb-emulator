@@ -2,11 +2,11 @@ import { describe, expect, it } from 'vitest'
 import { Cpu } from '@/cpu.ts'
 import { Registers } from '@/registers.ts'
 import {
-    ImmediateSourceStrategy,
+    Immediate8SourceStrategy,
     RegisterSourceStrategy,
 } from '@/instructions/source-strategies.ts'
 
-describe(ImmediateSourceStrategy, () => {
+describe(Immediate8SourceStrategy, () => {
     it('should return the immediate value', () => {
         // Given
         const cpu: Cpu = {
@@ -14,10 +14,10 @@ describe(ImmediateSourceStrategy, () => {
         } as Cpu
 
         // When
-        const strategy = new ImmediateSourceStrategy(cpu)
+        const strategy = new Immediate8SourceStrategy(cpu)
 
         // Then
-        expect(strategy.getSource()).to.equal(0x1)
+        expect(strategy.getValue()).to.equal(0x1)
     })
 })
 
@@ -34,6 +34,6 @@ describe(RegisterSourceStrategy, () => {
         const strategy = new RegisterSourceStrategy(0b000, registers)
 
         // Then
-        expect(strategy.getSource()).to.equal(0x1)
+        expect(strategy.getValue()).to.equal(0x1)
     })
 })

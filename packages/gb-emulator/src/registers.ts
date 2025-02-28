@@ -11,20 +11,31 @@ import {
     set2ndBit,
     set3rdBit,
     set4thBit,
+    toHex,
 } from '@mawsfr/binary-operations'
 import { Memory } from '@/memory.ts'
 
-export interface Register {
-    get value(): number
-
-    set value(newValue: number)
+export interface CanCopyValueInto {
+    copyValueInto(target: CanPointToValue): void
 }
 
-export abstract class AbstractRegister implements Register {
+export interface CanCopyValueFrom {
+    copyValueFrom(source: CanPointToValue | Pointer): void
+}
+
+export abstract class AbstractRegister
+    implements CanCopyValueFrom, CanCopyValueInto
+{
+    public readonly name: R8Name | R16Name
     protected _value: number = 0
     protected readonly _mask: number
 
-    protected constructor(mask: number, value?: number) {
+    protected constructor(
+        name: R8Name | R16Name,
+        mask: number,
+        value?: number
+    ) {
+        this.name = name
         this._mask = mask
         this._value = value ?? this._value
     }
@@ -40,17 +51,29 @@ export abstract class AbstractRegister implements Register {
     set value(newValue) {
         this._value = bitwiseAnd(newValue, this._mask)
     }
-}
 
-export class Register8 extends AbstractRegister {
-    constructor() {
-        super(0xFF)
+    copyValueInto(target: CanPointToValue | Pointer) {
+        target.value = this.value
+    }
+
+    copyValueFrom(source: CanPointToValue | Pointer) {
+        this.value = source.value
+    }
+
+    toString() {
+        return `${this.name} (${toHex(this.value)})`
     }
 }
 
-export class Register16 extends AbstractRegister {
-    constructor(value?: number) {
-        super(0xFFFF, value)
+export class Register8 extends AbstractRegister {
+    constructor(name: R8Name) {
+        super(name, 0xFF)
+    }
+}
+
+export class Register16 extends AbstractRegister implements CanPointToValue {
+    constructor(name: R16Name, value?: number) {
+        super(name, 0xFFFF, value)
     }
 
     incrementOrDecrementIfNeeded() {
@@ -62,7 +85,7 @@ export class HLI extends Register16 {
     protected readonly HL: ComposedRegister
 
     constructor(HL: ComposedRegister) {
-        super()
+        super('HLI')
         this.HL = HL
     }
 
@@ -83,7 +106,7 @@ export class HLD extends Register16 {
     protected readonly HL: ComposedRegister
 
     constructor(HL: ComposedRegister) {
-        super()
+        super('HLD')
         this.HL = HL
     }
 
@@ -166,8 +189,8 @@ export class ComposedRegister extends Register16 {
     public readonly high: Register8
     public readonly low: Register8
 
-    constructor(high: Register8, low: Register8) {
-        super()
+    constructor(name: R16Name, high: Register8, low: Register8) {
+        super(name)
         this.high = high
         this.low = low
     }
@@ -187,25 +210,81 @@ export class ComposedRegister extends Register16 {
     }
 }
 
-export class Pointer extends AbstractRegister {
-    protected readonly register: ComposedRegister
-    protected readonly memory: Memory
+export type Name = R8Name | R16Name | 'imm8' | 'imm16' | 'FF00+C' | 'FF00+imm8'
+export type PointerName = `[${Name}]`
 
-    constructor(register: ComposedRegister, memory: Memory) {
-        super(register.mask)
+export interface HasName {
+    get name(): Name
+}
+
+export interface HasValue {
+    get value(): number
+
+    set value(newValue: number)
+}
+
+export interface CanPointToValue extends HasName, HasValue {}
+
+export class Pointer implements CanCopyValueInto, CanCopyValueFrom {
+    public readonly name: PointerName
+    public readonly register: CanPointToValue
+    protected readonly memory: Memory
+    protected readonly offset: number
+
+    constructor(
+        register: CanPointToValue,
+        memory: Memory,
+        offset: 0 | 0xFF00 = 0
+    ) {
+        this.name = this.generateName(offset, register)
         this.register = register
         this.memory = memory
+        this.offset = offset
     }
 
+    generateName(offset: number, register: CanPointToValue): PointerName {
+        return `[${
+            offset
+                ? `${offset}+${register.name}`
+                : (register.name as PointerName)
+        }]` as PointerName
+    }
+
+    get value() {
+        return this.memory.addresses[this.offset + this.register.value]
+    }
+
+    set value(newValue: number) {
+        this.memory.write(this.offset + this.register.value, newValue)
+    }
+
+    copyValueFrom(source: CanPointToValue | Pointer) {
+        this.value = source.value
+    }
+
+    copyValueInto(target: CanPointToValue | Pointer) {
+        target.value = this.value
+    }
+
+    toString(): string {
+        return `[${this.name}] (=> ${toHex(this.value)})`
+    }
+}
+
+export class Pointer16 extends Pointer {
     get value() {
         return this.memory.addresses[this.register.value]
     }
 
     set value(newValue: number) {
-        this.memory.addresses[this.register.value] = newValue
+        this.memory.addresses[this.register.value]
+            = isolate2LastDigits(newValue)
+        this.memory.addresses[this.register.value + 1]
+            = isolate2FirstDigits(newValue)
     }
 }
 
+export type R8Name = 'B' | 'C' | 'D' | 'E' | 'H' | 'L' | 'A' | 'F'
 export type R8Code =
     | 0b000
     | 0b001
@@ -215,35 +294,77 @@ export type R8Code =
     | 0b101
     | 0b110
     | 0b111
+
+export type R16Name = 'BC' | 'DE' | 'HL' | 'SP' | 'HLI' | 'HLD' | 'AF' | 'PC'
 export type R16Code = 0b00 | 0b01 | 0b10 | 0b11
 export type ConditionCode = 0b00 | 0b01 | 0b10 | 0b11
+
+export abstract class Condition {
+    public readonly name: string
+    public readonly flags: Flags
+
+    constructor(name: string, flags: Flags) {
+        this.name = name
+        this.flags = flags
+    }
+
+    abstract isMet(): boolean
+
+    toString() {
+        return `COND ${this.name} (${this.isMet()})`
+    }
+}
+
+export class NZ extends Condition {
+    isMet() {
+        return !this.flags.zeroFlag
+    }
+}
+
+export class Z extends Condition {
+    isMet() {
+        return Boolean(this.flags.zeroFlag)
+    }
+}
+
+export class NC extends Condition {
+    isMet() {
+        return !this.flags.carryFlag
+    }
+}
+
+export class C extends Condition {
+    isMet() {
+        return Boolean(this.flags.carryFlag)
+    }
+}
 
 export class Registers {
     private readonly memory: Memory
 
-    public readonly A: Register8 = new Register8()
-    public readonly B: Register8 = new Register8()
-    public readonly C: Register8 = new Register8()
-    public readonly D: Register8 = new Register8()
-    public readonly E: Register8 = new Register8()
-    public readonly H: Register8 = new Register8()
-    public readonly L: Register8 = new Register8()
-    public readonly F: Flags = new Flags()
+    public readonly A: Register8 = new Register8('A')
+    public readonly B: Register8 = new Register8('B')
+    public readonly C: Register8 = new Register8('C')
+    public readonly D: Register8 = new Register8('D')
+    public readonly E: Register8 = new Register8('E')
+    public readonly H: Register8 = new Register8('H')
+    public readonly L: Register8 = new Register8('L')
+    public readonly F: Flags = new Flags('F')
 
-    public readonly HL = new ComposedRegister(this.H, this.L)
-    public readonly AF = new ComposedRegister(this.A, this.F)
-    public readonly BC = new ComposedRegister(this.B, this.C)
-    public readonly DE = new ComposedRegister(this.D, this.E)
+    public readonly HL = new ComposedRegister('HL', this.H, this.L)
+    public readonly AF = new ComposedRegister('AF', this.A, this.F)
+    public readonly BC = new ComposedRegister('BC', this.B, this.C)
+    public readonly DE = new ComposedRegister('DE', this.D, this.E)
 
-    public readonly SP: Register16 = new Register16(0xFFFE)
-    public readonly PC: Register16 = new Register16(0x0100)
+    public readonly SP: Register16 = new Register16('SP', 0xFFFE)
+    public readonly PC: Register16 = new Register16('PC', 0x0100)
 
     public readonly HLI: HLI = new HLI(this.HL)
     public readonly HLD: HLD = new HLD(this.HL)
 
     public readonly '[HL]': Pointer
 
-    public readonly r8: Record<R8Code, Register8>
+    public readonly r8: Record<R8Code, Register8 | Pointer>
 
     public readonly r16: Record<R16Code, Register16> = {
         0b00: this.BC,
@@ -259,11 +380,20 @@ export class Registers {
         0b11: this.HLD,
     }
 
+    public readonly '[r16mem]': Record<R16Code, Pointer>
+
     public readonly r16Stk: Record<R16Code, Register16> = {
         0b00: this.BC,
         0b01: this.DE,
         0b10: this.HL,
         0b11: this.AF,
+    }
+
+    public readonly conditions: Record<ConditionCode, Condition> = {
+        0b00: new NZ('NZ', this.F),
+        0b01: new Z('Z', this.F),
+        0b10: new NC('NC', this.F),
+        0b11: new C('C', this.F),
     }
 
     constructor(memory: Memory) {
@@ -279,17 +409,28 @@ export class Registers {
             0b110: this['[HL]'],
             0b111: this.A,
         }
+
+        this['[r16mem]'] = {
+            0b00: new Pointer(this.BC, memory),
+            0b01: new Pointer(this.DE, memory),
+            0b10: new Pointer(this.HLI, memory),
+            0b11: new Pointer(this.HLD, memory),
+        }
     }
 
     pushPCToStack() {
         this.pushToStack(this.PC.value)
     }
 
+    popPCFromStack() {
+        this.PC.value = this.popFromStack()
+    }
+
     pushToStack(value: number) {
         this.SP.value--
-        this.memory.addresses[this.SP.value] = isolate2LastDigits(value)
+        this.memory.write(this.SP.value, isolate2FirstDigits(value)) // High
         this.SP.value--
-        this.memory.addresses[this.SP.value] = isolate2FirstDigits(value)
+        this.memory.write(this.SP.value, isolate2LastDigits(value)) // Low
     }
 
     popFromStack() {
@@ -297,6 +438,7 @@ export class Registers {
         this.SP.value++
         const high = this.memory.addresses[this.SP.value]
         this.SP.value++
-        return concatBytes(high, low)
+
+        return concatBytes(low, high)
     }
 }

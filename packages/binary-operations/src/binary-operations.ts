@@ -31,13 +31,13 @@ export const masks = {
     THREE_LAST_DIGITS: 0x0F_FF,
 }
 
-export const shiftRightBy =
-    (offset: number) =>
+export const shiftRightBy
+    = (offset: number) =>
     (number_: number): number =>
         // eslint-disable-next-line no-bitwise
         number_ >> offset
-export const shiftLeftBy =
-    (offset: number) =>
+export const shiftLeftBy
+    = (offset: number) =>
     (number_: number): number =>
         // eslint-disable-next-line no-bitwise
         number_ << offset
@@ -89,9 +89,9 @@ export const setNthBit = ({
     value: number
 }): number => {
     const mask = shiftLeftBy(bitIndex)(0x01)
-    return value === 1 ?
-            bitwiseOr(number, mask)
-        :   bitwiseAnd(number, bitwiseXor(mask, 0xFF))
+    return value === 1
+        ? bitwiseOr(number, mask)
+        : bitwiseAnd(number, bitwiseXor(mask, 0xFF))
 }
 
 export const set1stBit = (number_: number, value: number): number =>

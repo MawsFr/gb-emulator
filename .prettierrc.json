@@ -11,5 +11,5 @@
     "vueIndentScriptAndStyle": false,
     "endOfLine": "auto",
     "singleAttributePerLine": true,
-    "experimentalTernaries": true
+    "experimentalTernaries": false
 }

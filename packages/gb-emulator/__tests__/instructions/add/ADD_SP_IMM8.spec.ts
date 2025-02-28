@@ -11,7 +11,7 @@ describe(ADD_SP_IMM8, () => {
         // Given
         registers.PC.value = 0x0
         registers.SP.value = 0xFFFF
-        memory.addresses[0x1] = 0xFF
+        memory.write(0x1, 0xFF)
 
         // When
         new ADD_SP_IMM8(cpu).execute()

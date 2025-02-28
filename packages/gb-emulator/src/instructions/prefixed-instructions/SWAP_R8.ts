@@ -18,17 +18,20 @@ export type SWAP_R8_OPCODES =
 
 export class SWAP_R8 extends Instruction {
     execute(opcode: SWAP_R8_OPCODES) {
-        const register = this.extractSourceR8(opcode)
-        // eslint-disable-next-line prefer-destructuring
-        const value = this.registers.r8[register].value
+        const register = this.r8Source(opcode)
+        const { value } = register
 
-        this.registers.r8[register].value = bitwiseOr(
+        register.value = bitwiseOr(
             shiftLeftBy(4)(bitwiseAnd(value, 0x0F)),
             shiftRightBy4(bitwiseAnd(value, 0xF0))
         )
 
-        this.updateFlagsAfterRotate(this.registers.r8[register].value, 0)
+        this.updateFlagsAfterRotate(register.value, 0)
 
-        this.registers.PC.value++
+        this.cpu.goToNextInstruction()
+    }
+
+    toString(opcode: SWAP_R8_OPCODES) {
+        return `(prefixed) SWAP ${this.r8Source(opcode).name}`
     }
 }

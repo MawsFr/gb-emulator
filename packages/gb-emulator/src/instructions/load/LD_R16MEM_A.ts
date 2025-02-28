@@ -8,14 +8,14 @@ export type LD_R16MEM_A_OPCODES =
 
 export class LD_R16MEM_A extends Instruction {
     execute(opcode: LD_R16MEM_A_OPCODES) {
-        const destination = this.extractDestinationR16(opcode)
+        this.registers.A.copyValueInto(this['[r16mem]'](opcode))
 
-        const register = this.registers.r16mem[destination]
-        const address = register.value
+        this.r16mem(opcode).incrementOrDecrementIfNeeded()
 
-        this.memory.addresses[address] = this.registers.A.value
-        register.incrementOrDecrementIfNeeded()
+        this.cpu.goToNextInstruction()
+    }
 
-        this.registers.PC.value++
+    toString(opcode: LD_R16MEM_A_OPCODES): string {
+        return `LD ${this['[r16mem]'](opcode)}, ${this.registers.A}`
     }
 }

@@ -13,15 +13,16 @@ export type SLA_R8_OPCODES =
 
 export class SLA_R8 extends Instruction {
     execute(opcode: SLA_R8_OPCODES) {
-        const register = this.extractSourceR8(opcode)
-        const bit7 = getNthBit(this.registers.r8[register].value, 7)
+        const register = this.r8Source(opcode)
+        const bit7 = getNthBit(register.value, 7)
 
-        this.registers.r8[register].value = shiftLeftBy1(
-            this.registers.r8[register].value
-        )
+        register.value = shiftLeftBy1(register.value)
+        this.updateFlagsAfterRotate(register.value, bit7)
 
-        this.updateFlagsAfterRotate(this.registers.r8[register].value, bit7)
+        this.cpu.goToNextInstruction()
+    }
 
-        this.registers.PC.value++
+    toString(opcode: SLA_R8_OPCODES) {
+        return `(prefixed) SLA ${this.r8Source(opcode).name}`
     }
 }

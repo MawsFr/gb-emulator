@@ -11,8 +11,8 @@ describe(CALL_IMM16, () => {
         // Given
         registers.PC.value = 0x8000
 
-        memory.addresses[0x8001] = 0x34
-        memory.addresses[0x8002] = 0x12
+        memory.write(0x8001, 0x34)
+        memory.write(0x8002, 0x12)
 
         registers.SP.value = 0xFFFE
 
@@ -22,7 +22,7 @@ describe(CALL_IMM16, () => {
         // Then
         expect(registers.PC.value).to.equal(0x1234)
         expect(registers.SP.value).to.equal(0xFFFC)
-        expect(memory.addresses[0xFFFD]).to.equal(0x03)
-        expect(memory.addresses[0xFFFC]).to.equal(0x80)
+        expect(memory.addresses[0xFFFD]).to.equal(0x80)
+        expect(memory.addresses[0xFFFC]).to.equal(0x03)
     })
 })
