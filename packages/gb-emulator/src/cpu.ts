@@ -1,6 +1,5 @@
 import { Registers } from '@/registers.ts'
-import { Memory } from '@/memory.ts'
-import { concatBytes } from '@mawsfr/binary-operations'
+import { Immediate16, Immediate8, Memory } from '@/memory.ts'
 import { InstructionLoader } from '@/instructions/instruction-loader.ts'
 import { Instruction } from '@/instructions/instruction.ts'
 import { LD_R16_IMM16_OPCODES } from '@/instructions/load/LD_R16_IMM16.ts'
@@ -93,6 +92,7 @@ import { BIT_B3_R8_OPCODES } from './instructions/prefixed-instructions/BIT_B3_R
 import { RES_B3_R8_OPCODES } from './instructions/prefixed-instructions/RES_B3_R8'
 import { SET_B3_R8_OPCODES } from './instructions/prefixed-instructions/SET_B3_R8'
 import { CB_OPCODE } from '@/instructions/prefixed-instructions/CB.ts'
+import { NOP_OPCODE } from '@/instructions/misc/NOP.ts'
 
 export interface CpuConfig {
     registers: Registers
@@ -100,6 +100,7 @@ export interface CpuConfig {
 }
 
 export type Opcode =
+    | NOP_OPCODE
     | LD_R16_IMM16_OPCODES
     | LD_R16MEM_A_OPCODES
     | LD_A_R16MEM_OPCODES
@@ -186,35 +187,26 @@ export class Cpu {
 
     private hardLocked: boolean = false
 
+    public readonly immediate8: Immediate8
+    public readonly immediate16: Immediate16
+
     constructor(config: CpuConfig) {
         this.registers = config.registers
         this.memory = config.memory
+        this.immediate8 = new Immediate8(this.memory, this.registers.PC)
+        this.immediate16 = new Immediate16(this.memory, this.registers.PC)
 
         this.instructions = InstructionLoader.loadInstructions(this)
         this.prefixedInstructions =
             InstructionLoader.loadPrefixedInstructions(this)
     }
 
-    getImmediateBytes({ count }: { count: 1 | 2 }) {
-        return count === 1 ?
-                this.nextByte()
-            :   concatBytes(this.nextByte(), this.nextByte())
-    }
-
-    nextByte() {
-        this.registers.PC.value++
-        return this.memory.addresses[this.registers.PC.value]
-    }
-
-    /**
-     * Increments PC and returns the immediate 8 bit value
-     */
     getImmediate8() {
-        return this.getImmediateBytes({ count: 1 })
+        return this.immediate8.value
     }
 
     getImmediate16() {
-        return this.getImmediateBytes({ count: 2 })
+        return this.immediate16.value
     }
 
     execute(opcode: Opcode) {
@@ -247,24 +239,32 @@ export class Cpu {
 
     dispatch() {
         const opcode = this.decode(this.fetchNextByte())
+        const instruction = this.instructions[opcode]
 
         // eslint-disable-next-line no-console
         console.log(
-            `Executing opcode : ${opcode.toString(16)} | ${opcode.toString(2)}`
+            `Executing opcode : ${opcode.toString(16).toUpperCase()} | ${opcode.toString(2)} | ${instruction.toString(opcode)}`
         )
 
-        this.instructions[opcode].execute(opcode)
+        instruction.execute(opcode)
     }
 
     fetchNextByte(): number {
-        return this.memory.addresses[this.registers.PC.value]
+        const byte = this.memory.addresses[this.registers.PC.value]
+        // eslint-disable-next-line no-console
+        console.log(
+            `Fetching byte : ${byte.toString(16).toUpperCase()} | ${byte.toString(2)}`
+        )
+        return byte
     }
 
     decode(byte: number): Opcode {
         const opcode = byte
 
         if (!this.isValidOpcode(opcode)) {
-            throw new Error('Unknown instruction')
+            throw new Error(
+                `Unknown instruction ${opcode.toString(16).toUpperCase()} | ${opcode.toString(2)}`
+            )
         }
 
         return opcode as Opcode

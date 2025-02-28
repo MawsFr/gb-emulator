@@ -66,10 +66,12 @@ import { BIT_B3_R8 } from './prefixed-instructions/BIT_B3_R8'
 import { RES_B3_R8 } from './prefixed-instructions/RES_B3_R8'
 import { SET_B3_R8 } from './prefixed-instructions/SET_B3_R8'
 import { CB } from '@/instructions/prefixed-instructions/CB.ts'
+import { NOP } from '@/instructions/misc/NOP.ts'
 
 // eslint-disable-next-line unicorn/no-static-only-class
 export abstract class InstructionLoader {
     static loadInstructions = (cpu: Cpu): Record<Opcode, Instruction> => {
+        const nop = new NOP(cpu)
         const ld_r16_imm16 = new LD_R16_IMM16(cpu)
         const ld_r16mem_a = new LD_R16MEM_A(cpu)
         const ld_a_r16mem = new LD_A_R16MEM(cpu)
@@ -191,6 +193,8 @@ export abstract class InstructionLoader {
         const cb = new CB(cpu)
 
         return {
+            0b00000000: nop,
+
             0b00000001: ld_r16_imm16,
             0b00010001: ld_r16_imm16,
             0b00100001: ld_r16_imm16,

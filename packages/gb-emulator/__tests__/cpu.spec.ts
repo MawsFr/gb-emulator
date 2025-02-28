@@ -35,6 +35,8 @@ describe(Cpu, () => {
 
     describe(Cpu.prototype.execute, () => {
         it.for<Opcode>([
+            // NOP
+            0x00000000,
             // LD R16, IMM16
             0b00000001, 0b00010001, 0b00100001, 0b00110001,
             // LD R16MEM, A
@@ -314,7 +316,9 @@ describe(Cpu, () => {
         }) => {
             const byte: number = 0b111111111
 
-            expect(() => cpu.decode(byte)).toThrow('Unknown instruction')
+            expect(() => cpu.decode(byte)).toThrow(
+                'Unknown instruction 1FF | 111111111'
+            )
         })
     })
 
