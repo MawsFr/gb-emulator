@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/254</span>
+                <span class='fraction'>0/273</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/254</span>
+                <span class='fraction'>0/273</span>
             </div>
         
             
@@ -317,7 +317,45 @@
 <a name='L252'></a><a href='#L252'>252</a>
 <a name='L253'></a><a href='#L253'>253</a>
 <a name='L254'></a><a href='#L254'>254</a>
-<a name='L255'></a><a href='#L255'>255</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L255'></a><a href='#L255'>255</a>
+<a name='L256'></a><a href='#L256'>256</a>
+<a name='L257'></a><a href='#L257'>257</a>
+<a name='L258'></a><a href='#L258'>258</a>
+<a name='L259'></a><a href='#L259'>259</a>
+<a name='L260'></a><a href='#L260'>260</a>
+<a name='L261'></a><a href='#L261'>261</a>
+<a name='L262'></a><a href='#L262'>262</a>
+<a name='L263'></a><a href='#L263'>263</a>
+<a name='L264'></a><a href='#L264'>264</a>
+<a name='L265'></a><a href='#L265'>265</a>
+<a name='L266'></a><a href='#L266'>266</a>
+<a name='L267'></a><a href='#L267'>267</a>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a>
+<a name='L274'></a><a href='#L274'>274</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -589,6 +627,11 @@
 <span class="cstat-no" title="statement not covered" >        /&gt;</span>
 <span class="cstat-no" title="statement not covered" >        ROM chargé : {{ loadedRom ? 'Oui' : 'Non' }}</span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        Previous :</span>
+<span class="cstat-no" title="statement not covered" >        {{ instruction }}</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        | Next :</span>
+<span class="cstat-no" title="statement not covered" >        {{ getNextInstruction() }}</span>
 <span class="cstat-no" title="statement not covered" >        &lt;div class="container"&gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;div</span>
 <span class="cstat-no" title="statement not covered" >                class="graphics"</span>
@@ -633,7 +676,13 @@
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >&lt;script setup lang="ts"&gt;</span>
 <span class="cstat-no" title="statement not covered" >/* eslint-disable no-useless-assignment */</span>
-<span class="cstat-no" title="statement not covered" >import { Cpu, Graphics, Memory, Registers } from '@mawsfr/gb-emulator'</span>
+<span class="cstat-no" title="statement not covered" >import {</span>
+<span class="cstat-no" title="statement not covered" >    Cpu,</span>
+<span class="cstat-no" title="statement not covered" >    Graphics,</span>
+<span class="cstat-no" title="statement not covered" >    Instruction,</span>
+<span class="cstat-no" title="statement not covered" >    Memory,</span>
+<span class="cstat-no" title="statement not covered" >    Registers,</span>
+<span class="cstat-no" title="statement not covered" >} from '@mawsfr/gb-emulator'</span>
 <span class="cstat-no" title="statement not covered" >import { ref, useTemplateRef, watch } from 'vue'</span>
 <span class="cstat-no" title="statement not covered" >import { useMemoize } from '@vueuse/core'</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -655,6 +704,8 @@
 <span class="cstat-no" title="statement not covered" >        registers,</span>
 <span class="cstat-no" title="statement not covered" >    })</span>
 <span class="cstat-no" title="statement not covered" >)</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >const instruction = ref&lt;Instruction | undefined&gt;()</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const loadedRom = ref&lt;Uint8Array | undefined&gt;()</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -726,7 +777,7 @@
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const executeNextInstruction = () =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    manual.value = true</span>
-<span class="cstat-no" title="statement not covered" >    cpu.value.dispatch()</span>
+<span class="cstat-no" title="statement not covered" >    instruction.value = cpu.value.dispatch()</span>
 <span class="cstat-no" title="statement not covered" >    scrollToCurrentAddress()</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -746,10 +797,16 @@
 <span class="cstat-no" title="statement not covered" >    tileDataTableCtx.fillRect(0, 0, 800, 800)</span>
 <span class="cstat-no" title="statement not covered" >    tileDataTableCtx.fillStyle = 'black'</span>
 <span class="cstat-no" title="statement not covered" >    tileDataTableCtx.fillText(</span>
-<span class="cstat-no" title="statement not covered" >        `Tile data table : ${  graphics.tileDataTable.tiles.length}`,</span>
+<span class="cstat-no" title="statement not covered" >        `Tile data table : ${graphics.tileDataTable.tiles.length}`,</span>
 <span class="cstat-no" title="statement not covered" >        350,</span>
 <span class="cstat-no" title="statement not covered" >        350</span>
 <span class="cstat-no" title="statement not covered" >    )</span>
+<span class="cstat-no" title="statement not covered" >}</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >const getNextInstruction = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return cpu.value.instructions[</span>
+<span class="cstat-no" title="statement not covered" >        cpu.value.decode(cpu.value.fetchNextByte())</span>
+<span class="cstat-no" title="statement not covered" >    ].toString(cpu.value.decode(cpu.value.fetchNextByte()))</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const getOpcodeDescription = useMemoize((opcode: number) =&gt; {</span>
@@ -832,7 +889,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-02T14:43:56.978Z
+                at 2025-03-02T16:02:03.960Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
