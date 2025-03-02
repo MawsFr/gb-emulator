@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">93.54% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>28/28</span>
+                <span class='fraction'>29/31</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">93.54% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>28/28</span>
+                <span class='fraction'>29/31</span>
             </div>
         
             
@@ -116,7 +116,11 @@
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -138,42 +142,46 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">7013x</span>
+<span class="cline-any cline-yes">7040x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7013x</span>
-<span class="cline-any cline-yes">7013x</span>
-<span class="cline-any cline-yes">7013x</span>
-<span class="cline-any cline-yes">7013x</span>
+<span class="cline-any cline-yes">7040x</span>
+<span class="cline-any cline-yes">7040x</span>
+<span class="cline-any cline-yes">7040x</span>
+<span class="cline-any cline-yes">7040x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7013x</span>
+<span class="cline-any cline-yes">7040x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">7013x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6233x</span>
-<span class="cline-any cline-yes">6233x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7040x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7040x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">780x</span>
-<span class="cline-any cline-yes">780x</span>
+<span class="cline-any cline-yes">6257x</span>
+<span class="cline-any cline-yes">6257x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">783x</span>
+<span class="cline-any cline-yes">783x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Instruction } from '@/instructions/instruction.ts'
 import { Cpu } from '@/cpu.ts'
-import { R8Code } from '@/registers.ts'
+import { R8Code } from '@/registers/registers.ts'
 import {
-    ImmediateSourceStrategy,
+    Immediate8SourceStrategy,
     RegisterSourceStrategy,
     SourceStrategy,
 } from '@/instructions/source-strategies.ts'
@@ -191,24 +199,28 @@ export type SBC_A_R8_OPCODES =
 export type SBC_A_IMM8_OPCODE = 0b11011110
 &nbsp;
 export abstract class SBC_A_8_SOURCE extends Instruction {
-    private readonly sourceStrategy: SourceStrategy
+    private readonly source: SourceStrategy
 &nbsp;
-    protected constructor(cpu: Cpu, sourceStrategy: SourceStrategy) {
+    protected constructor(cpu: Cpu, source: SourceStrategy) {
         super(cpu)
-        this.sourceStrategy = sourceStrategy
+        this.source = source
     }
 &nbsp;
     execute(): void {
         const minuend = this.registers.A.value
-        const subtrahend = this.sourceStrategy.getSource()
+        const subtrahend = this.source.getValue()
         const carry = this.registers.F.carryFlag
         const result = minuend - subtrahend - carry
 &nbsp;
         this.registers.A.value = result
         this.updateFlagsAfterSubtraction(minuend, subtrahend - carry, result)
 &nbsp;
-        this.registers.PC.value++
+        this.cpu.goToNextInstruction(this.source.getAdditionalBytes())
     }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    toString(): string {</span>
+<span class="cstat-no" title="statement not covered" >        return `SBC ${this.registers.A}, ${this.source.get()}`</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
 }
 &nbsp;
 export class SBC_A_R8 extends SBC_A_8_SOURCE {
@@ -219,7 +231,7 @@ export class SBC_A_R8 extends SBC_A_8_SOURCE {
 &nbsp;
 export class SBC_A_IMM8 extends SBC_A_8_SOURCE {
     constructor(cpu: Cpu) {
-        super(cpu, new ImmediateSourceStrategy(cpu))
+        super(cpu, new Immediate8SourceStrategy(cpu))
     }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -229,7 +241,7 @@ export class SBC_A_IMM8 extends SBC_A_8_SOURCE {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-28T00:22:04.114Z
+                at 2025-03-02T14:43:56.978Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>
