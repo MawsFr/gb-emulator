@@ -187,10 +187,16 @@ export class ComposedRegister extends Register16 {
     public readonly high: Register8
     public readonly low: Register8
 
-    constructor(name: R16Name, high: Register8, low: Register8) {
+    constructor(
+        name: R16Name,
+        high: Register8,
+        low: Register8,
+        value?: number
+    ) {
         super(name)
         this.high = high
         this.low = low
+        this.value = value ?? this.value
     }
 
     get value() {
@@ -349,10 +355,10 @@ export class Registers {
     public readonly L: Register8 = new Register8('L')
     public readonly F: OperationFlags = new OperationFlags('F')
 
-    public readonly HL = new ComposedRegister('HL', this.H, this.L)
-    public readonly AF = new ComposedRegister('AF', this.A, this.F)
-    public readonly BC = new ComposedRegister('BC', this.B, this.C)
-    public readonly DE = new ComposedRegister('DE', this.D, this.E)
+    public readonly HL = new ComposedRegister('HL', this.H, this.L, 0x014D)
+    public readonly AF = new ComposedRegister('AF', this.A, this.F, 0x01B0)
+    public readonly BC = new ComposedRegister('BC', this.B, this.C, 0x0013)
+    public readonly DE = new ComposedRegister('DE', this.D, this.E, 0x00D8)
 
     public readonly SP: Register16 = new Register16('SP', 0xFFFE)
     public readonly PC: Register16 = new Register16('PC', 0x0100)

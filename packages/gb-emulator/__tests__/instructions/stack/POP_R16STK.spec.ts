@@ -37,6 +37,10 @@ describe(POP_R16STK, () => {
             // Given
             registers.PC.value = 0x0000
             registers.SP.value = 0xFFFC
+            registers.BC.value = expectedBC ?? 0
+            registers.DE.value = expectedDE ?? 0
+            registers.HL.value = expectedHL ?? 0
+            registers.AF.value = expectedAF ?? 0
 
             memory.write(0xFFFD, 0x12)
             memory.write(0xFFFC, 0x34)

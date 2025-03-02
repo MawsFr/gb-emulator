@@ -64,49 +64,93 @@ describe(Registers, () => {
     })
 
     describe('16 bits registers', () => {
-        it<GbEmulatorTestContext>('should have an AF register with A as high and F as low', ({
-            registers,
-        }) => {
-            registers.A.value = 0x01
-            registers.F.value = 0x02
-            expect(registers.AF.value).to.be.a('number').and.to.equal(0x0102)
+        describe('AF', () => {
+            it<GbEmulatorTestContext>('should have an AF register with A as high and F as low', ({
+                registers,
+            }) => {
+                registers.A.value = 0x01
+                registers.F.value = 0x02
+                expect(registers.AF.value)
+                    .to.be.a('number')
+                    .and.to.equal(0x0102)
+            })
+
+            it<GbEmulatorTestContext>('should have default value 0x01B0', ({
+                registers,
+            }) => {
+                expect(registers.AF.value).to.equal(0x01B0)
+            })
         })
 
-        it<GbEmulatorTestContext>('should have a BC register with B as high and C as low', ({
-            registers,
-        }) => {
-            registers.B.value = 0x01
-            registers.C.value = 0x02
-            expect(registers.BC.value).to.be.a('number').and.to.equal(0x0102)
+        describe('BC', () => {
+            it<GbEmulatorTestContext>('should have a BC register with B as high and C as low', ({
+                registers,
+            }) => {
+                registers.B.value = 0x01
+                registers.C.value = 0x02
+                expect(registers.BC.value)
+                    .to.be.a('number')
+                    .and.to.equal(0x0102)
+            })
+
+            it<GbEmulatorTestContext>('should have default value 0x0013', ({
+                registers,
+            }) => {
+                expect(registers.BC.value).to.equal(0x0013)
+            })
         })
 
-        it<GbEmulatorTestContext>('should have a DE register with D as high and E as low', ({
-            registers,
-        }) => {
-            registers.D.value = 0x01
-            registers.E.value = 0x02
-            expect(registers.DE.value).to.be.a('number').and.to.equal(0x0102)
+        describe('DE', () => {
+            it<GbEmulatorTestContext>('should have a DE register with D as high and E as low', ({
+                registers,
+            }) => {
+                registers.D.value = 0x01
+                registers.E.value = 0x02
+                expect(registers.DE.value)
+                    .to.be.a('number')
+                    .and.to.equal(0x0102)
+            })
+
+            it<GbEmulatorTestContext>('should have default value 0x00D8', ({
+                registers,
+            }) => {
+                expect(registers.DE.value).to.equal(0x00D8)
+            })
         })
 
-        it<GbEmulatorTestContext>('should have a HL register with H as high and L as low', ({
-            registers,
-        }) => {
-            registers.H.value = 0x01
-            registers.L.value = 0x02
-            expect(registers.HL.value).to.be.a('number').and.to.equal(0x0102)
+        describe('HL', () => {
+            it<GbEmulatorTestContext>('should have a HL register with H as high and L as low', ({
+                registers,
+            }) => {
+                registers.H.value = 0x01
+                registers.L.value = 0x02
+                expect(registers.HL.value)
+                    .to.be.a('number')
+                    .and.to.equal(0x0102)
+            })
+
+            it<GbEmulatorTestContext>('should have default value 0x014D', ({
+                registers,
+            }) => {
+                expect(registers.HL.value).to.equal(0x014D)
+            })
         })
 
-        it<GbEmulatorTestContext>('should have a SP register', ({
-            registers,
-        }) => {
-            registers.SP.value = 0x0102
-            expect(registers.SP.value).to.be.a('number').and.to.equal(0x0102)
-        })
+        describe('SP', () => {
+            it<GbEmulatorTestContext>('should have a SP register', ({
+                registers,
+            }) => {
+                registers.SP.value = 0x0102
+                expect(registers.SP.value)
+                    .to.be.a('number')
+                    .and.to.equal(0x0102)
+            })
 
-        it<GbEmulatorTestContext>('should have a SP register with default value = 0xFFFE', ({
-            registers,
-        }) => {
-            expect(registers.SP.value).to.equal(0xFFFE)
+            it<GbEmulatorTestContext>('should have a SP register with default value = 0xFFFE', ({
+                registers,
+            }) => {
+                expect(registers.SP.value).to.equal(0xFFFE)
+            })
         })
 
         it<GbEmulatorTestContext>('should have a PC register with default value 0x0100', ({
