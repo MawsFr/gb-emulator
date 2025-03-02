@@ -249,13 +249,23 @@ describe('BinaryOperations', () => {
     })
 
     describe(getNthBit, () => {
-        it.each([
-            { num: 0b11111110, bitIndex: 0, expected: 0 },
-            { num: 0b10000000, bitIndex: 7, expected: 1 },
-        ])('should get the nth bit', ({ num, bitIndex, expected }) => {
-            const result = getNthBit(num, bitIndex)
-            expect(result).toBe(expected)
-        })
+        it.for<{
+            num: number
+            bitIndex: number
+            expected: Bit
+            endianness: 'big' | 'little'
+        }>([
+            { num: 0b11111110, bitIndex: 0, expected: 0, endianness: 'little' },
+            { num: 0b10000000, bitIndex: 7, expected: 1, endianness: 'little' },
+            { num: 0b11111110, bitIndex: 0, expected: 1, endianness: 'big' },
+            { num: 0b10000000, bitIndex: 7, expected: 0, endianness: 'big' },
+        ])(
+            'should get the nth bit',
+            ({ num, bitIndex, expected, endianness }) => {
+                const result = getNthBit(num, bitIndex, { endianness })
+                expect(result).toBe(expected)
+            }
+        )
     })
 
     describe(get1stBit, () => {

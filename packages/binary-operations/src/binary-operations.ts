@@ -72,9 +72,23 @@ export const isolateLeastSignificantBit = (number_: number): number =>
 export const isolateMostSignificantBit = (number_: number): number =>
     shiftRightBy7(number_)
 
-export const getNthBit = (number_: number, bitIndex: number): Bit => {
-    return bitwiseAnd(shiftRightBy(bitIndex)(number_), 0x01) as Bit
+export const getNthBit = (
+    number_: number,
+    bitIndex: number,
+    options: {
+        endianness: 'big' | 'little'
+    } = {
+        endianness: 'little',
+    }
+): Bit => {
+    return bitwiseAnd(
+        shiftRightBy(options.endianness === 'big' ? 7 - bitIndex : bitIndex)(
+            number_
+        ),
+        0x01
+    ) as Bit
 }
+
 export const get1stBit = (number_: number): Bit => getNthBit(number_, 0)
 export const get2ndBit = (number_: number): Bit => getNthBit(number_, 1)
 export const get3rdBit = (number_: number): Bit => getNthBit(number_, 2)
@@ -107,16 +121,11 @@ export const set4thBit = (number_: number, value: Bit): number =>
 export const isBitSet = (
     number_: number,
     bitIndex: number,
-    { endianness }: { endianness: 'big' | 'little' } = {
+    options: { endianness: 'big' | 'little' } = {
         endianness: 'little',
     }
 ): boolean => {
-    return (
-        getNthBit(
-            number_,
-            endianness === 'little' ? bitIndex : 7 - bitIndex
-        ) === 1
-    )
+    return getNthBit(number_, bitIndex, options) === 1
 }
 
 export const toHex = (number: number): string =>
