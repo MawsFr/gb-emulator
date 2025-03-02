@@ -10,6 +10,10 @@ import ts from 'typescript-eslint'
 import prettierRecommended from 'eslint-plugin-prettier/recommended'
 import { includeIgnoreFile } from '@eslint/compat'
 import stylistic from '@stylistic/eslint-plugin'
+import {
+    defineConfigWithVueTs,
+    vueTsConfigs,
+} from '@vue/eslint-config-typescript'
 
 const __filename = fileURLToPath(import.meta.url),
     __dirname = path.dirname(__filename),
@@ -17,12 +21,11 @@ const __filename = fileURLToPath(import.meta.url),
 
 const gitignorePath = path.resolve(__dirname, '.gitignore')
 
-export default ts.config(
+export default defineConfigWithVueTs(
     includeIgnoreFile(gitignorePath),
     js.configs.recommended,
     js.configs.all,
     ...ts.configs.recommended,
-    ...vue.configs['flat/recommended'],
     prettierRecommended,
     {
         plugins: {
@@ -30,6 +33,8 @@ export default ts.config(
         },
     },
     unicorn.configs.recommended,
+    vue.configs['flat/essential'],
+    vueTsConfigs.recommendedTypeChecked,
     ...compat.extends(),
     eslintConfigPrettier,
     {
@@ -81,6 +86,9 @@ export default ts.config(
             'no-warning-comments': 'off',
             '@stylistic/multiline-ternary': ['error', 'always-multiline'],
             '@stylistic/operator-linebreak': ['error', 'before'],
+            'no-console': 'off',
+            '@typescript-eslint/restrict-template-expressions': 'off',
+            '@typescript-eslint/unbound-method': 'off',
         },
     }
 )
