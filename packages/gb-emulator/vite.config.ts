@@ -17,7 +17,7 @@ export default defineConfig({
         dts({
             outDir: 'dist/types',
             rollupTypes: true,
-            tsconfigPath: './tsconfig.json',
+            tsconfigPath: './tsconfig.app.json',
         }),
     ],
 })

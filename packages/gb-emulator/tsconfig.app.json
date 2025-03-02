@@ -30,6 +30,6 @@
             "@mawsfr/binary-operations": ["../packages/binary-operations/src"]
         }
     },
-    "include": ["./src"],
+    "include": ["./src", "./*.ts"],
     "exclude": ["./__tests__"]
 }

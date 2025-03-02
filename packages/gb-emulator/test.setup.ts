@@ -1,5 +1,5 @@
 import { beforeEach } from 'vitest'
-import { Memory, Registers } from './src'
+import { Memory, Registers } from '$/src'
 import { Cpu } from '@/cpu.ts'
 
 export interface GbEmulatorTestContext {
