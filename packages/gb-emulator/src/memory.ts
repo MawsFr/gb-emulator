@@ -49,20 +49,20 @@ export class Immediate16 extends ImmediateMemoryValue {
     }
 }
 
-export class Memory8Value {
-    private readonly memory: Memory
-    private readonly address: number
+export class Memory8Value<T extends number = number> {
+    protected readonly memory: Memory
+    protected readonly address: number
 
     constructor(memory: Memory, address: number) {
         this.memory = memory
         this.address = address
     }
 
-    get value(): number {
-        return bitwiseAnd(this.memory.addresses[this.address], 0xFF)
+    get value(): T {
+        return bitwiseAnd(this.memory.addresses[this.address], 0xFF) as T
     }
 
-    set value(value: number) {
+    set value(value: T) {
         this.memory.write(this.address, bitwiseAnd(value, 0xFF))
     }
 
@@ -72,13 +72,9 @@ export class Memory8Value {
 }
 
 export class Memory {
-    private readonly _addresses = new Uint8Array(0xFFFF)
-
-    get addresses() {
-        return this._addresses
-    }
+    public readonly addresses = new Uint8Array(0xFFFF)
 
     write(address: number, value: number) {
-        this._addresses[address] = bitwiseAnd(value, 0xFF)
+        this.addresses[address] = bitwiseAnd(value, 0xFF)
     }
 }
