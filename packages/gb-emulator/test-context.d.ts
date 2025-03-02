@@ -1,4 +1,4 @@
-import { Cpu, Memory, Registers } from '$/src'
+import { Cpu, Graphics, Memory, Registers } from '$/src'
 
 // Issue: https://github.com/vitest-dev/vitest/issues/2892
 declare module 'vitest' {
@@ -6,5 +6,6 @@ declare module 'vitest' {
         registers: Registers
         memory: Memory
         cpu: Cpu
+        graphics: Graphics
     }
 }

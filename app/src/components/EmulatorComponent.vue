@@ -11,12 +11,19 @@
         <button @click="executeNextInstruction">Next Instruction</button>
         <button @click="scrollToCurrentAddress">Scroll to PC</button>
         <input
+            type="text"
+            v-model="addressToScrollTo"
+        />
+        <button @click="scrollToAddress">Scroll to</button>
+        <input
             type="file"
             @change="loadFile"
         />
         ROM chargé : {{ loadedRom ? 'Oui' : 'Non' }}
 
-        Previous :
+        | PC: {{ toHexa(cpu.registers.PC.value) }}
+
+        | Previous :
         {{ instruction }}
 
         | Next :
@@ -43,10 +50,13 @@
                     v-for="(address, index) in cpu.memory.addresses"
                     :key="index"
                     class="address"
-                    :class="{ 'current-address': isCurrentAddress(index) }"
+                    :class="{
+                        'current-address': isCurrentAddress(index),
+                        ['address-' + toHexa(index)]: true,
+                    }"
                 >
                     <div class="address-index-hexa">
-                        0x{{ toHexa(index, 3) }} ({{ index }})
+                        {{ toHexa(index, 4) }} ({{ index }})
                     </div>
                     <div class="address-hexa-value">
                         {{ toHexa(address) }}
@@ -74,6 +84,7 @@ import {
 } from '@mawsfr/gb-emulator'
 import { ref, useTemplateRef, watch } from 'vue'
 import { useMemoize } from '@vueuse/core'
+import { TileRendererImpl } from '../renderer/TileRendererImpl.ts'
 
 const canvas = useTemplateRef('canvas')
 const tileDataTable = useTemplateRef('tile-data-table')
@@ -83,6 +94,8 @@ let tileDataTableCtx: CanvasRenderingContext2D
 
 const manual = ref(true)
 const showMemory = ref(false)
+
+const addressToScrollTo = ref<string>('0x8000')
 
 const memory = new Memory()
 const registers = new Registers(memory)
@@ -97,6 +110,8 @@ const cpu = ref(
 const instruction = ref<Instruction | undefined>()
 
 const loadedRom = ref<Uint8Array | undefined>()
+let tileDataTableRenderer: TileRendererImpl
+let screenRenderer: TileRendererImpl
 
 watch(canvas, (canvasTemplate) => {
     if (canvasTemplate) {
@@ -104,7 +119,12 @@ watch(canvas, (canvasTemplate) => {
         canvasTemplate.width = 160
         canvasTemplate.height = 144
 
-        drawScreen()
+        screenRenderer = new TileRendererImpl(ctx, graphics)
+        try {
+            screenRenderer.render()
+        } catch (error) {
+            console.error("Erreur lors du rendu de l'écran :", error)
+        }
     }
 })
 
@@ -114,7 +134,12 @@ watch(tileDataTable, (tileDataTableTemplate) => {
         tileDataTableTemplate.width = 800
         tileDataTableTemplate.height = 800
 
-        drawTileDataTable()
+        tileDataTableRenderer = new TileRendererImpl(
+            tileDataTableCtx,
+            graphics.tileDataTable
+        )
+
+        tileDataTableRenderer.render()
     }
 })
 
@@ -153,6 +178,15 @@ const scrollToCurrentAddress = () =>
         block: 'center',
     })
 
+const scrollToAddress = () => {
+    document
+        .querySelectorAll(`.address-${addressToScrollTo.value}`)?.[0]
+        ?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+        })
+}
+
 const isCurrentAddress = (index: number) =>
     index === cpu.value.registers.PC.value
 
@@ -168,28 +202,7 @@ const executeNextInstruction = () => {
     manual.value = true
     instruction.value = cpu.value.dispatch()
     scrollToCurrentAddress()
-}
-
-const drawScreen = () => {
-    ctx.clearRect(0, 0, 160, 144)
-    ctx.beginPath()
-    ctx.fillStyle = 'white'
-    ctx.fillRect(0, 0, 160, 144)
-    ctx.fillStyle = 'black'
-    ctx.fillText('Screen', 50, 50)
-}
-
-const drawTileDataTable = () => {
-    tileDataTableCtx.clearRect(0, 0, 800, 800)
-    tileDataTableCtx.beginPath()
-    tileDataTableCtx.fillStyle = 'white'
-    tileDataTableCtx.fillRect(0, 0, 800, 800)
-    tileDataTableCtx.fillStyle = 'black'
-    tileDataTableCtx.fillText(
-        `Tile data table : ${graphics.tileDataTable.tiles.length}`,
-        350,
-        350
-    )
+    tileDataTableRenderer?.render()
 }
 
 const getNextInstruction = () => {
