@@ -14,8 +14,8 @@ export class ADD_HL_R16 extends Instruction {
 
         this.registers.HL.value = result
         this.updateFlagsAfterAddition(augend, addend, result, {
-            halfCarryFlagBit: 11,
-            carryFlagBit: 15,
+            halfCarryFlagBitIndex: 11,
+            carryFlagBitIndex: 15,
         })
 
         this.cpu.goToNextInstruction()

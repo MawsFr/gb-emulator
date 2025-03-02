@@ -7,6 +7,7 @@ import {
 } from '@/registers/registers.ts'
 import { Cpu, Opcode, PrefixedOpcode } from '@/cpu.ts'
 import {
+    Bit,
     bitwiseAnd,
     isBitSet,
     shiftRightBy,
@@ -42,13 +43,13 @@ export abstract class Instruction {
         addend: number,
         result: number,
         options?: {
-            zeroFlag?: number
-            carryFlagBit?: number
-            halfCarryFlagBit?: number
+            zeroFlag?: Bit
+            carryFlagBitIndex?: number
+            halfCarryFlagBitIndex?: number
         }
     ) {
-        const carryFlagBit = options?.carryFlagBit ?? 7
-        const halfCarryFlagBit = options?.halfCarryFlagBit ?? 3
+        const carryFlagBit = options?.carryFlagBitIndex ?? 7
+        const halfCarryFlagBit = options?.halfCarryFlagBitIndex ?? 3
 
         this.registers.F.carryFlag = this.getCarryFlag(
             augend,
@@ -93,7 +94,7 @@ export abstract class Instruction {
         this.registers.F.zeroFlag = value === 0 ? 1 : 0
     }
 
-    protected updateFlagsAfterRotate(value: number, carry: number) {
+    protected updateFlagsAfterRotate(value: number, carry: Bit) {
         this.registers.F.subtractionFlag = 0
         this.registers.F.halfCarryFlag = 0
         this.registers.F.carryFlag = carry

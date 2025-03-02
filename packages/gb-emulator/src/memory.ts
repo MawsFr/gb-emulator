@@ -49,7 +49,7 @@ export class Immediate16 extends ImmediateMemoryValue {
     }
 }
 
-export class MemoryValue {
+export class Memory8Value {
     private readonly memory: Memory
     private readonly address: number
 
@@ -59,15 +59,15 @@ export class MemoryValue {
     }
 
     get value(): number {
-        return this.memory.addresses[this.address]
+        return bitwiseAnd(this.memory.addresses[this.address], 0xFF)
     }
 
     set value(value: number) {
-        this.memory.write(this.address, value)
+        this.memory.write(this.address, bitwiseAnd(value, 0xFF))
     }
 
     toString(): string {
-        return `(${toHex(this.address)})`
+        return `${toHex(this.address)} (${toHex(this.value)})`
     }
 }
 

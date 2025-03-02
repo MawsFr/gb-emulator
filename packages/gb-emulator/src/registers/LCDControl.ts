@@ -1,4 +1,4 @@
-import { Memory, MemoryValue } from '$/src'
+import { Memory, Memory8Value } from '$/src'
 import { getNthBit } from '@mawsfr/binary-operations'
 
 export enum LCDControlAddressingMode {
@@ -6,7 +6,7 @@ export enum LCDControlAddressingMode {
     UNSIGNED_ADDRESSING_MODE = 1,
 }
 
-export class LCDControl extends MemoryValue {
+export class LCDControl extends Memory8Value {
     constructor(memory: Memory) {
         super(memory, 0xFF40)
     }
