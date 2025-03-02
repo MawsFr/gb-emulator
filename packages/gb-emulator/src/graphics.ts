@@ -6,7 +6,7 @@ export class TileData extends Memory8Value {}
 
 export class TileDataTable {
     private readonly memory: Memory
-    private readonly tiles: TileData[]
+    public readonly tiles: TileData[]
 
     constructor(memory: Memory) {
         this.memory = memory
@@ -31,7 +31,7 @@ export class TileDataTable {
 
 export class Graphics {
     private readonly memory: Memory
-    private readonly tileDataTable: TileDataTable
+    public readonly tileDataTable: TileDataTable
 
     constructor(memory: Memory) {
         this.memory = memory

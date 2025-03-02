@@ -1,5 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import EmulatorComponent from './components/EmulatorComponent.vue'
+</script>
 
-<template>Work in progress</template>
+<template>
+    <EmulatorComponent />
+</template>
 
 <style scoped></style>

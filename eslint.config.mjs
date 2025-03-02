@@ -89,6 +89,7 @@ export default defineConfigWithVueTs(
             'no-console': 'off',
             '@typescript-eslint/restrict-template-expressions': 'off',
             '@typescript-eslint/unbound-method': 'off',
+            'capitalized-comments': 'off',
         },
     }
 )

@@ -272,6 +272,7 @@ export class Cpu {
         )
 
         instruction.execute(opcode)
+        return instruction
     }
 
     fetchNextByte(): number {
