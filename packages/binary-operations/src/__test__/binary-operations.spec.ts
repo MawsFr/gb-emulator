@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import {
+    Bit,
     bitwiseAnd,
     bitwiseOr,
     bitwiseXor,
@@ -32,13 +33,13 @@ import {
     shiftRightBy7,
     shiftRightBy8,
     toHex,
-} from '../src'
+} from '../index.ts'
 
 describe('BinaryOperations', () => {
     describe(concatBytes, () => {
         it.each<{ endianness: 'big' | 'little'; expected: number }>([
-            { endianness: 'big', expected: 0x10_20 },
-            { endianness: 'little', expected: 0x20_10 },
+            { endianness: 'big', expected: 0x1020 },
+            { endianness: 'little', expected: 0x2010 },
         ])(
             'should concat two bytes with $endianness endian',
             ({ endianness, expected }) => {
@@ -103,13 +104,13 @@ describe('BinaryOperations', () => {
 
             const result = shiftLeftBy(1)(num)
 
-            expect(result).to.equal(0b1_0100)
+            expect(result).to.equal(0b10100)
         })
     })
 
     describe(shiftRightBy8, () => {
         it('should shift right by 8', () => {
-            const num = 0x12_34
+            const num = 0x1234
 
             const result = shiftRightBy8(num)
 
@@ -119,21 +120,21 @@ describe('BinaryOperations', () => {
 
     describe(shiftLeftBy8, () => {
         it('should shift left by 8', () => {
-            const num = 0x12_34
+            const num = 0x1234
 
             const result = shiftLeftBy8(num)
 
-            expect(result).to.equal(0x12_34_00)
+            expect(result).to.equal(0x123400)
         })
     })
 
     describe(shiftRightBy4, () => {
         it('should shift right by 4', () => {
-            const num = 0x12_34
+            const num = 0x1234
 
             const result = shiftRightBy4(num)
 
-            expect(result).to.equal(0x1_23)
+            expect(result).to.equal(0x123)
         })
     })
 
@@ -153,13 +154,13 @@ describe('BinaryOperations', () => {
 
             const result = shiftLeftBy1(num)
 
-            expect(result).to.equal(0b1_0100)
+            expect(result).to.equal(0b10100)
         })
     })
 
     describe(shiftRightBy7, () => {
         it('should shift right by 7', () => {
-            const num = 0b1000_0000
+            const num = 0b10000000
 
             const result = shiftRightBy7(num)
 
@@ -169,7 +170,7 @@ describe('BinaryOperations', () => {
 
     describe(isolate2ndDigit, () => {
         it('should isolate the second digit', () => {
-            const num = 0x12_34
+            const num = 0x1234
 
             const result = isolate2ndDigit(num)
 
@@ -179,7 +180,7 @@ describe('BinaryOperations', () => {
 
     describe(isolate3rdDigit, () => {
         it('should isolate the third digit', () => {
-            const num = 0x12_34
+            const num = 0x1234
 
             const result = isolate3rdDigit(num)
 
@@ -189,7 +190,7 @@ describe('BinaryOperations', () => {
 
     describe(isolate4thDigit, () => {
         it('should isolate the fourth digit', () => {
-            const num = 0x12_34
+            const num = 0x1234
 
             const result = isolate4thDigit(num)
 
@@ -199,7 +200,7 @@ describe('BinaryOperations', () => {
 
     describe(isolate2FirstDigits, () => {
         it('should isolate the two first digits', () => {
-            const num = 0x12_34
+            const num = 0x1234
 
             const result = isolate2FirstDigits(num)
 
@@ -209,7 +210,7 @@ describe('BinaryOperations', () => {
 
     describe(isolate2LastDigits, () => {
         it('should isolate the two last digits', () => {
-            const num = 0x12_34
+            const num = 0x1234
 
             const result = isolate2LastDigits(num)
 
@@ -219,17 +220,17 @@ describe('BinaryOperations', () => {
 
     describe(isolate3LastDigits, () => {
         it('should isolate the three last digits', () => {
-            const num = 0x12_34
+            const num = 0x1234
 
             const result = isolate3LastDigits(num)
 
-            expect(result).to.equal(0x2_34)
+            expect(result).to.equal(0x234)
         })
     })
 
     describe(isolateLeastSignificantBit, () => {
         it('should isolate the least significant bit', () => {
-            const num = 0b0000_0001
+            const num = 0b00000001
 
             const result = isolateLeastSignificantBit(num)
 
@@ -239,7 +240,7 @@ describe('BinaryOperations', () => {
 
     describe(isolateMostSignificantBit, () => {
         it('should isolate the most significant bit', () => {
-            const num = 0b1000_0000
+            const num = 0b10000000
 
             const result = isolateMostSignificantBit(num)
 
@@ -249,8 +250,8 @@ describe('BinaryOperations', () => {
 
     describe(getNthBit, () => {
         it.each([
-            { num: 0b1111_1110, bitIndex: 0, expected: 0 },
-            { num: 0b1000_0000, bitIndex: 7, expected: 1 },
+            { num: 0b11111110, bitIndex: 0, expected: 0 },
+            { num: 0b10000000, bitIndex: 7, expected: 1 },
         ])('should get the nth bit', ({ num, bitIndex, expected }) => {
             const result = getNthBit(num, bitIndex)
             expect(result).toBe(expected)
@@ -259,7 +260,7 @@ describe('BinaryOperations', () => {
 
     describe(get1stBit, () => {
         it('should get the 1st bit', () => {
-            const num = 0b0000_0001
+            const num = 0b00000001
 
             const result = get1stBit(num)
 
@@ -269,7 +270,7 @@ describe('BinaryOperations', () => {
 
     describe(get2ndBit, () => {
         it('should get the 2nd bit', () => {
-            const num = 0b0000_0010
+            const num = 0b00000010
 
             const result = get2ndBit(num)
 
@@ -279,7 +280,7 @@ describe('BinaryOperations', () => {
 
     describe(get3rdBit, () => {
         it('should get the 3rd bit', () => {
-            const num = 0b000_0100
+            const num = 0b0000100
 
             const result = get3rdBit(num)
 
@@ -289,7 +290,7 @@ describe('BinaryOperations', () => {
 
     describe(get4thBit, () => {
         it('should get the 4th bit', () => {
-            const num = 0b0000_1000
+            const num = 0b00001000
 
             const result = get4thBit(num)
 
@@ -298,15 +299,20 @@ describe('BinaryOperations', () => {
     })
 
     describe(setNthBit, () => {
-        it.each([
-            { num: 0b0000_0000, bitIndex: 0, value: 1, expected: 0b0000_0001 },
-            { num: 0b0000_0000, bitIndex: 1, value: 1, expected: 0b0000_0010 },
-            { num: 0b0000_0000, bitIndex: 2, value: 1, expected: 0b0000_0100 },
-            { num: 0b0000_0000, bitIndex: 3, value: 1, expected: 0b0000_1000 },
-            { num: 0b1111_1111, bitIndex: 0, value: 0, expected: 0b1111_1110 },
-            { num: 0b1111_1111, bitIndex: 1, value: 0, expected: 0b1111_1101 },
-            { num: 0b1111_1111, bitIndex: 2, value: 0, expected: 0b1111_1011 },
-            { num: 0b1111_1111, bitIndex: 3, value: 0, expected: 0b1111_0111 },
+        it.for<{
+            num: number
+            bitIndex: number
+            value: Bit
+            expected: number
+        }>([
+            { num: 0b00000000, bitIndex: 0, value: 1, expected: 0b00000001 },
+            { num: 0b00000000, bitIndex: 1, value: 1, expected: 0b00000010 },
+            { num: 0b00000000, bitIndex: 2, value: 1, expected: 0b00000100 },
+            { num: 0b00000000, bitIndex: 3, value: 1, expected: 0b00001000 },
+            { num: 0b11111111, bitIndex: 0, value: 0, expected: 0b11111110 },
+            { num: 0b11111111, bitIndex: 1, value: 0, expected: 0b11111101 },
+            { num: 0b11111111, bitIndex: 2, value: 0, expected: 0b11111011 },
+            { num: 0b11111111, bitIndex: 3, value: 0, expected: 0b11110111 },
         ])('should set the nth bit', ({ num, bitIndex, value, expected }) => {
             const result = setNthBit({ number: num, bitIndex, value })
             expect(result).toBe(expected)
@@ -315,47 +321,47 @@ describe('BinaryOperations', () => {
 
     describe(set1stBit, () => {
         it('should set the 1st bit', () => {
-            const num = 0b0001_0000
+            const num = 0b00010000
 
             const result = set1stBit(num, 1)
 
-            expect(result).toBe(0b0001_0001)
+            expect(result).toBe(0b00010001)
         })
     })
 
     describe(set2ndBit, () => {
         it('should set the 2nd bit', () => {
-            const num = 0b0000_1000
+            const num = 0b00001000
 
             const result = set2ndBit(num, 1)
 
-            expect(result).toBe(0b0000_1010)
+            expect(result).toBe(0b00001010)
         })
     })
 
     describe(set3rdBit, () => {
         it('should set the 3rd bit', () => {
-            const num = 0b0000_1000
+            const num = 0b00001000
 
             const result = set3rdBit(num, 1)
 
-            expect(result).toBe(0b0000_1100)
+            expect(result).toBe(0b00001100)
         })
     })
 
     describe(set4thBit, () => {
         it('should set the 4th bit', () => {
-            const num = 0b0000_0010
+            const num = 0b00000010
 
             const result = set4thBit(num, 1)
 
-            expect(result).toBe(0b0000_1010)
+            expect(result).toBe(0b00001010)
         })
     })
 
     describe(isBitSet, () => {
         it('should check if a bit is set on an 8 bit number with little endian', () => {
-            const num = 0b0000_0001
+            const num = 0b00000001
 
             const result = isBitSet(num, 0)
 
@@ -363,7 +369,7 @@ describe('BinaryOperations', () => {
         })
 
         it('should check if a bit is set on an 8 bit number with big endian', () => {
-            const num = 0b1000_0000
+            const num = 0b10000000
 
             const result = isBitSet(num, 0, { endianness: 'big' })
 
@@ -373,7 +379,7 @@ describe('BinaryOperations', () => {
 
     describe(isBitSet, () => {
         it('should check if a bit is not set with little endian', () => {
-            const num = 0b0111_1111
+            const num = 0b01111111
 
             const result = isBitSet(num, 7)
 
@@ -381,7 +387,7 @@ describe('BinaryOperations', () => {
         })
 
         it('should check if a bit is not set with big endian', () => {
-            const num = 0b0111_1111
+            const num = 0b01111111
 
             const result = isBitSet(num, 0, { endianness: 'big' })
 

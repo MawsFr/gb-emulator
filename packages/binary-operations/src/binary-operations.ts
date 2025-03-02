@@ -1,3 +1,4 @@
+export type Bit = 0 | 1
 export const concatBytes = (
     highByte: number,
     lowByte: number,
@@ -23,11 +24,11 @@ export const bitwiseAnd = (number1: number, number2: number): number =>
     number1 & number2
 
 export const masks = {
-    SECOND_DIGIT: 0x0F_00,
-    THIRD_DIGIT: 0x00_F0,
-    FOURTH_DIGIT: 0x00_0F,
-    TWO_FIRST_DIGITS: 0xFF_00,
-    TWO_LAST_DIGITS: 0x00_FF,
+    SECOND_DIGIT: 0x0F00,
+    THIRD_DIGIT: 0x00F0,
+    FOURTH_DIGIT: 0x000F,
+    TWO_FIRST_DIGITS: 0xFF00,
+    TWO_LAST_DIGITS: 0x00FF,
     THREE_LAST_DIGITS: 0x0F_FF,
 }
 
@@ -71,13 +72,13 @@ export const isolateLeastSignificantBit = (number_: number): number =>
 export const isolateMostSignificantBit = (number_: number): number =>
     shiftRightBy7(number_)
 
-export const getNthBit = (number_: number, bitIndex: number): number => {
-    return bitwiseAnd(shiftRightBy(bitIndex)(number_), 0x01)
+export const getNthBit = (number_: number, bitIndex: number): Bit => {
+    return bitwiseAnd(shiftRightBy(bitIndex)(number_), 0x01) as Bit
 }
-export const get1stBit = (number_: number): number => getNthBit(number_, 0)
-export const get2ndBit = (number_: number): number => getNthBit(number_, 1)
-export const get3rdBit = (number_: number): number => getNthBit(number_, 2)
-export const get4thBit = (number_: number): number => getNthBit(number_, 3)
+export const get1stBit = (number_: number): Bit => getNthBit(number_, 0)
+export const get2ndBit = (number_: number): Bit => getNthBit(number_, 1)
+export const get3rdBit = (number_: number): Bit => getNthBit(number_, 2)
+export const get4thBit = (number_: number): Bit => getNthBit(number_, 3)
 
 export const setNthBit = ({
     number,
@@ -86,7 +87,7 @@ export const setNthBit = ({
 }: {
     number: number
     bitIndex: number
-    value: number
+    value: Bit
 }): number => {
     const mask = shiftLeftBy(bitIndex)(0x01)
     return value === 1
@@ -94,13 +95,13 @@ export const setNthBit = ({
         : bitwiseAnd(number, bitwiseXor(mask, 0xFF))
 }
 
-export const set1stBit = (number_: number, value: number): number =>
+export const set1stBit = (number_: number, value: Bit): number =>
     setNthBit({ number: number_, bitIndex: 0, value })
-export const set2ndBit = (number_: number, value: number): number =>
+export const set2ndBit = (number_: number, value: Bit): number =>
     setNthBit({ number: number_, bitIndex: 1, value })
-export const set3rdBit = (number_: number, value: number): number =>
+export const set3rdBit = (number_: number, value: Bit): number =>
     setNthBit({ number: number_, bitIndex: 2, value })
-export const set4thBit = (number_: number, value: number): number =>
+export const set4thBit = (number_: number, value: Bit): number =>
     setNthBit({ number: number_, bitIndex: 3, value })
 
 export const isBitSet = (

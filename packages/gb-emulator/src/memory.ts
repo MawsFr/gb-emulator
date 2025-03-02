@@ -1,4 +1,4 @@
-import { CanPointToValue, Register16 } from '@/registers.ts'
+import { CanPointToValue, Register16 } from '@/registers/registers.ts'
 import { bitwiseAnd, concatBytes, toHex } from '@mawsfr/binary-operations'
 
 export abstract class ImmediateMemoryValue implements CanPointToValue {
@@ -46,6 +46,28 @@ export class Immediate16 extends ImmediateMemoryValue {
             this.memory.addresses[this.PC.value + 1],
             this.memory.addresses[this.PC.value + 2]
         )
+    }
+}
+
+export class MemoryValue {
+    private readonly memory: Memory
+    private readonly address: number
+
+    constructor(memory: Memory, address: number) {
+        this.memory = memory
+        this.address = address
+    }
+
+    get value(): number {
+        return this.memory.addresses[this.address]
+    }
+
+    set value(value: number) {
+        this.memory.write(this.address, value)
+    }
+
+    toString(): string {
+        return `(${toHex(this.address)})`
     }
 }
 

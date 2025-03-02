@@ -1,4 +1,5 @@
 import {
+    Bit,
     bitwiseAnd,
     concatBytes,
     get1stBit,
@@ -14,6 +15,7 @@ import {
     toHex,
 } from '@mawsfr/binary-operations'
 import { Memory } from '@/memory.ts'
+import { LCDControl } from '@/registers/LCDControl.ts'
 
 export interface CanCopyValueInto {
     copyValueInto(target: CanPointToValue): void
@@ -38,10 +40,6 @@ export abstract class AbstractRegister
         this.name = name
         this._mask = mask
         this._value = value ?? this._value
-    }
-
-    get mask() {
-        return this._mask
     }
 
     get value() {
@@ -123,7 +121,7 @@ export class HLD extends Register16 {
     }
 }
 
-export class Flags extends Register8 {
+export class OperationFlags extends Register8 {
     /**
      * Gets zero flag Z
      */
@@ -156,7 +154,7 @@ export class Flags extends Register8 {
      * Sets zero flag Z
      * @param value
      */
-    set zeroFlag(value: number) {
+    set zeroFlag(value: Bit) {
         this.value = set1stBit(this.value, value)
     }
 
@@ -164,7 +162,7 @@ export class Flags extends Register8 {
      * Sets half carry flag H
      * @param value
      */
-    set halfCarryFlag(value: number) {
+    set halfCarryFlag(value: Bit) {
         this.value = set3rdBit(this.value, value)
     }
 
@@ -172,7 +170,7 @@ export class Flags extends Register8 {
      * Sets subtraction flag N
      * @param value
      */
-    set subtractionFlag(value: number) {
+    set subtractionFlag(value: Bit) {
         this.value = set2ndBit(this.value, value)
     }
 
@@ -180,7 +178,7 @@ export class Flags extends Register8 {
      * Sets carry flag CY
      * @param value
      */
-    set carryFlag(value: number) {
+    set carryFlag(value: Bit) {
         this.value = set4thBit(this.value, value)
     }
 }
@@ -267,7 +265,7 @@ export class Pointer implements CanCopyValueInto, CanCopyValueFrom {
     }
 
     toString(): string {
-        return `[${this.name}] (=> ${toHex(this.value)})`
+        return `${this.name} (=> ${toHex(this.value)})`
     }
 }
 
@@ -301,9 +299,9 @@ export type ConditionCode = 0b00 | 0b01 | 0b10 | 0b11
 
 export abstract class Condition {
     public readonly name: string
-    public readonly flags: Flags
+    public readonly flags: OperationFlags
 
-    constructor(name: string, flags: Flags) {
+    constructor(name: string, flags: OperationFlags) {
         this.name = name
         this.flags = flags
     }
@@ -349,7 +347,7 @@ export class Registers {
     public readonly E: Register8 = new Register8('E')
     public readonly H: Register8 = new Register8('H')
     public readonly L: Register8 = new Register8('L')
-    public readonly F: Flags = new Flags('F')
+    public readonly F: OperationFlags = new OperationFlags('F')
 
     public readonly HL = new ComposedRegister('HL', this.H, this.L)
     public readonly AF = new ComposedRegister('AF', this.A, this.F)
@@ -363,6 +361,7 @@ export class Registers {
     public readonly HLD: HLD = new HLD(this.HL)
 
     public readonly '[HL]': Pointer
+    public readonly LCDC: LCDControl
 
     public readonly r8: Record<R8Code, Register8 | Pointer>
 
@@ -398,6 +397,7 @@ export class Registers {
 
     constructor(memory: Memory) {
         this.memory = memory
+        this.LCDC = new LCDControl(memory)
         this['[HL]'] = new Pointer(this.HL, memory)
         this.r8 = {
             0b000: this.B,

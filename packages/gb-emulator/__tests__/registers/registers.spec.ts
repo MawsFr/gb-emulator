@@ -1,7 +1,7 @@
 // Based on : https://gbdev.io/pandocs/CPU_Registers_and_Flags.html#the-flags-register-lower-8-bits-of-af-register
 
 import { describe, expect, it } from 'vitest'
-import { Registers } from '@/registers.ts'
+import { Registers } from '@/registers/registers.ts'
 import { GbEmulatorTestContext } from '$/test.setup.ts'
 
 describe(Registers, () => {
