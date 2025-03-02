@@ -2,14 +2,14 @@ import { Instruction } from '@/instructions/instruction.ts'
 import { getNthBit, shiftRightBy1 } from '@mawsfr/binary-operations'
 
 export type SRL_R8_OPCODES =
-    | 0b00111_000
-    | 0b00111_001
-    | 0b00111_010
-    | 0b00111_011
-    | 0b00111_100
-    | 0b00111_101
-    | 0b00111_110
-    | 0b00111_111
+    | 0b00111000
+    | 0b00111001
+    | 0b00111010
+    | 0b00111011
+    | 0b00111100
+    | 0b00111101
+    | 0b00111110
+    | 0b00111111
 
 export class SRL_R8 extends Instruction {
     execute(opcode: SRL_R8_OPCODES) {

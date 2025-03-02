@@ -13,19 +13,19 @@ describe(POP_R16STK, () => {
         expectedAF?: number
     }>([
         {
-            opcode: 0b11_00_0001,
+            opcode: 0b11000001,
             expectedBC: 0x1234,
         },
         {
-            opcode: 0b11_01_0001,
+            opcode: 0b11010001,
             expectedDE: 0x1234,
         },
         {
-            opcode: 0b11_10_0001,
+            opcode: 0b11100001,
             expectedHL: 0x1234,
         },
         {
-            opcode: 0b11_11_0001,
+            opcode: 0b11110001,
             expectedAF: 0x1234,
         },
     ])(

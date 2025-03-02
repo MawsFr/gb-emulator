@@ -2,14 +2,14 @@ import { Instruction } from '@/instructions/instruction.ts'
 import { SKIP_IMMEDIATE_8 } from '$/src'
 
 export type LD_R8_IMM8_OPCODES =
-    | 0b00_000_110
-    | 0b00_001_110
-    | 0b00_010_110
-    | 0b00_011_110
-    | 0b00_100_110
-    | 0b00_101_110
-    | 0b00_110_110
-    | 0b00_111_110
+    | 0b00000110
+    | 0b00001110
+    | 0b00010110
+    | 0b00011110
+    | 0b00100110
+    | 0b00101110
+    | 0b00110110
+    | 0b00111110
 
 export class LD_R8_IMM8 extends Instruction {
     execute(opcode: LD_R8_IMM8_OPCODES) {

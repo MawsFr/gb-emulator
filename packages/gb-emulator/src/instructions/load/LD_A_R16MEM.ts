@@ -1,10 +1,10 @@
 import { Instruction } from '@/instructions/instruction.ts'
 
 export type LD_A_R16MEM_OPCODES =
-    | 0b00_00_1010
-    | 0b00_01_1010
-    | 0b00_10_1010
-    | 0b00_11_1010
+    | 0b00001010
+    | 0b00011010
+    | 0b00101010
+    | 0b00111010
 
 export class LD_A_R16MEM extends Instruction {
     execute(opcode: LD_A_R16MEM_OPCODES) {

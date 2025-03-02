@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { LD_R8_IMM8, LD_R8_IMM8_OPCODES } from '@/instructions/load/LD_R8_IMM8'
-import { R8Code } from '@/registers.ts'
+import { R8Code } from '@/registers/registers.ts'
 
 describe(LD_R8_IMM8, () => {
     it.for<{
@@ -8,35 +8,35 @@ describe(LD_R8_IMM8, () => {
         expectedRegister: R8Code
     }>([
         {
-            opcode: 0b00_000_110,
+            opcode: 0b00000110,
             expectedRegister: 0b00,
         },
         {
-            opcode: 0b00_001_110,
+            opcode: 0b00001110,
             expectedRegister: 0b01,
         },
         {
-            opcode: 0b00_010_110,
+            opcode: 0b00010110,
             expectedRegister: 0b10,
         },
         {
-            opcode: 0b00_011_110,
+            opcode: 0b00011110,
             expectedRegister: 0b11,
         },
         {
-            opcode: 0b00_100_110,
+            opcode: 0b00100110,
             expectedRegister: 0b100,
         },
         {
-            opcode: 0b00_101_110,
+            opcode: 0b00101110,
             expectedRegister: 0b101,
         },
         {
-            opcode: 0b00_110_110,
+            opcode: 0b00110110,
             expectedRegister: 0b110,
         },
         {
-            opcode: 0b00_111_110,
+            opcode: 0b00111110,
             expectedRegister: 0b111,
         },
     ])(

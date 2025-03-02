@@ -7,35 +7,35 @@ describe(RST_TGT3, () => {
         expectedPC: number
     }>([
         {
-            opcode: 0b11_000_111,
+            opcode: 0b11000111,
             expectedPC: 0x0018,
         },
         {
-            opcode: 0b11_001_111,
+            opcode: 0b11001111,
             expectedPC: 0x0020,
         },
         {
-            opcode: 0b11_010_111,
+            opcode: 0b11010111,
             expectedPC: 0x0028,
         },
         {
-            opcode: 0b11_011_111,
+            opcode: 0b11011111,
             expectedPC: 0x0030,
         },
         {
-            opcode: 0b11_100_111,
+            opcode: 0b11100111,
             expectedPC: 0x0038,
         },
         {
-            opcode: 0b11_101_111,
+            opcode: 0b11101111,
             expectedPC: 0x0040,
         },
         {
-            opcode: 0b11_110_111,
+            opcode: 0b11110111,
             expectedPC: 0x0048,
         },
         {
-            opcode: 0b11_111_111,
+            opcode: 0b11111111,
             expectedPC: 0x0050,
         },
     ])(

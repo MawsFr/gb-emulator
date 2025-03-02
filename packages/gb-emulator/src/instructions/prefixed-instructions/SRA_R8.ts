@@ -7,14 +7,14 @@ import {
 } from '@mawsfr/binary-operations'
 
 export type SRA_R8_OPCODES =
-    | 0b00101_000
-    | 0b00101_001
-    | 0b00101_010
-    | 0b00101_011
-    | 0b00101_100
-    | 0b00101_101
-    | 0b00101_110
-    | 0b00101_111
+    | 0b00101000
+    | 0b00101001
+    | 0b00101010
+    | 0b00101011
+    | 0b00101100
+    | 0b00101101
+    | 0b00101110
+    | 0b00101111
 
 export class SRA_R8 extends Instruction {
     execute(opcode: SRA_R8_OPCODES) {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { R16Code } from '@/registers.ts'
+import { R16Code } from '@/registers/registers.ts'
 import { INC_R16, INC_R16_OPCODES } from '@/instructions/inc/INC_R16.ts'
 
 describe(INC_R16, () => {
@@ -8,19 +8,19 @@ describe(INC_R16, () => {
         expectedRegister: R16Code
     }>([
         {
-            opcode: 0b00_00_0011,
+            opcode: 0b00000011,
             expectedRegister: 0b00,
         },
         {
-            opcode: 0b00_01_0011,
+            opcode: 0b00010011,
             expectedRegister: 0b01,
         },
         {
-            opcode: 0b00_10_0011,
+            opcode: 0b00100011,
             expectedRegister: 0b10,
         },
         {
-            opcode: 0b00_11_0011,
+            opcode: 0b00110011,
             expectedRegister: 0b11,
         },
     ])(

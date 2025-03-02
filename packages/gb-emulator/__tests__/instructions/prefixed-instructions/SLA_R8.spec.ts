@@ -8,35 +8,35 @@ import { R8Code } from '$/src'
 describe(SLA_R8, () => {
     it.for<{ opcode: SLA_R8_OPCODES; expectedRegister: R8Code }>([
         {
-            opcode: 0b00100_000,
+            opcode: 0b00100000,
             expectedRegister: 0b000,
         },
         {
-            opcode: 0b00100_001,
+            opcode: 0b00100001,
             expectedRegister: 0b001,
         },
         {
-            opcode: 0b00100_010,
+            opcode: 0b00100010,
             expectedRegister: 0b010,
         },
         {
-            opcode: 0b00100_011,
+            opcode: 0b00100011,
             expectedRegister: 0b011,
         },
         {
-            opcode: 0b00100_100,
+            opcode: 0b00100100,
             expectedRegister: 0b100,
         },
         {
-            opcode: 0b00100_101,
+            opcode: 0b00100101,
             expectedRegister: 0b101,
         },
         {
-            opcode: 0b00100_110,
+            opcode: 0b00100110,
             expectedRegister: 0b110,
         },
         {
-            opcode: 0b00100_111,
+            opcode: 0b00100111,
             expectedRegister: 0b111,
         },
     ])(

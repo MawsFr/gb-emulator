@@ -11,19 +11,19 @@ describe(CALL_COND_IMM16, () => {
         carryFlag?: number
     }>([
         {
-            opcode: 0b110_00_100,
+            opcode: 0b11000100,
             zeroFlag: 0,
         },
         {
-            opcode: 0b110_01_100,
+            opcode: 0b11001100,
             zeroFlag: 1,
         },
         {
-            opcode: 0b110_10_100,
+            opcode: 0b11010100,
             carryFlag: 0,
         },
         {
-            opcode: 0b110_11_100,
+            opcode: 0b11011100,
             carryFlag: 1,
         },
     ])(
@@ -55,19 +55,19 @@ describe(CALL_COND_IMM16, () => {
         carryFlag?: number
     }>([
         {
-            opcode: 0b110_00_100,
+            opcode: 0b11000100,
             zeroFlag: 1,
         },
         {
-            opcode: 0b110_01_100,
+            opcode: 0b11001100,
             zeroFlag: 0,
         },
         {
-            opcode: 0b110_10_100,
+            opcode: 0b11010100,
             carryFlag: 1,
         },
         {
-            opcode: 0b110_11_100,
+            opcode: 0b11011100,
             carryFlag: 0,
         },
     ])(

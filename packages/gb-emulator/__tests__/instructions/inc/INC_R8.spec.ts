@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { R8Code } from '@/registers.ts'
+import { R8Code } from '@/registers/registers.ts'
 import { INC_R8, INC_R8_OPCODES } from '@/instructions/inc/INC_R8.ts'
 
 describe(INC_R8, () => {
@@ -8,35 +8,35 @@ describe(INC_R8, () => {
         expectedRegister: R8Code
     }>([
         {
-            opcode: 0b00_000_100,
+            opcode: 0b00000100,
             expectedRegister: 0b000,
         },
         {
-            opcode: 0b00_001_100,
+            opcode: 0b00001100,
             expectedRegister: 0b001,
         },
         {
-            opcode: 0b00_010_100,
+            opcode: 0b00010100,
             expectedRegister: 0b010,
         },
         {
-            opcode: 0b00_011_100,
+            opcode: 0b00011100,
             expectedRegister: 0b011,
         },
         {
-            opcode: 0b00_100_100,
+            opcode: 0b00100100,
             expectedRegister: 0b100,
         },
         {
-            opcode: 0b00_101_100,
+            opcode: 0b00101100,
             expectedRegister: 0b101,
         },
         {
-            opcode: 0b00_110_100,
+            opcode: 0b00110100,
             expectedRegister: 0b110,
         },
         {
-            opcode: 0b00_111_100,
+            opcode: 0b00111100,
             expectedRegister: 0b111,
         },
     ])(

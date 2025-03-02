@@ -1,14 +1,14 @@
 import { Instruction } from '@/instructions/instruction.ts'
 
 export type DEC_R8_OPCODES =
-    | 0b00_000_101
-    | 0b00_001_101
-    | 0b00_010_101
-    | 0b00_011_101
-    | 0b00_100_101
-    | 0b00_101_101
-    | 0b00_110_101
-    | 0b00_111_101
+    | 0b00000101
+    | 0b00001101
+    | 0b00010101
+    | 0b00011101
+    | 0b00100101
+    | 0b00101101
+    | 0b00110101
+    | 0b00111101
 
 export class DEC_R8 extends Instruction {
     execute(opcode: DEC_R8_OPCODES) {

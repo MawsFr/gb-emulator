@@ -1,6 +1,6 @@
 import { Instruction } from '@/instructions/instruction.ts'
 import { Cpu } from '@/cpu.ts'
-import { R8Code } from '@/registers.ts'
+import { R8Code } from '@/registers/registers.ts'
 import {
     Immediate8SourceStrategy,
     RegisterSourceStrategy,

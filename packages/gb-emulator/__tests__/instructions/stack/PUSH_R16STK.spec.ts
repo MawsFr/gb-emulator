@@ -8,10 +8,10 @@ describe(PUSH_R16STK, () => {
     it.for<{
         opcode: PUSH_R16STK_OPCODES
     }>([
-        { opcode: 0b11_00_0101 },
-        { opcode: 0b11_01_0101 },
-        { opcode: 0b11_10_0101 },
-        { opcode: 0b11_11_0101 },
+        { opcode: 0b11000101 },
+        { opcode: 0b11010101 },
+        { opcode: 0b11100101 },
+        { opcode: 0b11110101 },
     ])(
         'should push the value from the register pair onto the stack',
         ({ opcode }, { cpu, memory, registers }) => {
@@ -20,19 +20,19 @@ describe(PUSH_R16STK, () => {
             registers.SP.value = 0xFFFE
 
             switch (opcode) {
-                case 0b11_00_0101: {
+                case 0b11000101: {
                     registers.BC.value = 0x1234
                     break
                 }
-                case 0b11_01_0101: {
+                case 0b11010101: {
                     registers.DE.value = 0x1234
                     break
                 }
-                case 0b11_10_0101: {
+                case 0b11100101: {
                     registers.HL.value = 0x1234
                     break
                 }
-                case 0b11_11_0101: {
+                case 0b11110101: {
                     registers.AF.value = 0x1234
                     break
                 }

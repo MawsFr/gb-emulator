@@ -8,35 +8,35 @@ import { R8Code } from '$/src'
 describe(SRA_R8, () => {
     it.for<{ opcode: SRA_R8_OPCODES; expectedRegister: R8Code }>([
         {
-            opcode: 0b00101_000,
+            opcode: 0b00101000,
             expectedRegister: 0b000,
         },
         {
-            opcode: 0b00101_001,
+            opcode: 0b00101001,
             expectedRegister: 0b001,
         },
         {
-            opcode: 0b00101_010,
+            opcode: 0b00101010,
             expectedRegister: 0b010,
         },
         {
-            opcode: 0b00101_011,
+            opcode: 0b00101011,
             expectedRegister: 0b011,
         },
         {
-            opcode: 0b00101_100,
+            opcode: 0b00101100,
             expectedRegister: 0b100,
         },
         {
-            opcode: 0b00101_101,
+            opcode: 0b00101101,
             expectedRegister: 0b101,
         },
         {
-            opcode: 0b00101_110,
+            opcode: 0b00101110,
             expectedRegister: 0b110,
         },
         {
-            opcode: 0b00101_111,
+            opcode: 0b00101111,
             expectedRegister: 0b111,
         },
     ])(

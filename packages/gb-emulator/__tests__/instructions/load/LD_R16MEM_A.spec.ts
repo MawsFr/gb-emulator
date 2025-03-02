@@ -3,7 +3,7 @@ import {
     LD_R16MEM_A,
     LD_R16MEM_A_OPCODES,
 } from '@/instructions/load/LD_R16MEM_A.ts'
-import { R16Code } from '@/registers.ts'
+import { R16Code } from '@/registers/registers.ts'
 
 describe(LD_R16MEM_A, () => {
     it.for<{
@@ -12,22 +12,22 @@ describe(LD_R16MEM_A, () => {
         expectedValue: number
     }>([
         {
-            opcode: 0b00_00_0010,
+            opcode: 0b00000010,
             expectedRegister: 0b00,
             expectedValue: 0x2,
         },
         {
-            opcode: 0b00_01_0010,
+            opcode: 0b00010010,
             expectedRegister: 0b01,
             expectedValue: 0x2,
         },
         {
-            opcode: 0b00_10_0010,
+            opcode: 0b00100010,
             expectedRegister: 0b10,
             expectedValue: 0x3,
         },
         {
-            opcode: 0b00_11_0010,
+            opcode: 0b00110010,
             expectedRegister: 0b11,
             expectedValue: 0x1,
         },

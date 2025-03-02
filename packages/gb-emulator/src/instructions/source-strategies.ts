@@ -1,4 +1,4 @@
-import { Pointer, R8Code, Register8, Registers } from '@/registers.ts'
+import { Pointer, R8Code, Register8, Registers } from '@/registers/registers.ts'
 import { Cpu } from '@/cpu.ts'
 import { Immediate8 } from '$/src'
 

@@ -11,35 +11,35 @@ describe(RR_R8, () => {
         expectedRegister: R8Code
     }>([
         {
-            opcode: 0b00011_000,
+            opcode: 0b00011000,
             expectedRegister: 0b000,
         },
         {
-            opcode: 0b00011_001,
+            opcode: 0b00011001,
             expectedRegister: 0b001,
         },
         {
-            opcode: 0b00011_010,
+            opcode: 0b00011010,
             expectedRegister: 0b010,
         },
         {
-            opcode: 0b00011_011,
+            opcode: 0b00011011,
             expectedRegister: 0b011,
         },
         {
-            opcode: 0b00011_100,
+            opcode: 0b00011100,
             expectedRegister: 0b100,
         },
         {
-            opcode: 0b00011_101,
+            opcode: 0b00011101,
             expectedRegister: 0b101,
         },
         {
-            opcode: 0b00011_110,
+            opcode: 0b00011110,
             expectedRegister: 0b110,
         },
         {
-            opcode: 0b00011_111,
+            opcode: 0b00011111,
             expectedRegister: 0b111,
         },
     ])(

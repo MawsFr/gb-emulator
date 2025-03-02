@@ -3,7 +3,7 @@ import {
     LD_R16_IMM16,
     LD_R16_IMM16_OPCODES,
 } from '@/instructions/load/LD_R16_IMM16.ts'
-import { R16Code } from '@/registers.ts'
+import { R16Code } from '@/registers/registers.ts'
 
 describe(LD_R16_IMM16, () => {
     it.for<{
@@ -11,19 +11,19 @@ describe(LD_R16_IMM16, () => {
         expectedRegister: R16Code
     }>([
         {
-            opcode: 0b00_00_0001,
+            opcode: 0b00000001,
             expectedRegister: 0b00,
         },
         {
-            opcode: 0b00_01_0001,
+            opcode: 0b00010001,
             expectedRegister: 0b01,
         },
         {
-            opcode: 0b00_10_0001,
+            opcode: 0b00100001,
             expectedRegister: 0b10,
         },
         {
-            opcode: 0b00_11_0001,
+            opcode: 0b00110001,
             expectedRegister: 0b11,
         },
     ])(

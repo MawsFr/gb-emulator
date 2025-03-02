@@ -2,10 +2,10 @@ import { Instruction } from '@/instructions/instruction.ts'
 import { SKIP_IMMEDIATE_16 } from '$/src'
 
 export type CALL_COND_IMM16_OPCODES =
-    | 0b110_00_100
-    | 0b110_01_100
-    | 0b110_10_100
-    | 0b110_11_100
+    | 0b11000100
+    | 0b11001100
+    | 0b11010100
+    | 0b11011100
 
 export class CALL_COND_IMM16 extends Instruction {
     execute(opcode: CALL_COND_IMM16_OPCODES) {

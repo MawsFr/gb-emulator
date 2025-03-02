@@ -1,4 +1,4 @@
-import { Pointer, Pointer16, Registers } from '@/registers.ts'
+import { Pointer, Pointer16, Registers } from '@/registers/registers.ts'
 import { Immediate16, Immediate8, Memory } from '@/memory.ts'
 import { InstructionLoader } from '@/instructions/instruction-loader.ts'
 import { Instruction } from '@/instructions/instruction.ts'
@@ -235,18 +235,6 @@ export class Cpu {
         this.goToRelativeAddress(1 + additionalBytes)
     }
 
-    getValuePointedByImmediate18() {
-        return this['[imm8]'].value
-    }
-
-    getValuePointedByImmediate16() {
-        return this['[imm16]'].value
-    }
-
-    setValuePointedByImmediate16(value: number) {
-        this['[imm16]'].value = value
-    }
-
     execute(opcode: Opcode) {
         this.instructions[opcode].execute(opcode)
     }
@@ -279,7 +267,6 @@ export class Cpu {
         const opcode = this.decode(this.fetchNextByte())
         const instruction = this.instructions[opcode]
 
-        // eslint-disable-next-line no-console
         console.log(
             `Executing opcode : ${opcode.toString(16).toUpperCase()} | ${opcode.toString(2)} | ${instruction.toString(opcode)}`
         )
@@ -289,7 +276,7 @@ export class Cpu {
 
     fetchNextByte(): number {
         const byte = this.memory.addresses[this.registers.PC.value]
-        // eslint-disable-next-line no-console
+
         console.log(
             `Fetching byte : ${byte.toString(16).toUpperCase()} | ${byte.toString(2)}`
         )
@@ -309,7 +296,7 @@ export class Cpu {
     }
 
     isValidOpcode(opcode: number) {
-        return Object.keys(this.instructions).includes(String(opcode))
+        return this.instructions[opcode as Opcode]
     }
 
     decodePrefixed(byte: number): PrefixedOpcode {

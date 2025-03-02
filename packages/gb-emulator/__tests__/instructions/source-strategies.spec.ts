@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { Cpu } from '@/cpu.ts'
-import { Registers } from '@/registers.ts'
+import { Registers } from '@/registers/registers.ts'
 import {
     Immediate8SourceStrategy,
     RegisterSourceStrategy,

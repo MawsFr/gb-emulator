@@ -1,10 +1,10 @@
 import { Instruction } from '@/instructions/instruction.ts'
 
 export type ADD_HL_R16_OPCODES =
-    | 0b00_00_1001
-    | 0b00_01_1001
-    | 0b00_10_1001
-    | 0b00_11_1001
+    | 0b00001001
+    | 0b00011001
+    | 0b00101001
+    | 0b00111001
 
 export class ADD_HL_R16 extends Instruction {
     execute(opcode: ADD_HL_R16_OPCODES) {

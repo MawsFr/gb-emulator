@@ -8,13 +8,13 @@ describe(CPL, () => {
         registers,
     }) => {
         // Given
-        registers.A.value = 0b1010_1010
+        registers.A.value = 0b10101010
 
         // When
         new CPL(cpu).execute()
 
         // Then
-        expect(registers.A.value).toEqual(0b0101_0101)
+        expect(registers.A.value).toEqual(0b01010101)
         expect(registers.F.subtractionFlag).toBe(1)
         expect(registers.F.halfCarryFlag).toBe(1)
     })

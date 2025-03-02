@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { R16Code } from '@/registers.ts'
+import { R16Code } from '@/registers/registers.ts'
 import {
     LD_A_R16MEM,
     LD_A_R16MEM_OPCODES,
@@ -12,22 +12,22 @@ describe(LD_A_R16MEM, () => {
         expectedValue: number
     }>([
         {
-            opcode: 0b00_00_1010,
+            opcode: 0b00001010,
             expectedRegister: 0b00,
             expectedValue: 0x1,
         },
         {
-            opcode: 0b00_01_1010,
+            opcode: 0b00011010,
             expectedRegister: 0b01,
             expectedValue: 0x1,
         },
         {
-            opcode: 0b00_10_1010,
+            opcode: 0b00101010,
             expectedRegister: 0b10,
             expectedValue: 0x2,
         },
         {
-            opcode: 0b00_11_1010,
+            opcode: 0b00111010,
             expectedRegister: 0b11,
             expectedValue: 0x0,
         },

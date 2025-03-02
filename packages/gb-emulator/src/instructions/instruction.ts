@@ -4,7 +4,7 @@ import {
     R8Code,
     Register16,
     Registers,
-} from '@/registers.ts'
+} from '@/registers/registers.ts'
 import { Cpu, Opcode, PrefixedOpcode } from '@/cpu.ts'
 import {
     bitwiseAnd,
@@ -18,9 +18,9 @@ import { RET_COND_OPCODES } from '@/instructions/ret/RET_COND.ts'
 import { JP_COND_IMM16_OPCODE } from '@/instructions/jump/JP_COND_IMM16.ts'
 import { CALL_COND_IMM16_OPCODES } from '@/instructions/call/CALL_COND_IMM16.ts'
 
-export const REGISTER_16_MASK = 0b00_11_0000
-export const REGISTER_8_SOURCE_MASK = 0b00_000_111
-export const REGISTER_8_DESTINATION_MASK = 0b00_111_000
+export const REGISTER_16_MASK = 0b00110000
+export const REGISTER_8_SOURCE_MASK = 0b00000111
+export const REGISTER_8_DESTINATION_MASK = 0b00111000
 
 export abstract class Instruction {
     protected readonly cpu: Cpu
@@ -146,9 +146,7 @@ export abstract class Instruction {
             | CALL_COND_IMM16_OPCODES
     ) {
         // TODO: verify if code exists
-        return shiftRightBy(3)(
-            bitwiseAnd(opcode, 0b00_011_000)
-        ) as ConditionCode
+        return shiftRightBy(3)(bitwiseAnd(opcode, 0b00011000)) as ConditionCode
     }
 
     protected condition(

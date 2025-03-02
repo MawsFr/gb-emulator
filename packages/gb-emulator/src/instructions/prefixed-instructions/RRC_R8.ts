@@ -7,14 +7,14 @@ import {
 } from '@mawsfr/binary-operations'
 
 export type RRC_R8_OPCODES =
-    | 0b00001_000
-    | 0b00001_001
-    | 0b00001_010
-    | 0b00001_011
-    | 0b00001_100
-    | 0b00001_101
-    | 0b00001_110
-    | 0b00001_111
+    | 0b00001000
+    | 0b00001001
+    | 0b00001010
+    | 0b00001011
+    | 0b00001100
+    | 0b00001101
+    | 0b00001110
+    | 0b00001111
 
 export class RRC_R8 extends Instruction {
     execute(opcode: RRC_R8_OPCODES) {

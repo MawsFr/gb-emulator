@@ -2,10 +2,10 @@ import { Instruction } from '@/instructions/instruction.ts'
 import { SKIP_IMMEDIATE_16 } from '$/src'
 
 export type LD_R16_IMM16_OPCODES =
-    | 0b00_00_0001
-    | 0b00_01_0001
-    | 0b00_10_0001
-    | 0b00_11_0001
+    | 0b00000001
+    | 0b00010001
+    | 0b00100001
+    | 0b00110001
 
 export class LD_R16_IMM16 extends Instruction {
     execute(opcode: LD_R16_IMM16_OPCODES) {

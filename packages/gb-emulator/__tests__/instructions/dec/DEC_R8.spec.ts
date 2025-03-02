@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { R8Code } from '@/registers.ts'
+import { R8Code } from '@/registers/registers.ts'
 import { DEC_R8, DEC_R8_OPCODES } from '@/instructions/dec/DEC_R8.ts'
 
 describe(DEC_R8, () => {
@@ -8,35 +8,35 @@ describe(DEC_R8, () => {
         expectedRegister: R8Code
     }>([
         {
-            opcode: 0b00_000_101,
+            opcode: 0b00000101,
             expectedRegister: 0b000,
         },
         {
-            opcode: 0b00_001_101,
+            opcode: 0b00001101,
             expectedRegister: 0b001,
         },
         {
-            opcode: 0b00_010_101,
+            opcode: 0b00010101,
             expectedRegister: 0b010,
         },
         {
-            opcode: 0b00_011_101,
+            opcode: 0b00011101,
             expectedRegister: 0b011,
         },
         {
-            opcode: 0b00_100_101,
+            opcode: 0b00100101,
             expectedRegister: 0b100,
         },
         {
-            opcode: 0b00_101_101,
+            opcode: 0b00101101,
             expectedRegister: 0b101,
         },
         {
-            opcode: 0b00_110_101,
+            opcode: 0b00110101,
             expectedRegister: 0b110,
         },
         {
-            opcode: 0b00_111_101,
+            opcode: 0b00111101,
             expectedRegister: 0b111,
         },
     ])(

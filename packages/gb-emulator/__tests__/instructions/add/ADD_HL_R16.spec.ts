@@ -13,28 +13,28 @@ describe(ADD_HL_R16, () => {
         expectedHalfCarryFlag: number
     }>([
         {
-            opcode: 0b00_00_1001,
+            opcode: 0b00001001,
             expectedRegister: 'BC',
             expectedValue: 0b1111111111111111,
             expectedCarryFlag: 0,
             expectedHalfCarryFlag: 0,
         },
         {
-            opcode: 0b00_01_1001,
+            opcode: 0b00011001,
             expectedRegister: 'DE',
             expectedValue: 0b0000100000000000,
             expectedCarryFlag: 1,
             expectedHalfCarryFlag: 0,
         },
         {
-            opcode: 0b00_10_1001,
+            opcode: 0b00101001,
             expectedRegister: 'HL',
             expectedValue: 0b0001000000000000,
             expectedCarryFlag: 1,
             expectedHalfCarryFlag: 1,
         },
         {
-            opcode: 0b00_11_1001,
+            opcode: 0b00111001,
             expectedRegister: 'SP',
             expectedValue: 0b1001000000000000,
             expectedCarryFlag: 0,

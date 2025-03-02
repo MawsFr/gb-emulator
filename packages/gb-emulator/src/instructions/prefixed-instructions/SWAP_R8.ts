@@ -7,14 +7,14 @@ import {
 } from '@mawsfr/binary-operations'
 
 export type SWAP_R8_OPCODES =
-    | 0b00110_000
-    | 0b00110_001
-    | 0b00110_010
-    | 0b00110_011
-    | 0b00110_100
-    | 0b00110_101
-    | 0b00110_110
-    | 0b00110_111
+    | 0b00110000
+    | 0b00110001
+    | 0b00110010
+    | 0b00110011
+    | 0b00110100
+    | 0b00110101
+    | 0b00110110
+    | 0b00110111
 
 export class SWAP_R8 extends Instruction {
     execute(opcode: SWAP_R8_OPCODES) {
