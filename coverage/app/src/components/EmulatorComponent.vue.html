@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/273</span>
+                <span class='fraction'>0/286</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/273</span>
+                <span class='fraction'>0/286</span>
             </div>
         
             
@@ -336,7 +336,33 @@
 <a name='L271'></a><a href='#L271'>271</a>
 <a name='L272'></a><a href='#L272'>272</a>
 <a name='L273'></a><a href='#L273'>273</a>
-<a name='L274'></a><a href='#L274'>274</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a>
+<a name='L283'></a><a href='#L283'>283</a>
+<a name='L284'></a><a href='#L284'>284</a>
+<a name='L285'></a><a href='#L285'>285</a>
+<a name='L286'></a><a href='#L286'>286</a>
+<a name='L287'></a><a href='#L287'>287</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -622,12 +648,19 @@
 <span class="cstat-no" title="statement not covered" >        &lt;button @click="executeNextInstruction"&gt;Next Instruction&lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" >        &lt;button @click="scrollToCurrentAddress"&gt;Scroll to PC&lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" >        &lt;input</span>
+<span class="cstat-no" title="statement not covered" >            type="text"</span>
+<span class="cstat-no" title="statement not covered" >            v-model="addressToScrollTo"</span>
+<span class="cstat-no" title="statement not covered" >        /&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;button @click="scrollToAddress"&gt;Scroll to&lt;/button&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;input</span>
 <span class="cstat-no" title="statement not covered" >            type="file"</span>
 <span class="cstat-no" title="statement not covered" >            @change="loadFile"</span>
 <span class="cstat-no" title="statement not covered" >        /&gt;</span>
 <span class="cstat-no" title="statement not covered" >        ROM chargé : {{ loadedRom ? 'Oui' : 'Non' }}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        Previous :</span>
+<span class="cstat-no" title="statement not covered" >        | PC: {{ toHexa(cpu.registers.PC.value) }}</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        | Previous :</span>
 <span class="cstat-no" title="statement not covered" >        {{ instruction }}</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        | Next :</span>
@@ -654,10 +687,13 @@
 <span class="cstat-no" title="statement not covered" >                    v-for="(address, index) in cpu.memory.addresses"</span>
 <span class="cstat-no" title="statement not covered" >                    :key="index"</span>
 <span class="cstat-no" title="statement not covered" >                    class="address"</span>
-<span class="cstat-no" title="statement not covered" >                    :class="{ 'current-address': isCurrentAddress(index) }"</span>
+<span class="cstat-no" title="statement not covered" >                    :class="{</span>
+<span class="cstat-no" title="statement not covered" >                        'current-address': isCurrentAddress(index),</span>
+<span class="cstat-no" title="statement not covered" >                        ['address-' + toHexa(index)]: true,</span>
+<span class="cstat-no" title="statement not covered" >                    }"</span>
 <span class="cstat-no" title="statement not covered" >                &gt;</span>
 <span class="cstat-no" title="statement not covered" >                    &lt;div class="address-index-hexa"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                        0x{{ toHexa(index, 3) }} ({{ index }})</span>
+<span class="cstat-no" title="statement not covered" >                        {{ toHexa(index, 4) }} ({{ index }})</span>
 <span class="cstat-no" title="statement not covered" >                    &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >                    &lt;div class="address-hexa-value"&gt;</span>
 <span class="cstat-no" title="statement not covered" >                        {{ toHexa(address) }}</span>
@@ -685,6 +721,7 @@
 <span class="cstat-no" title="statement not covered" >} from '@mawsfr/gb-emulator'</span>
 <span class="cstat-no" title="statement not covered" >import { ref, useTemplateRef, watch } from 'vue'</span>
 <span class="cstat-no" title="statement not covered" >import { useMemoize } from '@vueuse/core'</span>
+<span class="cstat-no" title="statement not covered" >import { TileRendererImpl } from '../renderer/TileRendererImpl.ts'</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const canvas = useTemplateRef('canvas')</span>
 <span class="cstat-no" title="statement not covered" >const tileDataTable = useTemplateRef('tile-data-table')</span>
@@ -694,6 +731,8 @@
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const manual = ref(true)</span>
 <span class="cstat-no" title="statement not covered" >const showMemory = ref(false)</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >const addressToScrollTo = ref&lt;string&gt;('0x8000')</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const memory = new Memory()</span>
 <span class="cstat-no" title="statement not covered" >const registers = new Registers(memory)</span>
@@ -708,6 +747,8 @@
 <span class="cstat-no" title="statement not covered" >const instruction = ref&lt;Instruction | undefined&gt;()</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const loadedRom = ref&lt;Uint8Array | undefined&gt;()</span>
+<span class="cstat-no" title="statement not covered" >let tileDataTableRenderer: TileRendererImpl</span>
+<span class="cstat-no" title="statement not covered" >let screenRenderer: TileRendererImpl</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >watch(canvas, (canvasTemplate) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    if (canvasTemplate) {</span>
@@ -715,7 +756,12 @@
 <span class="cstat-no" title="statement not covered" >        canvasTemplate.width = 160</span>
 <span class="cstat-no" title="statement not covered" >        canvasTemplate.height = 144</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        drawScreen()</span>
+<span class="cstat-no" title="statement not covered" >        screenRenderer = new TileRendererImpl(ctx, graphics)</span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >            screenRenderer.render()</span>
+<span class="cstat-no" title="statement not covered" >        } catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >            console.error("Erreur lors du rendu de l'écran :", error)</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >})</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -725,7 +771,12 @@
 <span class="cstat-no" title="statement not covered" >        tileDataTableTemplate.width = 800</span>
 <span class="cstat-no" title="statement not covered" >        tileDataTableTemplate.height = 800</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        drawTileDataTable()</span>
+<span class="cstat-no" title="statement not covered" >        tileDataTableRenderer = new TileRendererImpl(</span>
+<span class="cstat-no" title="statement not covered" >            tileDataTableCtx,</span>
+<span class="cstat-no" title="statement not covered" >            graphics.tileDataTable</span>
+<span class="cstat-no" title="statement not covered" >        )</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        tileDataTableRenderer.render()</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >})</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -764,6 +815,15 @@
 <span class="cstat-no" title="statement not covered" >        block: 'center',</span>
 <span class="cstat-no" title="statement not covered" >    })</span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >const scrollToAddress = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    document</span>
+<span class="cstat-no" title="statement not covered" >        .querySelectorAll(`.address-${addressToScrollTo.value}`)?.[0]</span>
+<span class="cstat-no" title="statement not covered" >        ?.scrollIntoView({</span>
+<span class="cstat-no" title="statement not covered" >            behavior: 'smooth',</span>
+<span class="cstat-no" title="statement not covered" >            block: 'center',</span>
+<span class="cstat-no" title="statement not covered" >        })</span>
+<span class="cstat-no" title="statement not covered" >}</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const isCurrentAddress = (index: number) =&gt;</span>
 <span class="cstat-no" title="statement not covered" >    index === cpu.value.registers.PC.value</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -779,28 +839,7 @@
 <span class="cstat-no" title="statement not covered" >    manual.value = true</span>
 <span class="cstat-no" title="statement not covered" >    instruction.value = cpu.value.dispatch()</span>
 <span class="cstat-no" title="statement not covered" >    scrollToCurrentAddress()</span>
-<span class="cstat-no" title="statement not covered" >}</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >const drawScreen = () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    ctx.clearRect(0, 0, 160, 144)</span>
-<span class="cstat-no" title="statement not covered" >    ctx.beginPath()</span>
-<span class="cstat-no" title="statement not covered" >    ctx.fillStyle = 'white'</span>
-<span class="cstat-no" title="statement not covered" >    ctx.fillRect(0, 0, 160, 144)</span>
-<span class="cstat-no" title="statement not covered" >    ctx.fillStyle = 'black'</span>
-<span class="cstat-no" title="statement not covered" >    ctx.fillText('Screen', 50, 50)</span>
-<span class="cstat-no" title="statement not covered" >}</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >const drawTileDataTable = () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    tileDataTableCtx.clearRect(0, 0, 800, 800)</span>
-<span class="cstat-no" title="statement not covered" >    tileDataTableCtx.beginPath()</span>
-<span class="cstat-no" title="statement not covered" >    tileDataTableCtx.fillStyle = 'white'</span>
-<span class="cstat-no" title="statement not covered" >    tileDataTableCtx.fillRect(0, 0, 800, 800)</span>
-<span class="cstat-no" title="statement not covered" >    tileDataTableCtx.fillStyle = 'black'</span>
-<span class="cstat-no" title="statement not covered" >    tileDataTableCtx.fillText(</span>
-<span class="cstat-no" title="statement not covered" >        `Tile data table : ${graphics.tileDataTable.tiles.length}`,</span>
-<span class="cstat-no" title="statement not covered" >        350,</span>
-<span class="cstat-no" title="statement not covered" >        350</span>
-<span class="cstat-no" title="statement not covered" >    )</span>
+<span class="cstat-no" title="statement not covered" >    tileDataTableRenderer?.render()</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const getNextInstruction = () =&gt; {</span>
@@ -889,7 +928,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-02T16:02:03.960Z
+                at 2025-03-02T21:41:39.197Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
