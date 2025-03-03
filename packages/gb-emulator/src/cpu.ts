@@ -253,7 +253,7 @@ export class Cpu {
 
     loadROM(rom: Uint8Array) {
         for (const [address, byte] of [...rom].entries()) {
-            this.memory.write(address, byte)
+            this.memory.addresses[address] = byte
         }
     }
 
