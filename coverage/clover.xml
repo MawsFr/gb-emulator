@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1740953586362" clover="3.2.0">
-  <project timestamp="1740953586362" name="All files">
+<coverage generated="1741016962915" clover="3.2.0">
+  <project timestamp="1741016962915" name="All files">
     <metrics statements="4902" coveredstatements="2450" conditionals="334" coveredconditionals="321" methods="357" coveredmethods="269" elements="5593" coveredelements="3040" complexity="0" loc="4902" ncloc="4902" packages="25" files="87" classes="87"/>
     <package name="app.dist.assets">
       <metrics statements="17" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="index-BSygF0v_.js" path="/home/runner/work/gb-emulator/gb-emulator/app/dist/assets/index-BSygF0v_.js">
+      <file name="index-MJQqXfHB.js" path="/home/runner/work/gb-emulator/gb-emulator/app/dist/assets/index-MJQqXfHB.js">
         <metrics statements="17" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="2" count="0" type="stmt"/>
@@ -392,7 +392,7 @@
         <line num="19" count="74" type="cond" truecount="1" falsecount="0"/>
         <line num="21" count="749" type="stmt"/>
         <line num="22" count="74" type="cond" truecount="1" falsecount="0"/>
-        <line num="24" count="38876855" type="stmt"/>
+        <line num="24" count="38876852" type="stmt"/>
         <line num="26" count="74" type="stmt"/>
         <line num="27" count="74" type="stmt"/>
         <line num="28" count="74" type="stmt"/>
@@ -2758,8 +2758,8 @@
         <line num="109" count="789" type="stmt"/>
         <line num="110" count="789" type="stmt"/>
         <line num="112" count="789" type="cond" truecount="1" falsecount="0"/>
-        <line num="113" count="24718" type="stmt"/>
-        <line num="114" count="24718" type="stmt"/>
+        <line num="113" count="24715" type="stmt"/>
+        <line num="114" count="24715" type="stmt"/>
         <line num="115" count="789" type="stmt"/>
       </file>
       <file name="utils.ts" path="/home/runner/work/gb-emulator/gb-emulator/packages/gb-emulator/src/utils.ts">
