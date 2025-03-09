@@ -1,10 +1,5 @@
 import { Memory, Memory8Value } from '@/memory.ts'
-import {
-    Bit,
-    bitwiseOr,
-    getNthBit,
-    shiftLeftBy,
-} from '@mawsfr/binary-operations'
+import { bitwiseOr, getNthBit, shiftLeftBy } from '@mawsfr/binary-operations'
 import { IntRange } from '@/utils.ts'
 
 export const TILE_DATA_BYTE_SIZE = 16
@@ -14,18 +9,18 @@ export const COLOR_DEPTH = 2
 export type ColorId = IntRange<0, 4>
 export type TileDataLine = Array<ColorId>
 
-export class TileData extends Memory8Value<Bit> {
+export class TileData extends Memory8Value<number> {
     public readonly lines: Array<TileDataLine> = []
     public readonly height: number
 
     constructor(
-        memory: Memory,
         address: number,
+        memory: Memory,
         options?: {
             height?: number
         }
     ) {
-        super(memory, address)
+        super(address, memory)
         this.height = options?.height ?? TILE_DATA_BYTE_SIZE
         this.lines = this.readBytes()
     }
@@ -82,7 +77,7 @@ export class TileDataTable implements Renderable {
             address <= 0x97FF;
             address += TILE_DATA_BYTE_SIZE
         ) {
-            tiles.push(new TileData(this.memory, address))
+            tiles.push(new TileData(address, this.memory))
         }
 
         return tiles

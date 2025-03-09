@@ -55,7 +55,7 @@ export default defineConfigWithVueTs(
     },
     {
         rules: {
-            'unicorn/number-literal-case': 'error',
+            'unicorn/number-literal-case': 'warn',
             camelcase: 'off',
             'sort-keys': 'off',
             'no-inline-comments': 'off',
@@ -90,6 +90,7 @@ export default defineConfigWithVueTs(
             '@typescript-eslint/restrict-template-expressions': 'off',
             '@typescript-eslint/unbound-method': 'off',
             'capitalized-comments': 'off',
+            'no-undefined': 'off',
         },
     }
 )

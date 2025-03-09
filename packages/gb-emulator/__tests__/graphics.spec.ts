@@ -9,7 +9,7 @@ describe(TileData, () => {
         memory.write(0x8002, 0b11000000)
         memory.write(0x8003, 0b10100000)
 
-        const tile = new TileData(memory, 0x8000, {
+        const tile = new TileData(0x8000, memory, {
             height: 4,
         })
 

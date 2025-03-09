@@ -8,7 +8,7 @@ export type PUSH_R16STK_OPCODES =
 
 export class PUSH_R16STK extends Instruction {
     execute(opcode: PUSH_R16STK_OPCODES) {
-        this.registers.pushToStack(this.r16Stk(opcode).value)
+        this.registers.stack.push(this.r16Stk(opcode).value)
 
         this.cpu.goToNextInstruction()
     }
