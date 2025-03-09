@@ -3,12 +3,13 @@ import {
     CALL_COND_IMM16,
     CALL_COND_IMM16_OPCODES,
 } from '@/instructions/call/CALL_COND_IMM16.ts'
+import { Bit } from '@mawsfr/binary-operations'
 
 describe(CALL_COND_IMM16, () => {
     it.for<{
         opcode: CALL_COND_IMM16_OPCODES
-        zeroFlag?: number
-        carryFlag?: number
+        zeroFlag?: Bit
+        carryFlag?: Bit
     }>([
         {
             opcode: 0b11000100,
@@ -51,8 +52,8 @@ describe(CALL_COND_IMM16, () => {
 
     it.for<{
         opcode: CALL_COND_IMM16_OPCODES
-        zeroFlag?: number
-        carryFlag?: number
+        zeroFlag?: Bit
+        carryFlag?: Bit
     }>([
         {
             opcode: 0b11000100,

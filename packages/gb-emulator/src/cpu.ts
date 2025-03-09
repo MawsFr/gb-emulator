@@ -1,5 +1,11 @@
-import { Pointer, Pointer16, Registers } from '@/registers/registers.ts'
-import { Immediate16, Immediate8, Memory } from '@/memory.ts'
+import { Registers } from '@/registers/registers.ts'
+import {
+    Immediate16,
+    Immediate8,
+    Memory,
+    Pointed16Value,
+    Pointed8Value,
+} from '@/memory.ts'
 import { InstructionLoader } from '@/instructions/instruction-loader.ts'
 import { Instruction } from '@/instructions/instruction.ts'
 import { LD_R16_IMM16_OPCODES } from '@/instructions/load/LD_R16_IMM16.ts'
@@ -189,22 +195,26 @@ export class Cpu {
 
     public readonly imm8: Immediate8
     public readonly imm16: Immediate16
-    public readonly '[imm8]': Pointer
-    public readonly '[imm16]': Pointer16
-    public readonly '[FF00+C]': Pointer
-    public readonly '[FF00+imm8]': Pointer
+    public readonly '[imm8]': Pointed8Value
+    public readonly '[imm16]': Pointed16Value
+    public readonly '[FF00+C]': Pointed8Value
+    public readonly '[FF00+imm8]': Pointed8Value
 
     constructor(config: CpuConfig) {
         this.registers = config.registers
         this.memory = config.memory
 
-        this.imm8 = new Immediate8(this.memory, this.registers.PC)
-        this.imm16 = new Immediate16(this.memory, this.registers.PC)
+        this.imm8 = new Immediate8(this.registers.PC, this.memory)
+        this.imm16 = new Immediate16(this.registers.PC, this.memory)
 
-        this['[imm8]'] = new Pointer(this.imm8, this.memory)
-        this['[imm16]'] = new Pointer16(this.imm16, this.memory)
-        this['[FF00+C]'] = new Pointer(this.registers.C, this.memory, 0xFF00)
-        this['[FF00+imm8]'] = new Pointer(this.imm8, this.memory, 0xFF00)
+        this['[imm8]'] = new Pointed8Value(this.imm8, this.memory)
+        this['[imm16]'] = new Pointed16Value(this.imm16, this.memory)
+        this['[FF00+C]'] = new Pointed8Value(this.registers.C, this.memory, {
+            offset: 0xFF00,
+        })
+        this['[FF00+imm8]'] = new Pointed8Value(this.imm8, this.memory, {
+            offset: 0xFF00,
+        })
 
         this.instructions = InstructionLoader.loadInstructions(this)
         this.prefixedInstructions

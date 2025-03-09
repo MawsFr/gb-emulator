@@ -1,9 +1,9 @@
-import { Pointer, R8Code, Register8, Registers } from '@/registers/registers.ts'
+import { R8Code, Register8, Registers } from '@/registers/registers.ts'
 import { Cpu } from '@/cpu.ts'
-import { Immediate8 } from '$/src'
+import { Immediate8, PointedValue } from '$/src'
 
 export interface SourceStrategy {
-    get(): Immediate8 | Register8 | Pointer
+    get(): Immediate8 | Register8 | PointedValue
 
     getValue(): number
 
@@ -19,7 +19,7 @@ export class RegisterSourceStrategy implements SourceStrategy {
         this.registers = registers
     }
 
-    get(): Register8 | Pointer {
+    get(): Register8 | PointedValue {
         return this.registers.r8[this.register]
     }
 
@@ -39,7 +39,7 @@ export class Immediate8SourceStrategy implements SourceStrategy {
         this.cpu = cpu
     }
 
-    get(): Immediate8 | Pointer {
+    get(): Immediate8 | PointedValue {
         return this.cpu.imm8
     }
 

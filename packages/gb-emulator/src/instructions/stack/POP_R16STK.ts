@@ -8,7 +8,7 @@ export type POP_R16STK_OPCODES =
 
 export class POP_R16STK extends Instruction {
     execute(opcode: POP_R16STK_OPCODES) {
-        this.r16Stk(opcode).value = this.registers.popFromStack()
+        this.r16Stk(opcode).value = this.registers.stack.pop()
 
         this.cpu.goToNextInstruction()
     }

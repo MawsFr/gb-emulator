@@ -6,9 +6,9 @@ export enum LCDControlAddressingMode {
     UNSIGNED_ADDRESSING_MODE = 1,
 }
 
-export class LCDControl extends Memory8Value {
+export class LCDControl extends Memory8Value<number> {
     constructor(memory: Memory) {
-        super(memory, 0xFF40)
+        super(0xFF40, memory)
     }
 
     get addressingMode(): LCDControlAddressingMode {

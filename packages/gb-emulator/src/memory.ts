@@ -1,22 +1,31 @@
-import { CanPointToValue, Register16 } from '@/registers/registers.ts'
-import { bitwiseAnd, concatBytes, toHex } from '@mawsfr/binary-operations'
+import { Pointer, PointerName, Register16 } from '@/registers/registers.ts'
+import {
+    bitwiseAnd,
+    concatBytes,
+    isolate2FirstDigits,
+    isolate2LastDigits,
+    toHex,
+} from '@mawsfr/binary-operations'
+import { getAddressValue, isPointer } from '@/utils.ts'
 
-export abstract class ImmediateMemoryValue implements CanPointToValue {
+export abstract class ImmediateMemoryValue implements Pointer {
     public readonly name: 'imm8' | 'imm16'
     protected readonly memory: Memory
-    protected readonly PC: Register16
+    protected readonly memoryValue: MemoryValue
 
     protected constructor(
         name: 'imm8' | 'imm16',
         memory: Memory,
-        pc: Register16
+        memoryValue: MemoryValue
     ) {
         this.name = name
         this.memory = memory
-        this.PC = pc
+        this.memoryValue = memoryValue
     }
 
-    abstract get value(): number
+    get value() {
+        return this.memoryValue.value
+    }
 
     toString(): string {
         return `${this.name} (${toHex(this.value)})`
@@ -27,49 +36,135 @@ export const SKIP_IMMEDIATE_8 = 1
 export const SKIP_IMMEDIATE_16 = 2
 
 export class Immediate8 extends ImmediateMemoryValue {
-    constructor(memory: Memory, pc: Register16) {
-        super('imm8', memory, pc)
-    }
-
-    get value(): number {
-        return this.memory.addresses[this.PC.value + 1]
-    }
-}
-
-export class Immediate16 extends ImmediateMemoryValue {
-    constructor(memory: Memory, pc: Register16) {
-        super('imm16', memory, pc)
-    }
-
-    get value(): number {
-        return concatBytes(
-            this.memory.addresses[this.PC.value + 1],
-            this.memory.addresses[this.PC.value + 2]
+    constructor(pc: Register16, memory: Memory) {
+        super(
+            'imm8',
+            memory,
+            new Memory8Value(pc, memory, {
+                offset: 1,
+            })
         )
     }
 }
 
-export class Memory8Value<T extends number = number> {
-    protected readonly memory: Memory
-    protected readonly address: number
+export class Immediate16 extends ImmediateMemoryValue {
+    constructor(pc: Register16, memory: Memory) {
+        super(
+            'imm16',
+            memory,
+            new Memory16Value(pc, memory, {
+                offset: 1,
+            })
+        )
+    }
+}
 
-    constructor(memory: Memory, address: number) {
+export abstract class MemoryValue<A extends number | Pointer = Pointer> {
+    protected readonly memory: Memory
+    protected readonly offset: number
+    public address: A
+    public readonly name?: PointerName
+
+    protected constructor(
+        address: A,
+        memory: Memory,
+        options: { offset?: number }
+    ) {
+        const { offset } = options
         this.memory = memory
         this.address = address
+        this.offset = offset ?? 0
+        this.name = isPointer(address)
+            ? this.generateName(this.offset, address)
+            : undefined
     }
 
-    get value(): T {
-        return bitwiseAnd(this.memory.addresses[this.address], 0xFF) as T
+    generateName(offset: number, pointer: Pointer): PointerName {
+        return `[${`${offset && offset !== 0 ? offset : ''}+${pointer.name}`}]` as PointerName
     }
 
-    set value(value: T) {
-        this.memory.write(this.address, bitwiseAnd(value, 0xFF))
+    get value(): number {
+        return bitwiseAnd(
+            this.memory.addresses[getAddressValue(this.address) + this.offset],
+            0xFF
+        )
+    }
+
+    set value(value: number) {
+        this.memory.write(getAddressValue(this.address) + this.offset, value)
     }
 
     toString(): string {
-        return `${toHex(this.address)} (${toHex(this.value)})`
+        return `${this.name ?? toHex(getAddressValue(this.address) + this.offset)} (${toHex(this.value)})`
     }
 }
+
+export class Memory8Value<
+    A extends number | Pointer = Pointer,
+> extends MemoryValue<A> {
+    constructor(
+        address: A,
+        memory: Memory,
+        options: {
+            offset?: number
+        } = {
+            offset: 0,
+        }
+    ) {
+        super(address, memory, options)
+    }
+}
+
+export class Memory16Value<
+    A extends number | Pointer = Pointer,
+> extends MemoryValue<A> {
+    protected readonly endianness: 'big' | 'little'
+
+    constructor(
+        address: A,
+        memory: Memory,
+        options: {
+            endianness?: 'big' | 'little'
+            offset?: number
+        } = { endianness: 'little', offset: 0 }
+    ) {
+        super(address, memory, options)
+        this.endianness = options.endianness ?? 'little'
+    }
+
+    get value(): number {
+        return concatBytes(
+            this.memory.addresses[getAddressValue(this.address) + this.offset],
+            this.memory.addresses[
+                getAddressValue(this.address) + this.offset + 1
+            ],
+            {
+                endianness: this.endianness,
+            }
+        )
+    }
+
+    set value(value: number) {
+        const high = isolate2FirstDigits(value)
+        const low = isolate2LastDigits(value)
+        const isBigEndian = this.endianness === 'big'
+
+        this.memory.write(
+            getAddressValue(this.address) + this.offset,
+            isBigEndian ? high : low
+        )
+        this.memory.write(
+            getAddressValue(this.address) + this.offset + 1,
+            isBigEndian ? low : high
+        )
+    }
+}
+
+export type PointedValue = Pointed8Value | Pointed16Value
+
+export class Pointed8Value extends Memory8Value {}
+
+export class Pointed16Value extends Memory16Value {}
 
 export class Memory {
     public readonly addresses = new Uint8Array(0x10000)
